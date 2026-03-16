@@ -259,6 +259,14 @@
   .chat-send { padding:9px 12px; letter-spacing:.08em; }
   .chat-status { display:none; }
 }
+
+/* ── embedded watch photos ───────────────────────────────────────────── */
+.watch-img-btn img, .img-btn img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  opacity:.82; transition:opacity .15s;
+}
+.watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
+.watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
 </style>
 </head>
 <body style="background:#1a1814; min-height:100vh;">
