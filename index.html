@@ -840,6 +840,90 @@ async function sendPrompt() {
 document.getElementById('chat-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendPrompt(); }
 });
+
+// ── Watch image loader (Wikimedia Commons) ───────────────────────────────
+// Curated search queries per slot — tuned for best Wikimedia results.
+// Key = first arg of searchPhoto() on that button.
+const WIKI_QUERIES = {
+  'Caravelle manual wind':                    'Caravelle watch vintage',
+  'Bulova Accutron Spaceview':                'Bulova Accutron Spaceview',
+  'Longines Sport Chief ref 7042':            'Longines vintage watch 1950s',
+  'Omega Seamaster ref 166.010':              'Omega Seamaster vintage 1960s',
+  'Longines Flagship 18k ref 3410':           'Longines Flagship gold dress watch',
+  'Universal Genève Polerouter ref 20217':    'Universal Geneve Polerouter',
+  'Zenith El Primero ref A386':               'Zenith El Primero chronograph',
+  'Rolex Datejust ref 1601':                  'Rolex Datejust vintage',
+  'Omega Speedmaster Professional ref 3570.50': 'Omega Speedmaster Professional Moonwatch',
+  'Rolex Submariner Hulk 116610LV':           'Rolex Submariner green',
+  'JLC Master Ultra Thin Moon Q1368430':      'Jaeger-LeCoultre Master Ultra Thin',
+  'Rolex Day-Date 18038 yellow gold':         'Rolex Day-Date yellow gold',
+  'Rolex GMT-Master ref 1675 Pepsi':          'Rolex GMT-Master Pepsi vintage',
+};
+
+async function fetchWikiImage(query) {
+  const params = new URLSearchParams({
+    action: 'query', generator: 'search', gsrnamespace: '6',
+    gsrsearch: query, gsrlimit: '8',
+    prop: 'imageinfo', iiprop: 'url|mime', iiurlwidth: '300',
+    format: 'json', origin: '*',
+  });
+  const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
+  const data = await res.json();
+  const pages = Object.values(data.query?.pages || {});
+  // Sort by page index so we get the most relevant result first
+  pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
+  for (const page of pages) {
+    const info = page.imageinfo?.[0];
+    if (!info) continue;
+    if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
+    return info.thumburl || info.url;
+  }
+  return null;
+}
+
+function injectImage(btn, imgUrl, label) {
+  const img = document.createElement('img');
+  img.src = imgUrl;
+  img.alt = label;
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+  img.onerror = function() { btn.innerHTML = prevContent; }; // revert on 404
+  const prevContent = btn.innerHTML;
+  btn.innerHTML = '';
+  btn.appendChild(img);
+}
+
+async function loadWatchImages() {
+  const buttons = document.querySelectorAll('.watch-img-btn, .img-btn');
+  for (const btn of buttons) {
+    const onclick = btn.getAttribute('onclick') || '';
+    // Extract first arg: searchPhoto('DISPLAY NAME', '...')
+    const m = onclick.match(/searchPhoto\('([^']+)'/);
+    if (!m) continue;
+    const displayName = m[1];
+    const wikiQuery = WIKI_QUERIES[displayName];
+    if (!wikiQuery) continue;
+    try {
+      const imgUrl = await fetchWikiImage(wikiQuery);
+      if (imgUrl) injectImage(btn, imgUrl, displayName);
+    } catch(_) { /* keep placeholder */ }
+    // Small delay — be polite to Wikimedia
+    await new Promise(r => setTimeout(r, 150));
+  }
+  // Re-run after any Claude update replaces .db innerHTML
+  document.querySelector('.db').addEventListener('DOMSubtreeModified',
+    function() { clearTimeout(this._imgTimer); this._imgTimer = setTimeout(loadWatchImages, 800); },
+    { once: false }
+  );
+}
+
+// Also reload images after sendPrompt() replaces the dashboard HTML
+const _origSendPrompt = sendPrompt;
+sendPrompt = async function() {
+  await _origSendPrompt.apply(this, arguments);
+  setTimeout(loadWatchImages, 500);
+};
+
+document.addEventListener('DOMContentLoaded', loadWatchImages);
 </script>
 </body>
 </html>
