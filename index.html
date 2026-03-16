@@ -897,6 +897,7 @@ async function sendPrompt() {
   input.value = '';
 
   try {
+    console.log('[chat] sending request', { instruction, model: 'claude-sonnet-4-6' });
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -917,6 +918,7 @@ async function sendPrompt() {
       })
     });
 
+    console.log('[chat] response received', { status: res.status, ok: res.ok });
     if (!res.ok) {
       let msg = `API error ${res.status}`;
       try { const j = await res.json(); msg = j.error?.message || msg; } catch(_) {}
@@ -948,29 +950,46 @@ async function sendPrompt() {
         if (raw === '[DONE]') continue;
         try {
           const ev = JSON.parse(raw);
+          console.log('[chat] SSE event', ev.type, ev.delta?.type ?? '');
           if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') {
             full += ev.delta.text;
           }
-        } catch(_) {}
+        } catch(parseErr) {
+          console.warn('[chat] SSE parse error', parseErr, 'raw:', raw);
+        }
       }
     }
 
-    if (full.trim()) {
-      // Strip accidental code fences if model adds them
-      let html = full.trim();
-      if (html.startsWith('```')) {
-        html = html.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '').trim();
-      }
+    console.log('[chat] stream complete, accumulated length:', full.length);
+
+    if (!full.trim()) {
+      throw new Error('Model returned an empty response — check console for SSE events');
+    }
+
+    // Strip accidental code fences if model adds them
+    let html = full.trim();
+    if (html.startsWith('```')) {
+      html = html.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '').trim();
+    }
+
+    try {
       document.querySelector('.db').innerHTML = html;
       exp = false; // reset summers expand state to match fresh DOM
+      console.log('[chat] DOM updated successfully');
+    } catch (domErr) {
+      throw new Error('DOM update failed: ' + domErr.message);
     }
 
   } catch (err) {
+    console.error('[chat] error caught:', err);
     const errBar = document.getElementById('chat-err-bar');
-    errBar.textContent = err.message;
-    errBar.classList.remove('hidden');
+    if (errBar) {
+      errBar.textContent = err.message;
+      errBar.classList.remove('hidden');
+    }
     input.value = instruction; // restore so user can retry
   } finally {
+    console.log('[chat] finally: resetting loading state');
     setLoading(false);
   }
 }
