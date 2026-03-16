@@ -255,6 +255,7 @@
 }
 .watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
 .watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
+
 </style>
 </head>
 <body style="background:#181510; min-height:100vh;">
@@ -934,29 +935,29 @@ document.getElementById('chat-input').addEventListener('keydown', function(e) {
 // commons: Wikimedia Commons search fallback
 const WIKI_SOURCES = {
   'Caravelle manual wind':
-    { wp: null,                          commons: 'Caravelle Bulova vintage pocket watch' },
+    { wp: 'Caravelle (watch)',           commons: 'Caravelle Bulova wristwatch vintage manual wind' },
   'Bulova Accutron Spaceview':
-    { wp: 'Bulova Accutron',             commons: 'Bulova Accutron Spaceview tuning fork' },
+    { wp: 'Bulova Accutron',             commons: 'Bulova Accutron Spaceview 214 tuning fork' },
   'Longines Sport Chief ref 7042':
-    { wp: null,                          commons: 'Longines vintage dress watch manual wind 1950s' },
+    { wp: 'Longines',                    commons: 'Longines Sport Chief vintage wristwatch manual wind' },
   'Omega Seamaster ref 166.010':
-    { wp: 'Omega Seamaster',             commons: 'Omega Seamaster vintage 1960s automatic' },
+    { wp: 'Omega Seamaster',             commons: 'Omega Seamaster 166.010 vintage crosshair dial 1964' },
   'Longines Flagship 18k ref 3410':
-    { wp: null,                          commons: 'Longines Flagship gold dress watch vintage' },
+    { wp: 'Longines Flagship',           commons: 'Longines Flagship gold 3410 vintage dress watch 1960s' },
   'Universal Genève Polerouter ref 20217':
-    { wp: 'Universal Genève Polerouter', commons: 'Universal Geneve Polerouter micro-rotor watch' },
+    { wp: 'Universal Genève Polerouter', commons: 'Universal Genève Polerouter 20217 micro-rotor' },
   'Zenith El Primero ref A386':
-    { wp: 'El Primero',                  commons: 'Zenith El Primero A386 chronograph vintage' },
+    { wp: 'El Primero',                  commons: 'Zenith El Primero A386 chronograph 1969' },
   'Rolex Datejust ref 1601':
-    { wp: 'Rolex Datejust',              commons: 'Rolex Datejust 1601 vintage stainless pie pan' },
+    { wp: 'Rolex Datejust',              commons: 'Rolex Datejust 1601 pie pan dial fluted bezel' },
   'Omega Speedmaster Professional ref 3570.50':
-    { wp: 'Omega Speedmaster',           commons: 'Omega Speedmaster Professional moonwatch 3570' },
+    { wp: 'Omega Speedmaster Professional', commons: 'Omega Speedmaster Professional 3570.50 moonwatch' },
   'Rolex Submariner Hulk 116610LV':
-    { wp: 'Rolex Submariner',            commons: 'Rolex Submariner 116610LV green ceramic bezel' },
+    { wp: 'Rolex Submariner',            commons: 'Rolex Submariner 116610LV green ceramic bezel Hulk' },
   'JLC Master Ultra Thin Moon Q1368430':
-    { wp: 'Jaeger-LeCoultre Master Ultra Thin', commons: 'Jaeger-LeCoultre moonphase dress watch' },
+    { wp: 'Jaeger-LeCoultre Master Ultra Thin', commons: 'Jaeger-LeCoultre Master Ultra Thin Moon moonphase' },
   'Rolex Day-Date 18038 yellow gold':
-    { wp: 'Rolex Day-Date',              commons: 'Rolex Day-Date yellow gold President bracelet' },
+    { wp: 'Rolex Day-Date',              commons: 'Rolex Day-Date 18038 yellow gold President bracelet' },
   'Rolex GMT-Master ref 1675 Pepsi':
     { wp: 'Rolex GMT-Master',            commons: 'Rolex GMT-Master 1675 Pepsi red blue bezel vintage' },
 };
