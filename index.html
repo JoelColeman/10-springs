@@ -198,46 +198,9 @@
   min-height:14px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 
-/* ── Photo overlay ─────────────────────────────────────── */
-.photo-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,.82);
-  display:none; align-items:center; justify-content:center;
-  z-index:500; backdrop-filter:blur(5px);
-}
-.photo-overlay.open { display:flex; }
-.photo-box {
-  background:#211f1b; border:0.5px solid rgba(196,146,42,.28);
-  padding:1.6rem 1.5rem; max-width:420px; width:92%; border-radius:3px;
-}
-.photo-header {
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:8.5px; text-transform:uppercase; letter-spacing:.18em;
-  color:#C4922A; margin-bottom:10px; opacity:.7;
-}
-.photo-watch-name {
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:13px; font-weight:500; color:#F0EDE8; margin-bottom:4px;
-}
-.photo-query-text {
-  font-family:monospace; font-size:9.5px; color:#6A665E;
-  margin-bottom:1.25rem; line-height:1.5; letter-spacing:.03em;
-}
-.photo-actions { display:flex; gap:8px; }
-.photo-btn {
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  flex:1; padding:8px 12px; font-size:10px; letter-spacing:.1em;
-  text-transform:uppercase; cursor:pointer; border-radius:2px;
-  text-align:center; text-decoration:none; border:0.5px solid;
-  transition:background .13s;
-}
-.photo-btn.primary {
-  background:rgba(196,146,42,.12); border-color:rgba(196,146,42,.38); color:#C4922A;
-}
-.photo-btn.primary:hover { background:rgba(196,146,42,.24); }
-.photo-btn.secondary {
-  background:transparent; border-color:rgba(255,255,255,.1); color:#6A665E;
-}
-.photo-btn.secondary:hover { border-color:rgba(255,255,255,.2); color:#A8A49C; }
+/* ── Image fetch loading state ─────────────────────────── */
+.img-fetching { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
+.img-fetching span { font-size:7px; text-transform:uppercase; letter-spacing:.1em; color:var(--gold-dim); text-align:center; line-height:1.5; }
 
 /* ── Chat bar ──────────────────────────────────────────── */
 .chat-bar {
@@ -308,19 +271,6 @@
   </div>
 </div>
 
-<!-- ── Photo overlay ──────────────────────────────────────────────────── -->
-<div class="photo-overlay" id="photo-overlay" onclick="if(event.target===this)closePhoto()">
-  <div class="photo-box">
-    <div class="photo-header">Reference search</div>
-    <div class="photo-watch-name" id="photo-name"></div>
-    <div class="photo-query-text" id="photo-query"></div>
-    <div class="photo-actions">
-      <a class="photo-btn primary" id="photo-link" href="#" target="_blank"
-        rel="noopener noreferrer">Open Google Images ↗</a>
-      <button class="photo-btn secondary" onclick="closePhoto()">Close</button>
-    </div>
-  </div>
-</div>
 
 <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
 <div class="db">
@@ -627,7 +577,7 @@
 </div>
 <div class="show-more" id="sum-tog" onclick="togSum()">▼ Show all 10 Summers (Su4–Su10)</div>
 <div class="footer">
-  <span>Tap 📷 for photo search · tap row for alternates · Listings ↗ opens Google Shopping</span>
+  <span>Tap 📷 to fetch photo via AI · hold to refresh · tap row for alternates</span>
   <span>Last updated March 2026</span>
 </div>
 </div><!-- .db -->
@@ -672,25 +622,110 @@ document.getElementById('key-input').addEventListener('keydown', function(e) {
 // Show on first load if key missing
 if (!localStorage.getItem('10s_api_key')) showKeyModal();
 
-// ── Photo overlay ────────────────────────────────────────────────────────
-function searchPhoto(displayName, query) {
-  document.getElementById('photo-name').textContent = displayName;
-  document.getElementById('photo-query').textContent = query;
-  const url = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(query);
-  document.getElementById('photo-link').href = url;
-  document.getElementById('photo-overlay').classList.add('open');
-}
+// ── Photo fetch via Claude ────────────────────────────────────────────────
+const IMG_CACHE_PREFIX = '10s_img_';
 
-function closePhoto() {
-  document.getElementById('photo-overlay').classList.remove('open');
+async function searchPhoto(displayName, query, btnOverride) {
+  const btn = btnOverride
+    || (typeof event !== 'undefined' && event?.target?.closest('.watch-img-btn, .img-btn'))
+    || null;
+  if (!btn) return;
+
+  // If already showing an image, ignore regular tap (long-press handles refresh)
+  if (btn.querySelector('img')) return;
+
+  // Use cached URL if available
+  const cacheKey = IMG_CACHE_PREFIX + displayName;
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) { injectImage(btn, cached, displayName); return; }
+
+  // Need API key
+  const apiKey = localStorage.getItem('10s_api_key');
+  if (!apiKey) { showKeyModal(); return; }
+
+  // Loading state
+  btn.innerHTML = '<div class="img-fetching"><span>Finding<br>photo…</span></div>';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 300,
+        system: `Return ONLY a single direct image URL for the watch described. Requirements:
+- URL must end in .jpg, .jpeg, .png, or .webp
+- Must be publicly accessible without authentication
+- Prefer upload.wikimedia.org URLs when a good one exists
+- The image should clearly show the watch dial
+Output nothing except the raw URL on one line — no explanation, no markdown, no quotes.`,
+        messages: [{ role: 'user', content: `${displayName}\n${query}` }]
+      })
+    });
+
+    if (!res.ok) {
+      if (res.status === 401) {
+        localStorage.removeItem('10s_api_key');
+        showKeyModal();
+        document.getElementById('key-err').textContent = 'Key rejected — please re-enter.';
+      }
+      throw new Error(`API ${res.status}`);
+    }
+
+    const data = await res.json();
+    const raw = (data.content?.[0]?.text || '').trim();
+
+    // Extract a valid image URL (must end in image extension, optionally with query string)
+    const match = raw.match(/https?:\/\/\S+?\.(?:jpg|jpeg|png|webp)(?:[?#][^\s]*)?/i);
+    if (!match) throw new Error('no valid image URL in response');
+
+    const imgUrl = match[0];
+    localStorage.setItem(cacheKey, imgUrl);
+    injectImage(btn, imgUrl, displayName);
+
+  } catch(_) {
+    btn.innerHTML = '<div class="cam">📷</div><div class="cam-lbl">Tap to retry</div>';
+  }
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closePhoto();
-    document.getElementById('key-modal').classList.add('hidden');
-  }
+  if (e.key === 'Escape') document.getElementById('key-modal').classList.add('hidden');
 });
+
+// ── Long-press / right-click to clear cache and re-fetch ─────────────────
+let _lpTimer = null;
+
+function _clearAndRefetch(btn) {
+  const m = (btn.getAttribute('onclick') || '').match(/searchPhoto\('([^']+)','([^']+)'/);
+  if (!m) return;
+  const [, displayName, query] = m;
+  localStorage.removeItem(IMG_CACHE_PREFIX + displayName);
+  if (navigator.vibrate) navigator.vibrate(40);
+  btn.innerHTML = '<div class="cam">📷</div><div class="cam-lbl">Tap for photo</div>';
+  searchPhoto(displayName, query, btn);
+}
+
+document.addEventListener('contextmenu', function(e) {
+  const btn = e.target.closest('.watch-img-btn, .img-btn');
+  if (!btn || !btn.querySelector('img')) return;
+  e.preventDefault();
+  _clearAndRefetch(btn);
+});
+
+document.addEventListener('touchstart', function(e) {
+  const btn = e.target.closest('.watch-img-btn, .img-btn');
+  if (!btn || !btn.querySelector('img')) return;
+  _lpTimer = setTimeout(() => _clearAndRefetch(btn), 650);
+}, { passive: true });
+
+['touchend', 'touchcancel', 'touchmove'].forEach(ev =>
+  document.addEventListener(ev, () => clearTimeout(_lpTimer), { passive: true })
+);
 
 // ── Dashboard interactions ───────────────────────────────────────────────
 function togAccord() {
@@ -976,9 +1011,24 @@ function injectImage(btn, imgUrl, label) {
   btn.appendChild(img);
 }
 
+// Restore all cached images immediately — called on load and after dashboard HTML refresh
+function loadCachedImages() {
+  document.querySelectorAll('.watch-img-btn, .img-btn').forEach(btn => {
+    const m = (btn.getAttribute('onclick') || '').match(/searchPhoto\('([^']+)'/);
+    if (!m) return;
+    const cached = localStorage.getItem(IMG_CACHE_PREFIX + m[1]);
+    if (cached) injectImage(btn, cached, m[1]);
+  });
+}
+
 async function loadWatchImages() {
+  // Restore cached images first so they appear instantly
+  loadCachedImages();
+
   const buttons = document.querySelectorAll('.watch-img-btn, .img-btn');
   for (const btn of buttons) {
+    // Skip slots already showing an image (cached or previously loaded)
+    if (btn.querySelector('img')) continue;
     const onclick = btn.getAttribute('onclick') || '';
     const m = onclick.match(/searchPhoto\('([^']+)'/);
     if (!m) continue;
