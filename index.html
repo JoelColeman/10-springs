@@ -38,7 +38,7 @@
 .h-row { display:grid; grid-template-columns:44px 92px 1fr; border-top:0.5px solid var(--heritage-rule); }
 .h-num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:var(--heritage-gold); border-right:0.5px solid var(--heritage-rule); padding:0 4px; gap:3px; letter-spacing:.1em; }
 .h-lineage { font-size:7px; color:var(--t3); font-weight:400; text-align:center; letter-spacing:.02em; }
-.img-btn { width:92px; min-height:106px; border-right:0.5px solid var(--heritage-rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#0c0b08; transition:background .15s; padding:6px 4px; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; }
+.img-btn { width:92px; min-height:80px; max-height:80px; border-right:0.5px solid var(--heritage-rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#0c0b08; transition:background .15s; padding:0; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; align-self:center; }
 .img-btn:hover { background:rgba(196,146,42,.08); }
 .img-btn .cam { font-size:16px; opacity:.2; }
 .img-btn .cam-lbl { font-size:7px; color:var(--gold-dim); text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; opacity:.45; }
@@ -93,7 +93,7 @@
 .rnum.gold { color:var(--gold); }
 .rnum.nxt { color:var(--t2); }
 .rnum .age { font-size:8px; color:var(--t4); font-weight:400; }
-.watch-img-btn { width:92px; min-height:106px; border-right:0.5px solid var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#0c0b08; transition:background .15s; padding:6px 4px; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; }
+.watch-img-btn { width:92px; min-height:80px; max-height:80px; border-right:0.5px solid var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#0c0b08; transition:background .15s; padding:0; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; align-self:center; }
 .watch-img-btn:hover { background:rgba(196,146,42,.06); }
 .watch-img-btn .cam { font-size:15px; opacity:.18; }
 .watch-img-btn .cam-lbl { font-size:7px; color:var(--t3); text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; }
@@ -149,7 +149,7 @@
 @media(max-width:480px){
   .row { grid-template-columns:38px 72px 1fr auto; }
   .h-row { grid-template-columns:38px 72px 1fr; }
-  .watch-img-btn,.img-btn { width:72px; min-height:88px; }
+  .watch-img-btn,.img-btn { width:72px; min-height:80px; max-height:80px; }
   .rright { min-width:72px; padding:.65rem .7rem; }
   .alts { padding:.6rem .75rem .75rem .75rem; }
   .sbar { grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -287,11 +287,11 @@
 
 /* ── watch photos ─────────────────────────────────────────────────────── */
 .watch-img-btn img, .img-btn img {
-  width:100%; height:100%; object-fit:contain; display:block;
+  width:100%; height:100%; object-fit:cover; object-position:center; display:block;
   opacity:.88; transition:opacity .15s;
 }
 .watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
-.watch-img-btn, .img-btn { padding:4px !important; overflow:hidden; }
+.watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
 </style>
 </head>
 <body style="background:#181510; min-height:100vh;">
@@ -894,51 +894,74 @@ document.getElementById('chat-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendPrompt(); }
 });
 
-// ── Watch image loader (Wikimedia Commons) ───────────────────────────────
-// Each entry: [primaryQuery, fallbackQuery]
-const WIKI_QUERIES = {
-  'Caravelle manual wind':                    ['Caravelle Bulova watch vintage manual wind', 'Caravelle watch'],
-  'Bulova Accutron Spaceview':                ['Bulova Accutron Spaceview 214 tuning fork', 'Bulova Accutron'],
-  'Longines Sport Chief ref 7042':            ['Longines Sport Chief vintage', 'Longines vintage watch manual wind'],
-  'Omega Seamaster ref 166.010':              ['Omega Seamaster 166 vintage 1960s', 'Omega Seamaster vintage automatic'],
-  'Longines Flagship 18k ref 3410':           ['Longines Flagship 18k gold vintage', 'Longines Flagship vintage dress'],
-  'Universal Genève Polerouter ref 20217':    ['Universal Geneve Polerouter micro-rotor', 'Universal Geneve vintage watch'],
-  'Zenith El Primero ref A386':               ['Zenith El Primero A386 chronograph 1969', 'Zenith El Primero vintage'],
-  'Rolex Datejust ref 1601':                  ['Rolex Datejust 1601 vintage pie pan dial', 'Rolex Datejust vintage stainless'],
-  'Omega Speedmaster Professional ref 3570.50': ['Omega Speedmaster Professional moonwatch 3570', 'Omega Speedmaster Professional Cal 1861'],
-  'Rolex Submariner Hulk 116610LV':           ['Rolex Submariner 116610LV green ceramic', 'Rolex Submariner green dial'],
-  'JLC Master Ultra Thin Moon Q1368430':      ['Jaeger-LeCoultre Master Ultra Thin moonphase', 'Jaeger-LeCoultre moonphase dress watch'],
-  'Rolex Day-Date 18038 yellow gold':         ['Rolex Day-Date 18038 yellow gold President', 'Rolex Day-Date gold champagne dial'],
-  'Rolex GMT-Master ref 1675 Pepsi':          ['Rolex GMT-Master 1675 Pepsi bezel vintage', 'Rolex GMT-Master vintage red blue bezel'],
+// ── Watch image loader ────────────────────────────────────────────────────
+// wp: Wikipedia article title (pageimages API — reliable, curated lead image)
+// commons: Wikimedia Commons search fallback
+const WIKI_SOURCES = {
+  'Caravelle manual wind':
+    { wp: null,                          commons: 'Caravelle Bulova vintage pocket watch' },
+  'Bulova Accutron Spaceview':
+    { wp: 'Bulova Accutron',             commons: 'Bulova Accutron Spaceview tuning fork' },
+  'Longines Sport Chief ref 7042':
+    { wp: null,                          commons: 'Longines vintage dress watch manual wind 1950s' },
+  'Omega Seamaster ref 166.010':
+    { wp: 'Omega Seamaster',             commons: 'Omega Seamaster vintage 1960s automatic' },
+  'Longines Flagship 18k ref 3410':
+    { wp: null,                          commons: 'Longines Flagship gold dress watch vintage' },
+  'Universal Genève Polerouter ref 20217':
+    { wp: 'Universal Genève Polerouter', commons: 'Universal Geneve Polerouter micro-rotor watch' },
+  'Zenith El Primero ref A386':
+    { wp: 'El Primero',                  commons: 'Zenith El Primero A386 chronograph vintage' },
+  'Rolex Datejust ref 1601':
+    { wp: 'Rolex Datejust',              commons: 'Rolex Datejust 1601 vintage stainless pie pan' },
+  'Omega Speedmaster Professional ref 3570.50':
+    { wp: 'Omega Speedmaster',           commons: 'Omega Speedmaster Professional moonwatch 3570' },
+  'Rolex Submariner Hulk 116610LV':
+    { wp: 'Rolex Submariner',            commons: 'Rolex Submariner 116610LV green ceramic bezel' },
+  'JLC Master Ultra Thin Moon Q1368430':
+    { wp: 'Jaeger-LeCoultre Master Ultra Thin', commons: 'Jaeger-LeCoultre moonphase dress watch' },
+  'Rolex Day-Date 18038 yellow gold':
+    { wp: 'Rolex Day-Date',              commons: 'Rolex Day-Date yellow gold President bracelet' },
+  'Rolex GMT-Master ref 1675 Pepsi':
+    { wp: 'Rolex GMT-Master',            commons: 'Rolex GMT-Master 1675 Pepsi red blue bezel vintage' },
 };
 
-async function fetchWikiImage(primaryQuery, fallbackQuery) {
-  const tryQuery = async (q) => {
-    const params = new URLSearchParams({
-      action: 'query', generator: 'search', gsrnamespace: '6',
-      gsrsearch: q, gsrlimit: '12',
-      prop: 'imageinfo', iiprop: 'url|mime|size', iiurlwidth: '400',
-      format: 'json', origin: '*',
-    });
-    const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
-    const data = await res.json();
-    const pages = Object.values(data.query?.pages || {});
-    pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
-    for (const page of pages) {
-      const info = page.imageinfo?.[0];
-      if (!info) continue;
-      if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
-      // Skip tiny images (icons, logos)
-      const tw = info.thumbwidth || 0;
-      const th = info.thumbheight || 0;
-      if (tw < 80 || th < 80) continue;
-      return info.thumburl || info.url;
-    }
-    return null;
-  };
-  const result = await tryQuery(primaryQuery);
-  if (result) return result;
-  if (fallbackQuery) return await tryQuery(fallbackQuery);
+// Wikipedia pageimages API — returns the article's curated lead thumbnail
+async function fetchWpImage(title) {
+  const params = new URLSearchParams({
+    action: 'query', titles: title,
+    prop: 'pageimages', pithumbsize: '400',
+    format: 'json', origin: '*',
+  });
+  const res = await fetch('https://en.wikipedia.org/w/api.php?' + params);
+  const data = await res.json();
+  const pages = Object.values(data.query?.pages || {});
+  for (const p of pages) {
+    if (p.thumbnail?.source) return p.thumbnail.source;
+  }
+  return null;
+}
+
+// Wikimedia Commons file search — fallback for watches without WP articles
+async function fetchCommonsImage(query) {
+  const params = new URLSearchParams({
+    action: 'query', generator: 'search', gsrnamespace: '6',
+    gsrsearch: query, gsrlimit: '15',
+    prop: 'imageinfo', iiprop: 'url|mime|size', iiurlwidth: '400',
+    format: 'json', origin: '*',
+  });
+  const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
+  const data = await res.json();
+  const pages = Object.values(data.query?.pages || {});
+  pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
+  for (const page of pages) {
+    const info = page.imageinfo?.[0];
+    if (!info) continue;
+    if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
+    // Skip tiny thumbnails (icons, watermarks)
+    if ((info.thumbwidth || 0) < 100 || (info.thumbheight || 0) < 100) continue;
+    return info.thumburl || info.url;
+  }
   return null;
 }
 
@@ -947,7 +970,7 @@ function injectImage(btn, imgUrl, label) {
   const img = document.createElement('img');
   img.src = imgUrl;
   img.alt = label;
-  img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;';
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center;display:block;';
   img.onerror = () => { btn.innerHTML = prevContent; };
   btn.innerHTML = '';
   btn.appendChild(img);
@@ -960,14 +983,15 @@ async function loadWatchImages() {
     const m = onclick.match(/searchPhoto\('([^']+)'/);
     if (!m) continue;
     const displayName = m[1];
-    const queries = WIKI_QUERIES[displayName];
-    if (!queries) continue;
+    const src = WIKI_SOURCES[displayName];
+    if (!src) continue;
     try {
-      const imgUrl = await fetchWikiImage(queries[0], queries[1]);
+      let imgUrl = null;
+      if (src.wp) imgUrl = await fetchWpImage(src.wp);
+      if (!imgUrl) imgUrl = await fetchCommonsImage(src.commons);
       if (imgUrl) injectImage(btn, imgUrl, displayName);
     } catch(_) { /* keep placeholder */ }
-    // Be polite to Wikimedia
-    await new Promise(r => setTimeout(r, 200));
+    await new Promise(r => setTimeout(r, 220));
   }
   // Re-run after any Claude update replaces .db innerHTML
   document.querySelector('.db').addEventListener('DOMSubtreeModified',
