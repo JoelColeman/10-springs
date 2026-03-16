@@ -7,83 +7,106 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #1a1814; --bg-raised: #211f1b; --bg-section: #141210; --bg-drawer: #161412;
-  --gold: #C4922A; --gold-dim: #8A6420;
+  --bg: #181510; --bg-raised: #1f1d18; --bg-section: #0f0e0a; --bg-drawer: #141210;
+  --gold: #C4922A; --gold-dim: #8A6420; --gold-pale: rgba(196,146,42,.1);
   --white: #F0EDE8; --t1: #F0EDE8; --t2: #A8A49C; --t3: #6A665E; --t4: #3E3B35;
   --rule: rgba(240,237,232,.07); --rule-accent: rgba(196,146,42,.2);
-  --heritage-bg: #1e1810; --heritage-rule: rgba(196,146,42,.15); --heritage-gold: #C4922A;
+  --heritage-bg: #1c1609; --heritage-rule: rgba(196,146,42,.18); --heritage-gold: #C4922A;
 }
-.db { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; width:100%; background:var(--bg); color:var(--t1); }
-.hdr { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; padding:1.25rem 1.5rem 1rem; border-bottom:0.5px solid var(--rule-accent); }
-.hdr-title { font-size:15px; font-weight:500; letter-spacing:.25em; text-transform:uppercase; color:var(--white); }
-.hdr-sub { font-size:10px; color:var(--t3); letter-spacing:.1em; margin-top:4px; text-transform:uppercase; }
-.hdr-stats { display:flex; gap:24px; }
+.db { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; width:100%; max-width:720px; margin:0 auto; background:var(--bg); color:var(--t1); }
+
+/* ── Tachymeter ─────────────────────────────────────────── */
+.tachy { height:22px; background:#090806; border-bottom:0.5px solid rgba(196,146,42,.18); display:flex; align-items:center; padding:0 1.5rem; overflow:hidden; gap:14px; }
+.tachy-lbl { font-size:6px; letter-spacing:.22em; color:rgba(196,146,42,.45); font-family:'Courier New',monospace; text-transform:uppercase; flex-shrink:0; }
+.tachy-scale { font-size:6px; letter-spacing:.5em; color:var(--t4); font-family:'Courier New',monospace; white-space:nowrap; opacity:.6; }
+
+/* ── Header ─────────────────────────────────────────────── */
+.hdr { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; padding:2rem 1.5rem 1.5rem; border-bottom:0.5px solid var(--rule-accent); background:linear-gradient(180deg,#0c0b08 0%,var(--bg) 100%); }
+.hdr-brand { display:flex; flex-direction:column; gap:6px; }
+.hdr-eyebrow { font-size:7.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); opacity:.55; }
+.hdr-title { font-size:26px; font-weight:300; letter-spacing:.32em; text-transform:uppercase; color:var(--white); line-height:1; }
+.hdr-sub { font-size:9px; color:var(--t3); letter-spacing:.14em; margin-top:2px; text-transform:uppercase; }
+.hdr-stats { display:flex; gap:28px; align-items:flex-start; padding-top:4px; }
 .hs { text-align:right; }
-.hs-val { font-size:18px; font-weight:500; color:var(--t1); }
+.hs-val { font-size:20px; font-weight:300; color:var(--t1); letter-spacing:.03em; }
 .hs-val.gold { color:var(--gold); }
-.hs-lbl { font-size:9px; color:var(--t3); letter-spacing:.1em; text-transform:uppercase; margin-top:2px; }
+.hs-lbl { font-size:7.5px; color:var(--t4); letter-spacing:.13em; text-transform:uppercase; margin-top:3px; }
 .heritage-wrap { background:var(--heritage-bg); border-bottom:0.5px solid var(--heritage-rule); }
-.heritage-hdr { padding:.6rem 1.5rem .4rem; display:flex; align-items:baseline; gap:10px; border-bottom:0.5px solid var(--heritage-rule); }
-.heritage-title { font-size:9px; text-transform:uppercase; letter-spacing:.15em; color:var(--heritage-gold); font-weight:500; }
-.heritage-sub { font-size:9px; color:var(--t3); letter-spacing:.05em; }
-.h-row { display:grid; grid-template-columns:48px 64px 1fr; border-top:0.5px solid var(--heritage-rule); }
-.h-num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9px; font-weight:500; color:var(--heritage-gold); border-right:0.5px solid var(--heritage-rule); padding:0 4px; gap:2px; letter-spacing:.08em; }
-.h-lineage { font-size:7.5px; color:var(--t3); font-weight:400; text-align:center; }
-.img-btn { width:64px; border-right:0.5px solid var(--heritage-rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:rgba(196,146,42,.04); transition:background .15s; padding:8px 4px; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; }
-.img-btn:hover { background:rgba(196,146,42,.1); }
-.img-btn .cam { font-size:15px; opacity:.3; }
-.img-btn .cam-lbl { font-size:7px; color:var(--heritage-gold); text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; opacity:.6; }
-.h-main { padding:.65rem 1rem; display:flex; flex-direction:column; gap:3px; }
-.h-name { font-size:12px; font-weight:500; color:var(--white); }
-.h-meta { font-size:10.5px; color:var(--t2); }
-.h-story { font-size:10px; color:var(--t3); font-style:italic; line-height:1.55; margin-top:3px; }
-.h-links { display:flex; gap:5px; margin-top:6px; flex-wrap:wrap; }
-.h-badge { display:inline-block; font-size:8px; padding:2px 8px; border-radius:2px; background:rgba(196,146,42,.08); color:var(--heritage-gold); border:0.5px solid rgba(196,146,42,.25); margin-top:4px; letter-spacing:.08em; text-transform:uppercase; }
-.principles { display:flex; gap:5px; flex-wrap:wrap; padding:.75rem 1.5rem; border-bottom:0.5px solid var(--rule); }
-.pill { font-size:9px; padding:2px 9px; border-radius:20px; border:0.5px solid rgba(255,255,255,.1); color:var(--t3); background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.05) 0%, rgba(0,0,0,.12) 100%); letter-spacing:.03em; }
-.decisions { padding:.65rem 1.5rem; border-bottom:0.5px solid var(--rule); background:rgba(196,146,42,.03); }
-.dec-title { font-size:8.5px; text-transform:uppercase; letter-spacing:.15em; color:var(--gold-dim); margin-bottom:6px; }
-.dec-item { font-size:10.5px; color:var(--t2); display:flex; gap:7px; margin-bottom:4px; line-height:1.45; }
-.dec-item::before { content:"✓"; color:var(--gold); flex-shrink:0; font-size:9px; margin-top:1px; }
+.heritage-hdr { padding:.65rem 1.5rem .5rem; display:flex; align-items:baseline; gap:10px; border-bottom:0.5px solid var(--heritage-rule); }
+.heritage-title { font-size:8px; text-transform:uppercase; letter-spacing:.22em; color:var(--heritage-gold); font-weight:500; }
+.heritage-sub { font-size:9px; color:var(--t3); letter-spacing:.04em; font-style:italic; }
+.h-row { display:grid; grid-template-columns:44px 92px 1fr; border-top:0.5px solid var(--heritage-rule); }
+.h-num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:var(--heritage-gold); border-right:0.5px solid var(--heritage-rule); padding:0 4px; gap:3px; letter-spacing:.1em; }
+.h-lineage { font-size:7px; color:var(--t3); font-weight:400; text-align:center; letter-spacing:.02em; }
+.img-btn { width:92px; min-height:106px; border-right:0.5px solid var(--heritage-rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#0c0b08; transition:background .15s; padding:6px 4px; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; }
+.img-btn:hover { background:rgba(196,146,42,.08); }
+.img-btn .cam { font-size:16px; opacity:.2; }
+.img-btn .cam-lbl { font-size:7px; color:var(--gold-dim); text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; opacity:.45; }
+.h-main { padding:.75rem 1rem; display:flex; flex-direction:column; gap:4px; }
+.h-name { font-size:12.5px; font-weight:500; color:var(--white); }
+.h-meta { font-size:10px; color:var(--t2); line-height:1.5; }
+.h-story { font-size:10px; color:var(--t3); font-style:italic; line-height:1.6; margin-top:4px; }
+.h-links { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+.h-badge { display:inline-block; font-size:7.5px; padding:2px 9px; border-radius:2px; background:rgba(196,146,42,.06); color:var(--heritage-gold); border:0.5px solid rgba(196,146,42,.2); margin-top:4px; letter-spacing:.1em; text-transform:uppercase; }
+
+/* ── Philosophy accordion ───────────────────────────────── */
+.accord { border-bottom:0.5px solid var(--rule); }
+.accord-hdr { padding:.8rem 1.5rem; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:background .15s; background:rgba(196,146,42,.02); user-select:none; }
+.accord-hdr:hover { background:rgba(196,146,42,.05); }
+.accord-left { display:flex; align-items:center; gap:10px; }
+.accord-register { width:14px; height:14px; border-radius:50%; border:0.5px solid rgba(196,146,42,.35); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.accord-register::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:.5; display:block; }
+.accord-title { font-size:8.5px; text-transform:uppercase; letter-spacing:.2em; color:var(--t3); }
+.accord-chev { font-size:9px; color:var(--t4); transition:transform .2s ease; }
+.accord-chev.open { transform:rotate(180deg); }
+.accord-body { display:none; }
+.accord-body.open { display:block; }
+.principles { display:flex; gap:5px; flex-wrap:wrap; padding:.7rem 1.5rem; border-bottom:0.5px solid var(--rule); }
+.pill { font-size:9px; padding:3px 10px; border-radius:20px; border:0.5px solid rgba(255,255,255,.08); color:var(--t3); background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.04) 0%, rgba(0,0,0,.1) 100%); letter-spacing:.03em; }
+.decisions { padding:.7rem 1.5rem; background:rgba(196,146,42,.02); }
+.dec-title { font-size:8px; text-transform:uppercase; letter-spacing:.18em; color:var(--gold-dim); opacity:.7; margin-bottom:8px; }
+.dec-item { font-size:10.5px; color:var(--t2); display:flex; gap:8px; margin-bottom:5px; line-height:1.5; }
+.dec-item::before { content:"✓"; color:var(--gold); flex-shrink:0; font-size:9px; margin-top:2px; }
 .dec-item.open::before { content:"◦"; color:var(--t4); }
 .sbar { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-bottom:0.5px solid var(--rule); }
-.si { padding:.7rem 1.25rem; border-right:0.5px solid var(--rule); }
+.si { padding:.85rem 1.25rem; border-right:0.5px solid var(--rule); }
 .si:last-child { border-right:none; }
-.si-lbl { font-size:8.5px; color:var(--t3); text-transform:uppercase; letter-spacing:.1em; margin-bottom:5px; }
-.si-val { font-size:15px; font-weight:500; color:var(--t1); }
+.si-lbl { font-size:7.5px; color:var(--t4); text-transform:uppercase; letter-spacing:.13em; margin-bottom:6px; }
+.si-val { font-size:17px; font-weight:300; color:var(--t1); letter-spacing:.02em; }
 .si-val.gold { color:var(--gold); }
-.prog { padding:.7rem 1.5rem; border-bottom:0.5px solid var(--rule); }
-.prog-lbl { display:flex; justify-content:space-between; font-size:8.5px; color:var(--t3); text-transform:uppercase; letter-spacing:.1em; margin-bottom:7px; }
-.prog-rail { height:2px; background:var(--rule); border-radius:1px; }
-.prog-fill { height:100%; width:9.1%; background:var(--gold); border-radius:1px; }
-.dots { display:flex; gap:7px; margin-top:9px; flex-wrap:wrap; }
-.dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-.dot.owned { background:var(--gold); }
-.dot.next { background:transparent; border:1.5px dashed var(--gold); }
+.prog { padding:.85rem 1.5rem; border-bottom:0.5px solid var(--rule); }
+.prog-lbl { display:flex; justify-content:space-between; font-size:8px; color:var(--t4); text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px; }
+.prog-rail { height:1.5px; background:rgba(240,237,232,.1); border-radius:1px; }
+.prog-fill { height:100%; width:9.1%; background:linear-gradient(90deg,var(--gold-dim),var(--gold)); border-radius:1px; }
+.dots { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; align-items:center; }
+.dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.dot.owned { background:var(--gold); box-shadow:0 0 5px rgba(196,146,42,.35); }
+.dot.next { background:transparent; border:1.5px dashed var(--gold); opacity:.7; }
 .dot.plan { background:transparent; border:0.5px solid var(--t4); }
-.dot.heritage { background:var(--heritage-gold); opacity:.4; }
-.sec { padding:.35rem 1.5rem; font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--t3); background:var(--bg-section); border-top:0.5px solid var(--rule); border-bottom:0.5px solid var(--rule); display:flex; align-items:center; gap:10px; }
-.sec::before { content:''; display:inline-block; width:16px; height:0.5px; background:var(--gold); opacity:.5; flex-shrink:0; }
-.row { display:grid; grid-template-columns:48px 64px 1fr auto; align-items:stretch; border-bottom:0.5px solid var(--rule); transition:background .12s; }
+.dot.heritage { background:var(--heritage-gold); opacity:.28; width:6px; height:6px; }
+.sec { padding:.45rem 1.5rem; font-size:7.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--t4); background:var(--bg-section); border-top:0.5px solid var(--rule); border-bottom:0.5px solid var(--rule); display:flex; align-items:center; gap:10px; }
+.sec::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:.45; flex-shrink:0; display:inline-block; }
+.sec::after { content:''; flex:1; height:0.5px; background:linear-gradient(90deg,rgba(196,146,42,.2),transparent); }
+.row { display:grid; grid-template-columns:44px 92px 1fr auto; align-items:stretch; border-bottom:0.5px solid var(--rule); transition:background .12s; }
 .row:hover { background:var(--bg-raised); }
-.rnum { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:10px; font-weight:500; border-right:0.5px solid var(--rule); padding:0 4px; gap:2px; flex-shrink:0; color:var(--t3); letter-spacing:.06em; }
+.rnum { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9.5px; font-weight:500; border-right:0.5px solid var(--rule); padding:0 4px; gap:3px; flex-shrink:0; color:var(--t3); letter-spacing:.08em; }
 .rnum.gold { color:var(--gold); }
 .rnum.nxt { color:var(--t2); }
-.rnum .age { font-size:8.5px; color:var(--t4); font-weight:400; }
-.watch-img-btn { width:64px; border-right:0.5px solid var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:rgba(255,255,255,.02); transition:background .15s; padding:8px 4px; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; min-height:72px; }
+.rnum .age { font-size:8px; color:var(--t4); font-weight:400; }
+.watch-img-btn { width:92px; min-height:106px; border-right:0.5px solid var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#0c0b08; transition:background .15s; padding:6px 4px; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; }
 .watch-img-btn:hover { background:rgba(196,146,42,.06); }
-.watch-img-btn .cam { font-size:14px; opacity:.2; }
+.watch-img-btn .cam { font-size:15px; opacity:.18; }
 .watch-img-btn .cam-lbl { font-size:7px; color:var(--t3); text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; }
-.rmain { padding:.65rem 1rem; display:flex; flex-direction:column; gap:3px; cursor:pointer; }
+.rmain { padding:.75rem 1rem; display:flex; flex-direction:column; gap:4px; cursor:pointer; }
 .rtop { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
-.rname { font-size:12.5px; font-weight:500; color:var(--white); }
-.rref { font-size:10px; color:var(--t3); font-family:monospace; letter-spacing:.06em; }
-.rmeta { font-size:10.5px; color:var(--t2); line-height:1.45; }
-.rnote { font-size:10px; color:var(--t3); font-style:italic; }
-.rdec { font-size:10px; color:var(--gold-dim); font-style:italic; }
-.tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:4px; }
-.chev { font-size:8.5px; color:var(--t4); margin-top:3px; }
-.tag { font-size:8.5px; padding:2px 7px; border-radius:20px; letter-spacing:.06em; text-transform:uppercase; border:0.5px solid; }
+.rname { font-size:13px; font-weight:500; color:var(--white); }
+.rref { font-size:10px; color:var(--t3); font-family:'Courier New',monospace; letter-spacing:.06em; }
+.rmeta { font-size:10px; color:var(--t2); line-height:1.5; }
+.rnote { font-size:9.5px; color:var(--t3); font-style:italic; line-height:1.5; }
+.rdec { font-size:9.5px; color:var(--gold-dim); font-style:italic; line-height:1.5; }
+.tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:5px; }
+.chev { font-size:8px; color:var(--t4); margin-top:3px; letter-spacing:.04em; }
+.tag { font-size:8px; padding:2px 8px; border-radius:20px; letter-spacing:.07em; text-transform:uppercase; border:0.5px solid; }
 .tag.owned { color:#C4922A; border-color:rgba(196,146,42,.4); background:radial-gradient(ellipse at 50% 20%, rgba(196,146,42,.18) 0%, rgba(196,146,42,.05) 100%); }
 .tag.rolex { color:#C4922A; border-color:rgba(196,146,42,.35); background:radial-gradient(ellipse at 50% 20%, rgba(196,146,42,.12) 0%, rgba(196,146,42,.03) 100%); }
 .tag.chrono { color:#7BB8E8; border-color:rgba(123,184,232,.35); background:radial-gradient(ellipse at 50% 20%, rgba(123,184,232,.12) 0%, rgba(30,60,100,.15) 100%); }
@@ -93,9 +116,9 @@
 .tag.open { color:#B8A8E8; border-color:rgba(184,168,232,.3); background:radial-gradient(ellipse at 50% 20%, rgba(184,168,232,.1) 0%, rgba(40,20,80,.15) 100%); }
 .tag.locked { color:#C4922A; border-color:rgba(196,146,42,.4); background:radial-gradient(ellipse at 50% 20%, rgba(196,146,42,.2) 0%, rgba(196,146,42,.06) 100%); }
 .tag.base { color:var(--t3); border-color:var(--t4); background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.04) 0%, rgba(0,0,0,.1) 100%); }
-.rright { display:flex; flex-direction:column; align-items:flex-end; justify-content:center; padding:.65rem 1.25rem; gap:5px; border-left:0.5px solid var(--rule); min-width:88px; flex-shrink:0; }
-.rbdg { font-size:13px; font-weight:500; color:var(--white); }
-.rbadge { font-size:8px; padding:2px 8px; border-radius:20px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+.rright { display:flex; flex-direction:column; align-items:flex-end; justify-content:center; padding:.75rem 1.25rem; gap:6px; border-left:0.5px solid var(--rule); min-width:92px; flex-shrink:0; }
+.rbdg { font-size:14px; font-weight:300; color:var(--white); letter-spacing:.02em; }
+.rbadge { font-size:7.5px; padding:2px 9px; border-radius:20px; letter-spacing:.09em; text-transform:uppercase; white-space:nowrap; }
 .st-o { color:var(--gold); border:0.5px solid rgba(196,146,42,.4); background:radial-gradient(ellipse at 50% 20%, rgba(196,146,42,.2) 0%, rgba(196,146,42,.05) 100%); }
 .st-n { color:#7BB8E8; border:0.5px solid rgba(123,184,232,.35); background:radial-gradient(ellipse at 50% 20%, rgba(123,184,232,.15) 0%, rgba(20,50,90,.2) 100%); }
 .st-p { color:var(--t3); border:0.5px solid var(--t4); background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.04) 0%, rgba(0,0,0,.1) 100%); }
@@ -104,33 +127,35 @@
 .lnk { font-size:8.5px; padding:2px 7px; border-radius:3px; border:0.5px solid var(--t4); color:var(--t3); text-decoration:none; white-space:nowrap; letter-spacing:.04em; }
 .lnk:hover { border-color:var(--gold); color:var(--gold); }
 .lnk.blue { border-color:rgba(196,146,42,.3); color:var(--gold); }
-.alts { display:none; padding:.55rem 1rem .7rem 116px; background:var(--bg-drawer); border-bottom:0.5px solid var(--rule); border-top:0.5px solid var(--rule); }
+.alts { display:none; padding:.6rem 1rem .75rem 136px; background:var(--bg-drawer); border-bottom:0.5px solid var(--rule); border-top:0.5px solid var(--rule); }
 .alts.open { display:block; }
-.alts-lbl { font-size:8.5px; text-transform:uppercase; letter-spacing:.12em; color:var(--t4); margin-bottom:6px; }
-.alt-item { font-size:10.5px; color:var(--t2); display:flex; gap:6px; margin-bottom:4px; align-items:baseline; line-height:1.4; }
+.alts-lbl { font-size:8px; text-transform:uppercase; letter-spacing:.14em; color:var(--t4); margin-bottom:7px; }
+.alt-item { font-size:10.5px; color:var(--t2); display:flex; gap:6px; margin-bottom:5px; align-items:baseline; line-height:1.45; }
 .alt-item::before { content:"–"; color:var(--t4); flex-shrink:0; }
 .alt-item a { color:var(--gold-dim); text-decoration:none; font-size:9px; margin-left:4px; opacity:.7; }
 .alt-item a:hover { opacity:1; color:var(--gold); }
-.p2row { display:grid; grid-template-columns:48px 1fr auto; align-items:stretch; border-bottom:0.5px solid var(--rule); opacity:.45; transition:opacity .15s; }
-.p2row:hover { opacity:.7; }
-.p2num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9.5px; color:var(--t3); border-right:0.5px solid var(--rule); padding:0 4px; gap:1px; flex-shrink:0; }
-.p2num .age { font-size:8px; color:var(--t4); }
-.p2main { padding:.5rem .9rem; }
+.p2row { display:grid; grid-template-columns:44px 1fr auto; align-items:stretch; border-bottom:0.5px solid var(--rule); opacity:.5; transition:opacity .15s; }
+.p2row:hover { opacity:.75; }
+.p2num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9px; color:var(--t3); border-right:0.5px solid var(--rule); padding:0 4px; gap:1px; flex-shrink:0; letter-spacing:.05em; }
+.p2num .age { font-size:7.5px; color:var(--t4); }
+.p2main { padding:.55rem .9rem; }
 .p2name { font-size:12px; font-weight:500; color:var(--t1); }
-.p2meta { font-size:10px; color:var(--t2); margin-top:1px; }
-.p2right { display:flex; align-items:center; justify-content:flex-end; padding:.5rem 1.25rem; border-left:0.5px solid var(--rule); min-width:64px; flex-shrink:0; }
-.p2bdg { font-size:12px; font-weight:500; color:var(--t2); }
-.show-more { padding:.55rem 1.5rem; font-size:10px; color:var(--t3); cursor:pointer; text-align:center; border-bottom:0.5px solid var(--rule); letter-spacing:.06em; }
+.p2meta { font-size:9.5px; color:var(--t2); margin-top:2px; line-height:1.4; }
+.p2right { display:flex; align-items:center; justify-content:flex-end; padding:.55rem 1.25rem; border-left:0.5px solid var(--rule); min-width:64px; flex-shrink:0; }
+.p2bdg { font-size:12px; font-weight:300; color:var(--t2); }
+.show-more { padding:.65rem 1.5rem; font-size:9.5px; color:var(--t3); cursor:pointer; text-align:center; border-bottom:0.5px solid var(--rule); letter-spacing:.08em; transition:color .15s; }
 .show-more:hover { color:var(--gold); }
-.footer { padding:.7rem 1.5rem; font-size:9px; color:var(--t4); display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px; letter-spacing:.05em; border-top:0.5px solid var(--rule-accent); margin-bottom:80px; }
+.footer { padding:1rem 1.5rem; font-size:8.5px; color:var(--t4); display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px; letter-spacing:.06em; border-top:0.5px solid var(--rule-accent); margin-bottom:80px; background:#0c0b08; }
 @media(max-width:480px){
-  .row { grid-template-columns:38px 52px 1fr auto; }
-  .h-row { grid-template-columns:38px 52px 1fr; }
-  .watch-img-btn,.img-btn { width:52px; }
-  .rright { min-width:70px; padding:.65rem .7rem; }
-  .alts { padding:.55rem .75rem .7rem .75rem; }
+  .row { grid-template-columns:38px 72px 1fr auto; }
+  .h-row { grid-template-columns:38px 72px 1fr; }
+  .watch-img-btn,.img-btn { width:72px; min-height:88px; }
+  .rright { min-width:72px; padding:.65rem .7rem; }
+  .alts { padding:.6rem .75rem .75rem .75rem; }
   .sbar { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .hdr { padding:1rem; }
+  .hdr { padding:1.5rem 1rem 1.25rem; }
+  .hdr-title { font-size:22px; }
+  .chat-status { display:none; }
 }
 
 /* ── API key modal ─────────────────────────────────────── */
@@ -260,16 +285,16 @@
   .chat-status { display:none; }
 }
 
-/* ── embedded watch photos ───────────────────────────────────────────── */
+/* ── watch photos ─────────────────────────────────────────────────────── */
 .watch-img-btn img, .img-btn img {
-  width:100%; height:100%; object-fit:cover; display:block;
-  opacity:.82; transition:opacity .15s;
+  width:100%; height:100%; object-fit:contain; display:block;
+  opacity:.88; transition:opacity .15s;
 }
 .watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
-.watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
+.watch-img-btn, .img-btn { padding:4px !important; overflow:hidden; }
 </style>
 </head>
-<body style="background:#1a1814; min-height:100vh;">
+<body style="background:#181510; min-height:100vh;">
 
 <!-- ── API key modal ──────────────────────────────────────────────────── -->
 <div class="modal-overlay hidden" id="key-modal">
@@ -299,10 +324,15 @@
 
 <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
 <div class="db">
+<div class="tachy">
+  <span class="tachy-lbl">Tachymeter</span>
+  <span class="tachy-scale">1000 · 500 · 300 · 250 · 200 · 150 · 120 · 100 · 90 · 80 · 75 · 70 · 60</span>
+</div>
 <div class="hdr">
-  <div>
+  <div class="hdr-brand">
+    <div class="hdr-eyebrow">Joel Coleman · Age 35–45</div>
     <div class="hdr-title">10 Springs</div>
-    <div class="hdr-sub">Age 35–45 · Mechanical instrument watches of the exploration age</div>
+    <div class="hdr-sub">Mechanical instrument watches of the exploration age</div>
   </div>
   <div class="hdr-stats">
     <div class="hs"><div class="hs-val">1</div><div class="hs-lbl">Purchased</div></div>
@@ -344,21 +374,32 @@
     </div>
   </div>
 </div>
-<div class="principles">
-  <span class="pill">Mechanical only</span>
-  <span class="pill">Vintage: collectibility + originality + serviceability</span>
-  <span class="pill">Modern: iconic + value-holding</span>
-  <span class="pill">Vintage / Dress / Sport / Chrono / Gold / Weird</span>
-  <span class="pill">Must love wearing it + collector floor</span>
-  <span class="pill">Leave behind substance, not obligation</span>
-</div>
-<div class="decisions">
-  <div class="dec-title">Decisions locked</div>
-  <div class="dec-item">S6 Speedmaster → modern 3570.50 · El Primero covers vintage chrono; Speedy is the wearable icon</div>
-  <div class="dec-item">S7 → open by design · Seamaster Diver 300M live contender alongside Hulk / Batman / Root Beer · color TBD based on earlier springs</div>
-  <div class="dec-item">S9 → full gold presidential confirmed · champagne dial as default · black dial as strongly preferred alternate</div>
-  <div class="dec-item">Philosophy → framework not contract · gut aesthetic + collector floor · nothing bought to fill a box</div>
-  <div class="dec-item open">S7 specific reference → intentionally deferred until S4–S6 are on the wrist and color balance is clear</div>
+<div class="accord">
+  <div class="accord-hdr" onclick="togAccord()">
+    <div class="accord-left">
+      <div class="accord-register"></div>
+      <span class="accord-title">Collection philosophy &amp; locked decisions</span>
+    </div>
+    <span class="accord-chev" id="accord-chev">▼</span>
+  </div>
+  <div class="accord-body" id="accord-body">
+    <div class="principles">
+      <span class="pill">Mechanical only</span>
+      <span class="pill">Vintage: collectibility + originality + serviceability</span>
+      <span class="pill">Modern: iconic + value-holding</span>
+      <span class="pill">Vintage / Dress / Sport / Chrono / Gold / Weird</span>
+      <span class="pill">Must love wearing it + collector floor</span>
+      <span class="pill">Leave behind substance, not obligation</span>
+    </div>
+    <div class="decisions">
+      <div class="dec-title">Decisions locked</div>
+      <div class="dec-item">S6 Speedmaster → modern 3570.50 · El Primero covers vintage chrono; Speedy is the wearable icon</div>
+      <div class="dec-item">S7 → open by design · Seamaster Diver 300M live contender alongside Hulk / Batman / Root Beer · color TBD based on earlier springs</div>
+      <div class="dec-item">S9 → full gold presidential confirmed · champagne dial as default · black dial as strongly preferred alternate</div>
+      <div class="dec-item">Philosophy → framework not contract · gut aesthetic + collector floor · nothing bought to fill a box</div>
+      <div class="dec-item open">S7 specific reference → intentionally deferred until S4–S6 are on the wrist and color balance is clear</div>
+    </div>
+  </div>
 </div>
 <div class="sbar">
   <div class="si"><div class="si-lbl">Spent</div><div class="si-val gold">~$500</div></div>
@@ -652,6 +693,15 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ── Dashboard interactions ───────────────────────────────────────────────
+function togAccord() {
+  const body = document.getElementById('accord-body');
+  const chev = document.getElementById('accord-chev');
+  if (!body) return;
+  const isOpen = body.classList.toggle('open');
+  chev.textContent = isOpen ? '▲' : '▼';
+  chev.classList.toggle('open', isOpen);
+}
+
 function tog(id, el) {
   const p = document.getElementById('alt-' + id);
   if (!p) return;
@@ -725,7 +775,10 @@ The user will give you a natural language instruction and the current innerHTML 
 Rules:
 - Return raw HTML only — no markdown, no code fences, no explanation, no preamble
 - Preserve ALL CSS classes, inline styles, onclick attributes, href values, and structure exactly
+- Preserve the .tachy bar, .hdr structure with .hdr-brand / .hdr-eyebrow / .hdr-title / .hdr-sub
+- Preserve the .accord structure wrapping .principles and .decisions — do not flatten it
 - Preserve the searchPhoto(displayName, query) two-argument signature on every 📷 button
+- Preserve the .sec::before / .sec::after decoration (no extra elements inside .sec needed)
 - Make only the specific change the user asks for — do not reformat, reorder, or improve anything else
 - Update the header stats (Purchased count, Projected total), progress bar width/label, dots, decisions section, footer date, and any stats bar values to stay consistent with changes
 - When adding a new locked decision, append it to the .decisions div as a .dec-item (not .dec-item.open)
@@ -842,52 +895,60 @@ document.getElementById('chat-input').addEventListener('keydown', function(e) {
 });
 
 // ── Watch image loader (Wikimedia Commons) ───────────────────────────────
-// Curated search queries per slot — tuned for best Wikimedia results.
-// Key = first arg of searchPhoto() on that button.
+// Each entry: [primaryQuery, fallbackQuery]
 const WIKI_QUERIES = {
-  'Caravelle manual wind':                    'Caravelle watch vintage',
-  'Bulova Accutron Spaceview':                'Bulova Accutron Spaceview',
-  'Longines Sport Chief ref 7042':            'Longines vintage watch 1950s',
-  'Omega Seamaster ref 166.010':              'Omega Seamaster vintage 1960s',
-  'Longines Flagship 18k ref 3410':           'Longines Flagship gold dress watch',
-  'Universal Genève Polerouter ref 20217':    'Universal Geneve Polerouter',
-  'Zenith El Primero ref A386':               'Zenith El Primero chronograph',
-  'Rolex Datejust ref 1601':                  'Rolex Datejust vintage',
-  'Omega Speedmaster Professional ref 3570.50': 'Omega Speedmaster Professional Moonwatch',
-  'Rolex Submariner Hulk 116610LV':           'Rolex Submariner green',
-  'JLC Master Ultra Thin Moon Q1368430':      'Jaeger-LeCoultre Master Ultra Thin',
-  'Rolex Day-Date 18038 yellow gold':         'Rolex Day-Date yellow gold',
-  'Rolex GMT-Master ref 1675 Pepsi':          'Rolex GMT-Master Pepsi vintage',
+  'Caravelle manual wind':                    ['Caravelle Bulova watch vintage manual wind', 'Caravelle watch'],
+  'Bulova Accutron Spaceview':                ['Bulova Accutron Spaceview 214 tuning fork', 'Bulova Accutron'],
+  'Longines Sport Chief ref 7042':            ['Longines Sport Chief vintage', 'Longines vintage watch manual wind'],
+  'Omega Seamaster ref 166.010':              ['Omega Seamaster 166 vintage 1960s', 'Omega Seamaster vintage automatic'],
+  'Longines Flagship 18k ref 3410':           ['Longines Flagship 18k gold vintage', 'Longines Flagship vintage dress'],
+  'Universal Genève Polerouter ref 20217':    ['Universal Geneve Polerouter micro-rotor', 'Universal Geneve vintage watch'],
+  'Zenith El Primero ref A386':               ['Zenith El Primero A386 chronograph 1969', 'Zenith El Primero vintage'],
+  'Rolex Datejust ref 1601':                  ['Rolex Datejust 1601 vintage pie pan dial', 'Rolex Datejust vintage stainless'],
+  'Omega Speedmaster Professional ref 3570.50': ['Omega Speedmaster Professional moonwatch 3570', 'Omega Speedmaster Professional Cal 1861'],
+  'Rolex Submariner Hulk 116610LV':           ['Rolex Submariner 116610LV green ceramic', 'Rolex Submariner green dial'],
+  'JLC Master Ultra Thin Moon Q1368430':      ['Jaeger-LeCoultre Master Ultra Thin moonphase', 'Jaeger-LeCoultre moonphase dress watch'],
+  'Rolex Day-Date 18038 yellow gold':         ['Rolex Day-Date 18038 yellow gold President', 'Rolex Day-Date gold champagne dial'],
+  'Rolex GMT-Master ref 1675 Pepsi':          ['Rolex GMT-Master 1675 Pepsi bezel vintage', 'Rolex GMT-Master vintage red blue bezel'],
 };
 
-async function fetchWikiImage(query) {
-  const params = new URLSearchParams({
-    action: 'query', generator: 'search', gsrnamespace: '6',
-    gsrsearch: query, gsrlimit: '8',
-    prop: 'imageinfo', iiprop: 'url|mime', iiurlwidth: '300',
-    format: 'json', origin: '*',
-  });
-  const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
-  const data = await res.json();
-  const pages = Object.values(data.query?.pages || {});
-  // Sort by page index so we get the most relevant result first
-  pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
-  for (const page of pages) {
-    const info = page.imageinfo?.[0];
-    if (!info) continue;
-    if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
-    return info.thumburl || info.url;
-  }
+async function fetchWikiImage(primaryQuery, fallbackQuery) {
+  const tryQuery = async (q) => {
+    const params = new URLSearchParams({
+      action: 'query', generator: 'search', gsrnamespace: '6',
+      gsrsearch: q, gsrlimit: '12',
+      prop: 'imageinfo', iiprop: 'url|mime|size', iiurlwidth: '400',
+      format: 'json', origin: '*',
+    });
+    const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
+    const data = await res.json();
+    const pages = Object.values(data.query?.pages || {});
+    pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
+    for (const page of pages) {
+      const info = page.imageinfo?.[0];
+      if (!info) continue;
+      if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
+      // Skip tiny images (icons, logos)
+      const tw = info.thumbwidth || 0;
+      const th = info.thumbheight || 0;
+      if (tw < 80 || th < 80) continue;
+      return info.thumburl || info.url;
+    }
+    return null;
+  };
+  const result = await tryQuery(primaryQuery);
+  if (result) return result;
+  if (fallbackQuery) return await tryQuery(fallbackQuery);
   return null;
 }
 
 function injectImage(btn, imgUrl, label) {
+  const prevContent = btn.innerHTML;
   const img = document.createElement('img');
   img.src = imgUrl;
   img.alt = label;
-  img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
-  img.onerror = function() { btn.innerHTML = prevContent; }; // revert on 404
-  const prevContent = btn.innerHTML;
+  img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;';
+  img.onerror = () => { btn.innerHTML = prevContent; };
   btn.innerHTML = '';
   btn.appendChild(img);
 }
@@ -896,18 +957,17 @@ async function loadWatchImages() {
   const buttons = document.querySelectorAll('.watch-img-btn, .img-btn');
   for (const btn of buttons) {
     const onclick = btn.getAttribute('onclick') || '';
-    // Extract first arg: searchPhoto('DISPLAY NAME', '...')
     const m = onclick.match(/searchPhoto\('([^']+)'/);
     if (!m) continue;
     const displayName = m[1];
-    const wikiQuery = WIKI_QUERIES[displayName];
-    if (!wikiQuery) continue;
+    const queries = WIKI_QUERIES[displayName];
+    if (!queries) continue;
     try {
-      const imgUrl = await fetchWikiImage(wikiQuery);
+      const imgUrl = await fetchWikiImage(queries[0], queries[1]);
       if (imgUrl) injectImage(btn, imgUrl, displayName);
     } catch(_) { /* keep placeholder */ }
-    // Small delay — be polite to Wikimedia
-    await new Promise(r => setTimeout(r, 150));
+    // Be polite to Wikimedia
+    await new Promise(r => setTimeout(r, 200));
   }
   // Re-run after any Claude update replaces .db innerHTML
   document.querySelector('.db').addEventListener('DOMSubtreeModified',
