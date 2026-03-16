@@ -290,9 +290,241 @@
 }
 .watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
 .watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
+
+/* ── Timeline header ─────────────────────────────────────────────────── */
+:root { --tl-slot:56px; }
+
+.tl {
+  position:fixed; top:0; left:0; right:0; z-index:150;
+  height:120px; background:#F2F0EB;
+  border-bottom:0.5px solid rgba(0,0,0,.12);
+  overflow:hidden; transition:height .25s ease;
+}
+.tl.compact { height:48px; }
+
+.tl-track {
+  display:flex; align-items:flex-start;
+  padding:8px 2rem 0; height:100%;
+  overflow-x:auto; position:relative;
+  scrollbar-width:none;
+}
+.tl-track::-webkit-scrollbar { display:none; }
+
+/* Thin connecting line sitting behind all thumbnails */
+.tl-track::before {
+  content:''; position:absolute;
+  top:58px; /* 8(pad) + 24(era-hdr) + 4(slot-pad) + 22(half 44px) */
+  left:2rem; right:2rem; height:1px;
+  background:rgba(0,0,0,.1); pointer-events:none;
+  transition:top .25s ease;
+}
+.tl.compact .tl-track::before { top:22px; /* 4(pad) + 4(slot-pad) + 14(half 28px) */ }
+.tl.compact .tl-track { padding-top:4px; }
+
+.tl-era-group { display:flex; flex-direction:column; flex-shrink:0; }
+
+.tl-era-hdr {
+  height:24px; display:flex; flex-direction:column;
+  align-items:center; justify-content:flex-end; padding-bottom:4px;
+  overflow:hidden; transition:height .25s ease, opacity .25s ease;
+}
+.tl.compact .tl-era-hdr { height:0; opacity:0; }
+
+.tl-era-lbl {
+  font-size:8px; color:#999999; text-transform:uppercase;
+  letter-spacing:.1em; white-space:nowrap; margin-bottom:3px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+.tl-era-line {
+  width:calc(100% - var(--tl-slot)); /* inset by half-slot each end */
+  height:0; border-top:0.5px solid rgba(0,0,0,.15);
+  position:relative; transition:border-color .2s;
+}
+.tl-era-line::before, .tl-era-line::after {
+  content:''; position:absolute; top:0;
+  width:0.5px; height:4px; background:rgba(0,0,0,.15);
+  transition:background .2s;
+}
+.tl-era-line::before { left:0; }
+.tl-era-line::after  { right:0; }
+.tl-era-group.tl-era-active .tl-era-line { border-color:#E8142A; }
+.tl-era-group.tl-era-active .tl-era-line::before,
+.tl-era-group.tl-era-active .tl-era-line::after { background:#E8142A; }
+
+.tl-era-slots { display:flex; }
+
+.tl-heritage-sep { width:16px; flex-shrink:0; }
+
+.tl-slot {
+  width:var(--tl-slot); display:flex; flex-direction:column;
+  align-items:center; cursor:pointer; padding:4px 0 0;
+  position:relative; z-index:1; user-select:none;
+}
+.tl-slot:hover .tl-thumb { transform:scale(1.08); }
+
+.tl-thumb {
+  width:44px; height:44px; border-radius:50%; overflow:hidden;
+  background:#E8E5DF; display:flex; align-items:center; justify-content:center;
+  transition:width .25s ease, height .25s ease, transform .12s ease;
+  flex-shrink:0;
+}
+.tl-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+
+.ring-owned    { border:2px solid #E8142A; }
+.ring-decided  { border:1px dashed #E8142A; }
+.ring-planned  { border:1px solid rgba(0,0,0,.15); }
+.ring-heritage { border:1px solid rgba(0,0,0,.1); }
+
+.tl-label {
+  font-size:8px; color:#999999; letter-spacing:.14em;
+  font-family:'SF Mono','Fira Code',monospace; margin-top:4px;
+  transition:font-size .25s ease; white-space:nowrap;
+}
+.tl-age {
+  font-size:7px; color:#BBBBBB; margin-top:1px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  transition:opacity .25s ease, height .25s ease; white-space:nowrap;
+}
+.tl.compact .tl-thumb { width:28px; height:28px; }
+.tl.compact .tl-label { font-size:7px; }
+.tl.compact .tl-age   { opacity:0; height:0; overflow:hidden; margin-top:0; }
+
+/* scroll-margin so rows don't hide behind fixed header */
+.row[id], .h-row[id] { scroll-margin-top:136px; }
+
+@media (max-width:768px) {
+  .tl-thumb { width:32px; height:32px; }
+  .tl-era-lbl { display:none; }
+  .tl-era-line { display:none; }
+  .tl-era-hdr { padding-bottom:0; }
+  .tl-track::before { top:46px; /* 8(pad) + 24(era-hdr) + 4(slot-pad) + 16(half 32px) — era-hdr still holds space */ }
+}
 </style>
 </head>
-<body style="background:#F2F0EB; min-height:100vh;">
+<body style="background:#F2F0EB; min-height:100vh; padding-top:130px;">
+
+<!-- ── Timeline header ───────────────────────────────────────────────── -->
+<div class="tl" id="tl">
+  <div class="tl-track">
+
+    <!-- Foundation: NOW · S1 · S2 -->
+    <div class="tl-era-group" data-era="foundation">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Foundation</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="now" onclick="tlScrollTo('watch-now')">
+          <div class="tl-thumb ring-owned" id="tl-thumb-now"></div>
+          <div class="tl-label">NOW</div>
+          <div class="tl-age">Age 35</div>
+        </div>
+        <div class="tl-slot" data-id="s1" onclick="tlScrollTo('watch-s1')">
+          <div class="tl-thumb ring-decided" id="tl-thumb-s1"></div>
+          <div class="tl-label">S1</div>
+          <div class="tl-age">Age 36</div>
+        </div>
+        <div class="tl-slot" data-id="s2" onclick="tlScrollTo('watch-s2')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s2"></div>
+          <div class="tl-label">S2</div>
+          <div class="tl-age">Age 37</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Collector: S3 · S4 -->
+    <div class="tl-era-group" data-era="collector">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Collector</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="s3" onclick="tlScrollTo('watch-s3')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s3"></div>
+          <div class="tl-label">S3</div>
+          <div class="tl-age">Age 38</div>
+        </div>
+        <div class="tl-slot" data-id="s4" onclick="tlScrollTo('watch-s4')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s4"></div>
+          <div class="tl-label">S4</div>
+          <div class="tl-age">Age 39</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rolex: S5 · S6 · S7 -->
+    <div class="tl-era-group" data-era="rolex">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Rolex</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="s5" onclick="tlScrollTo('watch-s5')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s5"></div>
+          <div class="tl-label">S5</div>
+          <div class="tl-age">Age 40</div>
+        </div>
+        <div class="tl-slot" data-id="s6" onclick="tlScrollTo('watch-s6')">
+          <div class="tl-thumb ring-decided" id="tl-thumb-s6"></div>
+          <div class="tl-label">S6</div>
+          <div class="tl-age">Age 41</div>
+        </div>
+        <div class="tl-slot" data-id="s7" onclick="tlScrollTo('watch-s7')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s7"></div>
+          <div class="tl-label">S7</div>
+          <div class="tl-age">Age 42</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grails: S8 · S9 · S10 -->
+    <div class="tl-era-group" data-era="grails">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Grails</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="s8" onclick="tlScrollTo('watch-s8')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s8"></div>
+          <div class="tl-label">S8</div>
+          <div class="tl-age">Age 43</div>
+        </div>
+        <div class="tl-slot" data-id="s9" onclick="tlScrollTo('watch-s9')">
+          <div class="tl-thumb ring-decided" id="tl-thumb-s9"></div>
+          <div class="tl-label">S9</div>
+          <div class="tl-age">Age 44</div>
+        </div>
+        <div class="tl-slot" data-id="s10" onclick="tlScrollTo('watch-s10')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s10"></div>
+          <div class="tl-label">S10</div>
+          <div class="tl-age">Age 45</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Heritage separator + H1 · H2 -->
+    <div class="tl-heritage-sep"></div>
+    <div class="tl-era-group" data-era="heritage">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Heritage</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="h1" onclick="tlScrollTo('watch-h1')">
+          <div class="tl-thumb ring-heritage" id="tl-thumb-h1"></div>
+          <div class="tl-label">H1</div>
+          <div class="tl-age">Dad's</div>
+        </div>
+        <div class="tl-slot" data-id="h2" onclick="tlScrollTo('watch-h2')">
+          <div class="tl-thumb ring-heritage" id="tl-thumb-h2"></div>
+          <div class="tl-label">H2</div>
+          <div class="tl-age">Mom's</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- ── API key modal ──────────────────────────────────────────────────── -->
 <div class="modal-overlay hidden" id="key-modal">
@@ -331,7 +563,7 @@
     <span class="heritage-title">Heritage pieces</span>
     <span class="heritage-sub">Not for sale · The foundation everything else is built around</span>
   </div>
-  <div class="h-row">
+  <div class="h-row" id="watch-h1">
     <div class="h-num">H1<div class="h-lineage">Dad's side</div></div>
     <button class="img-btn" onclick="searchPhoto('Caravelle manual wind','Caravelle manual wind 1950s vintage watch')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
     <div class="h-main">
@@ -345,7 +577,7 @@
       <span class="h-badge">Heirloom · not for sale</span>
     </div>
   </div>
-  <div class="h-row">
+  <div class="h-row" id="watch-h2">
     <div class="h-num">H2<div class="h-lineage">Mom's side</div></div>
     <button class="img-btn" onclick="searchPhoto('Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
     <div class="h-main">
@@ -404,8 +636,8 @@
     <div class="dot plan"></div><div class="dot plan"></div><div class="dot plan"></div>
   </div>
 </div>
-<div class="sec">Foundation — Vintage dress · Ages 35–37</div>
-<div class="row">
+<div class="sec" id="sec-foundation">Foundation — Vintage dress · Ages 35–37</div>
+<div class="row" id="watch-now">
   <div class="rnum gold">Now<div class="age">Age 35</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('now',this)">
@@ -422,7 +654,7 @@
   <div class="alt-item">Omega Genève manual (Ref. 131.019) — 1960s <a href="https://www.google.com/search?q=Omega+Geneve+131.019+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Tissot Antimagnetique — 1945–1960 <a href="https://www.google.com/search?q=Tissot+Antimagnetique+vintage+watch+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s1">
   <div class="rnum nxt">S1<div class="age">Age 36</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s1',this)">
@@ -439,7 +671,7 @@
   <div class="alt-item">Longines Flagship steel — 1960s <a href="https://www.google.com/search?q=Longines+Flagship+steel+1960s+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Universal Genève dress watch — 1960s <a href="https://www.google.com/search?q=Universal+Geneve+dress+watch+1960s+vintage&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s2">
   <div class="rnum">S2<div class="age">Age 37</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s2',this)">
@@ -456,8 +688,8 @@
   <div class="alt-item">Universal Genève gold dress — 1960s <a href="https://www.google.com/search?q=Universal+Geneve+gold+dress+watch+1960s&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">IWC vintage dress (Ref. 810) <a href="https://www.google.com/search?q=IWC+810+vintage+dress+watch+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="sec">Collector — Instrument era · Ages 38–39</div>
-<div class="row">
+<div class="sec" id="sec-collector">Collector — Instrument era · Ages 38–39</div>
+<div class="row" id="watch-s3">
   <div class="rnum">S3<div class="age">Age 38</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Universal Genève Polerouter ref 20217','Universal Genève Polerouter ref 20217 tropical brown dial vintage')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s3',this)">
@@ -475,7 +707,7 @@
   <div class="alt-item">Omega Dynamic (Ref. 166.039) — 1968–1975 <a href="https://www.google.com/search?q=Omega+Dynamic+166.039+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Zenith Defy (Ref. A3642) — 1969–1973 <a href="https://www.google.com/search?q=Zenith+Defy+A3642+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s4">
   <div class="rnum">S4<div class="age">Age 39</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s4',this)">
@@ -493,8 +725,8 @@
   <div class="alt-item">Omega Speedmaster Reduced (Ref. 3510.50) <a href="https://www.google.com/search?q=Omega+Speedmaster+Reduced+3510.50+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Sinn 103 chronograph <a href="https://www.google.com/search?q=Sinn+103+chronograph+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="sec">Rolex — The ascent · Ages 40–42</div>
-<div class="row">
+<div class="sec" id="sec-rolex">Rolex — The ascent · Ages 40–42</div>
+<div class="row" id="watch-s5">
   <div class="rnum">S5<div class="age">Age 40</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s5',this)">
@@ -512,7 +744,7 @@
   <div class="alt-item">Rolex Air-King (Ref. 5500) — 1960–1989 <a href="https://www.google.com/search?q=Rolex+Air-King+5500+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Rolex Turn-O-Graph (Ref. 1625) <a href="https://www.google.com/search?q=Rolex+Turn-O-Graph+1625+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s6">
   <div class="rnum">S6<div class="age">Age 41</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s6',this)">
@@ -530,7 +762,7 @@
   <div class="alt-item">Tudor Black Bay Chrono (Ref. 79360N) <a href="https://www.google.com/search?q=Tudor+Black+Bay+Chrono+79360N+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Heuer Autavia <a href="https://www.google.com/search?q=Heuer+Autavia+vintage+chronograph+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s7">
   <div class="rnum">S7<div class="age">Age 42</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s7',this)">
@@ -550,8 +782,8 @@
   <div class="alt-item">Omega Seamaster Diver 300M — black, blue, or green ceramic <a href="https://www.google.com/search?q=Omega+Seamaster+Diver+300M+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Tudor Black Bay 58 (Ref. 79030B) — deep blue, 39mm <a href="https://www.google.com/search?q=Tudor+Black+Bay+58+79030B+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="sec">Grand complications &amp; grails · Ages 43–45</div>
-<div class="row">
+<div class="sec" id="sec-grails">Grand complications &amp; grails · Ages 43–45</div>
+<div class="row" id="watch-s8">
   <div class="rnum">S8<div class="age">Age 43</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s8',this)">
@@ -569,7 +801,7 @@
   <div class="alt-item">JLC Memovox (Ref. E855) — 1960–1970 <a href="https://www.google.com/search?q=JLC+Memovox+E855+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Cartier Santos <a href="https://www.google.com/search?q=Cartier+Santos+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s9">
   <div class="rnum">S9<div class="age">Age 44</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s9',this)">
@@ -588,7 +820,7 @@
   <div class="alt-item">Modern 228238 — 40mm · better wrist presence at 6'5" <a href="https://www.google.com/search?q=Rolex+Day-Date+40+228238+yellow+gold+for+sale&tbm=shop" target="_blank">↗</a></div>
   <div class="alt-item">Patek Philippe Calatrava (Ref. 3919) <a href="https://www.google.com/search?q=Patek+Philippe+Calatrava+3919+for+sale&tbm=shop" target="_blank">↗</a></div>
 </div>
-<div class="row">
+<div class="row" id="watch-s10">
   <div class="rnum">S10<div class="age">Age 45</div></div>
   <button class="watch-img-btn" onclick="searchPhoto('Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
   <div class="rmain" onclick="tog('s10',this)">
@@ -1124,6 +1356,106 @@ sendPrompt = async function() {
 };
 
 document.addEventListener('DOMContentLoaded', loadWatchImages);
+
+// ── Timeline header ───────────────────────────────────────────────────────
+
+function tlScrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Compact state on scroll
+(function() {
+  var tl = document.getElementById('tl');
+  var lastCompact = false;
+  window.addEventListener('scroll', function() {
+    var compact = window.scrollY > 80;
+    if (compact === lastCompact) return;
+    lastCompact = compact;
+    tl.classList.toggle('compact', compact);
+    document.body.style.paddingTop = compact ? '64px' : '130px';
+  }, { passive: true });
+})();
+
+// Active era highlight via IntersectionObserver
+(function() {
+  var sections = [
+    { id: 'sec-foundation', era: 'foundation' },
+    { id: 'sec-collector',  era: 'collector'  },
+    { id: 'sec-rolex',      era: 'rolex'      },
+    { id: 'sec-grails',     era: 'grails'     }
+  ];
+  var activeEra = 'foundation';
+
+  function setActiveEra(era) {
+    if (era === activeEra) return;
+    activeEra = era;
+    document.querySelectorAll('.tl-era-group').forEach(function(g) {
+      g.classList.toggle('tl-era-active', g.dataset.era === era);
+    });
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var match = sections.find(function(s) { return s.id === entry.target.id; });
+        if (match) setActiveEra(match.era);
+      }
+    });
+  }, { rootMargin: '-130px 0px -55% 0px' });
+
+  sections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) obs.observe(el);
+  });
+})();
+
+// Mirror loaded watch images into timeline thumbnails
+(function() {
+  // Map of watchImgBtn data-key → timeline thumb id
+  var imgMap = {
+    'Caravelle manual wind':              'tl-thumb-h1',
+    'Bulova Accutron Spaceview':          'tl-thumb-h2',
+    'Longines Sport Chief ref 7042':      'tl-thumb-now',
+    'Omega Seamaster ref 166.010':        'tl-thumb-s1',
+    'Longines Flagship 18k ref 3410':     'tl-thumb-s2',
+    'Universal Genève Polerouter ref 20217': 'tl-thumb-s3',
+    'Zenith El Primero ref A386':         'tl-thumb-s4',
+    'Rolex Datejust ref 1601':            'tl-thumb-s5',
+    'Omega Speedmaster Professional ref 3570.50': 'tl-thumb-s6',
+    'Rolex Submariner Hulk 116610LV':     'tl-thumb-s7',
+    'JLC Master Ultra Thin Moon Q1368430': 'tl-thumb-s8',
+    'Rolex Day-Date 18038 yellow gold':   'tl-thumb-s9',
+    'Rolex GMT-Master ref 1675 Pepsi':    'tl-thumb-s10'
+  };
+
+  function mirrorImage(src, thumbId) {
+    var thumb = document.getElementById(thumbId);
+    if (!thumb || thumb.querySelector('img')) return;
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    thumb.appendChild(img);
+  }
+
+  // Poll for images already present in the main buttons (loaded from cache)
+  function syncFromButtons() {
+    document.querySelectorAll('.watch-img-btn, .img-btn').forEach(function(btn) {
+      var img = btn.querySelector('img');
+      if (!img) return;
+      var onclick = btn.getAttribute('onclick') || '';
+      var m = onclick.match(/searchPhoto\('([^']+)'/);
+      if (!m) return;
+      var thumbId = imgMap[m[1]];
+      if (thumbId) mirrorImage(img.src, thumbId);
+    });
+  }
+
+  // Run once on load, then observe DOM mutations so newly-fetched images appear
+  document.addEventListener('DOMContentLoaded', syncFromButtons);
+  var mo = new MutationObserver(syncFromButtons);
+  mo.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+})();
 </script>
 </body>
 </html>
