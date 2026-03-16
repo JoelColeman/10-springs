@@ -291,11 +291,9 @@
 .watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
 .watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
 
-/* ── Timeline header ─────────────────────────────────────────────────── */
-:root { --tl-slot:56px; }
-
+/* ── Timeline ────────────────────────────────────────────────────────── */
 .tl {
-  position:fixed; top:0; left:0; right:0; z-index:150;
+  position:sticky; top:0; z-index:100;
   height:120px; background:#F2F0EB;
   border-bottom:0.5px solid rgba(0,0,0,.12);
   overflow:hidden; transition:height .25s ease;
@@ -305,10 +303,8 @@
 .tl-track {
   display:flex; align-items:flex-start;
   padding:8px 2rem 0; height:100%;
-  overflow-x:auto; position:relative;
-  scrollbar-width:none;
+  position:relative; overflow:hidden;
 }
-.tl-track::-webkit-scrollbar { display:none; }
 
 /* Thin connecting line sitting behind all thumbnails */
 .tl-track::before {
@@ -321,7 +317,11 @@
 .tl.compact .tl-track::before { top:22px; /* 4(pad) + 4(slot-pad) + 14(half 28px) */ }
 .tl.compact .tl-track { padding-top:4px; }
 
-.tl-era-group { display:flex; flex-direction:column; flex-shrink:0; }
+/* Era groups: flex value set inline (proportional to slot count) */
+.tl-era-group { display:flex; flex-direction:column; min-width:0; }
+
+/* Heritage group is visually muted — inherited, not purchased */
+.tl-era-group[data-era="heritage"] { opacity:0.6; }
 
 .tl-era-hdr {
   height:24px; display:flex; flex-direction:column;
@@ -336,7 +336,8 @@
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 .tl-era-line {
-  width:calc(100% - var(--tl-slot)); /* inset by half-slot each end */
+  /* inset by half a slot width from each end so endcaps sit at thumb centres */
+  width:calc(100% - 2 * (100% / (2 * var(--tl-group-slots, 1) * 2)));
   height:0; border-top:0.5px solid rgba(0,0,0,.15);
   position:relative; transition:border-color .2s;
 }
@@ -351,19 +352,21 @@
 .tl-era-group.tl-era-active .tl-era-line::before,
 .tl-era-group.tl-era-active .tl-era-line::after { background:#E8142A; }
 
-.tl-era-slots { display:flex; }
+.tl-era-slots { display:flex; flex:1; }
 
-.tl-heritage-sep { width:16px; flex-shrink:0; }
+.tl-heritage-sep { flex:0 0 clamp(6px,1.2vw,16px); }
 
+/* Each slot fills its share of the era group equally */
 .tl-slot {
-  width:var(--tl-slot); display:flex; flex-direction:column;
+  flex:1; min-width:0; display:flex; flex-direction:column;
   align-items:center; cursor:pointer; padding:4px 0 0;
   position:relative; z-index:1; user-select:none;
 }
 .tl-slot:hover .tl-thumb { transform:scale(1.08); }
 
 .tl-thumb {
-  width:44px; height:44px; border-radius:50%; overflow:hidden;
+  width:clamp(20px,3.5vw,44px); height:clamp(20px,3.5vw,44px);
+  border-radius:50%; overflow:hidden;
   background:#E8E5DF; display:flex; align-items:center; justify-content:center;
   transition:width .25s ease, height .25s ease, transform .12s ease;
   flex-shrink:0;
@@ -373,7 +376,7 @@
 .ring-owned    { border:2px solid #E8142A; }
 .ring-decided  { border:1px dashed #E8142A; }
 .ring-planned  { border:1px solid rgba(0,0,0,.15); }
-.ring-heritage { border:1px solid rgba(0,0,0,.1); }
+.ring-heritage { border:1px dashed rgba(0,0,0,.25); }
 
 .tl-label {
   font-size:8px; color:#999999; letter-spacing:.14em;
@@ -389,142 +392,17 @@
 .tl.compact .tl-label { font-size:7px; }
 .tl.compact .tl-age   { opacity:0; height:0; overflow:hidden; margin-top:0; }
 
-/* scroll-margin so rows don't hide behind fixed header */
-.row[id], .h-row[id] { scroll-margin-top:136px; }
+/* scroll-margin: compact sticky header is 48px; add small buffer */
+.row[id], .h-row[id] { scroll-margin-top:60px; }
 
 @media (max-width:768px) {
-  .tl-thumb { width:32px; height:32px; }
   .tl-era-lbl { display:none; }
   .tl-era-line { display:none; }
   .tl-era-hdr { padding-bottom:0; }
-  .tl-track::before { top:46px; /* 8(pad) + 24(era-hdr) + 4(slot-pad) + 16(half 32px) — era-hdr still holds space */ }
 }
 </style>
 </head>
-<body style="background:#F2F0EB; min-height:100vh; padding-top:130px;">
-
-<!-- ── Timeline header ───────────────────────────────────────────────── -->
-<div class="tl" id="tl">
-  <div class="tl-track">
-
-    <!-- Foundation: NOW · S1 · S2 -->
-    <div class="tl-era-group" data-era="foundation">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Foundation</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="now" onclick="tlScrollTo('watch-now')">
-          <div class="tl-thumb ring-owned" id="tl-thumb-now"></div>
-          <div class="tl-label">NOW</div>
-          <div class="tl-age">Age 35</div>
-        </div>
-        <div class="tl-slot" data-id="s1" onclick="tlScrollTo('watch-s1')">
-          <div class="tl-thumb ring-decided" id="tl-thumb-s1"></div>
-          <div class="tl-label">S1</div>
-          <div class="tl-age">Age 36</div>
-        </div>
-        <div class="tl-slot" data-id="s2" onclick="tlScrollTo('watch-s2')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s2"></div>
-          <div class="tl-label">S2</div>
-          <div class="tl-age">Age 37</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Collector: S3 · S4 -->
-    <div class="tl-era-group" data-era="collector">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Collector</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="s3" onclick="tlScrollTo('watch-s3')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s3"></div>
-          <div class="tl-label">S3</div>
-          <div class="tl-age">Age 38</div>
-        </div>
-        <div class="tl-slot" data-id="s4" onclick="tlScrollTo('watch-s4')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s4"></div>
-          <div class="tl-label">S4</div>
-          <div class="tl-age">Age 39</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Rolex: S5 · S6 · S7 -->
-    <div class="tl-era-group" data-era="rolex">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Rolex</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="s5" onclick="tlScrollTo('watch-s5')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s5"></div>
-          <div class="tl-label">S5</div>
-          <div class="tl-age">Age 40</div>
-        </div>
-        <div class="tl-slot" data-id="s6" onclick="tlScrollTo('watch-s6')">
-          <div class="tl-thumb ring-decided" id="tl-thumb-s6"></div>
-          <div class="tl-label">S6</div>
-          <div class="tl-age">Age 41</div>
-        </div>
-        <div class="tl-slot" data-id="s7" onclick="tlScrollTo('watch-s7')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s7"></div>
-          <div class="tl-label">S7</div>
-          <div class="tl-age">Age 42</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Grails: S8 · S9 · S10 -->
-    <div class="tl-era-group" data-era="grails">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Grails</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="s8" onclick="tlScrollTo('watch-s8')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s8"></div>
-          <div class="tl-label">S8</div>
-          <div class="tl-age">Age 43</div>
-        </div>
-        <div class="tl-slot" data-id="s9" onclick="tlScrollTo('watch-s9')">
-          <div class="tl-thumb ring-decided" id="tl-thumb-s9"></div>
-          <div class="tl-label">S9</div>
-          <div class="tl-age">Age 44</div>
-        </div>
-        <div class="tl-slot" data-id="s10" onclick="tlScrollTo('watch-s10')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s10"></div>
-          <div class="tl-label">S10</div>
-          <div class="tl-age">Age 45</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Heritage separator + H1 · H2 -->
-    <div class="tl-heritage-sep"></div>
-    <div class="tl-era-group" data-era="heritage">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Heritage</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="h1" onclick="tlScrollTo('watch-h1')">
-          <div class="tl-thumb ring-heritage" id="tl-thumb-h1"></div>
-          <div class="tl-label">H1</div>
-          <div class="tl-age">Dad's</div>
-        </div>
-        <div class="tl-slot" data-id="h2" onclick="tlScrollTo('watch-h2')">
-          <div class="tl-thumb ring-heritage" id="tl-thumb-h2"></div>
-          <div class="tl-label">H2</div>
-          <div class="tl-age">Mom's</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
+<body style="background:#F2F0EB; min-height:100vh;">
 
 <!-- ── API key modal ──────────────────────────────────────────────────── -->
 <div class="modal-overlay hidden" id="key-modal">
@@ -592,6 +470,134 @@
     </div>
   </div>
 </div>
+
+<!-- Sentinel: when this leaves the viewport the timeline goes compact -->
+<div id="tl-sentinel" style="height:0;overflow:hidden;"></div>
+
+<!-- ── Collection timeline ────────────────────────────────────────────── -->
+<div class="tl" id="tl">
+  <div class="tl-track">
+
+    <!-- HERITAGE · H1 · H2 — muted; inherited, not purchased -->
+    <div class="tl-era-group" data-era="heritage" style="flex:2">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Heritage</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="h1" onclick="tlScrollTo('watch-h1')">
+          <div class="tl-thumb ring-heritage" id="tl-thumb-h1"></div>
+          <div class="tl-label">H1</div>
+          <div class="tl-age">Dad's</div>
+        </div>
+        <div class="tl-slot" data-id="h2" onclick="tlScrollTo('watch-h2')">
+          <div class="tl-thumb ring-heritage" id="tl-thumb-h2"></div>
+          <div class="tl-label">H2</div>
+          <div class="tl-age">Mom's</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-heritage-sep"></div>
+
+    <!-- DRESS · NOW · S1 · S2  (ages 35–37 · vintage dress foundation) -->
+    <div class="tl-era-group" data-era="dress" style="flex:3">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Dress</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="now" onclick="tlScrollTo('watch-now')">
+          <div class="tl-thumb ring-owned" id="tl-thumb-now"></div>
+          <div class="tl-label">NOW</div>
+          <div class="tl-age">Age 35</div>
+        </div>
+        <div class="tl-slot" data-id="s1" onclick="tlScrollTo('watch-s1')">
+          <div class="tl-thumb ring-decided" id="tl-thumb-s1"></div>
+          <div class="tl-label">S1</div>
+          <div class="tl-age">Age 36</div>
+        </div>
+        <div class="tl-slot" data-id="s2" onclick="tlScrollTo('watch-s2')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s2"></div>
+          <div class="tl-label">S2</div>
+          <div class="tl-age">Age 37</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD · S3 · S4  (ages 38–39 · golden-age Swiss instrument) -->
+    <div class="tl-era-group" data-era="field" style="flex:2">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Field</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="s3" onclick="tlScrollTo('watch-s3')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s3"></div>
+          <div class="tl-label">S3</div>
+          <div class="tl-age">Age 38</div>
+        </div>
+        <div class="tl-slot" data-id="s4" onclick="tlScrollTo('watch-s4')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s4"></div>
+          <div class="tl-label">S4</div>
+          <div class="tl-age">Age 39</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPORT · S5 · S6 · S7  (ages 40–42 · Datejust · Speedmaster · modern sport) -->
+    <div class="tl-era-group" data-era="sport" style="flex:3">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Sport</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="s5" onclick="tlScrollTo('watch-s5')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s5"></div>
+          <div class="tl-label">S5</div>
+          <div class="tl-age">Age 40</div>
+        </div>
+        <div class="tl-slot" data-id="s6" onclick="tlScrollTo('watch-s6')">
+          <div class="tl-thumb ring-decided" id="tl-thumb-s6"></div>
+          <div class="tl-label">S6</div>
+          <div class="tl-age">Age 41</div>
+        </div>
+        <div class="tl-slot" data-id="s7" onclick="tlScrollTo('watch-s7')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s7"></div>
+          <div class="tl-label">S7</div>
+          <div class="tl-age">Age 42</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAIL · S8 · S9 · S10  (ages 43–45 · JLC · Day-Date · GMT-Master) -->
+    <div class="tl-era-group" data-era="grail" style="flex:3">
+      <div class="tl-era-hdr">
+        <span class="tl-era-lbl">Grail</span>
+        <div class="tl-era-line"></div>
+      </div>
+      <div class="tl-era-slots">
+        <div class="tl-slot" data-id="s8" onclick="tlScrollTo('watch-s8')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s8"></div>
+          <div class="tl-label">S8</div>
+          <div class="tl-age">Age 43</div>
+        </div>
+        <div class="tl-slot" data-id="s9" onclick="tlScrollTo('watch-s9')">
+          <div class="tl-thumb ring-decided" id="tl-thumb-s9"></div>
+          <div class="tl-label">S9</div>
+          <div class="tl-age">Age 44</div>
+        </div>
+        <div class="tl-slot" data-id="s10" onclick="tlScrollTo('watch-s10')">
+          <div class="tl-thumb ring-planned" id="tl-thumb-s10"></div>
+          <div class="tl-label">S10</div>
+          <div class="tl-age">Age 45</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div class="accord">
   <div class="accord-hdr" onclick="togAccord()">
     <div class="accord-left">
@@ -1366,28 +1372,25 @@ function tlScrollTo(id) {
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Compact state on scroll
+// Compact state: toggle when sentinel scrolls out of view
 (function() {
   var tl = document.getElementById('tl');
-  var lastCompact = false;
-  window.addEventListener('scroll', function() {
-    var compact = window.scrollY > 80;
-    if (compact === lastCompact) return;
-    lastCompact = compact;
-    tl.classList.toggle('compact', compact);
-    document.body.style.paddingTop = compact ? '64px' : '130px';
-  }, { passive: true });
+  var sentinel = document.getElementById('tl-sentinel');
+  if (!sentinel || !tl) return;
+  new IntersectionObserver(function(entries) {
+    tl.classList.toggle('compact', !entries[0].isIntersecting);
+  }, { threshold: 0 }).observe(sentinel);
 })();
 
-// Active era highlight via IntersectionObserver
+// Active bracket highlight: red underline on the era bracket in compact mode
 (function() {
   var sections = [
-    { id: 'sec-foundation', era: 'foundation' },
-    { id: 'sec-collector',  era: 'collector'  },
-    { id: 'sec-rolex',      era: 'rolex'      },
-    { id: 'sec-grails',     era: 'grails'     }
+    { id: 'sec-foundation', era: 'dress'  },
+    { id: 'sec-collector',  era: 'field'  },
+    { id: 'sec-rolex',      era: 'sport'  },
+    { id: 'sec-grails',     era: 'grail'  }
   ];
-  var activeEra = 'foundation';
+  var activeEra = 'dress';
 
   function setActiveEra(era) {
     if (era === activeEra) return;
@@ -1404,7 +1407,7 @@ function tlScrollTo(id) {
         if (match) setActiveEra(match.era);
       }
     });
-  }, { rootMargin: '-130px 0px -55% 0px' });
+  }, { rootMargin: '-60px 0px -55% 0px' }); // 60px = compact header height
 
   sections.forEach(function(s) {
     var el = document.getElementById(s.id);
