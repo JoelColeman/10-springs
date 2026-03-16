@@ -259,6 +259,14 @@
   .chat-send { padding:9px 12px; letter-spacing:.08em; }
   .chat-status { display:none; }
 }
+
+/* ── embedded watch photos ───────────────────────────────────────────── */
+.watch-img-btn img, .img-btn img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  opacity:.82; transition:opacity .15s;
+}
+.watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
+.watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
 </style>
 </head>
 <body style="background:#1a1814; min-height:100vh;">
@@ -680,18 +688,48 @@ function togSum() {
 }
 
 // ── Chat / Claude API ────────────────────────────────────────────────────
-const SYSTEM_PROMPT = `You are the editor for the "10 Springs" personal watch collection dashboard — a single-page HTML app.
+const SYSTEM_PROMPT = `You are the editor for "10 Springs" — Joel Coleman's personal watch collection planning dashboard, a single-page HTML app.
 
-The user will give you a natural language instruction and the current innerHTML of the .db div. Return ONLY the updated innerHTML of the .db div with the requested change applied.
+## Who this is for
+Joel Coleman, age 35, senior healthcare executive in Albuquerque NM. 6'5", 265 lbs. Married to Kassie. The goal of the collection is to leave behind watches his kids can discover independently and find hold real value — recreating the experience of discovering his grandfather's Bulova Accutron Spaceview.
+
+## Collection philosophy
+Mechanical only. Every watch must clear 3 of 4 bars: loves the aesthetic, would wear it regularly, defensible collector narrative, strong resale floor. Framework not contract — gut aesthetic + collector floor, nothing bought to fill a box.
+
+## Current status
+- Sport Chief ref 7042 purchased ~$500, shipping from Norway. Cal 30L, Arabic numeral cream dial, small seconds at 6. Good example of the reference.
+- All other springs: planned/future purchases
+
+## Key decisions locked
+- S6 Speedmaster → modern 3570.50 only, not vintage
+- S7 → deliberately open until S4–S6 are on the wrist and color balance is clear. Live candidates: Hulk 116610LV, Batman 116710BLNR, Root Beer 126711CHNR, Seamaster Diver 300M, Tudor BB58
+- S9 → full yellow gold President bracelet confirmed, champagne dial default, black dial strongly preferred alternate
+- 10 Summers = phase 2 plan for ages 46–55
+
+## Status tag & badge mappings (use exactly these classes)
+- Planned:    tag class="tag base" (or relevant category), rbadge class="rbadge st-p", text "Planned"
+- Up next:    rbadge class="rbadge st-n", text "Up next"
+- In hand / arrived / purchased: tag class="tag owned", rbadge class="rbadge st-o", text "In hand"
+- Decided:    tag class="tag locked", rbadge class="rbadge st-l", text "Decided" — add a .rdec line with the decision summary
+- Open:       tag class="tag open", rbadge class="rbadge st-d", text "Open"
+
+## Progress dots
+- .dot.heritage = H1/H2 (always 2, always first)
+- .dot.owned = purchased/in hand
+- .dot.next = next planned purchase
+- .dot.plan = future planned
+
+## Your task
+The user will give you a natural language instruction and the current innerHTML of the .db div. Return ONLY the updated innerHTML with the change applied.
 
 Rules:
-- Return raw HTML only — no markdown, no code fences, no explanation, no commentary
-- Preserve ALL CSS classes, inline styles, onclick attributes, href values, and data exactly as written
-- Preserve the searchPhoto(displayName, query) two-argument call signature on every 📷 button
+- Return raw HTML only — no markdown, no code fences, no explanation, no preamble
+- Preserve ALL CSS classes, inline styles, onclick attributes, href values, and structure exactly
+- Preserve the searchPhoto(displayName, query) two-argument signature on every 📷 button
 - Make only the specific change the user asks for — do not reformat, reorder, or improve anything else
-- If a watch status changes to "In hand" or "arrived": add/change tag to <span class="tag owned">In hand</span>, badge to <div class="rbadge st-o">In hand</div>
-- If a spring is "decided": add <span class="tag locked">Decided</span>, change badge to st-l class and text "Decided", add a .rdec line with the decision
-- Update stats, progress bar, dots, footer date, and decisions section as needed to stay consistent with changes`;
+- Update the header stats (Purchased count, Projected total), progress bar width/label, dots, decisions section, footer date, and any stats bar values to stay consistent with changes
+- When adding a new locked decision, append it to the .decisions div as a .dec-item (not .dec-item.open)
+- When a previously open decision is resolved, remove the .dec-item.open version and add a resolved .dec-item`;
 
 function setLoading(on) {
   const status = document.getElementById('chat-status');
@@ -802,6 +840,90 @@ async function sendPrompt() {
 document.getElementById('chat-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendPrompt(); }
 });
+
+// ── Watch image loader (Wikimedia Commons) ───────────────────────────────
+// Curated search queries per slot — tuned for best Wikimedia results.
+// Key = first arg of searchPhoto() on that button.
+const WIKI_QUERIES = {
+  'Caravelle manual wind':                    'Caravelle watch vintage',
+  'Bulova Accutron Spaceview':                'Bulova Accutron Spaceview',
+  'Longines Sport Chief ref 7042':            'Longines vintage watch 1950s',
+  'Omega Seamaster ref 166.010':              'Omega Seamaster vintage 1960s',
+  'Longines Flagship 18k ref 3410':           'Longines Flagship gold dress watch',
+  'Universal Genève Polerouter ref 20217':    'Universal Geneve Polerouter',
+  'Zenith El Primero ref A386':               'Zenith El Primero chronograph',
+  'Rolex Datejust ref 1601':                  'Rolex Datejust vintage',
+  'Omega Speedmaster Professional ref 3570.50': 'Omega Speedmaster Professional Moonwatch',
+  'Rolex Submariner Hulk 116610LV':           'Rolex Submariner green',
+  'JLC Master Ultra Thin Moon Q1368430':      'Jaeger-LeCoultre Master Ultra Thin',
+  'Rolex Day-Date 18038 yellow gold':         'Rolex Day-Date yellow gold',
+  'Rolex GMT-Master ref 1675 Pepsi':          'Rolex GMT-Master Pepsi vintage',
+};
+
+async function fetchWikiImage(query) {
+  const params = new URLSearchParams({
+    action: 'query', generator: 'search', gsrnamespace: '6',
+    gsrsearch: query, gsrlimit: '8',
+    prop: 'imageinfo', iiprop: 'url|mime', iiurlwidth: '300',
+    format: 'json', origin: '*',
+  });
+  const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
+  const data = await res.json();
+  const pages = Object.values(data.query?.pages || {});
+  // Sort by page index so we get the most relevant result first
+  pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
+  for (const page of pages) {
+    const info = page.imageinfo?.[0];
+    if (!info) continue;
+    if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
+    return info.thumburl || info.url;
+  }
+  return null;
+}
+
+function injectImage(btn, imgUrl, label) {
+  const img = document.createElement('img');
+  img.src = imgUrl;
+  img.alt = label;
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+  img.onerror = function() { btn.innerHTML = prevContent; }; // revert on 404
+  const prevContent = btn.innerHTML;
+  btn.innerHTML = '';
+  btn.appendChild(img);
+}
+
+async function loadWatchImages() {
+  const buttons = document.querySelectorAll('.watch-img-btn, .img-btn');
+  for (const btn of buttons) {
+    const onclick = btn.getAttribute('onclick') || '';
+    // Extract first arg: searchPhoto('DISPLAY NAME', '...')
+    const m = onclick.match(/searchPhoto\('([^']+)'/);
+    if (!m) continue;
+    const displayName = m[1];
+    const wikiQuery = WIKI_QUERIES[displayName];
+    if (!wikiQuery) continue;
+    try {
+      const imgUrl = await fetchWikiImage(wikiQuery);
+      if (imgUrl) injectImage(btn, imgUrl, displayName);
+    } catch(_) { /* keep placeholder */ }
+    // Small delay — be polite to Wikimedia
+    await new Promise(r => setTimeout(r, 150));
+  }
+  // Re-run after any Claude update replaces .db innerHTML
+  document.querySelector('.db').addEventListener('DOMSubtreeModified',
+    function() { clearTimeout(this._imgTimer); this._imgTimer = setTimeout(loadWatchImages, 800); },
+    { once: false }
+  );
+}
+
+// Also reload images after sendPrompt() replaces the dashboard HTML
+const _origSendPrompt = sendPrompt;
+sendPrompt = async function() {
+  await _origSendPrompt.apply(this, arguments);
+  setTimeout(loadWatchImages, 500);
+};
+
+document.addEventListener('DOMContentLoaded', loadWatchImages);
 </script>
 </body>
 </html>
