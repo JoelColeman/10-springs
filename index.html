@@ -400,9 +400,26 @@
   .tl-era-line { display:none; }
   .tl-era-hdr { padding-bottom:0; }
 }
+
+/* ── Page bezel ───────────────────────────────────────────── */
+.bezel {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+  box-shadow: 0 0 80px rgba(0,0,0,.55);
+  position: relative;
+}
+/* At wide viewports, pin fixed bars inside the bezel column */
+@media (min-width: 1200px) {
+  .chat-bar, .chat-err-bar {
+    left: calc(50% - 600px);
+    right: calc(50% - 600px);
+  }
+}
 </style>
 </head>
-<body style="background:#F2F0EB; min-height:100vh;">
+<body style="background:#1a1a1a; min-height:100vh;">
 
 <!-- ── API key modal ──────────────────────────────────────────────────── -->
 <div class="modal-overlay hidden" id="key-modal">
@@ -417,6 +434,9 @@
   </div>
 </div>
 
+
+<!-- ── Bezel / page wrapper ───────────────────────────────────────────── -->
+<div class="bezel">
 
 <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
 <div class="db">
@@ -869,6 +889,8 @@
   <button class="chat-key-btn" onclick="showKeyModal()" title="Update API key">⚙</button>
 </div>
 
+</div><!-- .bezel -->
+
 <script>
 // ── Photo placeholder restore (used by hardcoded img onerror) ────────────
 function restorePhotoBtn(btn) {
@@ -1057,51 +1079,117 @@ function togSum() {
 }
 
 // ── Chat / Claude API ────────────────────────────────────────────────────
-const SYSTEM_PROMPT = `You are the editor for "10 Springs" — Joel Coleman's personal watch collection planning dashboard, a single-page HTML app.
 
-## Who this is for
-Joel Coleman, age 35, senior healthcare executive in Albuquerque NM. 6'5", 265 lbs. Married to Kassie. The goal of the collection is to leave behind watches his kids can discover independently and find hold real value — recreating the experience of discovering his grandfather's Bulova Accutron Spaceview.
+const CHAT_SYSTEM = `You are the editor for "10 Springs" — Joel Coleman's watch collection dashboard.
 
-## Collection philosophy
-Mechanical only. Every watch must clear 3 of 4 bars: loves the aesthetic, would wear it regularly, defensible collector narrative, strong resale floor. Framework not contract — gut aesthetic + collector floor, nothing bought to fill a box.
+Joel Coleman, 35, Albuquerque NM. Goal: 10 mechanical watches (ages 35–45) to leave for his kids.
+Philosophy: mechanical only, 3-of-4 bars (aesthetic · wearability · collector narrative · resale floor).
+Locked: S6=Speedmaster 3570.50 modern; S7 open by design; S9=yellow gold Day-Date confirmed.
 
-## Current status
-- Sport Chief ref 7042 purchased ~$500, shipping from Norway. Cal 30L, Arabic numeral cream dial, small seconds at 6. Good example of the reference.
-- All other springs: planned/future purchases
+You receive the current watch cards as JSON and a natural language instruction.
+Return ONLY a JSON object — no markdown, no fences, no explanation:
 
-## Key decisions locked
-- S6 Speedmaster → modern 3570.50 only, not vintage
-- S7 → deliberately open until S4–S6 are on the wrist and color balance is clear. Live candidates: Hulk 116610LV, Batman 116710BLNR, Root Beer 126711CHNR, Seamaster Diver 300M, Tudor BB58
-- S9 → full yellow gold President bracelet confirmed, champagne dial default, black dial strongly preferred alternate
-- 10 Summers = phase 2 plan for ages 46–55
+{
+  "updates": [
+    {
+      "id": "s1",
+      "name": "...",        // optional — only include fields that change
+      "ref": "...",
+      "meta": "...",
+      "note": "...",        // set "" to remove
+      "dec": "...",         // decision summary line; set "" to remove
+      "price": "...",
+      "status": "Planned",  // "In hand" | "Up next" | "Planned" | "Decided" | "Open"
+      "tags": [{"text":"Vintage","cls":"vtg"}]  // full array if tags change
+    }
+  ],
+  "decisions": [
+    { "action": "add", "text": "...", "open": false }
+  ]
+}
 
-## Status tag & badge mappings (use exactly these classes)
-- Planned:    tag class="tag base" (or relevant category), rbadge class="rbadge st-p", text "Planned"
-- Up next:    rbadge class="rbadge st-n", text "Up next"
-- In hand / arrived / purchased: tag class="tag owned", rbadge class="rbadge st-o", text "In hand"
-- Decided:    tag class="tag locked", rbadge class="rbadge st-l", text "Decided" — add a .rdec line with the decision summary
-- Open:       tag class="tag open", rbadge class="rbadge st-d", text "Open"
+Tag cls values: owned, locked, rolex, chrono, dress, sport, vtg, open, base
+Omit "updates" or "decisions" keys entirely if nothing changes there.`;
 
-## Progress dots
-- .dot.heritage = H1/H2 (always 2, always first)
-- .dot.owned = purchased/in hand
-- .dot.next = next planned purchase
-- .dot.plan = future planned
+// Extract compact card state for the prompt payload
+function getDashboardState() {
+  const cards = [];
+  document.querySelectorAll('.row[id^="watch-"], .h-row[id^="watch-"]').forEach(function(row) {
+    const id = row.id.replace('watch-', '');
+    cards.push({
+      id,
+      name:   (row.querySelector('.rname,.h-name') || {}).textContent || '',
+      ref:    (row.querySelector('.rref') || {}).textContent || '',
+      meta:   (row.querySelector('.rmeta,.h-meta') || {}).textContent || '',
+      note:   (row.querySelector('.rnote') || {}).textContent || '',
+      dec:    (row.querySelector('.rdec') || {}).textContent || '',
+      price:  (row.querySelector('.rbdg') || {}).textContent || '',
+      status: (row.querySelector('.rbadge') || {}).textContent || '',
+      tags:   [].slice.call(row.querySelectorAll('.tag')).map(function(t) {
+        return { text: t.textContent.trim(), cls: t.className.replace('tag ', '').trim() };
+      })
+    });
+  });
+  return cards;
+}
 
-## Your task
-The user will give you a natural language instruction and the current innerHTML of the .db div. Return ONLY the updated innerHTML with the change applied.
+// Apply a structured JSON patch returned by Claude
+function applyPatch(patch) {
+  var BADGE_CLS = { 'In hand':'st-o', 'Up next':'st-n', 'Planned':'st-p', 'Decided':'st-l', 'Open':'st-d' };
+  var RING_CLS  = { 'In hand':'ring-owned', 'Decided':'ring-decided', 'Open':'ring-planned', 'Planned':'ring-planned', 'Up next':'ring-planned' };
 
-Rules:
-- Return raw HTML only — no markdown, no code fences, no explanation, no preamble
-- Preserve ALL CSS classes, inline styles, onclick attributes, href values, and structure exactly
-- Preserve the .tachy bar, .hdr structure with .hdr-brand / .hdr-eyebrow / .hdr-title / .hdr-sub
-- Preserve the .accord structure wrapping .principles and .decisions — do not flatten it
-- Preserve the searchPhoto(displayName, query) two-argument signature on every 📷 button
-- Preserve the .sec::before / .sec::after decoration (no extra elements inside .sec needed)
-- Make only the specific change the user asks for — do not reformat, reorder, or improve anything else
-- Update the header stats (Purchased count, Projected total), progress bar width/label, dots, decisions section, footer date, and any stats bar values to stay consistent with changes
-- When adding a new locked decision, append it to the .decisions div as a .dec-item (not .dec-item.open)
-- When a previously open decision is resolved, remove the .dec-item.open version and add a resolved .dec-item`;
+  (patch.updates || []).forEach(function(upd) {
+    var row = document.getElementById('watch-' + upd.id);
+    if (!row) return;
+    var rmain = row.querySelector('.rmain');
+
+    function setOrRemove(sel, val, cls) {
+      var el = row.querySelector(sel);
+      if (val === undefined) return;
+      if (val === '') { if (el) el.remove(); return; }
+      if (!el && rmain) {
+        el = document.createElement('div');
+        el.className = cls;
+        var tags = rmain.querySelector('.tags');
+        if (tags) rmain.insertBefore(el, tags); else rmain.appendChild(el);
+      }
+      if (el) el.textContent = val;
+    }
+
+    if (upd.name  !== undefined) { var e = row.querySelector('.rname,.h-name');  if (e) e.textContent = upd.name; }
+    if (upd.ref   !== undefined) { var e = row.querySelector('.rref');            if (e) e.textContent = upd.ref; }
+    if (upd.meta  !== undefined) { var e = row.querySelector('.rmeta,.h-meta');   if (e) e.textContent = upd.meta; }
+    if (upd.note  !== undefined) setOrRemove('.rnote', upd.note, 'rnote');
+    if (upd.dec   !== undefined) setOrRemove('.rdec',  upd.dec,  'rdec');
+    if (upd.price !== undefined) { var e = row.querySelector('.rbdg');            if (e) e.textContent = upd.price; }
+
+    if (upd.status !== undefined) {
+      var badge = row.querySelector('.rbadge');
+      if (badge) {
+        badge.textContent = upd.status;
+        badge.className = 'rbadge ' + (BADGE_CLS[upd.status] || 'st-p');
+      }
+      var thumb = document.getElementById('tl-thumb-' + upd.id);
+      if (thumb) thumb.className = 'tl-thumb ' + (RING_CLS[upd.status] || 'ring-planned');
+    }
+
+    if (upd.tags !== undefined) {
+      var tagsEl = row.querySelector('.tags');
+      if (tagsEl) tagsEl.innerHTML = upd.tags.map(function(t) {
+        return '<span class="tag ' + t.cls + '">' + t.text + '</span>';
+      }).join('');
+    }
+  });
+
+  (patch.decisions || []).forEach(function(dec) {
+    if (dec.action !== 'add') return;
+    var el = document.createElement('div');
+    el.className = 'dec-item' + (dec.open ? ' open' : '');
+    el.textContent = dec.text;
+    var div = document.querySelector('.decisions');
+    if (div) div.appendChild(el);
+  });
+}
 
 function setLoading(on) {
   const status = document.getElementById('chat-status');
@@ -1128,13 +1216,12 @@ async function sendPrompt() {
   const apiKey = localStorage.getItem('10s_api_key');
   if (!apiKey) { showKeyModal(); return; }
 
-  const currentHTML = document.querySelector('.db').innerHTML;
+  const cards = getDashboardState();
 
   setLoading(true);
   input.value = '';
 
   try {
-    console.log('[chat] sending request', { instruction, model: 'claude-sonnet-4-6' });
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -1145,20 +1232,18 @@ async function sendPrompt() {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 16000,
-        stream: true,
-        system: SYSTEM_PROMPT,
+        max_tokens: 1024,
+        system: CHAT_SYSTEM,
         messages: [{
           role: 'user',
-          content: `Current dashboard innerHTML (.db):\n\n${currentHTML}\n\n---\n\nInstruction: ${instruction}`
+          content: 'Cards:\n' + JSON.stringify(cards, null, 2) + '\n\nInstruction: ' + instruction
         }]
       })
     });
 
-    console.log('[chat] response received', { status: res.status, ok: res.ok });
     if (!res.ok) {
-      let msg = `API error ${res.status}`;
-      try { const j = await res.json(); msg = j.error?.message || msg; } catch(_) {}
+      let msg = 'API error ' + res.status;
+      try { const j = await res.json(); msg = (j.error && j.error.message) || msg; } catch(_) {}
       if (res.status === 401) {
         localStorage.removeItem('10s_api_key');
         showKeyModal();
@@ -1169,64 +1254,20 @@ async function sendPrompt() {
       throw new Error(msg);
     }
 
-    // Stream and accumulate
-    const reader = res.body.getReader();
-    const dec = new TextDecoder();
-    let buf = '';
-    let full = '';
+    const data = await res.json();
+    let raw = ((data.content && data.content[0] && data.content[0].text) || '').trim();
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop() || '';
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if (raw === '[DONE]') continue;
-        try {
-          const ev = JSON.parse(raw);
-          console.log('[chat] SSE event', ev.type, ev.delta?.type ?? '');
-          if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') {
-            full += ev.delta.text;
-          }
-        } catch(parseErr) {
-          console.warn('[chat] SSE parse error', parseErr, 'raw:', raw);
-        }
-      }
-    }
+    // Strip accidental code fences
+    if (raw.startsWith('```')) raw = raw.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '').trim();
 
-    console.log('[chat] stream complete, accumulated length:', full.length);
-
-    if (!full.trim()) {
-      throw new Error('Model returned an empty response — check console for SSE events');
-    }
-
-    // Strip accidental code fences if model adds them
-    let html = full.trim();
-    if (html.startsWith('```')) {
-      html = html.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '').trim();
-    }
-
-    try {
-      document.querySelector('.db').innerHTML = html;
-      exp = false; // reset summers expand state to match fresh DOM
-      console.log('[chat] DOM updated successfully');
-    } catch (domErr) {
-      throw new Error('DOM update failed: ' + domErr.message);
-    }
+    const patch = JSON.parse(raw);
+    applyPatch(patch);
 
   } catch (err) {
-    console.error('[chat] error caught:', err);
     const errBar = document.getElementById('chat-err-bar');
-    if (errBar) {
-      errBar.textContent = err.message;
-      errBar.classList.remove('hidden');
-    }
-    input.value = instruction; // restore so user can retry
+    if (errBar) { errBar.textContent = err.message; errBar.classList.remove('hidden'); }
+    input.value = instruction;
   } finally {
-    console.log('[chat] finally: resetting loading state');
     setLoading(false);
   }
 }
@@ -1356,12 +1397,6 @@ async function loadWatchImages() {
   );
 }
 
-// Also reload images after sendPrompt() replaces the dashboard HTML
-const _origSendPrompt = sendPrompt;
-sendPrompt = async function() {
-  await _origSendPrompt.apply(this, arguments);
-  setTimeout(loadWatchImages, 500);
-};
 
 document.addEventListener('DOMContentLoaded', loadWatchImages);
 
