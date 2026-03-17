@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@400;500;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    padding: 24px;
+  }
+
+  .bezel {
+    background: #0d0d0d;
+    border-radius: 18px;
+    padding: 20px;
+    max-width: 1100px;
+    width: 100%;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.06),
+      inset 0 -2px 4px rgba(0,0,0,0.8),
+      0 0 0 1px #2a2a2a,
+      0 24px 80px rgba(0,0,0,0.9);
+    position: relative;
+  }
+
+  .bezel::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+
+  .bezel-ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+
+  .bezel-label {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #d4b896;
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+
+  .tick-group {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .tick { width: 1px; height: 6px; background: #555; }
+  .tick.major { height: 10px; background: #888; width: 1.5px; }
+
+  .dial {
+    background: #f8f6f1;
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e0ddd5;
+  }
+
+  .dial-header {
+    background: #f8f6f1;
+    padding: 20px 28px 14px;
+    border-bottom: 1px solid #d8d4cc;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .brand-area { display: flex; flex-direction: column; gap: 2px; }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+
+  .model-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    color: #8a7b6a;
+    text-transform: uppercase;
+  }
+
+  .crown-stats { display: flex; gap: 24px; align-items: flex-end; }
+
+  .crown-stat { text-align: right; }
+
+  .crown-stat-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+
+  .crown-stat-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #8a7b6a;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .crown-stat-divider {
+    width: 1px;
+    height: 28px;
+    background: #c8c2b8;
+    margin-bottom: 4px;
+  }
+
+  .subdial-row {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr 2px 1fr;
+    background: #f8f6f1;
+    border-bottom: 1px solid #d8d4cc;
+  }
+
+  .subdial-divider { background: #d0ccc4; margin: 16px 0; }
+
+  .subdial { padding: 16px 20px 18px; position: relative; }
+
+  .subdial-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #8a7b6a;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .subdial-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid #c8c2b8;
+    background: #f0ece4;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .subdial-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .subdial-inner-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .subdial-inner-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: #8a7b6a;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    margin-top: 1px;
+  }
+
+  .subdial-detail {
+    font-size: 10px;
+    color: #5a5248;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .grail-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+  }
+
+  .grail-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #8a7b6a;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .grail-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: #cc2200;
+  }
+
+  .collection-area {
+    padding: 20px 24px;
+    background: #f8f6f1;
+  }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #8a7b6a;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #d0ccc4; }
+
+  .watch-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .watch-card {
+    background: #fff;
+    border: 1px solid #ddd9d0;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .watch-card.owned { border-color: #b8a88a; }
+  .watch-card.target { border-color: #c0c0c0; border-style: dashed; background: #fafaf8; }
+
+  .watch-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #e8e4dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ddd9d0;
+    position: relative;
+  }
+
+  .watch-image-placeholder.owned-placeholder { background: #ede8de; }
+
+  .fake-watch {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid #b8a88a;
+    background: #f8f6f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .fake-watch::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 0.5px solid #c8c0b0;
+  }
+
+  .fake-watch-dot { width: 4px; height: 4px; border-radius: 50%; background: #8a7b6a; }
+
+  .watch-card-info { padding: 8px 10px; }
+
+  .watch-ref {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #8a7b6a;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .watch-name { font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.3; margin-bottom: 4px; }
+  .watch-value { font-family: 'DM Mono', monospace; font-size: 10px; color: #5a5248; }
+
+  .owned-badge {
+    position: absolute; top: 6px; right: 6px;
+    background: #8a7b6a; color: #f8f6f1;
+    font-size: 7px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 5px; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .target-badge {
+    position: absolute; top: 6px; right: 6px;
+    background: transparent; color: #8a8a8a;
+    font-size: 7px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 5px; border-radius: 2px;
+    border: 1px solid #c0c0c0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .chat-bar {
+    background: #0d0d0d;
+    padding: 14px 20px;
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  .chat-input-mock {
+    flex: 1;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #888;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+  }
+
+  .chat-send-btn {
+    background: #8a7b6a; border: none; border-radius: 6px;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+
+  .bezel-bottom {
+    display: flex; justify-content: space-between;
+    padding: 10px 8px 0; align-items: center;
+  }
+
+  .bezel-bottom-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px; letter-spacing: 3px; color: #555; text-transform: uppercase;
+  }
+
+  .lume-dot { width: 6px; height: 6px; border-radius: 50%; background: #d4b896; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="bezel">
+  <div class="bezel-ticks">
+    <span class="bezel-label">Tachymeter</span>
+    <div class="tick-group">
+      <div class="tick"></div><div class="tick"></div><div class="tick major"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick major"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick major"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick major"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick major"></div>
+      <div class="tick"></div><div class="tick"></div><div class="tick major"></div>
+    </div>
+    <span class="bezel-label">1000 · 500 · 300 · 200 · 150 · 100 · 75 · 60</span>
+  </div>
+
+  <div class="dial">
+    <div class="dial-header">
+      <div class="brand-area">
+        <div class="brand-name">Joel Coleman</div>
+        <div class="model-name">10 Springs · Ages 35–45 · Albuquerque NM</div>
+      </div>
+      <div class="crown-stats">
+        <div class="crown-stat">
+          <div class="crown-stat-val">1</div>
+          <div class="crown-stat-label">Purchased</div>
+        </div>
+        <div class="crown-stat-divider"></div>
+        <div class="crown-stat">
+          <div class="crown-stat-val">2</div>
+          <div class="crown-stat-label">Inherited</div>
+        </div>
+        <div class="crown-stat-divider"></div>
+        <div class="crown-stat">
+          <div class="crown-stat-val">~$84K</div>
+          <div class="crown-stat-label">Projected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subdials row: 3 Daytona-style circles + grail -->
+    <div style="display:grid; grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr; background:#f8f6f1; border-bottom:1px solid #d8d4cc;">
+
+      <div class="subdial" style="text-align:center;">
+        <div class="subdial-title">Spent</div>
+        <div class="subdial-circle">
+          <svg class="subdial-svg" viewBox="0 0 90 90">
+            <!-- tick marks -->
+            <g stroke="#c8c2b8" stroke-width="1">
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(0 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(30 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(60 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(90 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(120 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(150 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(180 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(210 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(240 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(270 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(300 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(330 45 45)"/>
+            </g>
+            <!-- inner ring -->
+            <circle cx="45" cy="45" r="32" fill="none" stroke="#d8d4cc" stroke-width="0.5"/>
+            <!-- hand indicator -->
+            <line x1="45" y1="18" x2="45" y2="35" stroke="#8a7b6a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="45" cy="45" r="2" fill="#8a7b6a"/>
+          </svg>
+          <div class="subdial-inner-val">~$500</div>
+          <div class="subdial-inner-label">spent</div>
+        </div>
+      </div>
+
+      <div style="background:#d0ccc4; margin:16px 0;"></div>
+
+      <div class="subdial" style="text-align:center;">
+        <div class="subdial-title">Remaining</div>
+        <div class="subdial-circle">
+          <svg class="subdial-svg" viewBox="0 0 90 90">
+            <g stroke="#c8c2b8" stroke-width="1">
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(0 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(30 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(60 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(90 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(120 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(150 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(180 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(210 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(240 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(270 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(300 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(330 45 45)"/>
+            </g>
+            <circle cx="45" cy="45" r="32" fill="none" stroke="#d8d4cc" stroke-width="0.5"/>
+            <line x1="45" y1="18" x2="45" y2="35" stroke="#8a7b6a" stroke-width="1.5" stroke-linecap="round" transform="rotate(330 45 45)"/>
+            <circle cx="45" cy="45" r="2" fill="#8a7b6a"/>
+          </svg>
+          <div class="subdial-inner-val">~$83.5K</div>
+          <div class="subdial-inner-label">remaining</div>
+        </div>
+      </div>
+
+      <div style="background:#d0ccc4; margin:16px 0;"></div>
+
+      <div class="subdial" style="text-align:center;">
+        <div class="subdial-title">Next Spring</div>
+        <div class="subdial-circle">
+          <svg class="subdial-svg" viewBox="0 0 90 90">
+            <g stroke="#c8c2b8" stroke-width="1">
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(0 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(30 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(60 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(90 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(120 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(150 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(180 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(210 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(240 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="12" transform="rotate(270 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(300 45 45)"/>
+              <line x1="45" y1="6" x2="45" y2="10" transform="rotate(330 45 45)"/>
+            </g>
+            <circle cx="45" cy="45" r="32" fill="none" stroke="#d8d4cc" stroke-width="0.5"/>
+            <line x1="45" y1="18" x2="45" y2="35" stroke="#8a7b6a" stroke-width="1.5" stroke-linecap="round" transform="rotate(36 45 45)"/>
+            <circle cx="45" cy="45" r="2" fill="#8a7b6a"/>
+          </svg>
+          <div class="subdial-inner-val">Age 36</div>
+          <div class="subdial-inner-label">next spring</div>
+        </div>
+      </div>
+
+      <div style="background:#d0ccc4; margin:16px 0;"></div>
+
+      <div class="grail-stat">
+        <div class="grail-label">Grail</div>
+        <div class="grail-value">GMT 1675</div>
+        <div style="font-family:'DM Mono',monospace; font-size:9px; color:#8a7b6a; margin-top:4px; letter-spacing:1px;">S10 · AGE 45</div>
+      </div>
+
+    </div>
+
+    <!-- Watch grid -->
+    <div class="collection-area">
+      <div class="section-label">Foundation — Vintage Dress · Ages 35–37</div>
+      <div class="watch-grid">
+        <div class="watch-card owned">
+          <div class="watch-image-placeholder owned-placeholder">
+            <div class="fake-watch"><div class="fake-watch-dot"></div></div>
+            <div class="owned-badge">In Hand</div>
+          </div>
+          <div class="watch-card-info">
+            <div class="watch-ref">Ref. 7042</div>
+            <div class="watch-name">Longines Sport Chief</div>
+            <div class="watch-value">~$500</div>
+          </div>
+        </div>
+        <div class="watch-card target">
+          <div class="watch-image-placeholder">
+            <div class="fake-watch" style="border-color:#aaa;"><div class="fake-watch-dot" style="background:#aaa;"></div></div>
+            <div class="target-badge">Up Next</div>
+          </div>
+          <div class="watch-card-info">
+            <div class="watch-ref">Ref. 166.010</div>
+            <div class="watch-name">Omega Seamaster</div>
+            <div class="watch-value">~$1K</div>
+          </div>
+        </div>
+        <div class="watch-card target">
+          <div class="watch-image-placeholder">
+            <div class="fake-watch" style="border-color:#aaa;"><div class="fake-watch-dot" style="background:#aaa;"></div></div>
+            <div class="target-badge">Planned</div>
+          </div>
+          <div class="watch-card-info">
+            <div class="watch-ref">Ref. 3410</div>
+            <div class="watch-name">Longines Flagship 18k</div>
+            <div class="watch-value">~$1K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-bar">
+    <div class="chat-input-mock">'mark Sport Chief as arrived' · 'S7 decided — going with the Hulk'</div>
+    <div class="chat-send-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="#f8f6f1"><path d="M2 8l12-6-6 12V9L2 8z"/></svg>
+    </div>
+  </div>
+
+  <div class="bezel-bottom">
+    <div class="lume-dot"></div>
+    <span class="bezel-bottom-label">Mechanical Instrument Watches · Exploration Age</span>
+    <div class="lume-dot"></div>
+  </div>
+</div>
+</body>
+</html>
