@@ -1,6 +1,5 @@
 COLLECTION DATA (10springs-context.md)
 ════════════════════════════════════════
-
 # 10 Springs — Master Reference Document
 *Joel Coleman · Age 35 · Albuquerque, NM · As of March 2026*
 
@@ -225,49 +224,62 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 ## Dashboard Build Status
 
 - **Live at:** joelcoleman.github.io/10-springs
-- **Stack:** Single-file index.html, vanilla HTML/CSS/JS, Claude API chat bar
-- **Timeline:** Sticky, appears after Heritage section. H1+H2 leftmost, then S1–S10 in age order.
-- **Era brackets:** HERITAGE · DRESS · FIELD · SPORT · GRAIL (5 brackets, character-based not brand-based)
-- **Heritage section:** Appears first, described as "Not for sale — the foundation everything else is built around"
-- **Bottom stats:** Spent / Remaining / Next Spring / Grail displayed as circles
+- **Stack:** Single-file index.html (~1,852 lines), vanilla HTML/CSS/JS, Claude API chat bar
+- **Repo files:**
+  - `index.html` — the live dashboard
+  - `10springs-context.md` — this reference document
+  - `_prototypes/dashboard-mockup.html` — Daytona bezel/subdial/card design reference
+  - `_prototypes/card-fan-v2.html` — fan-out alternates interaction reference
+  - `CLAUDE.md` — project instructions for Claude Code agents
+  - `embed_images.py` — image embedding utility script
 
----
+### Currently Built and Live
+- ✅ **Bezel frame** — dark `#0d0d0d` outer shell, tachymeter bar with copper Bebas Neue labels, lume dots at bottom
+- ✅ **Dial header** — "Joel Coleman" in Playfair Display, "10 Springs · Ages 35–45" in Bebas Neue, crown stats (Purchased / Inherited / Projected) in DM Mono
+- ✅ **Three Daytona subdials** — SVG circles with tick marks, inner ring, hand indicators: Spent / Remaining / Next Spring. Grail text (GMT 1675) in red beside subdials.
+- ✅ **Card grid** — replaces list view. Photo-forward cards, ~180px wide, square image area
+- ✅ **Fan-out alternates** — primary card anchored left, alternates slide right on "View alternates" with spring animation `cubic-bezier(0.34, 1.56, 0.64, 1)`. "Hide alternates" collapses.
+- ✅ **Font system** — Bebas Neue + Playfair Display + DM Sans + DM Mono
+- ✅ **Color palette** — `#f4f1eb` linen background, `#f8f6f1` card surfaces, `#8a7b6a` accent/gold, `#1a1a1a` near-black, `#cc2200` status red
+- ✅ **Lean chat system** — JSON patch approach (~500 char system prompt + `getDashboardState()` extracting cards as compact JSON ~1KB). ~95% token reduction vs old approach.
+- ✅ **Sticky timeline** — after Heritage section, `position: sticky; top: 0`. H1+H2 leftmost, era brackets HERITAGE · DRESS · FIELD · SPORT · GRAIL
+- ✅ **Heritage section** — H1 Caravelle + H2 Accutron with family stories, distinct from card grid
+- ✅ **Collection Philosophy accordion** — collapsed by default
+- ✅ **10 Summers section** — collapsed/minimal by default, expandable list of Su1–Su10
+- ✅ **Planning detail hidden by default** — cards show primary info; detail row toggles on tap
 
-## Current Design Direction (In Progress)
-
-The following design changes are under active discussion and not yet built:
-
-- **Card grid replaces list view** — photo-forward, "digital watch case" not "glossary"
-- **Fan-out alternates interaction** — primary card anchored left, alternates fan right on "View alternates" button. Collapses to "Hide alternates."
-- **Font system:** DM Sans + DM Mono + Bebas Neue
-- **Color palette:** Warm linen (#f4f1eb background), off-white (#f8f6f1) card surfaces, dark brown/gold accents (#8a7b6a), near-black (#1a1a1a) text
-- **Black bezel outer frame** — dark outer wrapper creates figure-ground contrast, tachymeter tick marks decoration
-- **Subdials redesign** — Spent/Remaining/Next Spring circles should feel like real Daytona subdials with tick marks, inner rings, hand indicators
-- **Heritage pieces** — need distinct treatment from the purchased card grid (TBD)
-- **Planning detail hidden by default** — cards show primary info; alternates, research links, notes one tap deeper
-
----
-
-## Open Questions
-
-1. **Exact Zenith reference for S4** — A386 vs A3817/A384; taste pulls toward darker instrument variants
-2. **Exact Polerouter flavor** — tropical (preferred) vs crosshair silver vs blue
-3. **Datejust 1601 dial** — black vs blue; black increasingly preferred given instrument theme
-4. **S7 watch** — Hulk vs Batman vs Root Beer; deliberately deferred
-5. **Heritage pieces dashboard treatment** — how to visually distinguish H1/H2 from purchased springs
-6. **How much the collection leans vintage vs modern** in middle years — taste may keep drifting more vintage
-7. **Subdial design** — what data to show and how to make them feel like real Daytona subdials
+### Open Design Questions
+1. Further tweaks to the live redesign — actively being iterated
+2. Exact Zenith reference for S4 — A386 vs A3817/A384
+3. Exact Polerouter flavor — tropical (preferred) vs crosshair silver vs blue
+4. Datejust 1601 dial — black vs blue
+5. S7 watch — Hulk vs Batman vs Root Beer; deliberately deferred
+6. How much the collection leans vintage vs modern in middle years
 
 ---
 
 ## 10 Summers (Second Decade Concept — Not Finalized)
 
-A hypothetical second decade (ages 45–55) discussed at high level. More haute horology, advanced complications, independent watchmaker credibility. Candidates mentioned: Patek Calatrava, Rolex Explorer II 1655 "Freccione", A. Lange & Söhne Saxonia Thin, AP Royal Oak, Breguet Classique, Vacheron Overseas, Patek Annual Calendar, Rolex Daytona, F.P. Journe Chronomètre Bleu, vintage salmon-dial Patek Calatrava, Universal Genève Tri-Compax.
+A hypothetical second decade (ages 45–55) discussed at high level. More haute horology, advanced complications, independent watchmaker credibility. Candidates: Patek Calatrava (5119), Rolex Explorer II 1655 "Freccione", A. Lange & Söhne Saxonia Thin (201.027), AP Royal Oak (14790), Breguet Classique (5140/7147), Vacheron Constantin Overseas (4500V), Patek Annual Calendar (5146), Rolex Daytona (116500LN), F.P. Journe Chronomètre Bleu, vintage salmon-dial Patek Calatrava (565/570), Universal Genève Tri-Compax.
 
 ---
 
 ## Prompt Conventions
 
-All Claude Code prompts must:
+### All Claude Code prompts must:
 1. Start with a planning step and wait for confirmation before executing
 2. End with: *"After committing, provide the direct PR merge link to merge your branch into main so I can merge with one click."*
+3. Include: *"If you find yourself retrying the same approach more than twice, stop and tell me what's blocking rather than continuing to loop."*
+
+### Technical conventions learned:
+- **Large file writes:** Always use bash heredoc (`cat > index.html << 'PYEOF'`) — never sub-agents or the Write tool for files over ~400 lines. The Write tool silently drops the `content` parameter on large writes.
+- **Claude API model string:** `claude-sonnet-4-20250514`
+- **Chat system prompt:** Use lean JSON patch approach — pass `getDashboardState()` compact JSON (~1KB), not full innerHTML (~30KB)
+- **Prototype files:** Reference `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html` in the repo for design system and animation specs — don't rebuild from scratch
+
+### Strategic conversation conventions:
+- This chat is the advisor layer — Claude Code gets prompts, this chat handles design decisions
+- At natural topic shifts, check whether any decisions should be documented in this file
+- End sessions with an updated context doc download to replace the project file
+
+
