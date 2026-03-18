@@ -2,1500 +2,1852 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>10 Springs</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>10 Springs — Joel Coleman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #F2F0EB; --bg-raised: #ECEAE5; --bg-section: #E8E6E1; --bg-drawer: #ECEAE5;
-  --accent: #E8142A;
-  --t1: #0A0A0A; --t2: #555555; --t3: #999999; --t4: #AAAAAA;
-  --rule: rgba(0,0,0,.08); --rule-accent: rgba(0,0,0,.15);
-}
-.db { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; width:100%; padding:0 2rem; background:var(--bg); color:var(--t1); }
-
-/* ── Tachymeter ─────────────────────────────────────────── */
-.tachy { height:22px; background:#000000; border-bottom:0.5px solid #FFFFFF; display:flex; align-items:center; padding:0 1.5rem; overflow:hidden; gap:14px; }
-.tachy-lbl { font-size:9px; letter-spacing:.2em; color:#FFFFFF; font-family:'Courier New',monospace; text-transform:uppercase; flex-shrink:0; }
-.tachy-scale { font-size:9px; letter-spacing:.5em; color:#FFFFFF; font-family:'Courier New',monospace; white-space:nowrap; }
-
-/* ── Header ─────────────────────────────────────────────── */
-.hdr { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; padding:2rem 1.5rem 1.5rem; border-bottom:0.5px solid var(--rule-accent); background:var(--bg); }
-.hdr-brand { display:flex; flex-direction:column; gap:6px; }
-.hdr-eyebrow { font-size:7.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--t3); }
-.hdr-title { font-size:26px; font-weight:300; letter-spacing:.32em; text-transform:uppercase; color:#0A0A0A; line-height:1; }
-.hdr-sub { font-size:9px; color:var(--t3); letter-spacing:.14em; margin-top:2px; text-transform:uppercase; }
-.hdr-stats { display:flex; gap:28px; align-items:flex-start; padding-top:4px; }
-.hs { text-align:right; }
-.hs-val { font-size:20px; font-weight:300; color:#0A0A0A; letter-spacing:.03em; }
-.hs-val.gold { color:#0A0A0A; }
-.hs-lbl { font-size:7.5px; color:var(--t3); letter-spacing:.13em; text-transform:uppercase; margin-top:3px; }
-
-/* ── Heritage ────────────────────────────────────────────── */
-.heritage-wrap { background:#EDE9E0; border-bottom:0.5px solid var(--rule); }
-.heritage-hdr { padding:.65rem 1.5rem .5rem; display:flex; align-items:baseline; gap:10px; border-bottom:0.5px solid var(--rule); }
-.heritage-title { font-size:9px; text-transform:uppercase; letter-spacing:.2em; color:var(--t3); font-weight:400; }
-.heritage-sub { font-size:9px; color:var(--t2); letter-spacing:.04em; font-style:italic; }
-.h-row { display:grid; grid-template-columns:44px 64px 1fr; border-top:0.5px solid var(--rule); }
-.h-num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:var(--t3); border-right:0.5px solid var(--rule); padding:0 4px; gap:3px; letter-spacing:.1em; }
-.h-lineage { font-size:7px; color:var(--t3); font-weight:400; text-align:center; letter-spacing:.02em; }
-.img-btn { width:64px; min-height:64px; max-height:64px; border-right:0.5px solid var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#ECEAE5; transition:background .15s; padding:0; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; align-self:center; }
-.img-btn:hover { background:#E4E2DC; }
-.img-btn .cam { font-size:14px; opacity:.25; }
-.img-btn .cam-lbl { font-size:7px; color:#999999; text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; }
-.h-main { padding:.75rem 1rem; display:flex; flex-direction:column; gap:4px; }
-.h-name { font-size:14px; font-weight:400; color:#0A0A0A; letter-spacing:0.02em; }
-.h-meta { font-size:11px; color:#555555; line-height:1.5; }
-.h-story { font-size:10px; color:#777777; font-style:italic; line-height:1.6; margin-top:4px; }
-.h-links { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
-.h-badge { display:inline-block; font-size:7.5px; padding:2px 9px; border-radius:2px; background:transparent; color:#0A0A0A; border:0.5px solid rgba(0,0,0,.2); margin-top:4px; letter-spacing:.1em; text-transform:uppercase; }
-
-/* ── Philosophy accordion ───────────────────────────────── */
-.accord { border-bottom:0.5px solid var(--rule); }
-.accord-hdr { padding:.8rem 1.5rem; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:background .15s; background:transparent; user-select:none; }
-.accord-hdr:hover { background:var(--bg-raised); }
-.accord-left { display:flex; align-items:center; gap:10px; }
-.accord-register { width:14px; height:14px; border-radius:50%; border:0.5px solid rgba(0,0,0,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.accord-register::before { content:''; width:4px; height:4px; border-radius:50%; background:#0A0A0A; opacity:.3; display:block; }
-.accord-title { font-size:9px; text-transform:uppercase; letter-spacing:.2em; color:var(--t3); }
-.accord-chev { font-size:9px; color:var(--t3); transition:transform .2s ease; }
-.accord-chev.open { transform:rotate(180deg); }
-.accord-body { display:none; }
-.accord-body.open { display:block; }
-.principles { display:flex; gap:5px; flex-wrap:wrap; padding:.7rem 1.5rem; border-bottom:0.5px solid var(--rule); }
-.pill { font-size:9px; padding:3px 10px; border-radius:20px; border:0.5px solid rgba(0,0,0,.08); color:var(--t3); background:transparent; letter-spacing:.03em; }
-.decisions { padding:.7rem 1.5rem; background:transparent; }
-.dec-title { font-size:8px; text-transform:uppercase; letter-spacing:.18em; color:var(--t3); margin-bottom:8px; }
-.dec-item { font-size:10.5px; color:#555555; display:flex; gap:8px; margin-bottom:5px; line-height:1.5; }
-.dec-item::before { content:"✓"; color:#E8142A; flex-shrink:0; font-size:9px; margin-top:2px; }
-.dec-item.open::before { content:"◦"; color:var(--t3); }
-
-/* ── Summary stats — subdial circles ─────────────────────── */
-.sbar { display:flex; justify-content:center; align-items:center; gap:32px; padding:1.5rem; border-bottom:0.5px solid var(--rule); flex-wrap:wrap; }
-.si { width:80px; height:80px; border-radius:50%; border:0.5px solid rgba(0,0,0,.15); background:#F2F0EB; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0; }
-.si:last-child { border-right:none; }
-.si-lbl { font-size:8px; color:#999999; text-transform:uppercase; letter-spacing:.12em; margin-top:4px; }
-.si-val { font-size:14px; font-weight:400; color:#0A0A0A; letter-spacing:.02em; }
-.si-val.gold { color:#0A0A0A; }
-.si:last-child .si-val { color:#E8142A; }
-
-/* ── Progress ────────────────────────────────────────────── */
-.prog { padding:.85rem 1.5rem; border-bottom:0.5px solid var(--rule); }
-.prog-lbl { display:flex; justify-content:space-between; font-size:8px; color:var(--t3); text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px; }
-.prog-rail { height:1px; background:rgba(0,0,0,.08); border-radius:0; }
-.prog-fill { height:100%; width:9.1%; background:#E8142A; border-radius:0; }
-.dots { display:none; }
-
-/* ── Section headers ──────────────────────────────────────── */
-.sec { padding:.45rem 1.5rem; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--t3); background:var(--bg-section); border-top:0.5px solid rgba(0,0,0,.08); border-bottom:0.5px solid rgba(0,0,0,.08); display:flex; align-items:center; gap:10px; }
-.sec::before { content:''; width:0.5px; height:12px; background:#0A0A0A; opacity:.3; flex-shrink:0; display:inline-block; }
-.sec::after { content:''; flex:1; height:0; }
-
-/* ── Watch rows ───────────────────────────────────────────── */
-.row { display:grid; grid-template-columns:44px 64px 1fr auto; align-items:stretch; border-bottom:0.5px solid var(--rule); transition:background .12s; }
-.row:hover { background:#ECEAE5; }
-.rnum { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9.5px; font-weight:500; border-right:0.5px solid var(--rule); padding:0 4px; gap:3px; flex-shrink:0; color:var(--t3); letter-spacing:.08em; }
-.rnum.gold { color:#0A0A0A; }
-.rnum.nxt { color:#555555; }
-.rnum .age { font-size:8px; color:var(--t3); font-weight:400; }
-.watch-img-btn { width:64px; min-height:64px; max-height:64px; border-right:0.5px solid var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; background:#ECEAE5; transition:background .15s; padding:0; flex-shrink:0; border-left:none; border-top:none; border-bottom:none; align-self:center; }
-.watch-img-btn:hover { background:#E4E2DC; }
-.watch-img-btn .cam { font-size:14px; opacity:.18; }
-.watch-img-btn .cam-lbl { font-size:7px; color:#999999; text-align:center; line-height:1.3; letter-spacing:.06em; text-transform:uppercase; }
-.rmain { padding:.75rem 1rem; display:flex; flex-direction:column; gap:4px; cursor:pointer; }
-.rtop { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
-.rname { font-size:14px; font-weight:400; color:#0A0A0A; letter-spacing:0.02em; }
-.rref { font-size:10px; color:#999999; font-family:'Courier New',monospace; letter-spacing:.08em; }
-.rmeta { font-size:11px; color:#555555; line-height:1.5; }
-.rnote { font-size:11px; color:#555555; font-style:italic; line-height:1.5; }
-.rdec { font-size:11px; color:#555555; font-style:italic; line-height:1.5; }
-.tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:5px; }
-.chev { font-size:8px; color:var(--t3); margin-top:3px; letter-spacing:.04em; }
-
-/* ── Tags ─────────────────────────────────────────────────── */
-.tag { font-size:8px; padding:2px 8px; border-radius:20px; letter-spacing:.07em; text-transform:uppercase; border:0.5px solid transparent; }
-.tag.owned  { color:#FFFFFF; background:#E8142A; border-color:transparent; }
-.tag.locked { color:#FFFFFF; background:#E8142A; border-color:transparent; }
-.tag.rolex  { color:#0A0A0A; border-color:rgba(0,0,0,.15); background:rgba(0,0,0,.06); }
-.tag.chrono { color:#0A0A0A; border-color:rgba(0,0,0,.15); background:rgba(0,0,0,.06); }
-.tag.dress  { color:#0A0A0A; border-color:rgba(0,0,0,.15); background:rgba(0,0,0,.06); }
-.tag.sport  { color:#0A0A0A; border-color:rgba(0,0,0,.15); background:rgba(0,0,0,.06); }
-.tag.vtg    { color:#0A0A0A; border-color:rgba(0,0,0,.15); background:rgba(0,0,0,.06); }
-.tag.open   { color:#999999; border-color:rgba(0,0,0,.08); background:transparent; }
-.tag.base   { color:#999999; border-color:rgba(0,0,0,.08); background:transparent; }
-
-/* ── Right column ─────────────────────────────────────────── */
-.rright { display:flex; flex-direction:column; align-items:flex-end; justify-content:center; padding:.75rem 1.25rem; gap:6px; border-left:0.5px solid var(--rule); min-width:92px; flex-shrink:0; }
-.rbdg { font-size:13px; font-weight:400; color:#0A0A0A; letter-spacing:.02em; }
-.rbadge { font-size:7.5px; padding:2px 9px; border-radius:20px; letter-spacing:.09em; text-transform:uppercase; white-space:nowrap; border:0.5px solid transparent; }
-.st-o { color:#FFFFFF; background:#E8142A; border-color:transparent; }
-.st-n { color:#FFFFFF; background:#E8142A; border-color:transparent; }
-.st-l { color:#FFFFFF; background:#E8142A; border-color:transparent; }
-.st-p { color:#999999; border:0.5px solid rgba(0,0,0,.08); background:transparent; }
-.st-d { color:#0A0A0A; border:0.5px solid rgba(0,0,0,.15); background:rgba(0,0,0,.06); }
-
-/* ── Links ────────────────────────────────────────────────── */
-.lnk { font-size:8.5px; padding:2px 7px; border-radius:3px; border:0.5px solid rgba(0,0,0,.08); color:#999999; text-decoration:none; white-space:nowrap; letter-spacing:.04em; }
-.lnk:hover { border-color:rgba(0,0,0,.15); color:#0A0A0A; }
-.lnk.blue { border-color:rgba(0,0,0,.12); color:#555555; }
-
-/* ── Alternates drawer ────────────────────────────────────── */
-.alts { display:none; padding:.6rem 1rem .75rem 108px; background:var(--bg-drawer); border-bottom:0.5px solid var(--rule); border-top:0.5px solid var(--rule); }
-.alts.open { display:block; }
-.alts-lbl { font-size:8px; text-transform:uppercase; letter-spacing:.14em; color:var(--t3); margin-bottom:7px; }
-.alt-item { font-size:10.5px; color:#555555; display:flex; gap:6px; margin-bottom:5px; align-items:baseline; line-height:1.45; }
-.alt-item::before { content:"–"; color:var(--t3); flex-shrink:0; }
-.alt-item a { color:#999999; text-decoration:none; font-size:9px; margin-left:4px; opacity:.7; }
-.alt-item a:hover { opacity:1; color:#0A0A0A; }
-
-/* ── Phase 2 rows ─────────────────────────────────────────── */
-.p2row { display:grid; grid-template-columns:44px 1fr auto; align-items:stretch; border-bottom:0.5px solid var(--rule); opacity:.5; transition:opacity .15s; }
-.p2row:hover { opacity:.75; }
-.p2num { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:9px; color:var(--t3); border-right:0.5px solid var(--rule); padding:0 4px; gap:1px; flex-shrink:0; letter-spacing:.05em; }
-.p2num .age { font-size:7.5px; color:var(--t3); }
-.p2main { padding:.55rem .9rem; }
-.p2name { font-size:12px; font-weight:500; color:#0A0A0A; }
-.p2meta { font-size:9.5px; color:#555555; margin-top:2px; line-height:1.4; }
-.p2right { display:flex; align-items:center; justify-content:flex-end; padding:.55rem 1.25rem; border-left:0.5px solid var(--rule); min-width:64px; flex-shrink:0; }
-.p2bdg { font-size:12px; font-weight:300; color:#555555; }
-.show-more { padding:.65rem 1.5rem; font-size:9.5px; color:var(--t3); cursor:pointer; text-align:center; border-bottom:0.5px solid var(--rule); letter-spacing:.08em; transition:color .15s; }
-.show-more:hover { color:#0A0A0A; }
-.footer { padding:1rem 1.5rem; font-size:8.5px; color:var(--t3); display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px; letter-spacing:.06em; border-top:0.5px solid var(--rule-accent); margin-bottom:80px; background:#F2F0EB; }
-
-/* ── Responsive ───────────────────────────────────────────── */
-@media(max-width:768px){ .db { padding:0 1rem; } }
-@media(max-width:480px){
-  .row { grid-template-columns:38px 56px 1fr auto; }
-  .h-row { grid-template-columns:38px 56px 1fr; }
-  .watch-img-btn,.img-btn { width:56px; min-height:56px; max-height:56px; }
-  .rright { min-width:72px; padding:.65rem .7rem; }
-  .alts { padding:.6rem .75rem .75rem .75rem; }
-  .sbar { gap:16px; padding:1rem; }
-  .si { width:72px; height:72px; }
-  .hdr { padding:1.5rem 1rem 1.25rem; }
-  .hdr-title { font-size:22px; }
-  .chat-status { display:none; }
+/* ===== RESET & ROOT ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f6f1;--bg-raised:#f0ece4;--bg-section:#f0ece4;--bg-drawer:#f0ece4;
+  --accent:#E8142A;--t1:#0A0A0A;--t2:#555555;--t3:#999999;--t4:#AAAAAA;
+  --rule:rgba(0,0,0,.08);--rule-accent:rgba(0,0,0,.15)
 }
 
-/* ── API key modal ─────────────────────────────────────── */
-.modal-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,.6);
-  display:flex; align-items:center; justify-content:center;
-  z-index:1000; backdrop-filter:blur(6px);
+/* ===== BODY & BEZEL ===== */
+body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;padding:24px}
+.page-bezel{
+  background:#0d0d0d;border-radius:18px;padding:20px;max-width:1160px;
+  margin:0 auto 80px;width:100%;position:relative;
+  box-shadow:inset 0 2px 4px rgba(255,255,255,0.06),inset 0 -2px 4px rgba(0,0,0,0.8),
+             0 0 0 1px #2a2a2a,0 24px 80px rgba(0,0,0,0.9)
 }
-.modal-overlay.hidden { display:none; }
-.modal-box {
-  background:#F2F0EB; border:0.5px solid rgba(0,0,0,.15);
-  padding:2rem 1.75rem; max-width:380px; width:90%; border-radius:3px;
-}
-.modal-title {
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:12px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
-  color:#0A0A0A; margin-bottom:6px;
-}
-.modal-sub {
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:10px; color:#555555; line-height:1.65; margin-bottom:1.4rem;
-}
-.modal-input {
-  width:100%; background:#ECEAE5; border:0.5px solid rgba(0,0,0,.12);
-  color:#0A0A0A; padding:9px 11px; font-size:12px; font-family:monospace;
-  border-radius:2px; outline:none; margin-bottom:10px; letter-spacing:.04em;
-}
-.modal-input:focus { border-color:rgba(0,0,0,.3); }
-.modal-input::placeholder { color:#999999; }
-.modal-btn {
-  width:100%; background:#E8142A; border:none; color:#FFFFFF;
-  padding:8px 20px; font-size:10.5px; letter-spacing:.14em;
-  text-transform:uppercase; cursor:pointer; border-radius:0;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-}
-.modal-btn:hover { background:#CC1024; }
-.modal-btn-secondary {
-  width:100%; background:transparent; border:0.5px solid rgba(0,0,0,.12); color:#555555;
-  padding:8px 20px; font-size:10.5px; letter-spacing:.14em; margin-top:8px;
-  text-transform:uppercase; cursor:pointer; border-radius:0;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  transition:background .13s;
-}
-.modal-btn-secondary:hover { background:rgba(0,0,0,.05); }
-.modal-err {
-  font-size:9.5px; color:#E86A4E; letter-spacing:.05em; margin-top:7px;
-  min-height:14px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+.page-bezel::before{
+  content:'';position:absolute;inset:10px;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.04);pointer-events:none
 }
 
-/* ── Chat error bar ───────────────────────────────────── */
-.chat-err-bar {
-  position:fixed; bottom:52px; left:0; right:0; z-index:199;
-  padding:6px 14px; font-size:10px; color:#E8142A; letter-spacing:.02em;
-  background:rgba(232,20,42,.06); border-top:0.5px solid rgba(232,20,42,.2);
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+/* ===== TACHYMETER BAR ===== */
+.bezel-ticks{
+  display:flex;align-items:center;gap:10px;padding:8px 4px 10px;
+  border-bottom:1px solid #222
 }
-.chat-err-bar.hidden { display:none; }
+.bezel-lbl{
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:3px;
+  color:#d4b896;white-space:nowrap;flex-shrink:0
+}
+.tick-group{display:flex;align-items:flex-end;gap:2px;flex:1}
+.tick{width:1px;background:#3a3530;flex-shrink:0}
+.tick.major{height:10px;background:#5a5048}
+.tick.minor{height:6px}
 
-/* ── Image fetch loading state ─────────────────────────── */
-.img-fetching { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
-.img-fetching span { font-size:7px; text-transform:uppercase; letter-spacing:.1em; color:#999999; text-align:center; line-height:1.5; }
+/* ===== INNER DIAL ===== */
+.dial{background:#f8f6f1;border-radius:10px;border:1px solid #e0ddd5;overflow:hidden}
 
-/* ── Chat bar ──────────────────────────────────────────── */
-.chat-bar {
-  position:fixed; bottom:0; left:0; right:0;
-  background:#E8E6E1; border-top:0.5px solid rgba(0,0,0,.15);
-  padding:10px 14px; display:flex; gap:8px; align-items:center; z-index:200;
+/* ===== DIAL HEADER ===== */
+.dial-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  padding:20px 24px 16px;border-bottom:1px solid #e0ddd5;gap:16px
 }
-.chat-input {
-  flex:1; background:#F2F0EB; border:0.5px solid rgba(0,0,0,.12);
-  color:#0A0A0A; padding:9px 13px; font-size:12px; border-radius:2px;
-  outline:none; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  min-width:0;
+.brand-area{}
+.brand-name{
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+  color:#1a1a1a;letter-spacing:6px;text-transform:uppercase;line-height:1.1
 }
-.chat-input:focus { border-color:rgba(0,0,0,.3); }
-.chat-input::placeholder { color:#999999; font-size:11px; }
-.chat-input:disabled { opacity:.5; }
-.chat-send {
-  background:#E8142A; border:none; color:#FFFFFF; padding:9px 18px; font-size:10px;
-  letter-spacing:.12em; text-transform:uppercase; cursor:pointer; border-radius:0;
-  white-space:nowrap; flex-shrink:0;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  transition:background .13s;
+.model-name{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:8px;
+  color:#8a7b6a;margin-top:4px
 }
-.chat-send:hover:not(:disabled) { background:#CC1024; }
-.chat-send:disabled { opacity:.4; cursor:default; }
-.chat-key-btn {
-  background:transparent; border:0.5px solid rgba(0,0,0,.08);
-  color:#999999; padding:9px 10px; font-size:13px; cursor:pointer;
-  border-radius:2px; flex-shrink:0; transition:border-color .13s, color .13s;
-  line-height:1;
+.crown-stats{display:flex;align-items:center;gap:0;flex-shrink:0}
+.crown-stat{text-align:center;padding:0 14px}
+.crown-stat-val{
+  font-family:'DM Mono',monospace;font-size:16px;font-weight:500;
+  color:#1a1a1a;line-height:1
 }
-.chat-key-btn:hover { border-color:rgba(0,0,0,.15); color:#555555; }
-.chat-status {
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:9px; color:#555555; letter-spacing:.14em; text-transform:uppercase;
-  flex-shrink:0; opacity:0; transition:opacity .2s; white-space:nowrap;
-  pointer-events:none;
+.crown-stat-lbl{
+  font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:2px;
+  color:#8a7b6a;margin-top:3px
 }
-.chat-status.active { opacity:1; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-.chat-status.active { animation:pulse 1.4s ease-in-out infinite; }
-@media(max-width:480px){
-  .chat-bar { padding:8px 10px; gap:6px; }
-  .chat-send { padding:9px 12px; letter-spacing:.08em; }
-  .chat-status { display:none; }
-}
+.crown-stat-div{width:1px;height:28px;background:#d8d3c8;flex-shrink:0}
 
-/* ── watch photos ─────────────────────────────────────────────────────── */
-.watch-img-btn img, .img-btn img {
-  width:100%; height:100%; object-fit:cover; object-position:center; display:block;
-  opacity:.88; transition:opacity .15s;
+/* ===== SUBDIAL ROW ===== */
+.subdial-row{
+  display:flex;align-items:stretch;border-bottom:1px solid #e0ddd5;
+  background:#f4f1eb
 }
-.watch-img-btn:hover img, .img-btn:hover img { opacity:1; }
-.watch-img-btn, .img-btn { padding:0 !important; overflow:hidden; }
-
-/* ── Timeline ────────────────────────────────────────────────────────── */
-.tl {
-  position:sticky; top:0; z-index:100;
-  height:120px; background:#F2F0EB;
-  border-bottom:0.5px solid rgba(0,0,0,.12);
-  overflow:hidden; transition:height .25s ease;
+.subdial{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:14px 10px 12px;gap:6px;border-right:1px solid #e0ddd5;
+  min-width:0
 }
-.tl.compact { height:48px; }
-
-.tl-track {
-  display:flex; align-items:flex-start;
-  padding:8px 2rem 0; height:100%;
-  position:relative; overflow:hidden;
+.subdial:last-child{border-right:none}
+.subdial svg{width:90px;height:90px;flex-shrink:0}
+.subdial-lbl{
+  font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:3px;
+  color:#8a7b6a;text-align:center
+}
+.subdial-val{
+  font-family:'DM Mono',monospace;font-size:13px;font-weight:500;
+  color:#1a1a1a;text-align:center
+}
+.grail-subdial{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:14px 10px 12px;gap:8px;min-width:0
+}
+.grail-ref{
+  font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;
+  color:#1a1a1a;line-height:1
+}
+.grail-sub{
+  font-family:'DM Mono',monospace;font-size:10px;color:#8a7b6a;
+  letter-spacing:2px
 }
 
-/* Thin connecting line sitting behind all thumbnails */
-.tl-track::before {
-  content:''; position:absolute;
-  top:58px; /* 8(pad) + 24(era-hdr) + 4(slot-pad) + 22(half 44px) */
-  left:2rem; right:2rem; height:1px;
-  background:rgba(0,0,0,.1); pointer-events:none;
-  transition:top .25s ease;
+/* ===== SECTION LABEL ===== */
+.section-label{
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;
+  color:#8a7b6a;margin:20px 0 14px;display:flex;align-items:center;
+  gap:10px;text-transform:uppercase;padding:0 24px
 }
-.tl.compact .tl-track::before { top:22px; /* 4(pad) + 4(slot-pad) + 14(half 28px) */ }
-.tl.compact .tl-track { padding-top:4px; }
+.section-label::after{content:'';flex:1;height:1px;background:#d0ccc4}
 
-/* Era groups: flex value set inline (proportional to slot count) */
-.tl-era-group { display:flex; flex-direction:column; min-width:0; }
+/* ===== COLLECTION AREA ===== */
+.collection-area{padding:20px 24px 28px;background:#f8f6f1}
 
-/* Heritage group is visually muted — inherited, not purchased */
-.tl-era-group[data-era="heritage"] { opacity:0.6; }
-
-.tl-era-hdr {
-  height:24px; display:flex; flex-direction:column;
-  align-items:center; justify-content:flex-end; padding-bottom:4px;
-  overflow:hidden; transition:height .25s ease, opacity .25s ease;
+/* ===== SPRING ROW ===== */
+.spring-row{margin-bottom:24px;scroll-margin-top:64px}
+.spring-row-lbl{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:#8a7b6a;margin-bottom:8px;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px
 }
-.tl.compact .tl-era-hdr { height:0; opacity:0; }
+.spring-row-lbl::after{content:'';flex:1;height:0.5px;background:#c8c2b8}
 
-.tl-era-lbl {
-  font-size:8px; color:#999999; text-transform:uppercase;
-  letter-spacing:.1em; white-space:nowrap; margin-bottom:3px;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+/* ===== CARD FAN ===== */
+.card-fan{
+  display:flex;align-items:flex-start;gap:0;position:relative;
+  min-height:260px;overflow:visible
 }
-.tl-era-line {
-  /* inset by half a slot width from each end so endcaps sit at thumb centres */
-  width:calc(100% - 2 * (100% / (2 * var(--tl-group-slots, 1) * 2)));
-  height:0; border-top:0.5px solid rgba(0,0,0,.15);
-  position:relative; transition:border-color .2s;
+.watch-card{
+  width:160px;flex-shrink:0;background:#f8f6f1;border:1px solid #d8d3c8;
+  border-radius:8px;overflow:hidden;cursor:pointer;position:relative;
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+             opacity 0.3s ease,box-shadow 0.3s ease,
+             margin-left 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  transform-origin:bottom left;z-index:1
 }
-.tl-era-line::before, .tl-era-line::after {
-  content:''; position:absolute; top:0;
-  width:0.5px; height:4px; background:rgba(0,0,0,.15);
-  transition:background .2s;
-}
-.tl-era-line::before { left:0; }
-.tl-era-line::after  { right:0; }
-.tl-era-group.tl-era-active .tl-era-line { border-color:#E8142A; }
-.tl-era-group.tl-era-active .tl-era-line::before,
-.tl-era-group.tl-era-active .tl-era-line::after { background:#E8142A; }
+.watch-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:10}
+.watch-card.primary{width:180px;border-color:#b8a88a;z-index:2}
+.watch-card.alternate{margin-left:-130px;opacity:0.3;transform:scale(0.92) rotate(2deg);pointer-events:none}
+.watch-card.alternate:nth-child(3){transform:scale(0.90) rotate(3deg);margin-left:-135px}
+.watch-card.alternate:nth-child(4){transform:scale(0.88) rotate(5deg);margin-left:-138px}
+.watch-card.alternate:nth-child(5){transform:scale(0.86) rotate(7deg);margin-left:-140px}
+.watch-card.alternate:nth-child(6){transform:scale(0.84) rotate(9deg);margin-left:-142px}
+.card-fan.expanded .watch-card.alternate{margin-left:10px;opacity:1;transform:scale(1) rotate(0deg);pointer-events:all}
+.card-fan.expanded .watch-card.alternate:hover{transform:scale(1) translateY(-6px)}
 
-.tl-era-slots { display:flex; flex:1; }
+/* ===== CARD INTERNALS ===== */
+.card-image{width:100%;height:140px;background:#e8e3da;position:relative;border-bottom:1px solid #d8d3c8;overflow:hidden}
+.watch-card.primary .card-image{height:160px}
+.watch-img-btn{width:100%;height:100%;background:#e8e3da;border:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;transition:background .15s}
+.watch-img-btn:hover{background:#e0dbd0}
+.watch-img-btn .cam{font-size:20px;opacity:0.25}
+.watch-img-btn .cam-lbl{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:0.1em;text-align:center;line-height:1.4}
+.watch-img-btn img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.alt-image{display:flex;align-items:center;justify-content:center;background:#e0ddd5}
+.watch-face-placeholder{width:60px;height:60px;border-radius:50%;border:1.5px solid #b8a88a;background:#f0ece4;display:flex;align-items:center;justify-content:center;position:relative}
+.watch-face-placeholder::before{content:'';position:absolute;inset:6px;border-radius:50%;border:0.5px solid #c8c0b0}
+.wfp-inner{width:6px;height:6px;border-radius:50%;background:#8a7b6a;position:relative;z-index:1}
+.alt-num{position:absolute;top:8px;left:8px;background:#8a7b6a;color:#f8f6f1;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:3px 6px;border-radius:2px;font-family:'DM Sans',sans-serif}
+.card-info{padding:10px 12px 12px}
+.card-ref{font-family:'DM Mono',monospace;font-size:9px;color:#8a7b6a;letter-spacing:1px;margin-bottom:3px}
+.card-name{font-size:12px;font-weight:500;color:#1a1a1a;line-height:1.35;margin-bottom:4px}
+.card-meta{font-size:10px;color:#6a5f52;line-height:1.4;margin-bottom:3px}
+.card-note{font-size:10px;color:#6a5f52;font-style:italic;line-height:1.4;margin-bottom:3px}
+.card-dec{font-size:10px;color:#8a7b6a;font-style:italic;line-height:1.4;margin-bottom:3px}
+.card-price{font-family:'DM Mono',monospace;font-size:11px;color:#1a1a1a;font-weight:500;margin-bottom:6px}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 5px;border:0.5px solid #c0b8ac;border-radius:2px;color:#6a5f52;font-family:'DM Sans',sans-serif}
+.tag.owned{color:#f8f6f1;background:#1a1a1a;border-color:#1a1a1a}
+.tag.locked{color:#f8f6f1;background:#8a7b6a;border-color:#8a7b6a}
+.tag.rolex{color:#1a1a1a;border-color:#b8a88a;background:rgba(184,168,138,0.15)}
+.tag.vtg{color:#5a4e3c;border-color:#c0b090;background:transparent}
+.tag.chrono{color:#6a5f52;border-color:#c0b8ac;background:transparent}
+.tag.dress{color:#6a5f52;border-color:#c0b8ac;background:transparent}
+.tag.sport{color:#6a5f52;border-color:#c0b8ac;background:transparent}
+.tag.open{color:#999;border-color:rgba(0,0,0,.15);background:transparent}
+.tag.base{color:#6a5f52;border-color:#c0b8ac;background:transparent}
+.expand-btn{width:100%;background:transparent;border:none;border-top:0.5px solid #d8d3c8;padding:9px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#8a7b6a;cursor:pointer;text-align:left;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;transition:background .2s}
+.expand-btn:hover{background:#f0ece4}
+.expand-arrow{font-size:10px;transition:transform 0.3s ease;display:inline-block}
+.card-fan.expanded .expand-arrow{transform:rotate(90deg)}
+.rbadge{position:absolute;top:8px;right:8px;z-index:2;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-family:'DM Sans',sans-serif;pointer-events:none}
+.st-o{color:#f8f6f1;background:#1a1a1a}
+.st-n{color:#f8f6f1;background:#8a7b6a}
+.st-l{color:#f8f6f1;background:#8a7b6a}
+.st-p{color:#8a7b6a;border:0.5px solid #b8a88a;background:rgba(248,246,241,0.9)}
+.st-d{color:#6a5f52;border:0.5px solid #b0a898;background:rgba(248,246,241,0.9)}
 
-.tl-heritage-sep { flex:0 0 clamp(6px,1.2vw,16px); }
+/* ===== HERITAGE ===== */
+.heritage-wrap{padding:20px 24px 24px;background:#f8f6f1}
+.heritage-hdr{margin-bottom:16px}
+.heritage-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:4px;color:#1a1a1a;display:block}
+.heritage-sub{font-size:11px;color:#8a7b6a;display:block;margin-top:3px}
+.h-row{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-top:1px solid #e8e4de}
+.h-num{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#c8c0b0;line-height:1;width:32px;flex-shrink:0;text-align:center;padding-top:2px}
+.h-lineage{font-family:'DM Mono',monospace;font-size:8px;color:#aaa;letter-spacing:1px;margin-top:3px}
+.img-btn{width:72px;height:72px;flex-shrink:0;border-radius:6px;border:1px solid #d8d4cc;background:#e8e3da;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0}
+.img-btn .cam{font-size:18px;opacity:0.25}
+.img-btn .cam-lbl{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:0.1em;text-align:center;line-height:1.4}
+.h-main{flex:1;min-width:0}
+.h-name{font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:3px}
+.h-meta{font-size:11px;color:#8a7b6a;margin-bottom:6px}
+.h-story{font-size:12px;color:#4a4038;line-height:1.55;margin-bottom:8px}
+.h-links{display:flex;gap:10px;margin-bottom:8px}
+.h-badge{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7b6a;border:0.5px solid #b8a88a;padding:3px 7px;border-radius:2px}
+.lnk{font-size:11px;color:#8a7b6a;text-decoration:none;border-bottom:0.5px solid #b8a88a}
+.lnk:hover{color:#1a1a1a}
 
-/* Each slot fills its share of the era group equally */
-.tl-slot {
-  flex:1; min-width:0; display:flex; flex-direction:column;
-  align-items:center; cursor:pointer; padding:4px 0 0;
-  position:relative; z-index:1; user-select:none;
-}
-.tl-slot:hover .tl-thumb { transform:scale(1.08); }
+/* ===== TIMELINE ===== */
+.tl{position:sticky;top:0;z-index:40;background:#f4f1eb;border-bottom:1px solid #ddd9d0;padding:10px 24px 0;transition:padding 0.25s}
+.tl.compact{padding-top:6px;padding-bottom:0}
+.tl-track{display:flex;align-items:flex-end;gap:0;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.tl-track::-webkit-scrollbar{display:none}
+.tl-era-group{display:flex;align-items:flex-end;gap:3px;padding-right:12px;flex-shrink:0}
+.tl-era-hdr{display:flex;flex-direction:column;align-items:center;margin-right:4px}
+.tl-era-lbl{font-family:'Bebas Neue',sans-serif;font-size:8px;letter-spacing:2px;color:#8a7b6a;white-space:nowrap}
+.tl-era-line{width:1px;height:14px;background:#c8c2b8;margin:2px auto 0}
+.tl.compact .tl-era-line{height:8px}
+.tl.compact .tl-era-lbl{display:none}
+.tl-era-slots{display:flex;gap:3px}
+.tl-heritage-sep{width:1px;background:#c8c2b8;height:32px;margin:0 6px;align-self:flex-end}
+.tl-slot{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.tl-thumb{width:28px;height:28px;border-radius:50%;background:#e8e3da;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:7px;color:#8a7b6a;letter-spacing:0.5px;transition:transform 0.15s,box-shadow 0.15s;border:1.5px solid #c8c2b8;flex-shrink:0;overflow:hidden}
+.tl-thumb:hover{transform:scale(1.1);box-shadow:0 3px 10px rgba(0,0,0,0.1)}
+.tl-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.ring-owned{border:2px solid #E8142A !important;box-shadow:0 0 0 1px rgba(232,20,42,0.2)}
+.ring-decided{border:2px dashed #E8142A !important}
+.ring-planned{border:1.5px solid #c8c2b8 !important}
+.ring-heritage{border:1.5px dashed #b8a88a !important}
+.tl-label{font-family:'DM Mono',monospace;font-size:7px;color:#8a7b6a;letter-spacing:0.5px;text-align:center;line-height:1}
+.tl-age{font-family:'DM Mono',monospace;font-size:6px;color:#aaa;text-align:center}
+.tl.compact .tl-label,.tl.compact .tl-age{display:none}
 
-.tl-thumb {
-  width:clamp(20px,3.5vw,44px); height:clamp(20px,3.5vw,44px);
-  border-radius:50%; overflow:hidden;
-  background:#E8E5DF; display:flex; align-items:center; justify-content:center;
-  transition:width .25s ease, height .25s ease, transform .12s ease;
-  flex-shrink:0;
-}
-.tl-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+/* ===== PHILOSOPHY ACCORDION ===== */
+.accord{border:1px solid #e0ddd5;border-radius:6px;overflow:hidden;margin:0 24px 20px}
+.accord-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#f4f1eb;cursor:pointer;gap:12px}
+.accord-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.accord-register{display:flex;gap:8px;flex-wrap:wrap}
+.accord-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:#8a7b6a;white-space:nowrap;flex-shrink:0}
+.accord-chev{font-size:12px;color:#8a7b6a;transition:transform 0.25s;flex-shrink:0}
+.accord-body{display:none;padding:16px;border-top:1px solid #e0ddd5;background:#f8f6f1}
+.accord-body.open{display:block}
+.principles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.pill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:0.5px solid #b8a88a;border-radius:20px;color:#6a5f52}
+.decisions{display:flex;flex-direction:column;gap:8px}
+.dec-title{font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:2px;color:#8a7b6a;margin-bottom:8px}
+.dec-item{font-size:11px;color:#4a4038;line-height:1.5;padding-left:12px;border-left:2px solid #d8d4cc}
 
-.ring-owned    { border:2px solid #E8142A; }
-.ring-decided  { border:1px dashed #E8142A; }
-.ring-planned  { border:1px solid rgba(0,0,0,.15); }
-.ring-heritage { border:1px dashed rgba(0,0,0,.25); }
+/* ===== 10 SUMMERS ===== */
+.sec{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:#8a7b6a;padding:20px 24px 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:#d0ccc4}
+.p2row{display:flex;align-items:flex-start;gap:12px;padding:12px 24px;border-top:1px solid var(--rule)}
+.p2num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#c8c0b0;width:28px;flex-shrink:0;text-align:center;line-height:1;padding-top:2px}
+.p2main{flex:1;min-width:0}
+.p2name{font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:2px}
+.p2meta{font-size:11px;color:#8a7b6a;line-height:1.4}
+.p2right{text-align:right;flex-shrink:0}
+.p2bdg{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:#8a7b6a;border:0.5px solid #b8a88a;padding:3px 7px;border-radius:2px}
+.show-more{width:100%;background:none;border:none;border-top:1px solid #e8e4de;padding:12px 24px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#8a7b6a;cursor:pointer;text-align:center;text-transform:uppercase}
+.show-more:hover{background:#f4f1eb}
 
-.tl-label {
-  font-size:8px; color:#999999; letter-spacing:.14em;
-  font-family:'SF Mono','Fira Code',monospace; margin-top:4px;
-  transition:font-size .25s ease; white-space:nowrap;
-}
-.tl-age {
-  font-size:7px; color:#BBBBBB; margin-top:1px;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  transition:opacity .25s ease, height .25s ease; white-space:nowrap;
-}
-.tl.compact .tl-thumb { width:28px; height:28px; }
-.tl.compact .tl-label { font-size:7px; }
-.tl.compact .tl-age   { opacity:0; height:0; overflow:hidden; margin-top:0; }
+/* ===== BEZEL BOTTOM ===== */
+.bezel-bottom{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px 8px;border-top:1px solid #1e1e1e}
+.lume-dot{width:6px;height:6px;border-radius:50%;background:#d4b896;opacity:0.4;flex-shrink:0}
+.bezel-bottom-lbl{font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:3px;color:#5a5048}
 
-/* scroll-margin: compact sticky header is 48px; add small buffer */
-.row[id], .h-row[id] { scroll-margin-top:60px; }
+/* ===== FOOTER ===== */
+.footer{text-align:center;padding:24px;font-family:'DM Mono',monospace;font-size:10px;color:#3a3530;letter-spacing:1px}
 
-@media (max-width:768px) {
-  .tl-era-lbl { display:none; }
-  .tl-era-line { display:none; }
-  .tl-era-hdr { padding-bottom:0; }
-}
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:#f8f6f1;border-radius:8px;padding:28px;width:360px;max-width:calc(100vw - 32px);border:1px solid #d8d4cc}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:4px;color:#1a1a1a;margin-bottom:4px}
+.modal-sub{font-size:11px;color:#8a7b6a;line-height:1.5;margin-bottom:18px}
+.modal-input{width:100%;padding:10px 12px;background:#fff;border:1px solid #d8d4cc;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px;color:#1a1a1a;outline:none;margin-bottom:10px}
+.modal-input:focus{border-color:#b8a88a}
+.modal-btn{width:100%;padding:11px;background:#1a1a1a;color:#f8f6f1;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;cursor:pointer;margin-bottom:8px}
+.modal-btn:hover{background:#2a2a2a}
+.modal-btn-secondary{width:100%;padding:9px;background:transparent;color:#8a7b6a;border:0.5px solid #c0b8ac;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer}
+.modal-btn-secondary:hover{background:#f0ece4}
+.modal-err{font-size:11px;color:#c04040;margin-top:6px;display:none}
 
-/* ── Page bezel ───────────────────────────────────────────── */
-.bezel {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: var(--bg);
-  min-height: 100vh;
-  box-shadow: 0 0 80px rgba(0,0,0,.55);
-  position: relative;
-}
-/* At wide viewports, pin fixed bars inside the bezel column */
-@media (min-width: 1200px) {
-  .chat-bar, .chat-err-bar {
-    left: calc(50% - 600px);
-    right: calc(50% - 600px);
-  }
-}
+/* ===== CHAT BAR ===== */
+.chat-bar{position:fixed;bottom:0;left:0;right:0;background:#f4f1eb;border-top:1px solid #ddd9d0;padding:10px 16px;display:flex;align-items:center;gap:8px;z-index:50}
+.chat-input{flex:1;padding:9px 12px;background:#fff;border:1px solid #d8d4cc;border-radius:4px;font-size:12px;font-family:'DM Sans',sans-serif;color:#1a1a1a;outline:none}
+.chat-input:focus{border-color:#b8a88a}
+.chat-send{padding:9px 16px;background:#1a1a1a;color:#f8f6f1;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;cursor:pointer;white-space:nowrap}
+.chat-send:disabled{background:#aaa;cursor:not-allowed}
+.chat-key-btn{padding:9px 12px;background:transparent;color:#8a7b6a;border:0.5px solid #c0b8ac;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;white-space:nowrap}
+.chat-status{font-family:'DM Mono',monospace;font-size:10px;color:#8a7b6a;white-space:nowrap}
+.chat-err-bar{position:fixed;bottom:52px;left:0;right:0;background:#c04040;color:#fff;padding:8px 16px;font-size:11px;font-family:'DM Mono',monospace;text-align:center;z-index:51;display:none}
+
+/* ===== IMAGE LOADING ===== */
+.img-fetching{position:relative}
+.img-fetching span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#8a7b6a;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;background:rgba(232,227,218,0.85)}
 </style>
 </head>
-<body style="background:#1a1a1a; min-height:100vh;">
+<body>
+<!-- page bezel -->
+<div class="page-bezel">
+  <!-- tachymeter -->
+  <div class="bezel-ticks">
+    <span class="bezel-lbl">Tachymeter</span>
+    <div class="tick-group">
+      <div class="tick minor"></div><div class="tick minor"></div><div class="tick major"></div>
+      <div class="tick minor"></div><div class="tick minor"></div><div class="tick major"></div>
+      <div class="tick minor"></div><div class="tick minor"></div><div class="tick major"></div>
+      <div class="tick minor"></div><div class="tick minor"></div><div class="tick major"></div>
+      <div class="tick minor"></div><div class="tick minor"></div><div class="tick major"></div>
+      <div class="tick minor"></div><div class="tick minor"></div><div class="tick major"></div>
+    </div>
+    <span class="bezel-lbl">1000 &middot; 500 &middot; 300 &middot; 200 &middot; 150 &middot; 100 &middot; 75 &middot; 60</span>
+  </div>
 
-<!-- ── API key modal ──────────────────────────────────────────────────── -->
-<div class="modal-overlay hidden" id="key-modal">
+  <!-- inner dial -->
+  <div class="dial">
+
+    <!-- dial header -->
+    <div class="dial-header">
+      <div class="brand-area">
+        <div class="brand-name">Joel Coleman</div>
+        <div class="model-name">10 Springs &middot; Ages 35&ndash;45 &middot; Albuquerque NM</div>
+      </div>
+      <div class="crown-stats">
+        <div class="crown-stat">
+          <div class="crown-stat-val">1</div>
+          <div class="crown-stat-lbl">Purchased</div>
+        </div>
+        <div class="crown-stat-div"></div>
+        <div class="crown-stat">
+          <div class="crown-stat-val">2</div>
+          <div class="crown-stat-lbl">Inherited</div>
+        </div>
+        <div class="crown-stat-div"></div>
+        <div class="crown-stat">
+          <div class="crown-stat-val">~$84K</div>
+          <div class="crown-stat-lbl">Projected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- subdial row -->
+    <div class="subdial-row">
+      <div class="subdial">
+        <div class="subdial-lbl">Spent</div>
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="40" fill="none" stroke="#d8d4cc" stroke-width="1"/>
+          <g id="ticks-spent">
+            <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(0 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(30 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(60 45 45)"/>
+            <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(90 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(120 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(150 45 45)"/>
+            <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(180 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(210 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(240 45 45)"/>
+            <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(270 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(300 45 45)"/>
+            <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(330 45 45)"/>
+          </g>
+          <circle cx="45" cy="45" r="32" fill="none" stroke="#d8d4cc" stroke-width="0.5"/>
+          <line x1="45" y1="18" x2="45" y2="35" stroke="#8a7b6a" stroke-width="1.5" stroke-linecap="round" transform="rotate(0 45 45)"/>
+          <circle cx="45" cy="45" r="2" fill="#8a7b6a"/>
+        </svg>
+        <div class="subdial-val">~$500</div>
+      </div>
+      <div class="subdial">
+        <div class="subdial-lbl">Remaining</div>
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="40" fill="none" stroke="#d8d4cc" stroke-width="1"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(0 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(30 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(60 45 45)"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(90 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(120 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(150 45 45)"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(180 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(210 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(240 45 45)"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(270 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(300 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(330 45 45)"/>
+          <circle cx="45" cy="45" r="32" fill="none" stroke="#d8d4cc" stroke-width="0.5"/>
+          <line x1="45" y1="18" x2="45" y2="35" stroke="#8a7b6a" stroke-width="1.5" stroke-linecap="round" transform="rotate(330 45 45)"/>
+          <circle cx="45" cy="45" r="2" fill="#8a7b6a"/>
+        </svg>
+        <div class="subdial-val">~$83.5K</div>
+      </div>
+      <div class="subdial">
+        <div class="subdial-lbl">Next Spring</div>
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="40" fill="none" stroke="#d8d4cc" stroke-width="1"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(0 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(30 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(60 45 45)"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(90 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(120 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(150 45 45)"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(180 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(210 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(240 45 45)"/>
+          <line x1="45" y1="6" x2="45" y2="12" stroke="#8a7b6a" stroke-width="1.5" transform="rotate(270 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(300 45 45)"/>
+          <line x1="45" y1="8" x2="45" y2="12" stroke="#c8c2b8" stroke-width="1" transform="rotate(330 45 45)"/>
+          <circle cx="45" cy="45" r="32" fill="none" stroke="#d8d4cc" stroke-width="0.5"/>
+          <line x1="45" y1="18" x2="45" y2="35" stroke="#8a7b6a" stroke-width="1.5" stroke-linecap="round" transform="rotate(36 45 45)"/>
+          <circle cx="45" cy="45" r="2" fill="#8a7b6a"/>
+        </svg>
+        <div class="subdial-val">Age 36</div>
+      </div>
+      <div class="grail-subdial">
+        <div class="grail-ref">GMT 1675</div>
+        <div class="grail-sub">S10 &middot; AGE 45</div>
+      </div>
+    </div>
+
+    <!-- timeline sentinel -->
+    <div id="tl-sentinel" style="height:1px"></div>
+
+    <!-- timeline -->
+    <div class="tl" id="tl">
+      <div class="tl-track">
+        <div class="tl-era-group">
+          <div class="tl-era-hdr"><div class="tl-era-lbl">Heritage</div><div class="tl-era-line"></div></div>
+          <div class="tl-era-slots">
+            <div class="tl-slot" onclick="tlScrollTo('watch-h1')">
+              <div class="tl-thumb ring-heritage" id="tl-h1">H1</div>
+              <div class="tl-label">Caravelle</div>
+              <div class="tl-age">1950s</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-h2')">
+              <div class="tl-thumb ring-heritage" id="tl-h2">H2</div>
+              <div class="tl-label">Accutron</div>
+              <div class="tl-age">1960s</div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-heritage-sep"></div>
+        <div class="tl-era-group">
+          <div class="tl-era-hdr"><div class="tl-era-lbl">Dress</div><div class="tl-era-line"></div></div>
+          <div class="tl-era-slots">
+            <div class="tl-slot" onclick="tlScrollTo('watch-now')">
+              <div class="tl-thumb ring-owned" id="tl-now">NOW</div>
+              <div class="tl-label">L.Sport Chief</div>
+              <div class="tl-age">Age 35</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s1')">
+              <div class="tl-thumb ring-decided" id="tl-s1">S1</div>
+              <div class="tl-label">Seamaster</div>
+              <div class="tl-age">Age 36</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s2')">
+              <div class="tl-thumb ring-planned" id="tl-s2">S2</div>
+              <div class="tl-label">Flagship 18k</div>
+              <div class="tl-age">Age 37</div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-era-group">
+          <div class="tl-era-hdr"><div class="tl-era-lbl">Field</div><div class="tl-era-line"></div></div>
+          <div class="tl-era-slots">
+            <div class="tl-slot" onclick="tlScrollTo('watch-s3')">
+              <div class="tl-thumb ring-planned" id="tl-s3">S3</div>
+              <div class="tl-label">Polerouter</div>
+              <div class="tl-age">Age 38</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s4')">
+              <div class="tl-thumb ring-planned" id="tl-s4">S4</div>
+              <div class="tl-label">El Primero</div>
+              <div class="tl-age">Age 39</div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-era-group">
+          <div class="tl-era-hdr"><div class="tl-era-lbl">Sport</div><div class="tl-era-line"></div></div>
+          <div class="tl-era-slots">
+            <div class="tl-slot" onclick="tlScrollTo('watch-s5')">
+              <div class="tl-thumb ring-planned" id="tl-s5">S5</div>
+              <div class="tl-label">Datejust</div>
+              <div class="tl-age">Age 40</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s6')">
+              <div class="tl-thumb ring-decided" id="tl-s6">S6</div>
+              <div class="tl-label">Speedmaster</div>
+              <div class="tl-age">Age 41</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s7')">
+              <div class="tl-thumb ring-planned" id="tl-s7">S7</div>
+              <div class="tl-label">Color Sport</div>
+              <div class="tl-age">Age 42</div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-era-group">
+          <div class="tl-era-hdr"><div class="tl-era-lbl">Grail</div><div class="tl-era-line"></div></div>
+          <div class="tl-era-slots">
+            <div class="tl-slot" onclick="tlScrollTo('watch-s8')">
+              <div class="tl-thumb ring-planned" id="tl-s8">S8</div>
+              <div class="tl-label">JLC Moon</div>
+              <div class="tl-age">Age 43</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s9')">
+              <div class="tl-thumb ring-decided" id="tl-s9">S9</div>
+              <div class="tl-label">Day-Date</div>
+              <div class="tl-age">Age 44</div>
+            </div>
+            <div class="tl-slot" onclick="tlScrollTo('watch-s10')">
+              <div class="tl-thumb ring-planned" id="tl-s10">S10</div>
+              <div class="tl-label">GMT-Master</div>
+              <div class="tl-age">Age 45</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- heritage -->
+    <div class="heritage-wrap">
+      <div class="heritage-hdr">
+        <span class="heritage-title">Heritage pieces</span>
+        <span class="heritage-sub">Not for sale &middot; The foundation everything else is built around</span>
+      </div>
+      <div class="h-row" id="watch-h1">
+        <div class="h-num">H1<div class="h-lineage">Dad's side</div></div>
+        <button class="img-btn" onclick="searchPhoto('Caravelle manual wind','Caravelle manual wind 1950s vintage watch')"><div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div></button>
+        <div class="h-main">
+          <div class="h-name">Caravelle manual wind</div>
+          <div class="h-meta">1950s &middot; Manual wind &middot; Great-grandfather's watch &middot; Dad's side</div>
+          <div class="h-story">The oldest piece in the collection. Its story is still being discovered &mdash; research may reveal whether it carries the same quiet substance as the Accutron.</div>
+          <div class="h-links">
+            <a class="lnk" href="https://www.google.com/search?q=Caravelle+manual+wind+1950s+vintage+watch+for+sale&tbm=shop" target="_blank">Listings &#8599;</a>
+            <a class="lnk" href="https://www.google.com/search?q=Caravelle+Bulova+1950s+manual+wind+vintage+value+history" target="_blank">Research &#8599;</a>
+          </div>
+          <span class="h-badge">Heirloom &middot; not for sale</span>
+        </div>
+      </div>
+      <div class="h-row" id="watch-h2">
+        <div class="h-num">H2<div class="h-lineage">Mom's side</div></div>
+        <button class="img-btn" onclick="searchPhoto('Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg/400px-Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg" alt="Bulova Accutron Spaceview" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
+        <div class="h-main">
+          <div class="h-name">Bulova Accutron Spaceview</div>
+          <div class="h-meta">1960s&ndash;70s &middot; Tuning fork 360Hz &middot; Grandfather's watch &middot; Mom's side</div>
+          <div class="h-story">Given by grandmother. Research revealed it was rare and had held its value &mdash; confirming grandfather had taste. This experience is what the whole collection is trying to recreate for the next generation.</div>
+          <div class="h-links">
+            <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+for+sale&tbm=shop" target="_blank">Listings &#8599;</a>
+            <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+214+value+rarity+collector" target="_blank">Research &#8599;</a>
+          </div>
+          <span class="h-badge">Heirloom &middot; not for sale</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- philosophy accordion -->
+    <div class="accord" id="accord-phil">
+      <div class="accord-hdr" onclick="togAccord()">
+        <div class="accord-left">
+          <span class="accord-title">Collection Philosophy</span>
+          <div class="accord-register">
+            <span class="pill">Mechanical only</span>
+            <span class="pill">One at a time</span>
+            <span class="pill">Heritage forward</span>
+            <span class="pill">Utility first</span>
+          </div>
+        </div>
+        <span class="accord-chev" id="accord-chev">&#8250;</span>
+      </div>
+      <div class="accord-body" id="accord-body">
+        <div class="principles">
+          <span class="pill">Mechanical only</span>
+          <span class="pill">One at a time</span>
+          <span class="pill">Heritage forward</span>
+          <span class="pill">Utility first</span>
+        </div>
+        <div class="decisions">
+          <div class="dec-title">Key decisions locked</div>
+          <div class="dec-item">No quartz, no smart watches &mdash; every piece must have a mechanical movement</div>
+          <div class="dec-item">Purchase one watch per year, no exceptions &mdash; patience is part of the practice</div>
+          <div class="dec-item">S6 Speedmaster: modern over vintage &mdash; the El Primero covers vintage chrono territory</div>
+          <div class="dec-item">S7 color sport: intentionally open &mdash; decide after S4&ndash;S6 are on the wrist</div>
+          <div class="dec-item">S9 Day-Date: full yellow gold presidential confirmed &mdash; no compromise on the luxury tier</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- section: foundation -->
+    <div class="section-label" id="sec-foundation">Foundation &mdash; Vintage dress &middot; Ages 35&ndash;37</div>
+    <div class="collection-area">
+      <!-- NOW -->
+      <div class="spring-row" id="watch-now">
+        <div class="spring-row-lbl">NOW &middot; Age 35 &middot; Foundation / Dress</div>
+        <div class="card-fan" id="now-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-o">In Hand</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">7042</div>
+              <div class="card-name rname">Longines Sport Chief</div>
+              <div class="card-meta rmeta">1953&ndash;1960 &middot; Cal. 30L manual &middot; Vintage dress foundation</div>
+              <div class="card-price rbdg">~$500</div>
+              <div class="card-tags tags"><span class="tag owned">In hand</span><span class="tag vtg">Vintage</span><span class="tag dress">Dress</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('now-fan','now-btn')">
+              <span id="now-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">2757</div>
+              <div class="card-name">Omega Seamaster small seconds</div>
+              <div class="card-meta">1952&ndash;1956 &middot; Vintage dress</div>
+              <div class="card-price">~$500&ndash;800</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">131.019</div>
+              <div class="card-name">Omega Gen&egrave;ve manual</div>
+              <div class="card-meta">1960s &middot; Manual wind</div>
+              <div class="card-price">~$300&ndash;600</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Tissot Antimagnetique</div>
+              <div class="card-meta">1945&ndash;1960 &middot; Antimagnetique case</div>
+              <div class="card-price">~$300&ndash;500</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S1 -->
+      <div class="spring-row" id="watch-s1">
+        <div class="spring-row-lbl">S1 &middot; Age 36 &middot; Foundation / Dress</div>
+        <div class="card-fan" id="s1-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-n">Up Next</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">166.010</div>
+              <div class="card-name rname">Omega Seamaster</div>
+              <div class="card-meta rmeta">1962&ndash;1968 &middot; Cal. 565 automatic &middot; Crosshair dial</div>
+              <div class="card-note rnote">Crosshair dial &mdash; strong instrument aesthetic</div>
+              <div class="card-price rbdg">~$1K</div>
+              <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag sport">Sport</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s1-fan','s1-btn')">
+              <span id="s1-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">166.020</div>
+              <div class="card-name">Omega Seamaster De Ville</div>
+              <div class="card-meta">1963&ndash;1967 &middot; Vintage dress</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Longines Flagship steel</div>
+              <div class="card-meta">1960s &middot; Steel dress watch</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Universal Gen&egrave;ve dress</div>
+              <div class="card-meta">1960s &middot; Vintage dress</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="spring-row" id="watch-s2">
+        <div class="spring-row-lbl">S2 &middot; Age 37 &middot; Foundation / Gold Dress</div>
+        <div class="card-fan" id="s2-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-p">Planned</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">3410</div>
+              <div class="card-name rname">Longines Flagship 18k</div>
+              <div class="card-meta rmeta">1958&ndash;1968 &middot; 18k solid gold case &middot; Formal dress</div>
+              <div class="card-price rbdg">~$1K</div>
+              <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag dress">Dress</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s2-fan','s2-btn')">
+              <span id="s2-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">168.022</div>
+              <div class="card-name">Omega Seamaster gold-cap</div>
+              <div class="card-meta">Late 1960s &middot; Gold cap case</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Universal Gen&egrave;ve gold dress</div>
+              <div class="card-meta">1960s &middot; Vintage gold dress</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">810</div>
+              <div class="card-name">IWC vintage dress</div>
+              <div class="card-meta">1960s &middot; Swiss dress watch</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /collection-area foundation -->
+
+    <!-- section: collector -->
+    <div class="section-label" id="sec-collector">Collector &mdash; Instrument era &middot; Ages 38&ndash;39</div>
+    <div class="collection-area">
+
+      <!-- S3 -->
+      <div class="spring-row" id="watch-s3">
+        <div class="spring-row-lbl">S3 &middot; Age 38 &middot; Collector / Instrument</div>
+        <div class="card-fan" id="s3-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Universal Gen&egrave;ve Polerouter ref 20217','Universal Gen&egrave;ve Polerouter ref 20217 tropical brown dial vintage')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-p">Planned</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">20217</div>
+              <div class="card-name rname">Universal Gen&egrave;ve Polerouter</div>
+              <div class="card-meta rmeta">1956&ndash;1964 &middot; Gerald Genta &middot; Micro-rotor Cal. 215/218</div>
+              <div class="card-note rnote">Tropical brown dial preferred &mdash; even patina, original lume, dauphine hands</div>
+              <div class="card-price rbdg">$2&ndash;4K</div>
+              <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag base">Instrument</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s3-fan','s3-btn')">
+              <span id="s3-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Girard-Perregaux Gyromatic</div>
+              <div class="card-meta">1965&ndash;1972 &middot; Gyromax balance</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">166.039</div>
+              <div class="card-name">Omega Dynamic</div>
+              <div class="card-meta">1968&ndash;1975 &middot; Gerald Genta case design</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">A3642</div>
+              <div class="card-name">Zenith Defy</div>
+              <div class="card-meta">1969&ndash;1973 &middot; Tonneau instrument case</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="spring-row" id="watch-s4">
+        <div class="spring-row-lbl">S4 &middot; Age 39 &middot; Collector / Chrono</div>
+        <div class="card-fan" id="s4-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-p">Planned</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">A386</div>
+              <div class="card-name rname">Zenith El Primero</div>
+              <div class="card-meta rmeta">1969&ndash;1972 &middot; El Primero 3019PHC &middot; 36,000 vph</div>
+              <div class="card-note rnote">Black dial instrument style &middot; A3817 &ldquo;Shark Tooth&rdquo; as alternate primary</div>
+              <div class="card-price rbdg">$2&ndash;3K</div>
+              <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag chrono">Chrono</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s4-fan','s4-btn')">
+              <span id="s4-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">2447</div>
+              <div class="card-name">Heuer Carrera</div>
+              <div class="card-meta">1964&ndash;1970 &middot; Classic sport chrono</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">3510.50</div>
+              <div class="card-name">Omega Speedmaster Reduced</div>
+              <div class="card-meta">1990s &middot; Automatic Speedy</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Sinn 103</div>
+              <div class="card-meta">German pilot chronograph</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /collection-area collector -->
+
+    <!-- section: rolex -->
+    <div class="section-label" id="sec-rolex">Rolex &mdash; The ascent &middot; Ages 40&ndash;42</div>
+    <div class="collection-area">
+
+      <!-- S5 -->
+      <div class="spring-row" id="watch-s5">
+        <div class="spring-row-lbl">S5 &middot; Age 40 &middot; Rolex / Dress</div>
+        <div class="card-fan" id="s5-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-p">Planned</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">1601</div>
+              <div class="card-name rname">Rolex Datejust</div>
+              <div class="card-meta rmeta">1965&ndash;1977 &middot; Fluted bezel &middot; Pie-pan dial &middot; First Rolex</div>
+              <div class="card-note rnote">Black or blue sunburst preferred &middot; also: linen, sigma, silver pie-pan</div>
+              <div class="card-price rbdg">$4&ndash;6K</div>
+              <div class="card-tags tags"><span class="tag rolex">Rolex</span><span class="tag dress">Dress</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s5-fan','s5-btn')">
+              <span id="s5-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">14270</div>
+              <div class="card-name">Rolex Explorer</div>
+              <div class="card-meta">1989&ndash;2001 &middot; Clean sport dial</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">5500</div>
+              <div class="card-name">Rolex Air-King</div>
+              <div class="card-meta">1960&ndash;1989 &middot; Pilot's Rolex</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">1625</div>
+              <div class="card-name">Rolex Turn-O-Graph</div>
+              <div class="card-meta">Vintage rotating bezel Datejust</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <div class="spring-row" id="watch-s6">
+        <div class="spring-row-lbl">S6 &middot; Age 41 &middot; Chrono / Icon</div>
+        <div class="card-fan" id="s6-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-l">Decided</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">3570.50</div>
+              <div class="card-name rname">Omega Speedmaster Professional</div>
+              <div class="card-meta rmeta">1996&ndash;2014 &middot; Cal. 1861 &middot; Moonwatch &middot; Iconic chronograph</div>
+              <div class="card-dec rdec">Decided: modern over vintage &mdash; El Primero covers the vintage chrono slot</div>
+              <div class="card-price rbdg">$4&ndash;6K</div>
+              <div class="card-tags tags"><span class="tag chrono">Chrono</span><span class="tag locked">Decided</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s6-fan','s6-btn')">
+              <span id="s6-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">105.003/145.012</div>
+              <div class="card-name">Vintage Speedmaster</div>
+              <div class="card-meta">Considered and set aside</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">79360N</div>
+              <div class="card-name">Tudor Black Bay Chrono</div>
+              <div class="card-meta">Modern steel chronograph</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Heuer Autavia</div>
+              <div class="card-meta">Vintage racing chronograph</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S7 -->
+      <div class="spring-row" id="watch-s7">
+        <div class="spring-row-lbl">S7 &middot; Age 42 &middot; Sport / Color</div>
+        <div class="card-fan" id="s7-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-d">Open</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">TBD</div>
+              <div class="card-name rname">Colorful modern sport watch</div>
+              <div class="card-meta rmeta">Flagship sport watch &middot; color and reference TBD</div>
+              <div class="card-dec rdec">Open by design &mdash; decide after S4&ndash;S6 are on the wrist and color balance is clear</div>
+              <div class="card-price rbdg">$12&ndash;20K</div>
+              <div class="card-tags tags"><span class="tag sport">Sport</span><span class="tag open">Open by design</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s7-fan','s7-btn')">
+              <span id="s7-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">116610LV</div>
+              <div class="card-name">Rolex Submariner &ldquo;Hulk&rdquo;</div>
+              <div class="card-meta">Green ceramic, disc. 2020</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">116710BLNR</div>
+              <div class="card-name">Rolex GMT-Master II &ldquo;Batman&rdquo;</div>
+              <div class="card-meta">Black/blue ceramic bezel</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">126711CHNR</div>
+              <div class="card-name">Rolex GMT-Master II &ldquo;Root Beer&rdquo;</div>
+              <div class="card-meta">Everose/steel two-tone</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 4</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Omega Seamaster Diver 300M</div>
+              <div class="card-meta">Black, blue, or green ceramic</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 5</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">79030B</div>
+              <div class="card-name">Tudor Black Bay 58 Blue</div>
+              <div class="card-meta">Deep blue, 39mm</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /collection-area rolex -->
+
+    <!-- section: grails -->
+    <div class="section-label" id="sec-grails">Grand complications &amp; grails &middot; Ages 43&ndash;45</div>
+    <div class="collection-area">
+
+      <!-- S8 -->
+      <div class="spring-row" id="watch-s8">
+        <div class="spring-row-lbl">S8 &middot; Age 43 &middot; Grail / Celestial</div>
+        <div class="card-fan" id="s8-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-p">Planned</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">Q1368430</div>
+              <div class="card-name rname">Jaeger-LeCoultre Master Ultra Thin Moon</div>
+              <div class="card-meta rmeta">2012&ndash;present &middot; Moonphase &middot; Ultra-thin &middot; Celestial dress</div>
+              <div class="card-note rnote">Gold case preferred if budget allows at time of purchase</div>
+              <div class="card-price rbdg">$7&ndash;9K</div>
+              <div class="card-tags tags"><span class="tag dress">Dress</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s8-fan','s8-btn')">
+              <span id="s8-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">1-90-02-46-32</div>
+              <div class="card-name">Glashutte Original PanoMaticLunar</div>
+              <div class="card-meta">German moonphase dress</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">E855</div>
+              <div class="card-name">JLC Memovox</div>
+              <div class="card-meta">1960&ndash;1970 &middot; Vintage alarm watch</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Cartier Santos</div>
+              <div class="card-meta">Iconic square dress watch</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S9 -->
+      <div class="spring-row" id="watch-s9">
+        <div class="spring-row-lbl">S9 &middot; Age 44 &middot; Grail / Gold</div>
+        <div class="card-fan" id="s9-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-l">Decided</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">18038 or 228238</div>
+              <div class="card-name rname">Rolex Day-Date</div>
+              <div class="card-meta rmeta">Yellow gold &middot; President bracelet &middot; Luxury statement</div>
+              <div class="card-dec rdec">Decided: full gold presidential confirmed &middot; champagne dial as default &middot; black dial as strongly preferred alternate</div>
+              <div class="card-price rbdg">$14&ndash;18K</div>
+              <div class="card-tags tags"><span class="tag rolex">Rolex</span><span class="tag dress">Dress</span><span class="tag locked">Decided</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s9-fan','s9-btn')">
+              <span id="s9-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">18038</div>
+              <div class="card-name">Black stick dial variant</div>
+              <div class="card-meta">High contrast &mdash; strongly preferred alternate</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">18038</div>
+              <div class="card-name">Champagne dial variant</div>
+              <div class="card-meta">Classic presidential look &mdash; default reference</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">228238</div>
+              <div class="card-name">Modern 40mm Day-Date</div>
+              <div class="card-meta">Better wrist presence at 6'5"</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S10 -->
+      <div class="spring-row" id="watch-s10">
+        <div class="spring-row-lbl">S10 &middot; Age 45 &middot; Grail / The Close</div>
+        <div class="card-fan" id="s10-fan">
+          <div class="watch-card primary">
+            <div class="card-image">
+              <button class="watch-img-btn" onclick="searchPhoto('Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail')">
+                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+              </button>
+              <div class="rbadge st-p">Planned</div>
+            </div>
+            <div class="card-info rmain">
+              <div class="card-ref rref">1675</div>
+              <div class="card-name rname">Rolex GMT-Master</div>
+              <div class="card-meta rmeta">1965&ndash;1979 &middot; Pepsi bezel &middot; Vintage sport grail &middot; Closes the decade</div>
+              <div class="card-price rbdg">$14&ndash;18K</div>
+              <div class="card-tags tags"><span class="tag rolex">Rolex</span><span class="tag sport">Sport</span><span class="tag vtg">Vintage</span></div>
+            </div>
+            <button class="expand-btn" onclick="toggleFan('s10-fan','s10-btn')">
+              <span id="s10-btn">View alternates</span><span class="expand-arrow">&#8250;</span>
+            </button>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 1</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">16570</div>
+              <div class="card-name">Rolex Explorer II</div>
+              <div class="card-meta">1989&ndash;2011 &middot; Vintage sport Rolex</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 2</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">&mdash;</div>
+              <div class="card-name">Omega Planet Ocean</div>
+              <div class="card-meta">Deep-dive sport watch</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+          <div class="watch-card alternate">
+            <div class="card-image alt-image">
+              <div class="watch-face-placeholder"><div class="wfp-inner"></div></div>
+              <div class="alt-num">Alt 3</div>
+            </div>
+            <div class="card-info">
+              <div class="card-ref">14790</div>
+              <div class="card-name">Audemars Piguet Royal Oak</div>
+              <div class="card-meta">Integrated bracelet icon</div>
+              <div class="card-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /collection-area grails -->
+
+    <!-- 10 summers -->
+    <div class="sec">10 Summers</div>
+    <div id="sum-list">
+      <div class="p2row" id="sum-su1">
+        <div class="p2num">Su1</div>
+        <div class="p2main">
+          <div class="p2name">Canyon lands &amp; Red Rock</div>
+          <div class="p2meta">Utah road trip &middot; Age 35 &middot; The first summer of the decade</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su2">
+        <div class="p2num">Su2</div>
+        <div class="p2main">
+          <div class="p2name">Pacific coast drive</div>
+          <div class="p2meta">Highway 1 &middot; Age 36 &middot; Second summer</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su3">
+        <div class="p2num">Su3</div>
+        <div class="p2main">
+          <div class="p2name">Rocky Mountain loop</div>
+          <div class="p2meta">Colorado high country &middot; Age 37</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+    </div>
+    <div id="sum-extras" style="display:none">
+      <div class="p2row" id="sum-su4">
+        <div class="p2num">Su4</div>
+        <div class="p2main">
+          <div class="p2name">New England fall drive</div>
+          <div class="p2meta">October leaf change &middot; Age 38</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su5">
+        <div class="p2num">Su5</div>
+        <div class="p2main">
+          <div class="p2name">Southwest desert circuit</div>
+          <div class="p2meta">Arizona &amp; New Mexico &middot; Age 39</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su6">
+        <div class="p2num">Su6</div>
+        <div class="p2main">
+          <div class="p2name">Montana &amp; Wyoming</div>
+          <div class="p2meta">Big Sky country &middot; Age 40</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su7">
+        <div class="p2num">Su7</div>
+        <div class="p2main">
+          <div class="p2name">Pacific Northwest</div>
+          <div class="p2meta">Oregon &amp; Washington coast &middot; Age 41</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su8">
+        <div class="p2num">Su8</div>
+        <div class="p2main">
+          <div class="p2name">Gulf Coast drive</div>
+          <div class="p2meta">Texas to Florida &middot; Age 42</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su9">
+        <div class="p2num">Su9</div>
+        <div class="p2main">
+          <div class="p2name">Great Lakes circle</div>
+          <div class="p2meta">Midwest shoreline &middot; Age 43</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Planned</span></div>
+      </div>
+      <div class="p2row" id="sum-su10">
+        <div class="p2num">Su10</div>
+        <div class="p2main">
+          <div class="p2name">The close &mdash; destination TBD</div>
+          <div class="p2meta">The final summer &middot; Age 45 &middot; Chosen at the time</div>
+        </div>
+        <div class="p2right"><span class="p2bdg">Open</span></div>
+      </div>
+    </div>
+    <button class="show-more" onclick="togSum()" id="sum-toggle">Show all summers &#8250;</button>
+
+    <!-- bezel bottom -->
+    <div class="bezel-bottom">
+      <div class="lume-dot"></div>
+      <span class="bezel-bottom-lbl">Mechanical Instrument Watches &middot; Exploration Age</span>
+      <div class="lume-dot"></div>
+    </div>
+
+  </div><!-- /dial -->
+</div><!-- /page-bezel -->
+
+<div class="footer">Joel Coleman &middot; 10 Springs &middot; Ages 35&ndash;45 &middot; Albuquerque NM</div>
+
+<!-- API key modal -->
+<div class="modal-overlay" id="key-modal">
   <div class="modal-box">
-    <div class="modal-title">Anthropic API key</div>
-    <div class="modal-sub">Required for the natural language chat bar. Your key is stored only in this browser's localStorage and sent directly to Anthropic — never anywhere else.</div>
-    <input class="modal-input" id="key-input" type="password"
-      placeholder="sk-ant-api03-…" autocomplete="off" spellcheck="false">
-    <div class="modal-err" id="key-err"></div>
-    <button class="modal-btn" onclick="saveApiKey()">Save key &amp; continue</button>
-    <button class="modal-btn-secondary" onclick="clearApiKey()">Clear saved key</button>
+    <div class="modal-title">Claude API Key</div>
+    <div class="modal-sub">Enter your Anthropic API key to enable photo search and the AI assistant. Your key is stored locally in your browser only.</div>
+    <input class="modal-input" id="modal-key-input" type="password" placeholder="sk-ant-..." autocomplete="off">
+    <button class="modal-btn" onclick="saveApiKey()">Save Key</button>
+    <button class="modal-btn-secondary" onclick="document.getElementById('key-modal').classList.remove('open')">Skip for now</button>
+    <div class="modal-err" id="modal-err">Please enter a valid key starting with sk-ant-</div>
   </div>
 </div>
 
-
-<!-- ── Bezel / page wrapper ───────────────────────────────────────────── -->
-<div class="bezel">
-
-<!-- ── Dashboard ──────────────────────────────────────────────────────── -->
-<div class="db">
-<div class="tachy">
-  <span class="tachy-lbl">Tachymeter</span>
-  <span class="tachy-scale">1000 · 500 · 300 · 250 · 200 · 150 · 120 · 100 · 90 · 80 · 75 · 70 · 60</span>
-</div>
-<div class="hdr">
-  <div class="hdr-brand">
-    <div class="hdr-eyebrow">Joel Coleman · Age 35–45</div>
-    <div class="hdr-title">10 Springs</div>
-    <div class="hdr-sub">Mechanical instrument watches of the exploration age</div>
-  </div>
-  <div class="hdr-stats">
-    <div class="hs"><div class="hs-val">1</div><div class="hs-lbl">Purchased</div></div>
-    <div class="hs"><div class="hs-val">2</div><div class="hs-lbl">Inherited</div></div>
-    <div class="hs"><div class="hs-val gold">~$84K</div><div class="hs-lbl">Projected</div></div>
-  </div>
-</div>
-<div class="heritage-wrap">
-  <div class="heritage-hdr">
-    <span class="heritage-title">Heritage pieces</span>
-    <span class="heritage-sub">Not for sale · The foundation everything else is built around</span>
-  </div>
-  <div class="h-row" id="watch-h1">
-    <div class="h-num">H1<div class="h-lineage">Dad's side</div></div>
-    <button class="img-btn" onclick="searchPhoto('Caravelle manual wind','Caravelle manual wind 1950s vintage watch')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
-    <div class="h-main">
-      <div class="h-name">Caravelle manual wind</div>
-      <div class="h-meta">1950s · Manual wind · Great-grandfather's watch · Dad's side</div>
-      <div class="h-story">The oldest piece in the collection. Its story is still being discovered — research may reveal whether it carries the same quiet substance as the Accutron.</div>
-      <div class="h-links">
-        <a class="lnk" href="https://www.google.com/search?q=Caravelle+manual+wind+1950s+vintage+watch+for+sale&tbm=shop" target="_blank">Listings ↗</a>
-        <a class="lnk" href="https://www.google.com/search?q=Caravelle+Bulova+1950s+manual+wind+vintage+value+history" target="_blank">Research ↗</a>
-      </div>
-      <span class="h-badge">Heirloom · not for sale</span>
-    </div>
-  </div>
-  <div class="h-row" id="watch-h2">
-    <div class="h-num">H2<div class="h-lineage">Mom's side</div></div>
-    <button class="img-btn" onclick="searchPhoto('Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg/400px-Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg" alt="Bulova Accutron Spaceview" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-    <div class="h-main">
-      <div class="h-name">Bulova Accutron Spaceview</div>
-      <div class="h-meta">1960s–70s · Tuning fork 360Hz · Grandfather's watch · Mom's side</div>
-      <div class="h-story">Given by grandmother. Research revealed it was rare and had held its value — confirming grandfather had taste. This experience is what the whole collection is trying to recreate for the next generation.</div>
-      <div class="h-links">
-        <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+for+sale&tbm=shop" target="_blank">Listings ↗</a>
-        <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+214+value+rarity+collector" target="_blank">Research ↗</a>
-      </div>
-      <span class="h-badge">Heirloom · not for sale</span>
-    </div>
-  </div>
-</div>
-
-<!-- Sentinel: when this leaves the viewport the timeline goes compact -->
-<div id="tl-sentinel" style="height:0;overflow:hidden;"></div>
-
-<!-- ── Collection timeline ────────────────────────────────────────────── -->
-<div class="tl" id="tl">
-  <div class="tl-track">
-
-    <!-- HERITAGE · H1 · H2 — muted; inherited, not purchased -->
-    <div class="tl-era-group" data-era="heritage" style="flex:2">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Heritage</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="h1" onclick="tlScrollTo('watch-h1')">
-          <div class="tl-thumb ring-heritage" id="tl-thumb-h1"></div>
-          <div class="tl-label">H1</div>
-          <div class="tl-age">Dad's</div>
-        </div>
-        <div class="tl-slot" data-id="h2" onclick="tlScrollTo('watch-h2')">
-          <div class="tl-thumb ring-heritage" id="tl-thumb-h2"></div>
-          <div class="tl-label">H2</div>
-          <div class="tl-age">Mom's</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-heritage-sep"></div>
-
-    <!-- DRESS · NOW · S1 · S2  (ages 35–37 · vintage dress foundation) -->
-    <div class="tl-era-group" data-era="dress" style="flex:3">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Dress</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="now" onclick="tlScrollTo('watch-now')">
-          <div class="tl-thumb ring-owned" id="tl-thumb-now"></div>
-          <div class="tl-label">NOW</div>
-          <div class="tl-age">Age 35</div>
-        </div>
-        <div class="tl-slot" data-id="s1" onclick="tlScrollTo('watch-s1')">
-          <div class="tl-thumb ring-decided" id="tl-thumb-s1"></div>
-          <div class="tl-label">S1</div>
-          <div class="tl-age">Age 36</div>
-        </div>
-        <div class="tl-slot" data-id="s2" onclick="tlScrollTo('watch-s2')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s2"></div>
-          <div class="tl-label">S2</div>
-          <div class="tl-age">Age 37</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FIELD · S3 · S4  (ages 38–39 · golden-age Swiss instrument) -->
-    <div class="tl-era-group" data-era="field" style="flex:2">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Field</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="s3" onclick="tlScrollTo('watch-s3')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s3"></div>
-          <div class="tl-label">S3</div>
-          <div class="tl-age">Age 38</div>
-        </div>
-        <div class="tl-slot" data-id="s4" onclick="tlScrollTo('watch-s4')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s4"></div>
-          <div class="tl-label">S4</div>
-          <div class="tl-age">Age 39</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SPORT · S5 · S6 · S7  (ages 40–42 · Datejust · Speedmaster · modern sport) -->
-    <div class="tl-era-group" data-era="sport" style="flex:3">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Sport</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="s5" onclick="tlScrollTo('watch-s5')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s5"></div>
-          <div class="tl-label">S5</div>
-          <div class="tl-age">Age 40</div>
-        </div>
-        <div class="tl-slot" data-id="s6" onclick="tlScrollTo('watch-s6')">
-          <div class="tl-thumb ring-decided" id="tl-thumb-s6"></div>
-          <div class="tl-label">S6</div>
-          <div class="tl-age">Age 41</div>
-        </div>
-        <div class="tl-slot" data-id="s7" onclick="tlScrollTo('watch-s7')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s7"></div>
-          <div class="tl-label">S7</div>
-          <div class="tl-age">Age 42</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GRAIL · S8 · S9 · S10  (ages 43–45 · JLC · Day-Date · GMT-Master) -->
-    <div class="tl-era-group" data-era="grail" style="flex:3">
-      <div class="tl-era-hdr">
-        <span class="tl-era-lbl">Grail</span>
-        <div class="tl-era-line"></div>
-      </div>
-      <div class="tl-era-slots">
-        <div class="tl-slot" data-id="s8" onclick="tlScrollTo('watch-s8')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s8"></div>
-          <div class="tl-label">S8</div>
-          <div class="tl-age">Age 43</div>
-        </div>
-        <div class="tl-slot" data-id="s9" onclick="tlScrollTo('watch-s9')">
-          <div class="tl-thumb ring-decided" id="tl-thumb-s9"></div>
-          <div class="tl-label">S9</div>
-          <div class="tl-age">Age 44</div>
-        </div>
-        <div class="tl-slot" data-id="s10" onclick="tlScrollTo('watch-s10')">
-          <div class="tl-thumb ring-planned" id="tl-thumb-s10"></div>
-          <div class="tl-label">S10</div>
-          <div class="tl-age">Age 45</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="accord">
-  <div class="accord-hdr" onclick="togAccord()">
-    <div class="accord-left">
-      <div class="accord-register"></div>
-      <span class="accord-title">Collection philosophy &amp; locked decisions</span>
-    </div>
-    <span class="accord-chev" id="accord-chev">▼</span>
-  </div>
-  <div class="accord-body" id="accord-body">
-    <div class="principles">
-      <span class="pill">Mechanical only</span>
-      <span class="pill">Vintage: collectibility + originality + serviceability</span>
-      <span class="pill">Modern: iconic + value-holding</span>
-      <span class="pill">Vintage / Dress / Sport / Chrono / Gold / Weird</span>
-      <span class="pill">Must love wearing it + collector floor</span>
-      <span class="pill">Leave behind substance, not obligation</span>
-    </div>
-    <div class="decisions">
-      <div class="dec-title">Decisions locked</div>
-      <div class="dec-item">S6 Speedmaster → modern 3570.50 · El Primero covers vintage chrono; Speedy is the wearable icon</div>
-      <div class="dec-item">S7 → open by design · Seamaster Diver 300M live contender alongside Hulk / Batman / Root Beer · color TBD based on earlier springs</div>
-      <div class="dec-item">S9 → full gold presidential confirmed · champagne dial as default · black dial as strongly preferred alternate</div>
-      <div class="dec-item">Philosophy → framework not contract · gut aesthetic + collector floor · nothing bought to fill a box</div>
-      <div class="dec-item open">S7 specific reference → intentionally deferred until S4–S6 are on the wrist and color balance is clear</div>
-    </div>
-  </div>
-</div>
-<div class="sbar">
-  <div class="si"><div class="si-lbl">Spent</div><div class="si-val gold">~$500</div></div>
-  <div class="si"><div class="si-lbl">Remaining</div><div class="si-val">~$83.5K</div></div>
-  <div class="si"><div class="si-lbl">Next spring</div><div class="si-val">Age 36</div></div>
-  <div class="si"><div class="si-lbl">Grail</div><div class="si-val">GMT 1675</div></div>
-</div>
-<div class="prog">
-  <div class="prog-lbl"><span>Collection progress</span><span>1 of 11 purchased</span></div>
-  <div class="prog-rail"><div class="prog-fill"></div></div>
-  <div class="dots">
-    <div class="dot heritage"></div><div class="dot heritage"></div>
-    <div class="dot owned"></div><div class="dot next"></div>
-    <div class="dot plan"></div><div class="dot plan"></div><div class="dot plan"></div>
-    <div class="dot plan"></div><div class="dot plan"></div><div class="dot plan"></div>
-    <div class="dot plan"></div><div class="dot plan"></div><div class="dot plan"></div>
-  </div>
-</div>
-<div class="sec" id="sec-foundation">Foundation — Vintage dress · Ages 35–37</div>
-<div class="row" id="watch-now">
-  <div class="rnum gold">Now<div class="age">Age 35</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch')"><div class="cam">📷</div><div class="cam-lbl">Tap for photo</div></button>
-  <div class="rmain" onclick="tog('now',this)">
-    <div class="rtop"><span class="rname">Longines Sport Chief</span><span class="rref">7042</span></div>
-    <div class="rmeta">1953–1960 · Cal. 30L manual · Vintage dress foundation</div>
-    <div class="tags"><span class="tag owned">In hand</span><span class="tag vtg">Vintage</span><span class="tag dress">Dress</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">~$500</div><div class="rbadge st-o">In hand</div><a class="lnk blue" href="https://www.google.com/search?q=Longines+Sport+Chief+7042+vintage+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-now">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Omega Seamaster small seconds (Ref. 2757) — 1952–1956 <a href="https://www.google.com/search?q=Omega+Seamaster+2757+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Omega Genève manual (Ref. 131.019) — 1960s <a href="https://www.google.com/search?q=Omega+Geneve+131.019+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Tissot Antimagnetique — 1945–1960 <a href="https://www.google.com/search?q=Tissot+Antimagnetique+vintage+watch+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s1">
-  <div class="rnum nxt">S1<div class="age">Age 36</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Omega_Seamaster_De_Ville_1970.jpg/400px-Omega_Seamaster_De_Ville_1970.jpg" alt="Omega Seamaster 166.010" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s1',this)">
-    <div class="rtop"><span class="rname">Omega Seamaster</span><span class="rref">166.010</span></div>
-    <div class="rmeta">1962–1968 · Cal. 565 automatic · Vintage everyday watch</div>
-    <div class="tags"><span class="tag vtg">Vintage</span><span class="tag sport">Sport</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">~$1K</div><div class="rbadge st-n">Up next</div><a class="lnk blue" href="https://www.google.com/search?q=Omega+Seamaster+166.010+vintage+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s1">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Omega Seamaster De Ville (Ref. 166.020) — 1963–1967 <a href="https://www.google.com/search?q=Omega+Seamaster+De+Ville+166.020+vintage&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Longines Flagship steel — 1960s <a href="https://www.google.com/search?q=Longines+Flagship+steel+1960s+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Universal Genève dress watch — 1960s <a href="https://www.google.com/search?q=Universal+Geneve+dress+watch+1960s+vintage&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s2">
-  <div class="rnum">S2<div class="age">Age 37</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Longines-IMG_2188.jpg/400px-Longines-IMG_2188.jpg" alt="Longines Flagship ref 3410" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s2',this)">
-    <div class="rtop"><span class="rname">Longines Flagship 18k</span><span class="rref">3410</span></div>
-    <div class="rmeta">1958–1968 · 18k gold case · Formal dress watch</div>
-    <div class="tags"><span class="tag vtg">Vintage</span><span class="tag dress">Dress</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">~$1K</div><div class="rbadge st-p">Planned</div><a class="lnk blue" href="https://www.google.com/search?q=Longines+Flagship+3410+18k+gold+vintage+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s2">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Omega gold-cap Seamaster (Ref. 168.022) — late 1960s <a href="https://www.google.com/search?q=Omega+Seamaster+168.022+gold+cap+vintage&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Universal Genève gold dress — 1960s <a href="https://www.google.com/search?q=Universal+Geneve+gold+dress+watch+1960s&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">IWC vintage dress (Ref. 810) <a href="https://www.google.com/search?q=IWC+810+vintage+dress+watch+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="sec" id="sec-collector">Collector — Instrument era · Ages 38–39</div>
-<div class="row" id="watch-s3">
-  <div class="rnum">S3<div class="age">Age 38</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Universal Genève Polerouter ref 20217','Universal Genève Polerouter ref 20217 tropical brown dial vintage')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Polerouterface.JPG/400px-Polerouterface.JPG" alt="Universal Genève Polerouter ref 20217" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s3',this)">
-    <div class="rtop"><span class="rname">Universal Genève Polerouter</span><span class="rref">20217</span></div>
-    <div class="rmeta">1956–1964 · Gerald Genta design · Micro-rotor Cal. 215/218</div>
-    <div class="rnote">Tropical brown dial preferred · even patina, original lume, dauphine hands</div>
-    <div class="tags"><span class="tag vtg">Vintage</span><span class="tag base">Instrument</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$2–4K</div><div class="rbadge st-p">Planned</div><a class="lnk blue" href="https://www.google.com/search?q=Universal+Geneve+Polerouter+20217+tropical+dial+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s3">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Girard-Perregaux Gyromatic — 1965–1972 <a href="https://www.google.com/search?q=Girard-Perregaux+Gyromatic+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Omega Dynamic (Ref. 166.039) — 1968–1975 <a href="https://www.google.com/search?q=Omega+Dynamic+166.039+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Zenith Defy (Ref. A3642) — 1969–1973 <a href="https://www.google.com/search?q=Zenith+Defy+A3642+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s4">
-  <div class="rnum">S4<div class="age">Age 39</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Zenith_El_Primero.jpg/400px-Zenith_El_Primero.jpg" alt="Zenith El Primero A386" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s4',this)">
-    <div class="rtop"><span class="rname">Zenith El Primero</span><span class="rref">A386</span></div>
-    <div class="rmeta">1969–1972 · El Primero 3019PHC · 36,000 vph · Historical chronograph</div>
-    <div class="rnote">Black dial instrument style · A3817 "Shark Tooth" as alternate primary</div>
-    <div class="tags"><span class="tag vtg">Vintage</span><span class="tag chrono">Chrono</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$2–3K</div><div class="rbadge st-p">Planned</div><a class="lnk blue" href="https://www.google.com/search?q=Zenith+El+Primero+A386+black+dial+vintage+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s4">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Heuer Carrera (Ref. 2447) — 1964–1970 <a href="https://www.google.com/search?q=Heuer+Carrera+2447+vintage+chronograph+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Omega Speedmaster Reduced (Ref. 3510.50) <a href="https://www.google.com/search?q=Omega+Speedmaster+Reduced+3510.50+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Sinn 103 chronograph <a href="https://www.google.com/search?q=Sinn+103+chronograph+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="sec" id="sec-rolex">Rolex — The ascent · Ages 40–42</div>
-<div class="row" id="watch-s5">
-  <div class="rnum">S5<div class="age">Age 40</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Rolex_Datejust.JPG/400px-Rolex_Datejust.JPG" alt="Rolex Datejust 1601" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s5',this)">
-    <div class="rtop"><span class="rname">Rolex Datejust</span><span class="rref">1601</span></div>
-    <div class="rmeta">1965–1977 · Fluted bezel · pie-pan dial · First Rolex</div>
-    <div class="rnote">Black or blue sunburst preferred · also: linen, sigma, silver pie-pan</div>
-    <div class="tags"><span class="tag rolex">Rolex</span><span class="tag dress">Dress</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$4–6K</div><div class="rbadge st-p">Planned</div><a class="lnk blue" href="https://www.google.com/search?q=Rolex+Datejust+1601+black+dial+vintage+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s5">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Rolex Explorer (Ref. 14270) — 1989–2001 <a href="https://www.google.com/search?q=Rolex+Explorer+14270+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Rolex Air-King (Ref. 5500) — 1960–1989 <a href="https://www.google.com/search?q=Rolex+Air-King+5500+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Rolex Turn-O-Graph (Ref. 1625) <a href="https://www.google.com/search?q=Rolex+Turn-O-Graph+1625+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s6">
-  <div class="rnum">S6<div class="age">Age 41</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Vintage_Omega_Speedmaster_145.012-67.jpg/400px-Vintage_Omega_Speedmaster_145.012-67.jpg" alt="Omega Speedmaster Professional" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s6',this)">
-    <div class="rtop"><span class="rname">Omega Speedmaster Professional</span><span class="rref">3570.50</span></div>
-    <div class="rmeta">1996–2014 · Cal. 1861 · Moonwatch · Iconic chronograph</div>
-    <div class="rdec">Decided: modern over vintage — El Primero covers the vintage chrono slot</div>
-    <div class="tags"><span class="tag chrono">Chrono</span><span class="tag locked">Decided</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$4–6K</div><div class="rbadge st-l">Decided</div><a class="lnk blue" href="https://www.google.com/search?q=Omega+Speedmaster+Professional+3570.50+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s6">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Vintage Speedmaster 105.003 / 145.012 — considered and set aside <a href="https://www.google.com/search?q=Omega+Speedmaster+105.003+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Tudor Black Bay Chrono (Ref. 79360N) <a href="https://www.google.com/search?q=Tudor+Black+Bay+Chrono+79360N+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Heuer Autavia <a href="https://www.google.com/search?q=Heuer+Autavia+vintage+chronograph+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s7">
-  <div class="rnum">S7<div class="age">Age 42</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Rolex_Submariner_Professional.JPG/400px-Rolex_Submariner_Professional.JPG" alt="Rolex Submariner 116610LV" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s7',this)">
-    <div class="rtop"><span class="rname">Colorful modern sport watch</span><span class="rref">TBD</span></div>
-    <div class="rmeta">Flagship sport watch · color and reference TBD</div>
-    <div class="rdec">Open by design — decide after S4–S6 are on the wrist and color balance is clear</div>
-    <div class="tags"><span class="tag sport">Sport</span><span class="tag open">Open by design</span></div>
-    <div class="chev">▼ candidates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$12–20K</div><div class="rbadge st-d">Open</div><a class="lnk blue" href="https://www.google.com/search?q=Rolex+Submariner+116610LV+Hulk+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s7">
-  <div class="alts-lbl">Live candidates</div>
-  <div class="alt-item">Rolex Submariner "Hulk" (Ref. 116610LV) — green ceramic, disc. 2020 <a href="https://www.google.com/search?q=Rolex+Submariner+116610LV+Hulk+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Rolex GMT-Master II "Batman" (Ref. 116710BLNR) — black/blue ceramic <a href="https://www.google.com/search?q=Rolex+GMT+Master+II+Batman+116710BLNR+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Rolex GMT-Master II "Root Beer" (Ref. 126711CHNR) — Everose/steel <a href="https://www.google.com/search?q=Rolex+GMT+Master+II+Root+Beer+126711CHNR+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Omega Seamaster Diver 300M — black, blue, or green ceramic <a href="https://www.google.com/search?q=Omega+Seamaster+Diver+300M+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Tudor Black Bay 58 (Ref. 79030B) — deep blue, 39mm <a href="https://www.google.com/search?q=Tudor+Black+Bay+58+79030B+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="sec" id="sec-grails">Grand complications &amp; grails · Ages 43–45</div>
-<div class="row" id="watch-s8">
-  <div class="rnum">S8<div class="age">Age 43</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Jaeger_Le_Coultre_ultra_thin_moonphase_Q1258420.jpg/400px-Jaeger_Le_Coultre_ultra_thin_moonphase_Q1258420.jpg" alt="JLC Master Ultra Thin Moon" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s8',this)">
-    <div class="rtop"><span class="rname">Jaeger-LeCoultre Master Ultra Thin Moon</span><span class="rref">Q1368430</span></div>
-    <div class="rmeta">2012–present · Moonphase · Celestial dress watch</div>
-    <div class="rnote">Gold case preferred if budget allows at time of purchase</div>
-    <div class="tags"><span class="tag dress">Dress</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$7–9K</div><div class="rbadge st-p">Planned</div><a class="lnk blue" href="https://www.google.com/search?q=Jaeger+LeCoultre+Master+Ultra+Thin+Moon+Q1368430+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s8">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Glashütte Original PanoMaticLunar (Ref. 1-90-02-46-32) <a href="https://www.google.com/search?q=Glashutte+Original+PanoMaticLunar+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">JLC Memovox (Ref. E855) — 1960–1970 <a href="https://www.google.com/search?q=JLC+Memovox+E855+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Cartier Santos <a href="https://www.google.com/search?q=Cartier+Santos+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s9">
-  <div class="rnum">S9<div class="age">Age 44</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Quadrante_Day_Date_con_spade_dell'Oman_ref._18078.jpg/400px-Quadrante_Day_Date_con_spade_dell'Oman_ref._18078.jpg" alt="Rolex Day-Date 18038" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s9',this)">
-    <div class="rtop"><span class="rname">Rolex Day-Date</span><span class="rref">18038 or 228238</span></div>
-    <div class="rmeta">Yellow gold · President bracelet · Luxury statement</div>
-    <div class="rdec">Decided: full gold presidential confirmed · champagne dial as default · black dial as strongly preferred alternate</div>
-    <div class="tags"><span class="tag rolex">Rolex</span><span class="tag dress">Dress</span><span class="tag locked">Decided</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$14–18K</div><div class="rbadge st-l">Decided</div><a class="lnk blue" href="https://www.google.com/search?q=Rolex+Day-Date+18038+yellow+gold+champagne+dial+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s9">
-  <div class="alts-lbl">Alternates &amp; dial options</div>
-  <div class="alt-item">Black stick dial — strongly preferred alternate · high contrast · very compelling <a href="https://www.google.com/search?q=Rolex+Day-Date+18038+black+dial+yellow+gold+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Champagne/gold dial — the classic presidential look · default reference <a href="https://www.google.com/search?q=Rolex+Day-Date+18038+champagne+dial+yellow+gold+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Modern 228238 — 40mm · better wrist presence at 6'5" <a href="https://www.google.com/search?q=Rolex+Day-Date+40+228238+yellow+gold+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Patek Philippe Calatrava (Ref. 3919) <a href="https://www.google.com/search?q=Patek+Philippe+Calatrava+3919+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="row" id="watch-s10">
-  <div class="rnum">S10<div class="age">Age 45</div></div>
-  <button class="watch-img-btn" onclick="searchPhoto('Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Rolex_GMT-Master_ref._1675_&quot;Pink_Panther&quot;.jpg/400px-Rolex_GMT-Master_ref._1675_&quot;Pink_Panther&quot;.jpg" alt="Rolex GMT-Master 1675 Pepsi" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-  <div class="rmain" onclick="tog('s10',this)">
-    <div class="rtop"><span class="rname">Rolex GMT-Master</span><span class="rref">1675</span></div>
-    <div class="rmeta">1965–1979 · Pepsi bezel · Vintage sport grail</div>
-    <div class="tags"><span class="tag rolex">Rolex</span><span class="tag sport">Sport</span><span class="tag vtg">Vintage</span></div>
-    <div class="chev">▼ alternates</div>
-  </div>
-  <div class="rright"><div class="rbdg">$14–18K</div><div class="rbadge st-p">Planned</div><a class="lnk blue" href="https://www.google.com/search?q=Rolex+GMT+Master+1675+Pepsi+vintage+for+sale&tbm=shop" target="_blank">Listings ↗</a></div>
-</div>
-<div class="alts" id="alt-s10">
-  <div class="alts-lbl">Alternates considered</div>
-  <div class="alt-item">Rolex Explorer II (Ref. 16570) — 1989–2011 <a href="https://www.google.com/search?q=Rolex+Explorer+II+16570+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Omega Planet Ocean <a href="https://www.google.com/search?q=Omega+Planet+Ocean+vintage+for+sale&tbm=shop" target="_blank">↗</a></div>
-  <div class="alt-item">Audemars Piguet Royal Oak (Ref. 14790) <a href="https://www.google.com/search?q=Audemars+Piguet+Royal+Oak+14790+for+sale&tbm=shop" target="_blank">↗</a></div>
-</div>
-<div class="sec">10 Summers — Phase two · Ages 46–55</div>
-<div id="sum-list">
-  <div class="p2row"><div class="p2num">Su1<div class="age">46</div></div><div class="p2main"><div class="p2name">Patek Philippe Calatrava</div><div class="p2meta">5119 · 2006–2017 · Classical haute dress</div></div><div class="p2right"><div class="p2bdg">$20K</div></div></div>
-  <div class="p2row"><div class="p2num">Su2<div class="age">47</div></div><div class="p2main"><div class="p2name">Rolex Explorer II</div><div class="p2meta">1655 · 1971–1985 · Quirky vintage Rolex sport</div></div><div class="p2right"><div class="p2bdg">$20K</div></div></div>
-  <div class="p2row"><div class="p2num">Su3<div class="age">48</div></div><div class="p2main"><div class="p2name">A. Lange &amp; Söhne Saxonia Thin</div><div class="p2meta">201.027 · German haute dress</div></div><div class="p2right"><div class="p2bdg">$25K</div></div></div>
-</div>
-<div class="show-more" id="sum-tog" onclick="togSum()">▼ Show all 10 Summers (Su4–Su10)</div>
-<div class="footer">
-  <span>Tap 📷 to fetch photo via AI · hold to refresh · tap row for alternates</span>
-  <span>Last updated March 2026</span>
-</div>
-</div><!-- .db -->
-
-<!-- ── Chat error bar ─────────────────────────────────────────────────── -->
-<div class="chat-err-bar hidden" id="chat-err-bar"></div>
-
-<!-- ── Chat bar ────────────────────────────────────────────────────────── -->
+<!-- chat bar -->
 <div class="chat-bar">
-  <span class="chat-status" id="chat-status">Updating…</span>
-  <input class="chat-input" id="chat-input" type="text"
-    placeholder="'mark Sport Chief as arrived' · 'S7 decided — going with the Hulk'"
-    autocomplete="off" spellcheck="false">
+  <input class="chat-input" id="chat-input" type="text" placeholder="Ask about the collection or update a watch..." autocomplete="off">
+  <span class="chat-status" id="chat-status"></span>
   <button class="chat-send" id="chat-send" onclick="sendPrompt()">Send</button>
-  <button class="chat-key-btn" onclick="showKeyModal()" title="Update API key">⚙</button>
+  <button class="chat-key-btn" onclick="showKeyModal()">API Key</button>
 </div>
-
-</div><!-- .bezel -->
+<div class="chat-err-bar" id="chat-err-bar"></div>
 
 <script>
-// ── Photo placeholder restore (used by hardcoded img onerror) ────────────
-function restorePhotoBtn(btn) {
-  btn.innerHTML = '<div class="cam">📷</div><div class="cam-lbl">Tap for photo</div>';
+/* ===== API KEY ===== */
+function showKeyModal(){document.getElementById('key-modal').classList.add('open');document.getElementById('modal-key-input').value='';document.getElementById('modal-err').style.display='none';}
+function clearApiKey(){localStorage.removeItem('claude_api_key');document.getElementById('key-modal').classList.add('open');}
+function saveApiKey(){
+  var v=document.getElementById('modal-key-input').value.trim();
+  if(!v.startsWith('sk-ant-')){document.getElementById('modal-err').style.display='block';return;}
+  localStorage.setItem('claude_api_key',v);
+  document.getElementById('key-modal').classList.remove('open');
 }
 
-// ── API key modal ────────────────────────────────────────────────────────
-function showKeyModal() {
-  document.getElementById('key-modal').classList.remove('hidden');
-  document.getElementById('key-input').value = '';
-  document.getElementById('key-err').textContent = '';
-  setTimeout(() => document.getElementById('key-input').focus(), 60);
+/* ===== RESTORE PHOTO BTN ===== */
+function restorePhotoBtn(btn){
+  btn.innerHTML='<div class="cam">📷</div><div class="cam-lbl">Tap for photo</div>';
+  btn.className=(btn.tagName==='BUTTON')?'img-btn':'watch-img-btn';
 }
 
-function clearApiKey() {
-  localStorage.removeItem('10s_api_key');
-  location.reload();
+/* ===== IMAGE INJECTION ===== */
+function injectImage(btn,imgUrl,label){
+  var img=document.createElement('img');
+  img.src=imgUrl;
+  img.alt=label||'Watch photo';
+  img.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center;display:block;';
+  img.onerror=function(){restorePhotoBtn(btn);};
+  while(btn.firstChild)btn.removeChild(btn.firstChild);
+  btn.appendChild(img);
+  btn.classList.remove('img-fetching');
 }
 
-function saveApiKey() {
-  const val = document.getElementById('key-input').value.trim();
-  if (!val) {
-    document.getElementById('key-err').textContent = 'Please paste your API key.';
-    return;
-  }
-  if (!val.startsWith('sk-ant-')) {
-    document.getElementById('key-err').textContent = 'Key should start with sk-ant-…';
-    return;
-  }
-  localStorage.setItem('10s_api_key', val);
-  document.getElementById('key-modal').classList.add('hidden');
+/* ===== LONG PRESS CLEAR & REFETCH ===== */
+function _clearAndRefetch(btn){
+  restorePhotoBtn(btn);
+  var name=btn.dataset.displayName;
+  var query=btn.dataset.query;
+  if(name&&query)searchPhoto(name,query,btn);
 }
-
-document.getElementById('key-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') saveApiKey();
+document.addEventListener('contextmenu',function(e){
+  var b=e.target.closest('.watch-img-btn,.img-btn');
+  if(b&&b.querySelector('img')){e.preventDefault();_clearAndRefetch(b);}
 });
+(function(){
+  var _ltimer=null,_lbtn=null;
+  document.addEventListener('touchstart',function(e){
+    var b=e.target.closest('.watch-img-btn,.img-btn');
+    if(b&&b.querySelector('img')){_lbtn=b;_ltimer=setTimeout(function(){_clearAndRefetch(_lbtn);},700);}
+  },true);
+  document.addEventListener('touchend',function(){clearTimeout(_ltimer);},true);
+  document.addEventListener('touchmove',function(){clearTimeout(_ltimer);},true);
+})();
 
-// Show on first load if key missing
-if (!localStorage.getItem('10s_api_key')) showKeyModal();
-
-// ── Photo fetch via Claude ────────────────────────────────────────────────
-const IMG_CACHE_PREFIX = '10s_img_';
-
-async function searchPhoto(displayName, query, btnOverride) {
-  const btn = btnOverride
-    || (typeof event !== 'undefined' && event?.target?.closest('.watch-img-btn, .img-btn'))
-    || null;
-  if (!btn) return;
-
-  // Use cached URL if available
-  const cacheKey = IMG_CACHE_PREFIX + displayName;
-  const cached = localStorage.getItem(cacheKey);
-  if (cached) { injectImage(btn, cached, displayName); return; }
-
-  // Need API key
-  const apiKey = localStorage.getItem('10s_api_key');
-  if (!apiKey) { showKeyModal(); return; }
-
-  // Loading state
-  btn.innerHTML = '<div class="img-fetching"><span>Finding<br>photo…</span></div>';
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 300,
-        system: `Return ONLY a single direct image URL for the watch described. Requirements:
-- URL must end in .jpg, .jpeg, .png, or .webp
-- Must be publicly accessible without authentication
-- Prefer upload.wikimedia.org URLs when a good one exists
-- The image should clearly show the watch dial
-Output nothing except the raw URL on one line — no explanation, no markdown, no quotes.`,
-        messages: [{ role: 'user', content: `${displayName}\n${query}` }]
-      })
-    });
-
-    if (!res.ok) {
-      if (res.status === 401) {
-        localStorage.removeItem('10s_api_key');
-        showKeyModal();
-        document.getElementById('key-err').textContent = 'Key rejected — please re-enter.';
-      }
-      throw new Error(`API ${res.status}`);
-    }
-
-    const data = await res.json();
-    const raw = (data.content?.[0]?.text || '').trim();
-
-    // Extract a valid image URL (must end in image extension, optionally with query string)
-    const match = raw.match(/https?:\/\/\S+?\.(?:jpg|jpeg|png|webp)(?:[?#][^\s]*)?/i);
-    if (!match) throw new Error('no valid image URL in response');
-
-    const imgUrl = match[0];
-    localStorage.setItem(cacheKey, imgUrl);
-    injectImage(btn, imgUrl, displayName);
-
-  } catch(_) {
-    btn.innerHTML = '<div class="cam">📷</div><div class="cam-lbl">Tap to retry</div>';
-  }
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') document.getElementById('key-modal').classList.add('hidden');
-});
-
-// ── Long-press / right-click to clear cache and re-fetch ─────────────────
-let _lpTimer = null;
-
-function _clearAndRefetch(btn) {
-  const m = (btn.getAttribute('onclick') || '').match(/searchPhoto\('([^']+)','([^']+)'/);
-  if (!m) return;
-  const [, displayName, query] = m;
-  localStorage.removeItem(IMG_CACHE_PREFIX + displayName);
-  if (navigator.vibrate) navigator.vibrate(40);
-  btn.innerHTML = '<div class="cam">📷</div><div class="cam-lbl">Tap for photo</div>';
-  searchPhoto(displayName, query, btn);
-}
-
-document.addEventListener('contextmenu', function(e) {
-  const btn = e.target.closest('.watch-img-btn, .img-btn');
-  if (!btn || !btn.querySelector('img')) return;
-  e.preventDefault();
-  _clearAndRefetch(btn);
-});
-
-document.addEventListener('touchstart', function(e) {
-  const btn = e.target.closest('.watch-img-btn, .img-btn');
-  if (!btn || !btn.querySelector('img')) return;
-  _lpTimer = setTimeout(() => _clearAndRefetch(btn), 650);
-}, { passive: true });
-
-['touchend', 'touchcancel', 'touchmove'].forEach(ev =>
-  document.addEventListener(ev, () => clearTimeout(_lpTimer), { passive: true })
-);
-
-// ── Dashboard interactions ───────────────────────────────────────────────
-function togAccord() {
-  const body = document.getElementById('accord-body');
-  const chev = document.getElementById('accord-chev');
-  if (!body) return;
-  const isOpen = body.classList.toggle('open');
-  chev.textContent = isOpen ? '▲' : '▼';
-  chev.classList.toggle('open', isOpen);
-}
-
-function tog(id, el) {
-  const p = document.getElementById('alt-' + id);
-  if (!p) return;
-  const open = p.classList.toggle('open');
-  const c = el.querySelector('.chev');
-  if (c) c.textContent = open ? '▲ alternates' : '▼ alternates';
-}
-
-const extras = [
-  ['Su4',49,'Audemars Piguet Royal Oak','14790 · 1990s · Integrated bracelet icon · Alt: UG Tri-Compax','$25K'],
-  ['Su5',50,'Breguet Classique','5140/7147 · Classical watchmaking','$12–15K'],
-  ['Su6',51,'Vacheron Constantin Overseas','4500V · Luxury sport watch','$30K'],
-  ['Su7',52,'Patek Philippe Annual Calendar','5146 · Complicated dress','$30K'],
-  ['Su8',53,'Rolex Daytona','116500LN · Rolex chronograph icon','$35K'],
-  ['Su9',54,'F.P. Journe Chronomètre Bleu','— · Indie watchmaking pinnacle','$35K'],
-  ['Su10',55,'Vintage Patek Calatrava','565/570 · 1940s–50s · Salmon dial · Ultimate collector dress','$40K+'],
-];
-let exp = false;
-
-function togSum() {
-  exp = !exp;
-  document.querySelectorAll('.p2x').forEach(e => e.remove());
-  if (exp) {
-    const c = document.getElementById('sum-list');
-    extras.forEach(([l,a,n,m,b]) => {
-      const d = document.createElement('div'); d.className = 'p2row p2x';
-      d.innerHTML = `<div class="p2num">${l}<div class="age">${a}</div></div><div class="p2main"><div class="p2name">${n}</div><div class="p2meta">${m}</div></div><div class="p2right"><div class="p2bdg">${b}</div></div>`;
-      c.appendChild(d);
-    });
-    document.getElementById('sum-tog').textContent = '▲ Collapse';
-  } else {
-    document.getElementById('sum-tog').textContent = '▼ Show all 10 Summers (Su4–Su10)';
-  }
-}
-
-// ── Chat / Claude API ────────────────────────────────────────────────────
-
-const CHAT_SYSTEM = `You are the editor for "10 Springs" — Joel Coleman's watch collection dashboard.
-
-Joel Coleman, 35, Albuquerque NM. Goal: 10 mechanical watches (ages 35–45) to leave for his kids.
-Philosophy: mechanical only, 3-of-4 bars (aesthetic · wearability · collector narrative · resale floor).
-Locked: S6=Speedmaster 3570.50 modern; S7 open by design; S9=yellow gold Day-Date confirmed.
-
-You receive the current watch cards as JSON and a natural language instruction.
-Return ONLY a JSON object — no markdown, no fences, no explanation:
-
-{
-  "updates": [
-    {
-      "id": "s1",
-      "name": "...",        // optional — only include fields that change
-      "ref": "...",
-      "meta": "...",
-      "note": "...",        // set "" to remove
-      "dec": "...",         // decision summary line; set "" to remove
-      "price": "...",
-      "status": "Planned",  // "In hand" | "Up next" | "Planned" | "Decided" | "Open"
-      "tags": [{"text":"Vintage","cls":"vtg"}]  // full array if tags change
-    }
-  ],
-  "decisions": [
-    { "action": "add", "text": "...", "open": false }
-  ]
-}
-
-Tag cls values: owned, locked, rolex, chrono, dress, sport, vtg, open, base
-Omit "updates" or "decisions" keys entirely if nothing changes there.`;
-
-// Extract compact card state for the prompt payload
-function getDashboardState() {
-  const cards = [];
-  document.querySelectorAll('.row[id^="watch-"], .h-row[id^="watch-"]').forEach(function(row) {
-    const id = row.id.replace('watch-', '');
-    cards.push({
-      id,
-      name:   (row.querySelector('.rname,.h-name') || {}).textContent || '',
-      ref:    (row.querySelector('.rref') || {}).textContent || '',
-      meta:   (row.querySelector('.rmeta,.h-meta') || {}).textContent || '',
-      note:   (row.querySelector('.rnote') || {}).textContent || '',
-      dec:    (row.querySelector('.rdec') || {}).textContent || '',
-      price:  (row.querySelector('.rbdg') || {}).textContent || '',
-      status: (row.querySelector('.rbadge') || {}).textContent || '',
-      tags:   [].slice.call(row.querySelectorAll('.tag')).map(function(t) {
-        return { text: t.textContent.trim(), cls: t.className.replace('tag ', '').trim() };
-      })
-    });
-  });
-  return cards;
-}
-
-// Apply a structured JSON patch returned by Claude
-function applyPatch(patch) {
-  var BADGE_CLS = { 'In hand':'st-o', 'Up next':'st-n', 'Planned':'st-p', 'Decided':'st-l', 'Open':'st-d' };
-  var RING_CLS  = { 'In hand':'ring-owned', 'Decided':'ring-decided', 'Open':'ring-planned', 'Planned':'ring-planned', 'Up next':'ring-planned' };
-
-  (patch.updates || []).forEach(function(upd) {
-    var row = document.getElementById('watch-' + upd.id);
-    if (!row) return;
-    var rmain = row.querySelector('.rmain');
-
-    function setOrRemove(sel, val, cls) {
-      var el = row.querySelector(sel);
-      if (val === undefined) return;
-      if (val === '') { if (el) el.remove(); return; }
-      if (!el && rmain) {
-        el = document.createElement('div');
-        el.className = cls;
-        var tags = rmain.querySelector('.tags');
-        if (tags) rmain.insertBefore(el, tags); else rmain.appendChild(el);
-      }
-      if (el) el.textContent = val;
-    }
-
-    if (upd.name  !== undefined) { var e = row.querySelector('.rname,.h-name');  if (e) e.textContent = upd.name; }
-    if (upd.ref   !== undefined) { var e = row.querySelector('.rref');            if (e) e.textContent = upd.ref; }
-    if (upd.meta  !== undefined) { var e = row.querySelector('.rmeta,.h-meta');   if (e) e.textContent = upd.meta; }
-    if (upd.note  !== undefined) setOrRemove('.rnote', upd.note, 'rnote');
-    if (upd.dec   !== undefined) setOrRemove('.rdec',  upd.dec,  'rdec');
-    if (upd.price !== undefined) { var e = row.querySelector('.rbdg');            if (e) e.textContent = upd.price; }
-
-    if (upd.status !== undefined) {
-      var badge = row.querySelector('.rbadge');
-      if (badge) {
-        badge.textContent = upd.status;
-        badge.className = 'rbadge ' + (BADGE_CLS[upd.status] || 'st-p');
-      }
-      var thumb = document.getElementById('tl-thumb-' + upd.id);
-      if (thumb) thumb.className = 'tl-thumb ' + (RING_CLS[upd.status] || 'ring-planned');
-    }
-
-    if (upd.tags !== undefined) {
-      var tagsEl = row.querySelector('.tags');
-      if (tagsEl) tagsEl.innerHTML = upd.tags.map(function(t) {
-        return '<span class="tag ' + t.cls + '">' + t.text + '</span>';
-      }).join('');
-    }
-  });
-
-  (patch.decisions || []).forEach(function(dec) {
-    if (dec.action !== 'add') return;
-    var el = document.createElement('div');
-    el.className = 'dec-item' + (dec.open ? ' open' : '');
-    el.textContent = dec.text;
-    var div = document.querySelector('.decisions');
-    if (div) div.appendChild(el);
-  });
-}
-
-function setLoading(on) {
-  const status = document.getElementById('chat-status');
-  const send = document.getElementById('chat-send');
-  const input = document.getElementById('chat-input');
-  if (on) {
-    status.classList.add('active');
-    send.disabled = true;
-    input.disabled = true;
-    document.getElementById('chat-err-bar').classList.add('hidden');
-  } else {
-    status.classList.remove('active');
-    send.disabled = false;
-    input.disabled = false;
-    input.focus();
-  }
-}
-
-async function sendPrompt() {
-  const input = document.getElementById('chat-input');
-  const instruction = input.value.trim();
-  if (!instruction) return;
-
-  const apiKey = localStorage.getItem('10s_api_key');
-  if (!apiKey) { showKeyModal(); return; }
-
-  const cards = getDashboardState();
-
-  setLoading(true);
-  input.value = '';
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1024,
-        system: CHAT_SYSTEM,
-        messages: [{
-          role: 'user',
-          content: 'Cards:\n' + JSON.stringify(cards, null, 2) + '\n\nInstruction: ' + instruction
-        }]
-      })
-    });
-
-    if (!res.ok) {
-      let msg = 'API error ' + res.status;
-      try { const j = await res.json(); msg = (j.error && j.error.message) || msg; } catch(_) {}
-      if (res.status === 401) {
-        localStorage.removeItem('10s_api_key');
-        showKeyModal();
-        document.getElementById('key-err').textContent = 'Key rejected — please re-enter.';
-        setLoading(false);
-        return;
-      }
-      throw new Error(msg);
-    }
-
-    const data = await res.json();
-    let raw = ((data.content && data.content[0] && data.content[0].text) || '').trim();
-
-    // Strip accidental code fences
-    if (raw.startsWith('```')) raw = raw.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '').trim();
-
-    const patch = JSON.parse(raw);
-    applyPatch(patch);
-
-  } catch (err) {
-    const errBar = document.getElementById('chat-err-bar');
-    if (errBar) { errBar.textContent = err.message; errBar.classList.remove('hidden'); }
-    input.value = instruction;
-  } finally {
-    setLoading(false);
-  }
-}
-
-document.getElementById('chat-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendPrompt(); }
-});
-
-// ── Watch image loader ────────────────────────────────────────────────────
-// wp: Wikipedia article title (pageimages API — reliable, curated lead image)
-// commons: Wikimedia Commons search fallback
-const WIKI_SOURCES = {
-  'Caravelle manual wind':
-    { wp: 'Caravelle (watch)',           commons: 'Caravelle Bulova wristwatch vintage manual wind' },
-  'Bulova Accutron Spaceview':
-    { wp: 'Bulova Accutron',             commons: 'Bulova Accutron Spaceview 214 tuning fork' },
-  'Longines Sport Chief ref 7042':
-    { wp: 'Longines',                    commons: 'Longines Sport Chief vintage wristwatch manual wind' },
-  'Omega Seamaster ref 166.010':
-    { wp: 'Omega Seamaster',             commons: 'Omega Seamaster 166.010 vintage crosshair dial 1964' },
-  'Longines Flagship 18k ref 3410':
-    { wp: 'Longines Flagship',           commons: 'Longines Flagship gold 3410 vintage dress watch 1960s' },
-  'Universal Genève Polerouter ref 20217':
-    { wp: 'Universal Genève Polerouter', commons: 'Universal Genève Polerouter 20217 micro-rotor' },
-  'Zenith El Primero ref A386':
-    { wp: 'El Primero',                  commons: 'Zenith El Primero A386 chronograph 1969' },
-  'Rolex Datejust ref 1601':
-    { wp: 'Rolex Datejust',              commons: 'Rolex Datejust 1601 pie pan dial fluted bezel' },
-  'Omega Speedmaster Professional ref 3570.50':
-    { wp: 'Omega Speedmaster Professional', commons: 'Omega Speedmaster Professional 3570.50 moonwatch' },
-  'Rolex Submariner Hulk 116610LV':
-    { wp: 'Rolex Submariner',            commons: 'Rolex Submariner 116610LV green ceramic bezel Hulk' },
-  'JLC Master Ultra Thin Moon Q1368430':
-    { wp: 'Jaeger-LeCoultre Master Ultra Thin', commons: 'Jaeger-LeCoultre Master Ultra Thin Moon moonphase' },
-  'Rolex Day-Date 18038 yellow gold':
-    { wp: 'Rolex Day-Date',              commons: 'Rolex Day-Date 18038 yellow gold President bracelet' },
-  'Rolex GMT-Master ref 1675 Pepsi':
-    { wp: 'Rolex GMT-Master',            commons: 'Rolex GMT-Master 1675 Pepsi red blue bezel vintage' },
+/* ===== WIKI SOURCES ===== */
+var WIKI_SOURCES={
+  'Caravelle manual wind':{wp:'Caravelle (watch)',commons:'Caravelle Bulova wristwatch vintage manual wind'},
+  'Bulova Accutron Spaceview':{wp:'Bulova Accutron',commons:'Bulova Accutron Spaceview 214 tuning fork'},
+  'Longines Sport Chief ref 7042':{wp:'Longines',commons:'Longines Sport Chief vintage wristwatch manual wind'},
+  'Omega Seamaster ref 166.010':{wp:'Omega Seamaster',commons:'Omega Seamaster 166.010 vintage crosshair dial 1964'},
+  'Longines Flagship 18k ref 3410':{wp:'Longines Flagship',commons:'Longines Flagship gold 3410 vintage dress watch 1960s'},
+  'Universal Genève Polerouter ref 20217':{wp:'Universal Genève Polerouter',commons:'Universal Genève Polerouter 20217 micro-rotor'},
+  'Zenith El Primero ref A386':{wp:'El Primero',commons:'Zenith El Primero A386 chronograph 1969'},
+  'Rolex Datejust ref 1601':{wp:'Rolex Datejust',commons:'Rolex Datejust 1601 pie pan dial fluted bezel'},
+  'Omega Speedmaster Professional ref 3570.50':{wp:'Omega Speedmaster Professional',commons:'Omega Speedmaster Professional 3570.50 moonwatch'},
+  'Rolex Submariner Hulk 116610LV':{wp:'Rolex Submariner',commons:'Rolex Submariner 116610LV green ceramic bezel Hulk'},
+  'JLC Master Ultra Thin Moon Q1368430':{wp:'Jaeger-LeCoultre Master Ultra Thin',commons:'Jaeger-LeCoultre Master Ultra Thin Moon moonphase'},
+  'Rolex Day-Date 18038 yellow gold':{wp:'Rolex Day-Date',commons:'Rolex Day-Date 18038 yellow gold President bracelet'},
+  'Rolex GMT-Master ref 1675 Pepsi':{wp:'Rolex GMT-Master',commons:'Rolex GMT-Master 1675 Pepsi red blue bezel vintage'}
 };
 
-// Wikipedia pageimages API — returns the article's curated lead thumbnail
-async function fetchWpImage(title) {
-  const params = new URLSearchParams({
-    action: 'query', titles: title,
-    prop: 'pageimages', pithumbsize: '400',
-    format: 'json', origin: '*',
-  });
-  const res = await fetch('https://en.wikipedia.org/w/api.php?' + params);
-  const data = await res.json();
-  const pages = Object.values(data.query?.pages || {});
-  for (const p of pages) {
-    if (p.thumbnail?.source) return p.thumbnail.source;
-  }
-  return null;
-}
-
-// Wikimedia Commons file search — fallback for watches without WP articles
-async function fetchCommonsImage(query) {
-  const params = new URLSearchParams({
-    action: 'query', generator: 'search', gsrnamespace: '6',
-    gsrsearch: query, gsrlimit: '15',
-    prop: 'imageinfo', iiprop: 'url|mime|size', iiurlwidth: '400',
-    format: 'json', origin: '*',
-  });
-  const res = await fetch('https://commons.wikimedia.org/w/api.php?' + params);
-  const data = await res.json();
-  const pages = Object.values(data.query?.pages || {});
-  pages.sort((a, b) => (a.index ?? 99) - (b.index ?? 99));
-  for (const page of pages) {
-    const info = page.imageinfo?.[0];
-    if (!info) continue;
-    if (!['image/jpeg', 'image/png'].includes(info.mime)) continue;
-    // Skip tiny thumbnails (icons, watermarks)
-    if ((info.thumbwidth || 0) < 100 || (info.thumbheight || 0) < 100) continue;
-    return info.thumburl || info.url;
-  }
-  return null;
-}
-
-function injectImage(btn, imgUrl, label) {
-  const prevContent = btn.innerHTML;
-  const img = document.createElement('img');
-  img.src = imgUrl;
-  img.alt = label;
-  img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center;display:block;';
-  img.onerror = () => { btn.innerHTML = prevContent; };
-  btn.innerHTML = '';
-  btn.appendChild(img);
-}
-
-// Restore all cached images immediately — called on load and after dashboard HTML refresh
-function loadCachedImages() {
-  document.querySelectorAll('.watch-img-btn, .img-btn').forEach(btn => {
-    const m = (btn.getAttribute('onclick') || '').match(/searchPhoto\('([^']+)'/);
-    if (!m) return;
-    const cached = localStorage.getItem(IMG_CACHE_PREFIX + m[1]);
-    if (cached) injectImage(btn, cached, m[1]);
+/* ===== LOAD CACHED IMAGES ===== */
+function loadCachedImages(){
+  var cache=JSON.parse(localStorage.getItem('watch_image_cache')||'{}');
+  Object.keys(cache).forEach(function(name){
+    var url=cache[name];
+    document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(btn){
+      var dn=btn.dataset&&btn.dataset.displayName;
+      if(dn===name&&!btn.querySelector('img'))injectImage(btn,url,name);
+    });
   });
 }
 
-async function loadWatchImages() {
-  // Restore cached images first so they appear instantly
+/* ===== LOAD WATCH IMAGES FROM WIKIPEDIA ===== */
+function loadWatchImages(){
   loadCachedImages();
-
-  const buttons = document.querySelectorAll('.watch-img-btn, .img-btn');
-  for (const btn of buttons) {
-    // Skip slots already showing an image (cached or previously loaded)
-    if (btn.querySelector('img')) continue;
-    const onclick = btn.getAttribute('onclick') || '';
-    const m = onclick.match(/searchPhoto\('([^']+)'/);
-    if (!m) continue;
-    const displayName = m[1];
-    const src = WIKI_SOURCES[displayName];
-    if (!src) continue;
-    try {
-      let imgUrl = null;
-      if (src.wp) imgUrl = await fetchWpImage(src.wp);
-      if (!imgUrl) imgUrl = await fetchCommonsImage(src.commons);
-      if (imgUrl) injectImage(btn, imgUrl, displayName);
-    } catch(_) { /* keep placeholder */ }
-    await new Promise(r => setTimeout(r, 220));
-  }
-  // Re-run after any Claude update replaces .db innerHTML
-  document.querySelector('.db').addEventListener('DOMSubtreeModified',
-    function() { clearTimeout(this._imgTimer); this._imgTimer = setTimeout(loadWatchImages, 800); },
-    { once: false }
-  );
-}
-
-
-document.addEventListener('DOMContentLoaded', loadWatchImages);
-
-// ── Timeline header ───────────────────────────────────────────────────────
-
-function tlScrollTo(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}
-
-// Compact state: toggle when sentinel scrolls out of view
-(function() {
-  var tl = document.getElementById('tl');
-  var sentinel = document.getElementById('tl-sentinel');
-  if (!sentinel || !tl) return;
-  new IntersectionObserver(function(entries) {
-    tl.classList.toggle('compact', !entries[0].isIntersecting);
-  }, { threshold: 0 }).observe(sentinel);
-})();
-
-// Active bracket highlight: red underline on the era bracket in compact mode
-(function() {
-  var sections = [
-    { id: 'sec-foundation', era: 'dress'  },
-    { id: 'sec-collector',  era: 'field'  },
-    { id: 'sec-rolex',      era: 'sport'  },
-    { id: 'sec-grails',     era: 'grail'  }
-  ];
-  var activeEra = 'dress';
-
-  function setActiveEra(era) {
-    if (era === activeEra) return;
-    activeEra = era;
-    document.querySelectorAll('.tl-era-group').forEach(function(g) {
-      g.classList.toggle('tl-era-active', g.dataset.era === era);
-    });
-  }
-
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var match = sections.find(function(s) { return s.id === entry.target.id; });
-        if (match) setActiveEra(match.era);
+  document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(btn){
+    var dn=btn.dataset&&btn.dataset.displayName;
+    if(!dn||btn.querySelector('img'))return;
+    var src=WIKI_SOURCES[dn];
+    if(!src)return;
+    var wpTitle=encodeURIComponent(src.wp);
+    var url='https://en.wikipedia.org/api/rest_v1/page/summary/'+wpTitle;
+    fetch(url).then(function(r){return r.json();}).then(function(d){
+      if(d.thumbnail&&d.thumbnail.source){
+        var imgUrl=d.thumbnail.source;
+        var cache=JSON.parse(localStorage.getItem('watch_image_cache')||'{}');
+        cache[dn]=imgUrl;
+        localStorage.setItem('watch_image_cache',JSON.stringify(cache));
+        document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(b){
+          if(b.dataset&&b.dataset.displayName===dn&&!b.querySelector('img'))injectImage(b,imgUrl,dn);
+        });
       }
-    });
-  }, { rootMargin: '-60px 0px -55% 0px' }); // 60px = compact header height
-
-  sections.forEach(function(s) {
-    var el = document.getElementById(s.id);
-    if (el) obs.observe(el);
+    }).catch(function(){});
   });
-})();
+}
 
-// Mirror loaded watch images into timeline thumbnails
-(function() {
-  // Map of watchImgBtn data-key → timeline thumb id
-  var imgMap = {
-    'Caravelle manual wind':              'tl-thumb-h1',
-    'Bulova Accutron Spaceview':          'tl-thumb-h2',
-    'Longines Sport Chief ref 7042':      'tl-thumb-now',
-    'Omega Seamaster ref 166.010':        'tl-thumb-s1',
-    'Longines Flagship 18k ref 3410':     'tl-thumb-s2',
-    'Universal Genève Polerouter ref 20217': 'tl-thumb-s3',
-    'Zenith El Primero ref A386':         'tl-thumb-s4',
-    'Rolex Datejust ref 1601':            'tl-thumb-s5',
-    'Omega Speedmaster Professional ref 3570.50': 'tl-thumb-s6',
-    'Rolex Submariner Hulk 116610LV':     'tl-thumb-s7',
-    'JLC Master Ultra Thin Moon Q1368430': 'tl-thumb-s8',
-    'Rolex Day-Date 18038 yellow gold':   'tl-thumb-s9',
-    'Rolex GMT-Master ref 1675 Pepsi':    'tl-thumb-s10'
-  };
-
-  function mirrorImage(src, thumbId) {
-    var thumb = document.getElementById(thumbId);
-    if (!thumb || thumb.querySelector('img')) return;
-    var img = document.createElement('img');
-    img.src = src;
-    img.alt = '';
-    thumb.appendChild(img);
-  }
-
-  // Poll for images already present in the main buttons (loaded from cache)
-  function syncFromButtons() {
-    document.querySelectorAll('.watch-img-btn, .img-btn').forEach(function(btn) {
-      var img = btn.querySelector('img');
-      if (!img) return;
-      var onclick = btn.getAttribute('onclick') || '';
-      var m = onclick.match(/searchPhoto\('([^']+)'/);
-      if (!m) return;
-      var thumbId = imgMap[m[1]];
-      if (thumbId) mirrorImage(img.src, thumbId);
+/* ===== SEARCH PHOTO VIA CLAUDE API ===== */
+function searchPhoto(displayName,query,btnOverride){
+  var apiKey=localStorage.getItem('claude_api_key');
+  if(!apiKey){showKeyModal();return;}
+  var btn=btnOverride||null;
+  if(!btn){
+    document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(b){
+      if(b.dataset&&b.dataset.displayName===displayName)btn=b;
     });
   }
+  if(!btn)return;
+  btn.dataset.displayName=displayName;
+  btn.dataset.query=query;
+  btn.classList.add('img-fetching');
+  while(btn.firstChild)btn.removeChild(btn.firstChild);
+  var sp=document.createElement('span');sp.textContent='Searching...';btn.appendChild(sp);
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':apiKey,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:256,
+      messages:[{
+        role:'user',
+        content:'Find a direct image URL for: '+query+'. Return ONLY a single working direct image URL (must end in .jpg or .png or similar image extension) from Wikipedia Commons or a reputable watch source. No explanation, just the URL.'
+      }]
+    })
+  }).then(function(r){return r.json();}).then(function(d){
+    if(d.content&&d.content[0]&&d.content[0].text){
+      var text=d.content[0].text.trim();
+      var urlMatch=text.match(/https?:\/\/\S+\.(jpg|jpeg|png|webp)/i);
+      if(urlMatch){
+        var imgUrl=urlMatch[0];
+        var cache=JSON.parse(localStorage.getItem('watch_image_cache')||'{}');
+        cache[displayName]=imgUrl;
+        localStorage.setItem('watch_image_cache',JSON.stringify(cache));
+        injectImage(btn,imgUrl,displayName);
+      } else {
+        restorePhotoBtn(btn);
+      }
+    } else {
+      restorePhotoBtn(btn);
+    }
+  }).catch(function(){restorePhotoBtn(btn);});
+}
 
-  // Run once on load, then observe DOM mutations so newly-fetched images appear
-  document.addEventListener('DOMContentLoaded', syncFromButtons);
-  var mo = new MutationObserver(syncFromButtons);
-  mo.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+/* ===== ACCORDION ===== */
+function togAccord(){
+  var body=document.getElementById('accord-body');
+  var chev=document.getElementById('accord-chev');
+  if(body.classList.contains('open')){
+    body.classList.remove('open');
+    chev.style.transform='';
+  } else {
+    body.classList.add('open');
+    chev.style.transform='rotate(90deg)';
+  }
+}
+
+/* ===== CARD FAN ===== */
+function toggleFan(fanId,btnTextId){
+  var fan=document.getElementById(fanId);
+  var btnText=document.getElementById(btnTextId);
+  if(!fan)return;
+  if(fan.classList.contains('expanded')){
+    fan.classList.remove('expanded');
+    if(btnText)btnText.textContent='View alternates';
+  } else {
+    fan.classList.add('expanded');
+    if(btnText)btnText.textContent='Hide alternates';
+  }
+}
+
+/* ===== 10 SUMMERS ===== */
+function togSum(){
+  var extras=document.getElementById('sum-extras');
+  var btn=document.getElementById('sum-toggle');
+  if(extras.style.display==='none'){
+    extras.style.display='block';
+    btn.textContent='Hide summers ‹';
+  } else {
+    extras.style.display='none';
+    btn.textContent='Show all summers ›';
+  }
+}
+
+/* ===== TIMELINE ===== */
+function tlScrollTo(id){
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+(function(){
+  var sentinel=document.getElementById('tl-sentinel');
+  var tl=document.getElementById('tl');
+  if(!sentinel||!tl)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting)tl.classList.remove('compact');
+      else tl.classList.add('compact');
+    });
+  },{threshold:0});
+  obs.observe(sentinel);
 })();
+
+/* ===== GET DASHBOARD STATE ===== */
+function getDashboardState(){
+  var rows=document.querySelectorAll('.spring-row[id^="watch-"],.h-row[id^="watch-"]');
+  var state=[];
+  rows.forEach(function(row){
+    var id=row.id;
+    var nameEl=row.querySelector('.rname,.h-name,.card-name');
+    var refEl=row.querySelector('.rref,.card-ref');
+    var metaEl=row.querySelector('.rmeta,.h-meta,.card-meta');
+    var noteEl=row.querySelector('.rnote,.card-note');
+    var decEl=row.querySelector('.rdec,.card-dec');
+    var priceEl=row.querySelector('.rbdg,.card-price');
+    var badgeEl=row.querySelector('.rbadge');
+    var tagsEl=row.querySelector('.tags,.card-tags');
+    var tags=[];
+    if(tagsEl)tagsEl.querySelectorAll('.tag').forEach(function(t){tags.push(t.textContent.trim());});
+    state.push({
+      id:id,
+      name:nameEl?nameEl.textContent.trim():'',
+      ref:refEl?refEl.textContent.trim():'',
+      meta:metaEl?metaEl.textContent.trim():'',
+      note:noteEl?noteEl.textContent.trim():'',
+      dec:decEl?decEl.textContent.trim():'',
+      price:priceEl?priceEl.textContent.trim():'',
+      status:badgeEl?badgeEl.textContent.trim():'',
+      tags:tags
+    });
+  });
+  return state;
+}
+
+/* ===== APPLY PATCH ===== */
+function applyPatch(patch){
+  if(!patch||!Array.isArray(patch))return;
+  var statusRingMap={
+    'In hand':'ring-owned',
+    'In Hand':'ring-owned',
+    'Decided':'ring-decided',
+    'Open':'ring-planned',
+    'Planned':'ring-planned',
+    'Up next':'ring-decided',
+    'Up Next':'ring-decided'
+  };
+  var statusCls={
+    'In hand':'st-o','In Hand':'st-o',
+    'Decided':'st-l',
+    'Open':'st-d',
+    'Planned':'st-p',
+    'Up next':'st-n','Up Next':'st-n'
+  };
+  patch.forEach(function(item){
+    var row=document.getElementById(item.id);
+    if(!row)return;
+    var rmain=row.querySelector('.rmain,.card-info.rmain');
+    if(!rmain)return;
+    function setOrRemove(sel,val,cls){
+      if(val===undefined||val===null)return;
+      var el=rmain.querySelector(sel);
+      if(val===''){
+        if(el)el.remove();
+        return;
+      }
+      if(!el){
+        el=document.createElement('div');
+        el.className=cls;
+        var tagsContainer=rmain.querySelector('.card-tags,.tags');
+        if(tagsContainer)rmain.insertBefore(el,tagsContainer);
+        else rmain.appendChild(el);
+      }
+      el.textContent=val;
+    }
+    if(item.name!==undefined){
+      var nameEl=rmain.querySelector('.rname,.card-name');
+      if(nameEl)nameEl.textContent=item.name;
+    }
+    if(item.ref!==undefined){
+      var refEl=rmain.querySelector('.rref,.card-ref');
+      if(refEl)refEl.textContent=item.ref;
+    }
+    if(item.meta!==undefined)setOrRemove('.rmeta,.card-meta',item.meta,'card-meta rmeta');
+    if(item.note!==undefined)setOrRemove('.rnote,.card-note',item.note,'card-note rnote');
+    if(item.dec!==undefined)setOrRemove('.rdec,.card-dec',item.dec,'card-dec rdec');
+    if(item.price!==undefined){
+      var priceEl=rmain.querySelector('.rbdg,.card-price');
+      if(priceEl)priceEl.textContent=item.price;
+    }
+    if(item.status!==undefined){
+      var badge=row.querySelector('.rbadge');
+      if(badge){
+        badge.textContent=item.status;
+        badge.className='rbadge '+(statusCls[item.status]||'st-p');
+      }
+      var tlId=item.id.replace('watch-','tl-');
+      var tlThumb=document.getElementById(tlId);
+      if(tlThumb){
+        var ring=statusRingMap[item.status]||'ring-planned';
+        tlThumb.className=tlThumb.className.replace(/ring-\w+/g,'').trim()+' '+ring;
+      }
+    }
+    if(item.tags!==undefined&&Array.isArray(item.tags)){
+      var tagsEl=rmain.querySelector('.card-tags,.tags');
+      if(tagsEl){
+        tagsEl.innerHTML='';
+        item.tags.forEach(function(t){
+          var sp=document.createElement('span');
+          var cls=t.toLowerCase().replace(/\s+/g,'');
+          sp.className='tag '+cls;
+          sp.textContent=t;
+          tagsEl.appendChild(sp);
+        });
+      }
+    }
+  });
+}
+
+/* ===== CHAT / SEND PROMPT ===== */
+function setLoading(on){
+  var btn=document.getElementById('chat-send');
+  var status=document.getElementById('chat-status');
+  if(on){btn.disabled=true;btn.textContent='...';if(status)status.textContent='Thinking...';}
+  else{btn.disabled=false;btn.textContent='Send';if(status)status.textContent='';}
+}
+
+function sendPrompt(){
+  var apiKey=localStorage.getItem('claude_api_key');
+  if(!apiKey){showKeyModal();return;}
+  var input=document.getElementById('chat-input');
+  var prompt=input.value.trim();
+  if(!prompt)return;
+  input.value='';
+  setLoading(true);
+  var errBar=document.getElementById('chat-err-bar');
+  if(errBar)errBar.style.display='none';
+  var state=getDashboardState();
+  var systemPrompt='You are an assistant for a watch collection dashboard called "10 Springs". The collection belongs to Joel Coleman, ages 35-45, Albuquerque NM. You can answer questions about the collection OR return a JSON patch to update watches.\n\nCurrent collection state:\n'+JSON.stringify(state,null,2)+'\n\nIf the user wants to update a watch, return ONLY a JSON array (no explanation) like:\n[{"id":"watch-s1","name":"New Name","status":"Planned","price":"~$2K","note":"new note","dec":"new decision"}]\nFields: id, name, ref, meta, note, dec, price, status (one of: In Hand, Up Next, Planned, Decided, Open), tags (array of strings).\nOmit any fields you are not changing.\nIf just answering a question, return plain text.';
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':apiKey,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:1024,
+      system:systemPrompt,
+      messages:[{role:'user',content:prompt}]
+    })
+  }).then(function(r){return r.json();}).then(function(d){
+    setLoading(false);
+    if(d.content&&d.content[0]&&d.content[0].text){
+      var text=d.content[0].text.trim();
+      var jsonMatch=text.match(/\[[\s\S]*\]/);
+      if(jsonMatch){
+        try{
+          var patch=JSON.parse(jsonMatch[0]);
+          applyPatch(patch);
+          if(errBar){errBar.style.display='block';errBar.style.background='#4a7b6a';errBar.textContent='Dashboard updated.';setTimeout(function(){errBar.style.display='none';},2500);}
+        }catch(e){
+          if(errBar){errBar.style.display='block';errBar.style.background='#c04040';errBar.textContent='Parse error: '+e.message;}
+        }
+      } else {
+        if(errBar){errBar.style.display='block';errBar.style.background='#4a5a6a';errBar.textContent=text.substring(0,200)+(text.length>200?'...':'');setTimeout(function(){errBar.style.display='none';},6000);}
+      }
+    }
+  }).catch(function(e){
+    setLoading(false);
+    if(errBar){errBar.style.display='block';errBar.style.background='#c04040';errBar.textContent='Error: '+e.message;}
+  });
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  if(!localStorage.getItem('claude_api_key'))showKeyModal();
+  /* set data attributes for photo buttons */
+  var map=[
+    ['Caravelle manual wind','Caravelle manual wind 1950s vintage watch'],
+    ['Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s'],
+    ['Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch'],
+    ['Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964'],
+    ['Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s'],
+    ['Universal Genève Polerouter ref 20217','Universal Genève Polerouter ref 20217 tropical brown dial vintage'],
+    ['Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969'],
+    ['Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage'],
+    ['Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial'],
+    ['Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial'],
+    ['JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase'],
+    ['Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage'],
+    ['Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail']
+  ];
+  document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(btn){
+    /* onclick attribute already sets context; also set data attrs from onclick text */
+    var oc=btn.getAttribute('onclick')||'';
+    var m=oc.match(/searchPhoto\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
+    if(m){btn.dataset.displayName=m[1];btn.dataset.query=m[2];}
+  });
+  loadWatchImages();
+  /* chat enter key */
+  var ci=document.getElementById('chat-input');
+  if(ci)ci.addEventListener('keydown',function(e){if(e.key==='Enter')sendPrompt();});
+});
 </script>
 </body>
-</html>
+</html></html>
