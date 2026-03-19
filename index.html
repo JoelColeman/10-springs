@@ -295,6 +295,13 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 .chat-status{font-family:'DM Mono',monospace;font-size:10px;color:#8a7b6a;white-space:nowrap}
 .chat-err-bar{position:fixed;bottom:52px;left:0;right:0;background:#c04040;color:#fff;padding:8px 16px;font-size:11px;font-family:'DM Mono',monospace;text-align:center;z-index:51;display:none}
 
+/* ===== HERITAGE GRID ===== */
+.heritage-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 0 4px}
+@media(max-width:480px){.heritage-grid{grid-template-columns:1fr}}
+
+/* ===== CARD LINKS ===== */
+.card-links{display:flex;gap:10px;margin-bottom:6px}
+
 /* ===== IMAGE LOADING ===== */
 .img-fetching{position:relative}
 .img-fetching span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#8a7b6a;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;background:rgba(232,227,218,0.85)}
@@ -324,22 +331,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
     <div class="dial-header">
       <div class="brand-area">
         <div class="model-name">10 Springs &middot; Ages 35&ndash;45</div>
-      </div>
-      <div class="crown-stats">
-        <div class="crown-stat">
-          <div class="crown-stat-val">1</div>
-          <div class="crown-stat-lbl">Purchased</div>
-        </div>
-        <div class="crown-stat-div"></div>
-        <div class="crown-stat">
-          <div class="crown-stat-val">2</div>
-          <div class="crown-stat-lbl">Inherited</div>
-        </div>
-        <div class="crown-stat-div"></div>
-        <div class="crown-stat">
-          <div class="crown-stat-val">~$84K</div>
-          <div class="crown-stat-lbl">Projected</div>
-        </div>
       </div>
     </div>
 
@@ -521,32 +512,44 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <span class="heritage-title">Heritage pieces</span>
         <span class="heritage-sub">Not for sale &middot; The foundation everything else is built around</span>
       </div>
-      <div class="h-row" id="watch-h1">
-        <div class="h-num">H1<div class="h-lineage">Dad's side</div></div>
-        <button class="img-btn" onclick="searchPhoto('Caravelle manual wind','Caravelle manual wind 1950s vintage watch')"><div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div></button>
-        <div class="h-main">
-          <div class="h-name">Caravelle manual wind</div>
-          <div class="h-meta">1950s &middot; Manual wind &middot; Great-grandfather's watch &middot; Dad's side</div>
-          <div class="h-story">The oldest piece in the collection. Its story is still being discovered &mdash; research may reveal whether it carries the same quiet substance as the Accutron.</div>
-          <div class="h-links">
-            <a class="lnk" href="https://www.google.com/search?q=Caravelle+manual+wind+1950s+vintage+watch+for+sale&tbm=shop" target="_blank">Listings &#8599;</a>
-            <a class="lnk" href="https://www.google.com/search?q=Caravelle+Bulova+1950s+manual+wind+vintage+value+history" target="_blank">Research &#8599;</a>
+      <div class="heritage-grid">
+        <!-- H1 -->
+        <div class="watch-card primary" id="watch-h1">
+          <div class="card-image">
+            <button class="watch-img-btn" onclick="searchPhoto('Caravelle manual wind','Caravelle manual wind 1950s vintage watch')">
+              <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
+            </button>
+            <div class="rbadge st-l">H1</div>
           </div>
-          <span class="h-badge">Heirloom &middot; not for sale</span>
+          <div class="card-info">
+            <div class="card-ref">Caravelle</div>
+            <div class="card-name">Caravelle manual wind</div>
+            <div class="card-meta">1950s &middot; Manual wind &middot; Great-grandfather's watch</div>
+            <div class="card-links">
+              <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Caravelle+manual+wind+1950s&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+              <a class="lnk" href="https://www.google.com/search?q=Caravelle+Bulova+1950s+manual+wind+vintage+value+history" target="_blank">Research &#8599;</a>
+            </div>
+            <div class="card-tags"><span class="tag locked">Heirloom &middot; not for sale</span></div>
+          </div>
         </div>
-      </div>
-      <div class="h-row" id="watch-h2">
-        <div class="h-num">H2<div class="h-lineage">Mom's side</div></div>
-        <button class="img-btn" onclick="searchPhoto('Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg/400px-Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg" alt="Bulova Accutron Spaceview" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)"></button>
-        <div class="h-main">
-          <div class="h-name">Bulova Accutron Spaceview</div>
-          <div class="h-meta">1960s&ndash;70s &middot; Tuning fork 360Hz &middot; Grandfather's watch &middot; Mom's side</div>
-          <div class="h-story">Given by grandmother. Research revealed it was rare and had held its value &mdash; confirming grandfather had taste. This experience is what the whole collection is trying to recreate for the next generation.</div>
-          <div class="h-links">
-            <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+for+sale&tbm=shop" target="_blank">Listings &#8599;</a>
-            <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+214+value+rarity+collector" target="_blank">Research &#8599;</a>
+        <!-- H2 -->
+        <div class="watch-card primary" id="watch-h2">
+          <div class="card-image">
+            <button class="watch-img-btn" onclick="searchPhoto('Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg/400px-Vintage_Bulova_Accutron_Men's_Wrist_Watch,_Date_Code_M3_(1963),_The_Watch_That_Hums,_Model_214,_The_First_Model_Of_Accutron_Watches_(18413120563).jpg" alt="Bulova Accutron Spaceview" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onerror="restorePhotoBtn(this.parentNode)">
+            </button>
+            <div class="rbadge st-l">H2</div>
           </div>
-          <span class="h-badge">Heirloom &middot; not for sale</span>
+          <div class="card-info">
+            <div class="card-ref">Bulova &middot; 214</div>
+            <div class="card-name">Bulova Accutron Spaceview</div>
+            <div class="card-meta">1960s&ndash;70s &middot; Tuning fork 360Hz &middot; Grandfather's watch</div>
+            <div class="card-links">
+              <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Bulova+Accutron+Spaceview+214&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+              <a class="lnk" href="https://www.google.com/search?q=Bulova+Accutron+Spaceview+214+value+rarity+collector" target="_blank">Research &#8599;</a>
+            </div>
+            <div class="card-tags"><span class="tag locked">Heirloom &middot; not for sale</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -602,6 +605,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-name rname">Longines Sport Chief</div>
               <div class="card-meta rmeta">1953&ndash;1960 &middot; Cal. 30L manual &middot; Vintage dress foundation</div>
               <div class="card-price rbdg">~$500</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Longines+Sport+Chief+7042&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Longines+Sport+Chief+7042+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag owned">In hand</span><span class="tag vtg">Vintage</span><span class="tag dress">Dress</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('now-fan','now-btn')">
@@ -667,6 +674,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">1962&ndash;1968 &middot; Cal. 565 automatic &middot; Crosshair dial</div>
               <div class="card-note rnote">Crosshair dial &mdash; strong instrument aesthetic</div>
               <div class="card-price rbdg">~$1K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Seamaster+166.010&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Seamaster+166.010+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag sport">Sport</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s1-fan','s1-btn')">
@@ -728,6 +739,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-name rname">Longines Flagship 18k</div>
               <div class="card-meta rmeta">1958&ndash;1968 &middot; 18k solid gold case &middot; Formal dress</div>
               <div class="card-price rbdg">~$1K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Longines+Flagship+3410+18k&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Longines+Flagship+3410+18k+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag dress">Dress</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s2-fan','s2-btn')">
@@ -795,6 +810,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">1956&ndash;1964 &middot; Gerald Genta &middot; Micro-rotor Cal. 215/218</div>
               <div class="card-note rnote">Tropical brown dial preferred &mdash; even patina, original lume, dauphine hands</div>
               <div class="card-price rbdg">$2&ndash;4K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Universal+Geneve+Polerouter+20217&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Universal+Geneve+Polerouter+20217+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag base">Instrument</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s3-fan','s3-btn')">
@@ -857,6 +876,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">1969&ndash;1972 &middot; El Primero 3019PHC &middot; 36,000 vph</div>
               <div class="card-note rnote">Black dial instrument style &middot; A3817 &ldquo;Shark Tooth&rdquo; as alternate primary</div>
               <div class="card-price rbdg">$2&ndash;3K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Zenith+El+Primero+A386&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Zenith+El+Primero+A386+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag vtg">Vintage</span><span class="tag chrono">Chrono</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s4-fan','s4-btn')">
@@ -924,6 +947,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">1965&ndash;1977 &middot; Fluted bezel &middot; Pie-pan dial &middot; First Rolex</div>
               <div class="card-note rnote">Black or blue sunburst preferred &middot; also: linen, sigma, silver pie-pan</div>
               <div class="card-price rbdg">$4&ndash;6K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+Datejust+1601&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+Datejust+1601+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag rolex">Rolex</span><span class="tag dress">Dress</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s5-fan','s5-btn')">
@@ -986,6 +1013,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">1996&ndash;2014 &middot; Cal. 1861 &middot; Moonwatch &middot; Iconic chronograph</div>
               <div class="card-dec rdec">Decided: modern over vintage &mdash; El Primero covers the vintage chrono slot</div>
               <div class="card-price rbdg">$4&ndash;6K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Speedmaster+Professional+3570.50&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Speedmaster+Professional+3570.50+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag chrono">Chrono</span><span class="tag locked">Decided</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s6-fan','s6-btn')">
@@ -1048,6 +1079,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">Flagship sport watch &middot; color and reference TBD</div>
               <div class="card-dec rdec">Open by design &mdash; decide after S4&ndash;S6 are on the wrist and color balance is clear</div>
               <div class="card-price rbdg">$12&ndash;20K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=modern+colorful+sport+watch+luxury&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=modern+luxury+colorful+sport+watch+collection+options" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag sport">Sport</span><span class="tag open">Open by design</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s7-fan','s7-btn')">
@@ -1139,6 +1174,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">2012&ndash;present &middot; Moonphase &middot; Ultra-thin &middot; Celestial dress</div>
               <div class="card-note rnote">Gold case preferred if budget allows at time of purchase</div>
               <div class="card-price rbdg">$7&ndash;9K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=JLC+Master+Ultra+Thin+Moon+Q1368430&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Jaeger-LeCoultre+Master+Ultra+Thin+Moon+Q1368430+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag dress">Dress</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s8-fan','s8-btn')">
@@ -1201,6 +1240,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-meta rmeta">Yellow gold &middot; President bracelet &middot; Luxury statement</div>
               <div class="card-dec rdec">Decided: full gold presidential confirmed &middot; champagne dial as default &middot; black dial as strongly preferred alternate</div>
               <div class="card-price rbdg">$14&ndash;18K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+Day-Date+18038&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+Day-Date+18038+yellow+gold+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag rolex">Rolex</span><span class="tag dress">Dress</span><span class="tag locked">Decided</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s9-fan','s9-btn')">
@@ -1262,6 +1305,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-name rname">Rolex GMT-Master</div>
               <div class="card-meta rmeta">1965&ndash;1979 &middot; Pepsi bezel &middot; Vintage sport grail &middot; Closes the decade</div>
               <div class="card-price rbdg">$14&ndash;18K</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+GMT-Master+1675&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+GMT-Master+1675+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags tags"><span class="tag rolex">Rolex</span><span class="tag sport">Sport</span><span class="tag vtg">Vintage</span></div>
             </div>
             <button class="expand-btn" onclick="toggleFan('s10-fan','s10-btn')">
