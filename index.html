@@ -319,18 +319,18 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
   .card-fan.expanded .watch-card.alternate{display:block;margin-left:0;opacity:1;transform:none;pointer-events:all;width:auto;max-width:100%}
 }
 
-/* ===== CHANGE 1+4: DESKTOP (≥900px) — 2-col grid + constrained peek ===== */
+/* ===== DESKTOP (≥900px) — horizontal fan layout ===== */
 @media(min-width:900px){
-  .card-fan{position:relative;min-height:auto}
+  /* Collapsed: primary (~500px) + 25px peek of first alternate */
+  .card-fan{display:flex;align-items:flex-start;overflow:hidden;max-width:calc(500px + 25px);min-height:auto;position:relative}
   .watch-card{width:auto}
-  .watch-card.primary{width:auto;max-width:500px}
-  /* Collapsed: only first alternate peeks ~25px from right edge */
-  .watch-card.alternate{position:absolute;right:-135px;top:0;width:160px;margin-left:0;opacity:0.35;transform:scale(0.95) rotate(1.5deg);pointer-events:none}
+  .watch-card.primary{flex:1 1 500px;max-width:500px}
+  .watch-card.alternate{flex:0 0 160px;margin-left:0;opacity:0.35;transform:scale(0.95) rotate(1.5deg);pointer-events:none}
   .watch-card.alternate~.watch-card.alternate{display:none}
-  /* Expanded: 2-column grid — primary left, alternates stack in right column */
-  .card-fan.expanded{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
-  .card-fan.expanded .watch-card.primary{position:static;grid-column:1;grid-row:1;max-width:none;width:auto}
-  .card-fan.expanded .watch-card.alternate{position:static;display:block;width:auto;right:auto;top:auto;margin-left:0;opacity:1;transform:none;pointer-events:all;grid-column:2}
+  /* Expanded: primary left half, alternates right — horizontal fan */
+  .card-fan.expanded{max-width:none;overflow:visible;flex-wrap:wrap;gap:12px;align-items:flex-start}
+  .card-fan.expanded .watch-card.primary{flex:0 1 calc(50% - 6px);max-width:none;width:auto}
+  .card-fan.expanded .watch-card.alternate{display:block;flex:0 1 calc(50% - 6px);width:auto;margin-left:0;opacity:1;transform:none;pointer-events:all}
   .card-fan.expanded .watch-card.alternate~.watch-card.alternate{display:block}
   .card-fan.expanded .watch-card.alternate:hover{transform:translateY(-4px)}
 }
