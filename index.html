@@ -128,7 +128,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== CARD FAN ===== */
 .card-fan{
   display:flex;align-items:flex-start;gap:0;position:relative;
-  min-height:260px;overflow:visible
+  min-height:260px;overflow:hidden
 }
 .watch-card{
   width:160px;flex-shrink:0;background:#f8f6f1;border:1px solid #d8d3c8;
@@ -305,6 +305,46 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== IMAGE LOADING ===== */
 .img-fetching{position:relative}
 .img-fetching span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#8a7b6a;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;background:rgba(232,227,218,0.85)}
+
+/* ===== CHANGE 5: HERITAGE CARD FILL FIX ===== */
+.heritage-grid .watch-card.primary{width:100%;max-width:none}
+
+/* ===== CHANGE 1+4: TABLET (600–899px) — single column full-width ===== */
+@media(min-width:600px) and (max-width:899px){
+  .card-fan{min-height:auto}
+  .watch-card{width:auto}
+  .watch-card.primary{width:auto;max-width:100%}
+  .card-fan .watch-card.alternate{display:none}
+  .card-fan.expanded{flex-direction:column;align-items:stretch}
+  .card-fan.expanded .watch-card.alternate{display:block;margin-left:0;opacity:1;transform:none;pointer-events:all;width:auto;max-width:100%}
+}
+
+/* ===== CHANGE 1+4: DESKTOP (≥900px) — 2-col grid + constrained peek ===== */
+@media(min-width:900px){
+  .card-fan{position:relative;min-height:auto}
+  .watch-card{width:auto}
+  .watch-card.primary{width:auto;max-width:500px}
+  /* Collapsed: only first alternate peeks ~25px from right edge */
+  .watch-card.alternate{position:absolute;right:-135px;top:0;width:160px;margin-left:0;opacity:0.35;transform:scale(0.95) rotate(1.5deg);pointer-events:none}
+  .watch-card.alternate~.watch-card.alternate{display:none}
+  /* Expanded: 2-column grid — primary left, alternates stack in right column */
+  .card-fan.expanded{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+  .card-fan.expanded .watch-card.primary{position:static;grid-column:1;grid-row:1;max-width:none;width:auto}
+  .card-fan.expanded .watch-card.alternate{position:static;display:block;width:auto;right:auto;top:auto;margin-left:0;opacity:1;transform:none;pointer-events:all;grid-column:2}
+  .card-fan.expanded .watch-card.alternate~.watch-card.alternate{display:block}
+  .card-fan.expanded .watch-card.alternate:hover{transform:translateY(-4px)}
+}
+
+/* ===== CHANGE 2+3: MOBILE (≤599px) ===== */
+@media(max-width:599px){
+  /* Change 3: scale down outer bezel */
+  body{padding:8px}
+  .page-bezel{padding:10px;border-radius:12px}
+  .page-bezel::before{inset:5px;border-radius:8px}
+  /* Change 2: philosophy pills wrap horizontally */
+  .accord-left{flex-direction:column;align-items:flex-start;gap:6px}
+  .pill{font-size:8px;padding:3px 8px}
+}
 </style>
 </head>
 <body>
