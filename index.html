@@ -140,7 +140,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 }
 .watch-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:10}
 .watch-card.primary{width:180px;border-color:#b8a88a;z-index:2}
-.watch-card.alternate{margin-left:-130px;opacity:0.3;transform:scale(0.92) rotate(2deg);pointer-events:none}
+.watch-card.alternate{margin-left:-130px;opacity:0.3;transform:scale(0.92) rotate(2deg);pointer-events:none;border-style:dashed}
 .watch-card.alternate:nth-child(3){transform:scale(0.90) rotate(3deg);margin-left:-135px}
 .watch-card.alternate:nth-child(4){transform:scale(0.88) rotate(5deg);margin-left:-138px}
 .watch-card.alternate:nth-child(5){transform:scale(0.86) rotate(7deg);margin-left:-140px}
@@ -309,41 +309,52 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== CHANGE 5: HERITAGE CARD FILL FIX ===== */
 .heritage-grid .watch-card.primary{width:100%;max-width:none}
 
-/* ===== CHANGE 1+4: TABLET (600–899px) — single column full-width ===== */
-@media(min-width:600px) and (max-width:899px){
-  .card-fan{min-height:auto}
-  .watch-card{width:auto}
-  .watch-card.primary{width:auto;max-width:100%}
-  .card-fan .watch-card.alternate{display:none}
-  .card-fan.expanded{flex-direction:column;align-items:stretch}
-  .card-fan.expanded .watch-card.alternate{display:block;margin-left:0;opacity:1;transform:none;pointer-events:all;width:auto;max-width:100%}
-}
-
-/* ===== DESKTOP (≥900px) — horizontal fan layout ===== */
+/* ===== DESKTOP (≥900px) — always-expanded playing card fan ===== */
 @media(min-width:900px){
-  /* Collapsed: primary (~500px) + 25px peek of first alternate */
-  .card-fan{display:flex;align-items:flex-start;overflow:hidden;max-width:calc(500px + 25px);min-height:auto;position:relative}
-  .watch-card{width:auto}
-  .watch-card.primary{flex:1 1 500px;max-width:500px}
-  .watch-card.alternate{flex:0 0 160px;margin-left:0;opacity:0.35;transform:scale(0.95) rotate(1.5deg);pointer-events:none}
-  .watch-card.alternate~.watch-card.alternate{display:none}
-  /* Expanded: primary left half, alternates right — horizontal fan */
-  .card-fan.expanded{max-width:none;overflow:visible;flex-wrap:wrap;gap:12px;align-items:flex-start}
-  .card-fan.expanded .watch-card.primary{flex:0 1 calc(50% - 6px);max-width:none;width:auto}
-  .card-fan.expanded .watch-card.alternate{display:block;flex:0 1 calc(50% - 6px);width:auto;margin-left:0;opacity:1;transform:none;pointer-events:all}
-  .card-fan.expanded .watch-card.alternate~.watch-card.alternate{display:block}
-  .card-fan.expanded .watch-card.alternate:hover{transform:translateY(-4px)}
+  .card-fan{display:flex;align-items:flex-end;overflow-x:auto;overflow-y:hidden;padding-top:20px;min-height:auto;gap:0}
+  .watch-card{width:160px;flex-shrink:0}
+  .watch-card.primary{width:180px;flex-shrink:0;z-index:10;transform-origin:bottom center}
+  /* All alternates always visible — fan is never collapsed on desktop */
+  .watch-card.alternate{
+    display:block !important;width:160px;flex-shrink:0;
+    margin-left:-40px;opacity:1;pointer-events:all;
+    border-style:dashed;transform-origin:bottom center;
+    transform:rotate(var(--r,0deg))
+  }
+  /* nth-child selectors: primary is :nth-child(1), alternates follow */
+  .watch-card.alternate:nth-child(2){--r:5deg;z-index:9}
+  .watch-card.alternate:nth-child(3){--r:10deg;z-index:8;margin-left:-40px}
+  .watch-card.alternate:nth-child(4){--r:15deg;z-index:7;margin-left:-40px}
+  .watch-card.alternate:nth-child(5){--r:20deg;z-index:6;margin-left:-40px}
+  .watch-card.alternate:nth-child(6){--r:25deg;z-index:5;margin-left:-40px}
+  .watch-card.alternate:hover{transform:rotate(var(--r,0deg)) translateY(-14px);z-index:20}
+  /* Hide toggle — fan always shown on desktop */
+  .card-fan .expand-btn{display:none}
+  /* Heritage grid primaries stay full-width (grid context, flex props ignored) */
+  .heritage-grid .watch-card.primary{width:100%;max-width:none}
 }
 
-/* ===== CHANGE 2+3: MOBILE (≤599px) ===== */
+/* ===== MOBILE (≤599px) ===== */
 @media(max-width:599px){
-  /* Change 3: scale down outer bezel */
+  /* Outer bezel */
   body{padding:8px}
   .page-bezel{padding:10px;border-radius:12px}
   .page-bezel::before{inset:5px;border-radius:8px}
-  /* Change 2: philosophy pills wrap horizontally */
+  /* Philosophy pills */
   .accord-left{flex-direction:column;align-items:flex-start;gap:6px}
   .pill{font-size:8px;padding:3px 8px}
+  /* Card fan — collapsed: primary fills fan minus 25px peek */
+  .card-fan{overflow:hidden;min-height:0;gap:0}
+  .watch-card{width:auto}
+  .watch-card.primary{flex:0 0 calc(100% - 25px);width:auto;max-width:none}
+  .watch-card.alternate{flex:0 0 160px;width:160px;margin-left:0;opacity:0.5;transform:none;pointer-events:none}
+  .watch-card.alternate~.watch-card.alternate{display:none}
+  /* Expanded: horizontal scroll, all alternates visible */
+  .card-fan.expanded{overflow-x:auto}
+  .card-fan.expanded .watch-card.primary{flex:0 0 180px}
+  .card-fan.expanded .watch-card.alternate{display:block;flex:0 0 160px;width:160px;margin-left:8px;opacity:1;transform:none;pointer-events:all}
+  .card-fan.expanded .watch-card.alternate~.watch-card.alternate{display:block}
+  .card-fan.expanded .watch-card.alternate:hover{transform:translateY(-6px)}
 }
 </style>
 </head>
