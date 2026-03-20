@@ -251,16 +251,27 @@ Currently Built and Live
 ✅ 10 Summers section — correct second-decade watch list (SU1–SU10): Patek Calatrava 5119, Rolex Explorer II 1655, Lange Saxonia Thin 201.027, AP Royal Oak 14790, Breguet Classique 5140/7147, VC Overseas 4500V, Patek Annual Calendar 5146, Rolex Daytona 116500LN, FP Journe Chronomètre Bleu, Vintage Patek Calatrava 565/570
 ✅ Font system — Bebas Neue + Playfair Display + DM Sans + DM Mono
 ✅ Color palette — #f4f1eb linen background, #f8f6f1 card surfaces, #8a7b6a accent/gold, #1a1a1a near-black, #cc2200 status red
+Desktop card layout decision (locked): Primary card solid border, alternates dashed border, all cards in a flat horizontal row on desktop — no rotation, no fanning, no overlap. Row is horizontally scrollable if cards overflow. Toggle hidden on desktop, fan always visible. Mobile retains the peek/expand behavior with horizontal scroll on expand.
+Status badges removed: IN HAND / UP NEXT / PLANNED / DECIDED badges removed from all collection cards (NOW–S10). Status is communicated via the timeline only.
+
+Image Assets 
+
+Image assets are imgur-hosted and added directly to card HTML as <img src="..."> tags. All primary and alternate reference images have been identified and searched. URLs to be collected and provided at start of next Claude Code session. See search terms in conversation history if re-searching is needed.
+
 
 Pending — Next Session
 
  Archive chat bar — copy full chat bar HTML/CSS/JS to _prototypes/chatbar.html before removing from index.html
  Remove chat bar from index.html
- Add imgur-hosted images to all primary cards (NOW, S1–S10) and alternate cards
  Fix tap-for-photo behavior (currently non-functional)
  Fix photo click — should open lightbox, currently clears the image
  Tablet layout (600–899px) — currently falls back to base styles, revisit after images are in
- Mobile carousel polish — verify horizontal scroll/snap feel after fan fix
+ Verify desktop card flat row is rendering correctly after latest merge
+ Add imgur-hosted images to all primary cards (NOW, S1–S10) — URLs to be provided
+ Add imgur-hosted images to all alternate cards — URLs to be provided
+ Fix tap-for-photo behavior (currently non-functional)
+ Fix photo click — should open lightbox, currently clears the image
+ Mobile carousel polish — verify horizontal scroll/snap feel
 
 Deferred
 
