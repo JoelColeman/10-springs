@@ -223,38 +223,57 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 
 ## Dashboard Build Status
 
-- **Live at:** joelcoleman.github.io/10-springs
-- **Stack:** Single-file index.html (~1,852 lines), vanilla HTML/CSS/JS, Claude API chat bar
-- **Repo files:**
-  - `index.html` — the live dashboard
-  - `10springs-context.md` — this reference document
-  - `_prototypes/dashboard-mockup.html` — Daytona bezel/subdial/card design reference
-  - `_prototypes/card-fan-v2.html` — fan-out alternates interaction reference
-  - `CLAUDE.md` — project instructions for Claude Code agents
-  - `embed_images.py` — image embedding utility script
+- Dashboard Build Status
 
-### Currently Built and Live
-- ✅ **Bezel frame** — dark `#0d0d0d` outer shell, tachymeter bar with copper Bebas Neue labels, lume dots at bottom
-- ✅ **Dial header** — "Joel Coleman" in Playfair Display, "10 Springs · Ages 35–45" in Bebas Neue, crown stats (Purchased / Inherited / Projected) in DM Mono
-- ✅ **Three Daytona subdials** — SVG circles with tick marks, inner ring, hand indicators: Spent / Remaining / Next Spring. Grail text (GMT 1675) in red beside subdials.
-- ✅ **Card grid** — replaces list view. Photo-forward cards, ~180px wide, square image area
-- ✅ **Fan-out alternates** — primary card anchored left, alternates slide right on "View alternates" with spring animation `cubic-bezier(0.34, 1.56, 0.64, 1)`. "Hide alternates" collapses.
-- ✅ **Font system** — Bebas Neue + Playfair Display + DM Sans + DM Mono
-- ✅ **Color palette** — `#f4f1eb` linen background, `#f8f6f1` card surfaces, `#8a7b6a` accent/gold, `#1a1a1a` near-black, `#cc2200` status red
-- ✅ **Lean chat system** — JSON patch approach (~500 char system prompt + `getDashboardState()` extracting cards as compact JSON ~1KB). ~95% token reduction vs old approach.
-- ✅ **Sticky timeline** — after Heritage section, `position: sticky; top: 0`. H1+H2 leftmost, era brackets HERITAGE · DRESS · FIELD · SPORT · GRAIL
-- ✅ **Heritage section** — H1 Caravelle + H2 Accutron with family stories, distinct from card grid
-- ✅ **Collection Philosophy accordion** — collapsed by default
-- ✅ **10 Summers section** — collapsed/minimal by default, expandable list of Su1–Su10
-- ✅ **Planning detail hidden by default** — cards show primary info; detail row toggles on tap
+Live at: joelcoleman.github.io/10-springs
+Stack: Single-file index.html (~1,900+ lines), vanilla HTML/CSS/JS, Claude API chat bar (pending removal — see below), GitHub Pages hosting
+Repo files:
 
-### Open Design Questions
-1. Further tweaks to the live redesign — actively being iterated
-2. Exact Zenith reference for S4 — A386 vs A3817/A384
-3. Exact Polerouter flavor — tropical (preferred) vs crosshair silver vs blue
-4. Datejust 1601 dial — black vs blue
-5. S7 watch — Hulk vs Batman vs Root Beer; deliberately deferred
-6. How much the collection leans vintage vs modern in middle years
+index.html — the live dashboard
+10springs-context.md — this reference document
+_prototypes/dashboard-mockup.html — Daytona bezel/subdial/card design reference
+_prototypes/card-fan-v2.html — fan-out alternates interaction reference
+CLAUDE.md — project instructions for Claude Code agents
+embed_images.py — image embedding utility script
+
+
+
+Currently Built and Live
+
+✅ Bezel frame — dark #0d0d0d outer shell, tachymeter bar with copper Bebas Neue labels, lume dots at bottom
+✅ Dial header — "10 Springs · Ages 35–45" in clean single line, no name/location
+✅ Three Daytona subdials — Spent (~$500) / Total Planned ($84K) / Next Spring ($1K)
+✅ Playing card fan layout — primary card solid border, upright; alternates dashed border, rotating 5°→25° clockwise from bottom-center anchor, overlapping 40px each. Hover lifts card while preserving rotation. Desktop: fan always open, toggle hidden. Mobile: primary fills width minus 25px peek, tap to expand into horizontal scroll row
+✅ Heritage cards — H1 Caravelle + H2 Accutron as two side-by-side cards matching collection card format. Factual metadata only, no anecdotes. HEIRLOOM · NOT FOR SALE tag. Listings + Research links
+✅ Listings + Research links — on all primary collection cards (H1, H2, NOW, S1–S10) linking to Chrono24 and Google Search
+✅ Collection Philosophy accordion — pills wrap horizontally on mobile, clearly visible chevron
+✅ Responsive layout — bezel reduced on mobile, header text clean at all sizes, philosophy pills wrap horizontally
+✅ 10 Summers section — correct second-decade watch list (SU1–SU10): Patek Calatrava 5119, Rolex Explorer II 1655, Lange Saxonia Thin 201.027, AP Royal Oak 14790, Breguet Classique 5140/7147, VC Overseas 4500V, Patek Annual Calendar 5146, Rolex Daytona 116500LN, FP Journe Chronomètre Bleu, Vintage Patek Calatrava 565/570
+✅ Font system — Bebas Neue + Playfair Display + DM Sans + DM Mono
+✅ Color palette — #f4f1eb linen background, #f8f6f1 card surfaces, #8a7b6a accent/gold, #1a1a1a near-black, #cc2200 status red
+
+Pending — Next Session
+
+ Archive chat bar — copy full chat bar HTML/CSS/JS to _prototypes/chatbar.html before removing from index.html
+ Remove chat bar from index.html
+ Add imgur-hosted images to all primary cards (NOW, S1–S10) and alternate cards
+ Fix tap-for-photo behavior (currently non-functional)
+ Fix photo click — should open lightbox, currently clears the image
+ Tablet layout (600–899px) — currently falls back to base styles, revisit after images are in
+ Mobile carousel polish — verify horizontal scroll/snap feel after fan fix
+
+Deferred
+
+ Skin toggle system — dashboard switches between visual themes (Daytona / Pepsi GMT / Hulk / Day-Date)
+ Public collection builder tool — separate repo, intake questions → personalized roadmap
+ Day-Date 18038 deep-dive — dial options, white gold vs two-tone, vintage vs modern sizing for 6'5" frame
+
+Open Design Questions
+
+S4 — Zenith A386 vs A3817/A384 Shark Tooth (taste pulls toward darker instrument variants)
+S3 — Polerouter tropical dial vs crosshair silver vs blue
+S5 — Datejust 1601 black vs blue dial
+S7 — Hulk vs Batman vs Root Beer vs other; deliberately deferred until S4–S6 are on wrist
 
 ---
 
@@ -276,6 +295,9 @@ A hypothetical second decade (ages 45–55) discussed at high level. More haute 
 - **Claude API model string:** `claude-sonnet-4-20250514`
 - **Chat system prompt:** Use lean JSON patch approach — pass `getDashboardState()` compact JSON (~1KB), not full innerHTML (~30KB)
 - **Prototype files:** Reference `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html` in the repo for design system and animation specs — don't rebuild from scratch
+### Claude Code agent hygiene:
+- Start a fresh agent for each distinct build phase — agents accumulate conflicting context across long layout iteration sessions
+- The playing card fan layout went through multiple grid/flex iterations before landing on the correct approach — when layout prompts loop more than twice, stop and re-spec with the advisor chat before continuing
 
 ### Strategic conversation conventions:
 - This chat is the advisor layer — Claude Code gets prompts, this chat handles design decisions
