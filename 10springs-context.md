@@ -223,7 +223,7 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 
 ## Dashboard Build Status
 
-- Dashboard Build Status
+Dashboard Build Status
 
 Live at: joelcoleman.github.io/10-springs
 Stack: Single-file index.html (~1,900+ lines), vanilla HTML/CSS/JS, Claude API chat bar (pending removal — see below), GitHub Pages hosting
@@ -251,40 +251,101 @@ Currently Built and Live
 ✅ 10 Summers section — correct second-decade watch list (SU1–SU10): Patek Calatrava 5119, Rolex Explorer II 1655, Lange Saxonia Thin 201.027, AP Royal Oak 14790, Breguet Classique 5140/7147, VC Overseas 4500V, Patek Annual Calendar 5146, Rolex Daytona 116500LN, FP Journe Chronomètre Bleu, Vintage Patek Calatrava 565/570
 ✅ Font system — Bebas Neue + Playfair Display + DM Sans + DM Mono
 ✅ Color palette — #f4f1eb linen background, #f8f6f1 card surfaces, #8a7b6a accent/gold, #1a1a1a near-black, #cc2200 status red
+
 Desktop card layout decision (locked): Primary card solid border, alternates dashed border, all cards in a flat horizontal row on desktop — no rotation, no fanning, no overlap. Row is horizontally scrollable if cards overflow. Toggle hidden on desktop, fan always visible. Mobile retains the peek/expand behavior with horizontal scroll on expand.
 Status badges removed: IN HAND / UP NEXT / PLANNED / DECIDED badges removed from all collection cards (NOW–S10). Status is communicated via the timeline only.
 
-Image Assets 
+Image Assets
 
-Image assets are imgur-hosted and added directly to card HTML as <img src="..."> tags. All primary and alternate reference images have been identified and searched. URLs to be collected and provided at start of next Claude Code session. See search terms in conversation history if re-searching is needed.
+✅ 41 images injected — 13 primaries + 28 named alternates
+✅ All images: imgur-hosted, loading="lazy", width:100%, height:160px, object-fit:cover
+✅ H2 Wikipedia placeholder replaced with imgur URL
+✅ Primary cards: img injected as first child of watch-img-btn
+✅ Alternate cards: img injected as first child of card-image alt-image; alt-num badge floats above via position:absolute
 
+Image URL map (complete — for reference if re-injection needed):
+H1 Caravelle: https://i.imgur.com/eGCtW23.jpeg
+H2 Accutron Spaceview: https://i.imgur.com/zSdYCso.jpeg
+S0 primary Longines Sport Chief: https://i.imgur.com/Qniu7LS.jpeg
+S0 alt1 Omega Genève: https://i.imgur.com/30AVqnM.jpeg
+S0 alt2 Seamaster calendar: https://i.imgur.com/RvJLLqJ.jpeg
+S0 alt3 Tissot Antimagnetique: https://i.imgur.com/1BHjSfR.jpeg
+S1 primary Omega Seamaster 166.010: https://i.imgur.com/CjlL1Aq.jpeg
+S1 alt1 Omega De Ville: https://i.imgur.com/RRDBr7o.jpeg
+S1 alt2 Longines Flagship steel: https://i.imgur.com/C5bGGeh.jpeg
+S1 alt3 Universal Genève dress: https://i.imgur.com/AUmhXnu.jpeg
+S2 primary Longines Flagship 18k: https://i.imgur.com/quNzCFj.jpeg
+S2 alt1 Omega gold-cap Seamaster: https://i.imgur.com/k2Db0Af.jpeg
+S2 alt2 IWC vintage dress: https://i.imgur.com/vAWeYpx.jpeg
+S3 primary UG Polerouter: https://i.imgur.com/adAggDf.jpeg
+S3 alt1 GP Gyromatic: https://i.imgur.com/y4Jlu1i.jpeg
+S3 alt2 Omega Dynamic: https://i.imgur.com/GldPRzF.jpeg
+S3 alt3 Zenith Defy: https://i.imgur.com/WV71kEh.jpeg
+S4 primary Zenith El Primero A386: https://i.imgur.com/lJQ6Cxf.jpeg
+S4 alt1 Heuer Carrera: https://i.imgur.com/rkruIxa.jpeg
+S4 alt2 Sinn 103: https://i.imgur.com/m9SsUge.jpeg
+S4 alt3 Speedmaster Reduced: https://i.imgur.com/WFqzMgH.jpeg
+S5 primary Rolex Datejust 1601: https://i.imgur.com/hDaZahC.jpeg
+S5 alt1 Rolex Air-King: https://i.imgur.com/QNGqXGx.jpeg
+S5 alt2 Rolex Explorer: https://i.imgur.com/tfTCQxF.jpeg
+S5 alt3 Rolex Turn-O-Graph: https://i.imgur.com/scbvgTc.jpeg
+S6 primary Omega Speedmaster 3570.50: https://i.imgur.com/iIzRToh.jpeg
+S6 alt1 Heuer Autavia: https://i.imgur.com/1cfD9ys.jpeg
+S7 primary Rolex Submariner Hulk: https://i.imgur.com/bLQLOff.jpeg
+S7 alt1 GMT Batman: https://i.imgur.com/zUWUKzm.jpeg
+S7 alt2 Omega Seamaster 300M green: https://i.imgur.com/P8gfdc5.jpeg
+S7 alt3 GMT Root Beer: https://i.imgur.com/dVopQSA.jpeg
+S7 alt4 Tudor Black Bay 58 Blue: https://i.imgur.com/Xu1yIW5.jpeg
+S8 primary JLC Master Ultra Thin Moon: https://i.imgur.com/7PZY1nI.jpeg
+S8 alt1 Cartier Santos: https://i.imgur.com/SB3yl6i.jpeg
+S8 alt2 Glashütte PanoMaticLunar: https://i.imgur.com/w443h5L.jpeg
+S8 alt3 JLC Memovox vintage: https://i.imgur.com/7lDMGUq.jpeg
+S9 primary Rolex Day-Date 18038 gold dial: https://i.imgur.com/wjpkny5.jpeg
+S9 alt1 Day-Date black dial: https://i.imgur.com/dqsafmX.jpeg
+S10 primary Rolex GMT 1675 Pepsi: https://i.imgur.com/L0c18mX.jpeg
+S10 alt1 AP Royal Oak: https://i.imgur.com/1qqve63.jpeg
+S10 alt2 Rolex Explorer II: https://i.imgur.com/7NF660v.jpeg
 
-Pending — Next Session
+Cards still needing images (URLs not yet sourced):
+- S2 alt3 — Universal Genève gold dress
+- S6 alt2 — Vintage Speedmaster 105.003/145.012
+- S6 alt3 — Tudor Black Bay Chrono
+- S9 alt2 — Champagne dial Day-Date
+- S9 alt3 — Modern 40mm Day-Date 228238
 
- Archive chat bar — copy full chat bar HTML/CSS/JS to _prototypes/chatbar.html before removing from index.html
- Remove chat bar from index.html
- Fix tap-for-photo behavior (currently non-functional)
+Pending — Next Session (Bugs)
+
+ Fix tap-for-photo on primary cards — camera icon overlay intercepting on desktop, images not showing
  Fix photo click — should open lightbox, currently clears the image
- Tablet layout (600–899px) — currently falls back to base styles, revisit after images are in
- Verify desktop card flat row is rendering correctly after latest merge
- Add imgur-hosted images to all primary cards (NOW, S1–S10) — URLs to be provided
- Add imgur-hosted images to all alternate cards — URLs to be provided
- Fix tap-for-photo behavior (currently non-functional)
- Fix photo click — should open lightbox, currently clears the image
- Mobile carousel polish — verify horizontal scroll/snap feel
+
+Pending — Image Gaps (quick follow-up once URLs sourced)
+
+ S2 alt3 — Universal Genève gold dress
+ S6 alt2 — Vintage Speedmaster 105.003/145.012
+ S6 alt3 — Tudor Black Bay Chrono
+ S9 alt2 — Champagne dial Day-Date
+ S9 alt3 — Modern 40mm Day-Date 228238
+
+Pending — Layout/Polish
+
+ Tablet layout (600–899px) — still falling back to base styles, revisit now that images are in
+ Mobile carousel polish — verify horizontal scroll/snap feel with images loaded
+ Image cropping review — a few alt cards not centered on dial (Tissot S0, UG dress S1); may want object-position adjustments per card
 
 Deferred
 
  Skin toggle system — dashboard switches between visual themes (Daytona / Pepsi GMT / Hulk / Day-Date)
  Public collection builder tool — separate repo, intake questions → personalized roadmap
  Day-Date 18038 deep-dive — dial options, white gold vs two-tone, vintage vs modern sizing for 6'5" frame
+ Archive and remove chat bar from index.html (copy to _prototypes/chatbar.html first)
 
 Open Design Questions
 
 S4 — Zenith A386 vs A3817/A384 Shark Tooth (taste pulls toward darker instrument variants)
-S3 — Polerouter tropical dial vs crosshair silver vs blue
+S3 — Polerouter tropical dial confirmed as primary preference
 S5 — Datejust 1601 black vs blue dial
-S7 — Hulk vs Batman vs Root Beer vs other; deliberately deferred until S4–S6 are on wrist
+S7 — Hulk set as primary lean; final decision deferred until S4–S6 are on wrist
+S10 — GMT 1675 Pepsi as current primary; Rolex trajectory across S5/S7/S9/S10 is an open strategic conversation
 
 ---
 
@@ -306,6 +367,7 @@ A hypothetical second decade (ages 45–55) discussed at high level. More haute 
 - **Claude API model string:** `claude-sonnet-4-20250514`
 - **Chat system prompt:** Use lean JSON patch approach — pass `getDashboardState()` compact JSON (~1KB), not full innerHTML (~30KB)
 - **Prototype files:** Reference `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html` in the repo for design system and animation specs — don't rebuild from scratch
+
 ### Claude Code agent hygiene:
 - Start a fresh agent for each distinct build phase — agents accumulate conflicting context across long layout iteration sessions
 - The playing card fan layout went through multiple grid/flex iterations before landing on the correct approach — when layout prompts loop more than twice, stop and re-spec with the advisor chat before continuing
