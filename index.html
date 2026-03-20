@@ -316,7 +316,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
   .watch-card{width:160px;flex-shrink:0}
   .watch-card.primary{width:180px;flex-shrink:0}
   /* All alternates always visible — flat, no transforms, no overlap */
-  .watch-card.alternate{display:block !important;width:160px;flex-shrink:0;margin-left:0;opacity:1;pointer-events:all;border-style:dashed;transform:none}
+  .watch-card.alternate{display:block !important;width:160px;flex-shrink:0;margin-left:0 !important;opacity:1 !important;pointer-events:all;border-style:dashed;transform:none !important}
   .watch-card.alternate:hover{transform:translateY(-6px)}
   /* PRIMARY badge top-left via pseudo — .rbadge status sits top-right, no conflict */
   .watch-card.primary .card-image::before{content:'Primary';position:absolute;top:8px;left:8px;z-index:3;background:#1a1a1a;color:#f8f6f1;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:3px 6px;border-radius:2px;font-family:'DM Sans',sans-serif}
@@ -641,7 +641,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-o">In Hand</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">7042</div>
@@ -709,7 +708,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-n">Up Next</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">166.010</div>
@@ -775,7 +773,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-p">Planned</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">3410</div>
@@ -845,7 +842,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Universal Gen&egrave;ve Polerouter ref 20217','Universal Gen&egrave;ve Polerouter ref 20217 tropical brown dial vintage')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-p">Planned</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">20217</div>
@@ -911,7 +907,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-p">Planned</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">A386</div>
@@ -982,7 +977,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-p">Planned</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">1601</div>
@@ -1048,7 +1042,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-l">Decided</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">3570.50</div>
@@ -1114,7 +1107,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-d">Open</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">TBD</div>
@@ -1209,7 +1201,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-p">Planned</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">Q1368430</div>
@@ -1275,7 +1266,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-l">Decided</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">18038 or 228238</div>
@@ -1341,7 +1331,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <button class="watch-img-btn" onclick="searchPhoto('Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail')">
                 <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
               </button>
-              <div class="rbadge st-p">Planned</div>
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">1675</div>
