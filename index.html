@@ -309,28 +309,20 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== CHANGE 5: HERITAGE CARD FILL FIX ===== */
 .heritage-grid .watch-card.primary{width:100%;max-width:none}
 
-/* ===== DESKTOP (≥900px) — always-expanded playing card fan ===== */
+/* ===== DESKTOP (≥900px) — horizontal row, no fan/rotation ===== */
 @media(min-width:900px){
-  .card-fan{display:flex;align-items:flex-end;overflow-x:auto;overflow-y:hidden;padding-top:20px;min-height:auto;gap:0}
+  /* Flat horizontal row, scrollable if cards overflow */
+  .card-fan{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;overflow-y:visible;padding:16px;min-height:auto;scrollbar-width:thin;scrollbar-color:#d8d3c8 transparent}
   .watch-card{width:160px;flex-shrink:0}
-  .watch-card.primary{width:180px;flex-shrink:0;z-index:10;transform-origin:bottom center}
-  /* All alternates always visible — fan is never collapsed on desktop */
-  .watch-card.alternate{
-    display:block !important;width:160px;flex-shrink:0;
-    margin-left:-40px;opacity:1;pointer-events:all;
-    border-style:dashed;transform-origin:bottom center;
-    transform:rotate(var(--r,0deg))
-  }
-  /* nth-child selectors: primary is :nth-child(1), alternates follow */
-  .watch-card.alternate:nth-child(2){--r:5deg;z-index:9}
-  .watch-card.alternate:nth-child(3){--r:10deg;z-index:8;margin-left:-40px}
-  .watch-card.alternate:nth-child(4){--r:15deg;z-index:7;margin-left:-40px}
-  .watch-card.alternate:nth-child(5){--r:20deg;z-index:6;margin-left:-40px}
-  .watch-card.alternate:nth-child(6){--r:25deg;z-index:5;margin-left:-40px}
-  .watch-card.alternate:hover{transform:rotate(var(--r,0deg)) translateY(-14px);z-index:20}
-  /* Hide toggle — fan always shown on desktop */
+  .watch-card.primary{width:180px;flex-shrink:0}
+  /* All alternates always visible — flat, no transforms, no overlap */
+  .watch-card.alternate{display:block !important;width:160px;flex-shrink:0;margin-left:0;opacity:1;pointer-events:all;border-style:dashed;transform:none}
+  .watch-card.alternate:hover{transform:translateY(-6px)}
+  /* PRIMARY badge top-left via pseudo — .rbadge status sits top-right, no conflict */
+  .watch-card.primary .card-image::before{content:'Primary';position:absolute;top:8px;left:8px;z-index:3;background:#1a1a1a;color:#f8f6f1;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:3px 6px;border-radius:2px;font-family:'DM Sans',sans-serif}
+  /* Toggle hidden — all cards always visible on desktop */
   .card-fan .expand-btn{display:none}
-  /* Heritage grid primaries stay full-width (grid context, flex props ignored) */
+  /* Heritage grid primaries fill their column */
   .heritage-grid .watch-card.primary{width:100%;max-width:none}
 }
 
