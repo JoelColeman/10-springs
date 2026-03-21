@@ -151,11 +151,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== CARD INTERNALS ===== */
 .card-image{width:100%;height:140px;background:#e8e3da;position:relative;border-bottom:1px solid #d8d3c8;overflow:hidden}
 .watch-card.primary .card-image{height:160px}
-.watch-img-btn{width:100%;height:100%;background:#e8e3da;border:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;transition:background .15s}
-.watch-img-btn:hover{background:#e0dbd0}
-.watch-img-btn .cam{font-size:20px;opacity:0.25}
-.watch-img-btn .cam-lbl{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:0.1em;text-align:center;line-height:1.4}
-.watch-img-btn img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .alt-image{display:flex;align-items:center;justify-content:center;background:#e0ddd5}
 .watch-face-placeholder{width:60px;height:60px;border-radius:50%;border:1.5px solid #b8a88a;background:#f0ece4;display:flex;align-items:center;justify-content:center;position:relative}
 .watch-face-placeholder::before{content:'';position:absolute;inset:6px;border-radius:50%;border:0.5px solid #c8c0b0}
@@ -198,9 +193,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 .h-row{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-top:1px solid #e8e4de}
 .h-num{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#c8c0b0;line-height:1;width:32px;flex-shrink:0;text-align:center;padding-top:2px}
 .h-lineage{font-family:'DM Mono',monospace;font-size:8px;color:#aaa;letter-spacing:1px;margin-top:3px}
-.img-btn{width:72px;height:72px;flex-shrink:0;border-radius:6px;border:1px solid #d8d4cc;background:#e8e3da;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0}
-.img-btn .cam{font-size:18px;opacity:0.25}
-.img-btn .cam-lbl{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:0.1em;text-align:center;line-height:1.4}
 .h-main{flex:1;min-width:0}
 .h-name{font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:3px}
 .h-meta{font-size:11px;color:#8a7b6a;margin-bottom:6px}
@@ -280,9 +272,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== CARD LINKS ===== */
 .card-links{display:flex;gap:10px;margin-bottom:6px}
 
-/* ===== IMAGE LOADING ===== */
-.img-fetching{position:relative}
-.img-fetching span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#8a7b6a;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;background:rgba(232,227,218,0.85)}
 
 /* ===== CHANGE 5: HERITAGE CARD FILL FIX ===== */
 .heritage-grid .watch-card.primary{width:100%;max-width:none}
@@ -537,10 +526,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <!-- H1 -->
         <div class="watch-card primary" id="watch-h1">
           <div class="card-image">
-            <button class="watch-img-btn" onclick="searchPhoto('Caravelle manual wind','Caravelle manual wind 1950s vintage watch')">
-              <img src="https://i.imgur.com/eGCtW23.jpeg" alt="Caravelle manual wind" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-              <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-            </button>
+            <img src="https://i.imgur.com/eGCtW23.jpeg" alt="Caravelle manual wind" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             <div class="rbadge st-l">H1</div>
           </div>
           <div class="card-info">
@@ -557,9 +543,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <!-- H2 -->
         <div class="watch-card primary" id="watch-h2">
           <div class="card-image">
-            <button class="watch-img-btn" onclick="searchPhoto('Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s')">
-              <img src="https://i.imgur.com/zSdYCso.jpeg" alt="Bulova Accutron Spaceview" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-            </button>
+            <img src="https://i.imgur.com/zSdYCso.jpeg" alt="Bulova Accutron Spaceview" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             <div class="rbadge st-l">H2</div>
           </div>
           <div class="card-info">
@@ -617,10 +601,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="now-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch')">
-                <img src="https://i.imgur.com/Qniu7LS.jpeg" alt="Longines Sport Chief" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/Qniu7LS.jpeg" alt="Longines Sport Chief" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">7042</div>
@@ -648,6 +629,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-name">Omega Seamaster small seconds</div>
               <div class="card-meta">1952&ndash;1956 &middot; Vintage dress</div>
               <div class="card-price">~$500&ndash;800</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Seamaster+2757&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Seamaster+2757+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -662,6 +647,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-name">Omega Gen&egrave;ve manual</div>
               <div class="card-meta">1960s &middot; Manual wind</div>
               <div class="card-price">~$300&ndash;600</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Geneve+131.019&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Geneve+131.019+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -676,6 +665,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-name">Tissot Antimagnetique</div>
               <div class="card-meta">1945&ndash;1960 &middot; Antimagnetique case</div>
               <div class="card-price">~$300&ndash;500</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Tissot+Antimagnetique+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Tissot+Antimagnetique+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -688,10 +681,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s1-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964')">
-                <img src="https://i.imgur.com/CjlL1Aq.jpeg" alt="Omega Seamaster 166.010" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/CjlL1Aq.jpeg" alt="Omega Seamaster 166.010" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">166.010</div>
@@ -719,6 +709,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">166.020</div>
               <div class="card-name">Omega Seamaster De Ville</div>
               <div class="card-meta">1963&ndash;1967 &middot; Vintage dress</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Seamaster+De+Ville+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Seamaster+De+Ville+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -732,6 +726,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Longines Flagship steel</div>
               <div class="card-meta">1960s &middot; Steel dress watch</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Longines+Flagship+steel+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Longines+Flagship+steel+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -745,6 +743,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Universal Gen&egrave;ve dress</div>
               <div class="card-meta">1960s &middot; Vintage dress</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Universal+Geneve+dress+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Universal+Geneve+dress+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -757,10 +759,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s2-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s')">
-                <img src="https://i.imgur.com/quNzCFj.jpeg" alt="Longines Flagship 18k" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/quNzCFj.jpeg" alt="Longines Flagship 18k" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">3410</div>
@@ -787,6 +786,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">168.022</div>
               <div class="card-name">Omega Seamaster gold-cap</div>
               <div class="card-meta">Late 1960s &middot; Gold cap case</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Seamaster+gold+cap+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Seamaster+gold+cap+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -799,6 +802,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Universal Gen&egrave;ve gold dress</div>
               <div class="card-meta">1960s &middot; Vintage gold dress</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Universal+Geneve+gold+dress+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Universal+Geneve+gold+dress+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -812,6 +819,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">810</div>
               <div class="card-name">IWC vintage dress</div>
               <div class="card-meta">1960s &middot; Swiss dress watch</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=IWC+vintage+dress&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=IWC+vintage+dress+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -829,10 +840,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s3-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Universal Gen&egrave;ve Polerouter ref 20217','Universal Gen&egrave;ve Polerouter ref 20217 tropical brown dial vintage')">
-                <img src="https://i.imgur.com/adAggDf.jpeg" alt="Universal Genève Polerouter" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/adAggDf.jpeg" alt="Universal Genève Polerouter" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">20217</div>
@@ -860,6 +868,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Girard-Perregaux Gyromatic</div>
               <div class="card-meta">1965&ndash;1972 &middot; Gyromax balance</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Girard-Perregaux+Gyromatic&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Girard-Perregaux+Gyromatic+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -873,6 +885,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">166.039</div>
               <div class="card-name">Omega Dynamic</div>
               <div class="card-meta">1968&ndash;1975 &middot; Gerald Genta case design</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Dynamic+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Dynamic+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -886,6 +902,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">A3642</div>
               <div class="card-name">Zenith Defy</div>
               <div class="card-meta">1969&ndash;1973 &middot; Tonneau instrument case</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Zenith+Defy+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Zenith+Defy+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -898,10 +918,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s4-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969')">
-                <img src="https://i.imgur.com/lJQ6Cxf.jpeg" alt="Zenith El Primero A386" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/lJQ6Cxf.jpeg" alt="Zenith El Primero A386" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">A386</div>
@@ -929,6 +946,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">2447</div>
               <div class="card-name">Heuer Carrera</div>
               <div class="card-meta">1964&ndash;1970 &middot; Classic sport chrono</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Heuer+Carrera+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Heuer+Carrera+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -942,6 +963,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">3510.50</div>
               <div class="card-name">Omega Speedmaster Reduced</div>
               <div class="card-meta">1990s &middot; Automatic Speedy</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Speedmaster+Reduced&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Speedmaster+Reduced+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -955,6 +980,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Sinn 103</div>
               <div class="card-meta">German pilot chronograph</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Sinn+103&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Sinn+103+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -972,10 +1001,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s5-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage')">
-                <img src="https://i.imgur.com/hDaZahC.jpeg" alt="Rolex Datejust 1601" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/hDaZahC.jpeg" alt="Rolex Datejust 1601" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">1601</div>
@@ -1003,6 +1029,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">14270</div>
               <div class="card-name">Rolex Explorer</div>
               <div class="card-meta">1989&ndash;2001 &middot; Clean sport dial</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+Explorer+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+Explorer+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1016,6 +1046,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">5500</div>
               <div class="card-name">Rolex Air-King</div>
               <div class="card-meta">1960&ndash;1989 &middot; Pilot's Rolex</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+Air-King&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+Air-King+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1029,6 +1063,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">1625</div>
               <div class="card-name">Rolex Turn-O-Graph</div>
               <div class="card-meta">Vintage rotating bezel Datejust</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+Turn-O-Graph&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+Turn-O-Graph+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1041,10 +1079,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s6-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial')">
-                <img src="https://i.imgur.com/iIzRToh.jpeg" alt="Omega Speedmaster Professional 3570.50" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/iIzRToh.jpeg" alt="Omega Speedmaster Professional 3570.50" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">3570.50</div>
@@ -1071,6 +1106,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">105.003/145.012</div>
               <div class="card-name">Vintage Speedmaster</div>
               <div class="card-meta">Considered and set aside</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Speedmaster+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Speedmaster+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1083,6 +1122,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">79360N</div>
               <div class="card-name">Tudor Black Bay Chrono</div>
               <div class="card-meta">Modern steel chronograph</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Tudor+Black+Bay+Chrono&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Tudor+Black+Bay+Chrono+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1096,6 +1139,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Heuer Autavia</div>
               <div class="card-meta">Vintage racing chronograph</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Heuer+Autavia+vintage&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Heuer+Autavia+vintage+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1108,10 +1155,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s7-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial')">
-                <img src="https://i.imgur.com/bLQLOff.jpeg" alt="Rolex Submariner Hulk" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/bLQLOff.jpeg" alt="Rolex Submariner Hulk" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">TBD</div>
@@ -1138,6 +1182,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">116610LV</div>
               <div class="card-name">Rolex Submariner &ldquo;Hulk&rdquo;</div>
               <div class="card-meta">Green ceramic, disc. 2020</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+Submariner+116610LV&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+Submariner+116610LV+Hulk+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1151,6 +1199,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">116710BLNR</div>
               <div class="card-name">Rolex GMT-Master II &ldquo;Batman&rdquo;</div>
               <div class="card-meta">Black/blue ceramic bezel</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+GMT-Master+II+116710BLNR&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+GMT-Master+II+Batman+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1164,6 +1216,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">126711CHNR</div>
               <div class="card-name">Rolex GMT-Master II &ldquo;Root Beer&rdquo;</div>
               <div class="card-meta">Everose/steel two-tone</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Rolex+GMT-Master+II+126711CHNR&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Rolex+GMT-Master+II+Root+Beer+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1177,6 +1233,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Omega Seamaster Diver 300M</div>
               <div class="card-meta">Black, blue, or green ceramic</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Omega+Seamaster+Diver+300M&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Omega+Seamaster+Diver+300M+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1190,6 +1250,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">79030B</div>
               <div class="card-name">Tudor Black Bay 58 Blue</div>
               <div class="card-meta">Deep blue, 39mm</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Tudor+Black+Bay+58+Blue&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Tudor+Black+Bay+58+Blue+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1207,10 +1271,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s8-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase')">
-                <img src="https://i.imgur.com/7PZY1nI.jpeg" alt="JLC Master Ultra Thin Moon" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/7PZY1nI.jpeg" alt="JLC Master Ultra Thin Moon" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">Q1368430</div>
@@ -1238,6 +1299,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">1-90-02-46-32</div>
               <div class="card-name">Glashutte Original PanoMaticLunar</div>
               <div class="card-meta">German moonphase dress</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Glashutte+Original+PanoMaticLunar&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Glashutte+Original+PanoMaticLunar+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1251,6 +1316,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">E855</div>
               <div class="card-name">JLC Memovox</div>
               <div class="card-meta">1960&ndash;1970 &middot; Vintage alarm watch</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Jaeger-LeCoultre+Memovox&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Jaeger-LeCoultre+Memovox+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1264,6 +1333,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
               <div class="card-ref">&mdash;</div>
               <div class="card-name">Cartier Santos</div>
               <div class="card-meta">Iconic square dress watch</div>
+              <div class="card-links">
+                <a class="lnk" href="https://www.chrono24.com/search/index.htm?query=Cartier+Santos&redirectToSearchIndex=true" target="_blank">Listings &#8599;</a>
+                <a class="lnk" href="https://www.google.com/search?q=Cartier+Santos+value+collector" target="_blank">Research &#8599;</a>
+              </div>
               <div class="card-tags"></div>
             </div>
           </div>
@@ -1276,10 +1349,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s9-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage')">
-                <img src="https://i.imgur.com/wjpkny5.jpeg" alt="Rolex Day-Date 18038 gold dial" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/wjpkny5.jpeg" alt="Rolex Day-Date 18038 gold dial" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">18038 or 228238</div>
@@ -1343,10 +1413,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
         <div class="card-fan" id="s10-fan">
           <div class="watch-card primary">
             <div class="card-image">
-              <button class="watch-img-btn" onclick="searchPhoto('Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail')">
-                <img src="https://i.imgur.com/L0c18mX.jpeg" alt="Rolex GMT-Master 1675 Pepsi" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
-                <div class="cam">&#128247;</div><div class="cam-lbl">Tap for photo</div>
-              </button>
+              <img src="https://i.imgur.com/L0c18mX.jpeg" alt="Rolex GMT-Master 1675 Pepsi" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block">
             </div>
             <div class="card-info rmain">
               <div class="card-ref rref">1675</div>
@@ -1508,148 +1575,6 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 
 <script>
 
-/* ===== RESTORE PHOTO BTN ===== */
-function restorePhotoBtn(btn){
-  btn.innerHTML='<div class="cam">📷</div><div class="cam-lbl">Tap for photo</div>';
-  btn.className=(btn.tagName==='BUTTON')?'img-btn':'watch-img-btn';
-}
-
-/* ===== IMAGE INJECTION ===== */
-function injectImage(btn,imgUrl,label){
-  var img=document.createElement('img');
-  img.src=imgUrl;
-  img.alt=label||'Watch photo';
-  img.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center;display:block;';
-  img.onerror=function(){restorePhotoBtn(btn);};
-  while(btn.firstChild)btn.removeChild(btn.firstChild);
-  btn.appendChild(img);
-  btn.classList.remove('img-fetching');
-}
-
-/* ===== LONG PRESS CLEAR & REFETCH ===== */
-function _clearAndRefetch(btn){
-  restorePhotoBtn(btn);
-  var name=btn.dataset.displayName;
-  var query=btn.dataset.query;
-  if(name&&query)searchPhoto(name,query,btn);
-}
-document.addEventListener('contextmenu',function(e){
-  var b=e.target.closest('.watch-img-btn,.img-btn');
-  if(b&&b.querySelector('img')){e.preventDefault();_clearAndRefetch(b);}
-});
-(function(){
-  var _ltimer=null,_lbtn=null;
-  document.addEventListener('touchstart',function(e){
-    var b=e.target.closest('.watch-img-btn,.img-btn');
-    if(b&&b.querySelector('img')){_lbtn=b;_ltimer=setTimeout(function(){_clearAndRefetch(_lbtn);},700);}
-  },true);
-  document.addEventListener('touchend',function(){clearTimeout(_ltimer);},true);
-  document.addEventListener('touchmove',function(){clearTimeout(_ltimer);},true);
-})();
-
-/* ===== WIKI SOURCES ===== */
-var WIKI_SOURCES={
-  'Caravelle manual wind':{wp:'Caravelle (watch)',commons:'Caravelle Bulova wristwatch vintage manual wind'},
-  'Bulova Accutron Spaceview':{wp:'Bulova Accutron',commons:'Bulova Accutron Spaceview 214 tuning fork'},
-  'Longines Sport Chief ref 7042':{wp:'Longines',commons:'Longines Sport Chief vintage wristwatch manual wind'},
-  'Omega Seamaster ref 166.010':{wp:'Omega Seamaster',commons:'Omega Seamaster 166.010 vintage crosshair dial 1964'},
-  'Longines Flagship 18k ref 3410':{wp:'Longines Flagship',commons:'Longines Flagship gold 3410 vintage dress watch 1960s'},
-  'Universal Genève Polerouter ref 20217':{wp:'Universal Genève Polerouter',commons:'Universal Genève Polerouter 20217 micro-rotor'},
-  'Zenith El Primero ref A386':{wp:'El Primero',commons:'Zenith El Primero A386 chronograph 1969'},
-  'Rolex Datejust ref 1601':{wp:'Rolex Datejust',commons:'Rolex Datejust 1601 pie pan dial fluted bezel'},
-  'Omega Speedmaster Professional ref 3570.50':{wp:'Omega Speedmaster Professional',commons:'Omega Speedmaster Professional 3570.50 moonwatch'},
-  'Rolex Submariner Hulk 116610LV':{wp:'Rolex Submariner',commons:'Rolex Submariner 116610LV green ceramic bezel Hulk'},
-  'JLC Master Ultra Thin Moon Q1368430':{wp:'Jaeger-LeCoultre Master Ultra Thin',commons:'Jaeger-LeCoultre Master Ultra Thin Moon moonphase'},
-  'Rolex Day-Date 18038 yellow gold':{wp:'Rolex Day-Date',commons:'Rolex Day-Date 18038 yellow gold President bracelet'},
-  'Rolex GMT-Master ref 1675 Pepsi':{wp:'Rolex GMT-Master',commons:'Rolex GMT-Master 1675 Pepsi red blue bezel vintage'}
-};
-
-/* ===== LOAD CACHED IMAGES ===== */
-function loadCachedImages(){
-  var cache=JSON.parse(localStorage.getItem('watch_image_cache')||'{}');
-  Object.keys(cache).forEach(function(name){
-    var url=cache[name];
-    document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(btn){
-      var dn=btn.dataset&&btn.dataset.displayName;
-      if(dn===name&&!btn.querySelector('img'))injectImage(btn,url,name);
-    });
-  });
-}
-
-/* ===== LOAD WATCH IMAGES FROM WIKIPEDIA ===== */
-function loadWatchImages(){
-  loadCachedImages();
-  document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(btn){
-    var dn=btn.dataset&&btn.dataset.displayName;
-    if(!dn||btn.querySelector('img'))return;
-    var src=WIKI_SOURCES[dn];
-    if(!src)return;
-    var wpTitle=encodeURIComponent(src.wp);
-    var url='https://en.wikipedia.org/api/rest_v1/page/summary/'+wpTitle;
-    fetch(url).then(function(r){return r.json();}).then(function(d){
-      if(d.thumbnail&&d.thumbnail.source){
-        var imgUrl=d.thumbnail.source;
-        var cache=JSON.parse(localStorage.getItem('watch_image_cache')||'{}');
-        cache[dn]=imgUrl;
-        localStorage.setItem('watch_image_cache',JSON.stringify(cache));
-        document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(b){
-          if(b.dataset&&b.dataset.displayName===dn&&!b.querySelector('img'))injectImage(b,imgUrl,dn);
-        });
-      }
-    }).catch(function(){});
-  });
-}
-
-/* ===== SEARCH PHOTO VIA CLAUDE API ===== */
-function searchPhoto(displayName,query,btnOverride){
-  var apiKey=localStorage.getItem('claude_api_key');
-  if(!apiKey)return;
-  var btn=btnOverride||null;
-  if(!btn){
-    document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(b){
-      if(b.dataset&&b.dataset.displayName===displayName)btn=b;
-    });
-  }
-  if(!btn)return;
-  btn.dataset.displayName=displayName;
-  btn.dataset.query=query;
-  btn.classList.add('img-fetching');
-  while(btn.firstChild)btn.removeChild(btn.firstChild);
-  var sp=document.createElement('span');sp.textContent='Searching...';btn.appendChild(sp);
-  fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key':apiKey,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body:JSON.stringify({
-      model:'claude-sonnet-4-6',
-      max_tokens:256,
-      messages:[{
-        role:'user',
-        content:'Find a direct image URL for: '+query+'. Return ONLY a single working direct image URL (must end in .jpg or .png or similar image extension) from Wikipedia Commons or a reputable watch source. No explanation, just the URL.'
-      }]
-    })
-  }).then(function(r){return r.json();}).then(function(d){
-    if(d.content&&d.content[0]&&d.content[0].text){
-      var text=d.content[0].text.trim();
-      var urlMatch=text.match(/https?:\/\/\S+\.(jpg|jpeg|png|webp)/i);
-      if(urlMatch){
-        var imgUrl=urlMatch[0];
-        var cache=JSON.parse(localStorage.getItem('watch_image_cache')||'{}');
-        cache[displayName]=imgUrl;
-        localStorage.setItem('watch_image_cache',JSON.stringify(cache));
-        injectImage(btn,imgUrl,displayName);
-      } else {
-        restorePhotoBtn(btn);
-      }
-    } else {
-      restorePhotoBtn(btn);
-    }
-  }).catch(function(){restorePhotoBtn(btn);});
-}
 
 /* ===== ACCORDION ===== */
 function togAccord(){
@@ -1713,31 +1638,6 @@ function tlScrollTo(id){
 
 
 
-document.addEventListener('DOMContentLoaded',function(){
-  /* set data attributes for photo buttons */
-  var map=[
-    ['Caravelle manual wind','Caravelle manual wind 1950s vintage watch'],
-    ['Bulova Accutron Spaceview','Bulova Accutron Spaceview 214 tuning fork vintage 1960s'],
-    ['Longines Sport Chief ref 7042','Longines Sport Chief ref 7042 vintage 1950s watch'],
-    ['Omega Seamaster ref 166.010','Omega Seamaster ref 166.010 crosshair dial vintage 1964'],
-    ['Longines Flagship 18k ref 3410','Longines Flagship ref 3410 18k gold vintage dress watch 1960s'],
-    ['Universal Genève Polerouter ref 20217','Universal Genève Polerouter ref 20217 tropical brown dial vintage'],
-    ['Zenith El Primero ref A386','Zenith El Primero ref A386 black dial chronograph vintage 1969'],
-    ['Rolex Datejust ref 1601','Rolex Datejust ref 1601 black pie pan dial fluted bezel vintage'],
-    ['Omega Speedmaster Professional ref 3570.50','Omega Speedmaster Professional ref 3570.50 Moonwatch black dial'],
-    ['Rolex Submariner Hulk 116610LV','Rolex Submariner Hulk 116610LV green ceramic dial'],
-    ['JLC Master Ultra Thin Moon Q1368430','Jaeger-LeCoultre Master Ultra Thin Moon ref Q1368430 silver dial moonphase'],
-    ['Rolex Day-Date 18038 yellow gold','Rolex Day-Date 18038 yellow gold champagne dial President bracelet vintage'],
-    ['Rolex GMT-Master ref 1675 Pepsi','Rolex GMT-Master ref 1675 Pepsi red blue bezel black dial vintage grail']
-  ];
-  document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(btn){
-    /* onclick attribute already sets context; also set data attrs from onclick text */
-    var oc=btn.getAttribute('onclick')||'';
-    var m=oc.match(/searchPhoto\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
-    if(m){btn.dataset.displayName=m[1];btn.dataset.query=m[2];}
-  });
-  loadWatchImages();
-});
 </script>
 </body>
 </html></html>
