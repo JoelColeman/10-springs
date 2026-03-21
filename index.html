@@ -271,29 +271,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 /* ===== FOOTER ===== */
 .footer{text-align:center;padding:24px;font-family:'DM Mono',monospace;font-size:10px;color:#3a3530;letter-spacing:1px}
 
-/* ===== MODAL ===== */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal-box{background:#f8f6f1;border-radius:8px;padding:28px;width:360px;max-width:calc(100vw - 32px);border:1px solid #d8d4cc}
-.modal-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:4px;color:#1a1a1a;margin-bottom:4px}
-.modal-sub{font-size:11px;color:#8a7b6a;line-height:1.5;margin-bottom:18px}
-.modal-input{width:100%;padding:10px 12px;background:#fff;border:1px solid #d8d4cc;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px;color:#1a1a1a;outline:none;margin-bottom:10px}
-.modal-input:focus{border-color:#b8a88a}
-.modal-btn{width:100%;padding:11px;background:#1a1a1a;color:#f8f6f1;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;cursor:pointer;margin-bottom:8px}
-.modal-btn:hover{background:#2a2a2a}
-.modal-btn-secondary{width:100%;padding:9px;background:transparent;color:#8a7b6a;border:0.5px solid #c0b8ac;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer}
-.modal-btn-secondary:hover{background:#f0ece4}
-.modal-err{font-size:11px;color:#c04040;margin-top:6px;display:none}
 
-/* ===== CHAT BAR ===== */
-.chat-bar{position:fixed;bottom:0;left:0;right:0;background:#f4f1eb;border-top:1px solid #ddd9d0;padding:10px 16px;display:flex;align-items:center;gap:8px;z-index:50}
-.chat-input{flex:1;padding:9px 12px;background:#fff;border:1px solid #d8d4cc;border-radius:4px;font-size:12px;font-family:'DM Sans',sans-serif;color:#1a1a1a;outline:none}
-.chat-input:focus{border-color:#b8a88a}
-.chat-send{padding:9px 16px;background:#1a1a1a;color:#f8f6f1;border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;cursor:pointer;white-space:nowrap}
-.chat-send:disabled{background:#aaa;cursor:not-allowed}
-.chat-key-btn{padding:9px 12px;background:transparent;color:#8a7b6a;border:0.5px solid #c0b8ac;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;white-space:nowrap}
-.chat-status{font-family:'DM Mono',monospace;font-size:10px;color:#8a7b6a;white-space:nowrap}
-.chat-err-bar{position:fixed;bottom:52px;left:0;right:0;background:#c04040;color:#fff;padding:8px 16px;font-size:11px;font-family:'DM Mono',monospace;text-align:center;z-index:51;display:none}
 
 /* ===== HERITAGE GRID ===== */
 .heritage-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 0 4px}
@@ -1527,37 +1505,8 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 
 <div class="footer">Joel Coleman &middot; 10 Springs &middot; Ages 35&ndash;45 &middot; Albuquerque NM</div>
 
-<!-- API key modal -->
-<div class="modal-overlay" id="key-modal">
-  <div class="modal-box">
-    <div class="modal-title">Claude API Key</div>
-    <div class="modal-sub">Enter your Anthropic API key to enable photo search and the AI assistant. Your key is stored locally in your browser only.</div>
-    <input class="modal-input" id="modal-key-input" type="password" placeholder="sk-ant-..." autocomplete="off">
-    <button class="modal-btn" onclick="saveApiKey()">Save Key</button>
-    <button class="modal-btn-secondary" onclick="document.getElementById('key-modal').classList.remove('open')">Skip for now</button>
-    <div class="modal-err" id="modal-err">Please enter a valid key starting with sk-ant-</div>
-  </div>
-</div>
-
-<!-- chat bar -->
-<div class="chat-bar">
-  <input class="chat-input" id="chat-input" type="text" placeholder="Ask about the collection or update a watch..." autocomplete="off">
-  <span class="chat-status" id="chat-status"></span>
-  <button class="chat-send" id="chat-send" onclick="sendPrompt()">Send</button>
-  <button class="chat-key-btn" onclick="showKeyModal()">API Key</button>
-</div>
-<div class="chat-err-bar" id="chat-err-bar"></div>
 
 <script>
-/* ===== API KEY ===== */
-function showKeyModal(){document.getElementById('key-modal').classList.add('open');document.getElementById('modal-key-input').value='';document.getElementById('modal-err').style.display='none';}
-function clearApiKey(){localStorage.removeItem('claude_api_key');document.getElementById('key-modal').classList.add('open');}
-function saveApiKey(){
-  var v=document.getElementById('modal-key-input').value.trim();
-  if(!v.startsWith('sk-ant-')){document.getElementById('modal-err').style.display='block';return;}
-  localStorage.setItem('claude_api_key',v);
-  document.getElementById('key-modal').classList.remove('open');
-}
 
 /* ===== RESTORE PHOTO BTN ===== */
 function restorePhotoBtn(btn){
@@ -1654,7 +1603,7 @@ function loadWatchImages(){
 /* ===== SEARCH PHOTO VIA CLAUDE API ===== */
 function searchPhoto(displayName,query,btnOverride){
   var apiKey=localStorage.getItem('claude_api_key');
-  if(!apiKey){showKeyModal();return;}
+  if(!apiKey)return;
   var btn=btnOverride||null;
   if(!btn){
     document.querySelectorAll('.watch-img-btn,.img-btn').forEach(function(b){
@@ -1761,180 +1710,10 @@ function tlScrollTo(id){
   obs.observe(sentinel);
 })();
 
-/* ===== GET DASHBOARD STATE ===== */
-function getDashboardState(){
-  var rows=document.querySelectorAll('.spring-row[id^="watch-"],.h-row[id^="watch-"]');
-  var state=[];
-  rows.forEach(function(row){
-    var id=row.id;
-    var nameEl=row.querySelector('.rname,.h-name,.card-name');
-    var refEl=row.querySelector('.rref,.card-ref');
-    var metaEl=row.querySelector('.rmeta,.h-meta,.card-meta');
-    var noteEl=row.querySelector('.rnote,.card-note');
-    var decEl=row.querySelector('.rdec,.card-dec');
-    var priceEl=row.querySelector('.rbdg,.card-price');
-    var badgeEl=row.querySelector('.rbadge');
-    var tagsEl=row.querySelector('.tags,.card-tags');
-    var tags=[];
-    if(tagsEl)tagsEl.querySelectorAll('.tag').forEach(function(t){tags.push(t.textContent.trim());});
-    state.push({
-      id:id,
-      name:nameEl?nameEl.textContent.trim():'',
-      ref:refEl?refEl.textContent.trim():'',
-      meta:metaEl?metaEl.textContent.trim():'',
-      note:noteEl?noteEl.textContent.trim():'',
-      dec:decEl?decEl.textContent.trim():'',
-      price:priceEl?priceEl.textContent.trim():'',
-      status:badgeEl?badgeEl.textContent.trim():'',
-      tags:tags
-    });
-  });
-  return state;
-}
 
-/* ===== APPLY PATCH ===== */
-function applyPatch(patch){
-  if(!patch||!Array.isArray(patch))return;
-  var statusRingMap={
-    'In hand':'ring-owned',
-    'In Hand':'ring-owned',
-    'Decided':'ring-decided',
-    'Open':'ring-planned',
-    'Planned':'ring-planned',
-    'Up next':'ring-decided',
-    'Up Next':'ring-decided'
-  };
-  var statusCls={
-    'In hand':'st-o','In Hand':'st-o',
-    'Decided':'st-l',
-    'Open':'st-d',
-    'Planned':'st-p',
-    'Up next':'st-n','Up Next':'st-n'
-  };
-  patch.forEach(function(item){
-    var row=document.getElementById(item.id);
-    if(!row)return;
-    var rmain=row.querySelector('.rmain,.card-info.rmain');
-    if(!rmain)return;
-    function setOrRemove(sel,val,cls){
-      if(val===undefined||val===null)return;
-      var el=rmain.querySelector(sel);
-      if(val===''){
-        if(el)el.remove();
-        return;
-      }
-      if(!el){
-        el=document.createElement('div');
-        el.className=cls;
-        var tagsContainer=rmain.querySelector('.card-tags,.tags');
-        if(tagsContainer)rmain.insertBefore(el,tagsContainer);
-        else rmain.appendChild(el);
-      }
-      el.textContent=val;
-    }
-    if(item.name!==undefined){
-      var nameEl=rmain.querySelector('.rname,.card-name');
-      if(nameEl)nameEl.textContent=item.name;
-    }
-    if(item.ref!==undefined){
-      var refEl=rmain.querySelector('.rref,.card-ref');
-      if(refEl)refEl.textContent=item.ref;
-    }
-    if(item.meta!==undefined)setOrRemove('.rmeta,.card-meta',item.meta,'card-meta rmeta');
-    if(item.note!==undefined)setOrRemove('.rnote,.card-note',item.note,'card-note rnote');
-    if(item.dec!==undefined)setOrRemove('.rdec,.card-dec',item.dec,'card-dec rdec');
-    if(item.price!==undefined){
-      var priceEl=rmain.querySelector('.rbdg,.card-price');
-      if(priceEl)priceEl.textContent=item.price;
-    }
-    if(item.status!==undefined){
-      var badge=row.querySelector('.rbadge');
-      if(badge){
-        badge.textContent=item.status;
-        badge.className='rbadge '+(statusCls[item.status]||'st-p');
-      }
-      var tlId=item.id.replace('watch-','tl-');
-      var tlThumb=document.getElementById(tlId);
-      if(tlThumb){
-        var ring=statusRingMap[item.status]||'ring-planned';
-        tlThumb.className=tlThumb.className.replace(/ring-\w+/g,'').trim()+' '+ring;
-      }
-    }
-    if(item.tags!==undefined&&Array.isArray(item.tags)){
-      var tagsEl=rmain.querySelector('.card-tags,.tags');
-      if(tagsEl){
-        tagsEl.innerHTML='';
-        item.tags.forEach(function(t){
-          var sp=document.createElement('span');
-          var cls=t.toLowerCase().replace(/\s+/g,'');
-          sp.className='tag '+cls;
-          sp.textContent=t;
-          tagsEl.appendChild(sp);
-        });
-      }
-    }
-  });
-}
 
-/* ===== CHAT / SEND PROMPT ===== */
-function setLoading(on){
-  var btn=document.getElementById('chat-send');
-  var status=document.getElementById('chat-status');
-  if(on){btn.disabled=true;btn.textContent='...';if(status)status.textContent='Thinking...';}
-  else{btn.disabled=false;btn.textContent='Send';if(status)status.textContent='';}
-}
-
-function sendPrompt(){
-  var apiKey=localStorage.getItem('claude_api_key');
-  if(!apiKey){showKeyModal();return;}
-  var input=document.getElementById('chat-input');
-  var prompt=input.value.trim();
-  if(!prompt)return;
-  input.value='';
-  setLoading(true);
-  var errBar=document.getElementById('chat-err-bar');
-  if(errBar)errBar.style.display='none';
-  var state=getDashboardState();
-  var systemPrompt='You are an assistant for a watch collection dashboard called "10 Springs". The collection belongs to Joel Coleman, ages 35-45, Albuquerque NM. You can answer questions about the collection OR return a JSON patch to update watches.\n\nCurrent collection state:\n'+JSON.stringify(state,null,2)+'\n\nIf the user wants to update a watch, return ONLY a JSON array (no explanation) like:\n[{"id":"watch-s1","name":"New Name","status":"Planned","price":"~$2K","note":"new note","dec":"new decision"}]\nFields: id, name, ref, meta, note, dec, price, status (one of: In Hand, Up Next, Planned, Decided, Open), tags (array of strings).\nOmit any fields you are not changing.\nIf just answering a question, return plain text.';
-  fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key':apiKey,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body:JSON.stringify({
-      model:'claude-sonnet-4-6',
-      max_tokens:1024,
-      system:systemPrompt,
-      messages:[{role:'user',content:prompt}]
-    })
-  }).then(function(r){return r.json();}).then(function(d){
-    setLoading(false);
-    if(d.content&&d.content[0]&&d.content[0].text){
-      var text=d.content[0].text.trim();
-      var jsonMatch=text.match(/\[[\s\S]*\]/);
-      if(jsonMatch){
-        try{
-          var patch=JSON.parse(jsonMatch[0]);
-          applyPatch(patch);
-          if(errBar){errBar.style.display='block';errBar.style.background='#4a7b6a';errBar.textContent='Dashboard updated.';setTimeout(function(){errBar.style.display='none';},2500);}
-        }catch(e){
-          if(errBar){errBar.style.display='block';errBar.style.background='#c04040';errBar.textContent='Parse error: '+e.message;}
-        }
-      } else {
-        if(errBar){errBar.style.display='block';errBar.style.background='#4a5a6a';errBar.textContent=text.substring(0,200)+(text.length>200?'...':'');setTimeout(function(){errBar.style.display='none';},6000);}
-      }
-    }
-  }).catch(function(e){
-    setLoading(false);
-    if(errBar){errBar.style.display='block';errBar.style.background='#c04040';errBar.textContent='Error: '+e.message;}
-  });
-}
 
 document.addEventListener('DOMContentLoaded',function(){
-  if(!localStorage.getItem('claude_api_key'))showKeyModal();
   /* set data attributes for photo buttons */
   var map=[
     ['Caravelle manual wind','Caravelle manual wind 1950s vintage watch'],
@@ -1958,9 +1737,6 @@ document.addEventListener('DOMContentLoaded',function(){
     if(m){btn.dataset.displayName=m[1];btn.dataset.query=m[2];}
   });
   loadWatchImages();
-  /* chat enter key */
-  var ci=document.getElementById('chat-input');
-  if(ci)ci.addEventListener('keydown',function(e){if(e.key==='Enter')sendPrompt();});
 });
 </script>
 </body>
