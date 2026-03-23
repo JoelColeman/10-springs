@@ -139,7 +139,7 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
   transform-origin:bottom left;z-index:1
 }
 .watch-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:10}
-.watch-card.primary{width:180px;border-color:#b8a88a;z-index:2}
+.watch-card.primary{width:180px;border:2px solid #b8a88a;z-index:2}
 .watch-card.alternate{margin-left:-130px;opacity:0.3;transform:scale(0.92) rotate(2deg);pointer-events:none;border-style:dashed}
 .watch-card.alternate:nth-child(3){transform:scale(0.90) rotate(3deg);margin-left:-135px}
 .watch-card.alternate:nth-child(4){transform:scale(0.88) rotate(5deg);margin-left:-138px}
@@ -149,9 +149,9 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 .card-fan.expanded .watch-card.alternate:hover{transform:scale(1) translateY(-6px)}
 
 /* ===== CARD INTERNALS ===== */
-.card-image{width:100%;height:140px;background:#e8e3da;position:relative;border-bottom:1px solid #d8d3c8;overflow:hidden}
-.watch-card.primary .card-image{height:160px}
+.card-image{width:100%;height:160px;background:#e8e3da;position:relative;border-bottom:1px solid #d8d3c8;overflow:hidden}
 .alt-image{display:flex;align-items:center;justify-content:center;background:#e0ddd5}
+.alt-image:has(>img) .watch-face-placeholder{display:none}
 .watch-face-placeholder{width:60px;height:60px;border-radius:50%;border:1.5px solid #b8a88a;background:#f0ece4;display:flex;align-items:center;justify-content:center;position:relative}
 .watch-face-placeholder::before{content:'';position:absolute;inset:6px;border-radius:50%;border:0.5px solid #c8c0b0}
 .wfp-inner{width:6px;height:6px;border-radius:50%;background:#8a7b6a;position:relative;z-index:1}
@@ -280,10 +280,10 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 @media(min-width:900px){
   /* Flat horizontal row, scrollable if cards overflow */
   .card-fan{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;overflow-y:visible;padding:16px;min-height:auto;scrollbar-width:thin;scrollbar-color:#d8d3c8 transparent}
-  .watch-card{width:160px;flex-shrink:0}
+  .watch-card{width:180px;flex-shrink:0}
   .watch-card.primary{width:180px;flex-shrink:0}
   /* All alternates always visible — flat, no transforms, no overlap */
-  .watch-card.alternate{display:block !important;width:160px;flex-shrink:0;margin-left:0 !important;opacity:1 !important;pointer-events:all;border-style:dashed;transform:none !important}
+  .watch-card.alternate{display:block !important;width:180px;flex-shrink:0;margin-left:0 !important;opacity:1 !important;pointer-events:all;border-style:dashed;transform:none !important}
   .watch-card.alternate:hover{transform:translateY(-6px)}
   /* PRIMARY badge top-left via pseudo — .rbadge status sits top-right, no conflict */
   .watch-card.primary .card-image::before{content:'Primary';position:absolute;top:8px;left:8px;z-index:3;background:#1a1a1a;color:#f8f6f1;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:3px 6px;border-radius:2px;font-family:'DM Sans',sans-serif}
@@ -302,19 +302,21 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
   /* Philosophy pills */
   .accord-left{flex-direction:column;align-items:flex-start;gap:6px}
   .pill{font-size:8px;padding:3px 8px}
-  /* Card fan — collapsed: primary fills fan minus 25px peek */
-  .card-fan{overflow:hidden;min-height:0;gap:0}
-  .watch-card{width:auto}
-  .watch-card.primary{flex:0 0 calc(100% - 25px);width:auto;max-width:none}
-  .watch-card.alternate{flex:0 0 160px;width:160px;margin-left:0;opacity:0.5;transform:none;pointer-events:none}
-  .watch-card.alternate~.watch-card.alternate{display:none}
-  /* Expanded: horizontal scroll, all alternates visible */
-  .card-fan.expanded{overflow-x:auto}
-  .card-fan.expanded .watch-card.primary{flex:0 0 180px}
-  .card-fan.expanded .watch-card.alternate{display:block;flex:0 0 160px;width:160px;margin-left:8px;opacity:1;transform:none;pointer-events:all}
-  .card-fan.expanded .watch-card.alternate~.watch-card.alternate{display:block}
-  .card-fan.expanded .watch-card.alternate:hover{transform:translateY(-6px)}
+  /* Card fan — always-visible horizontal scroll */
+  .card-fan{display:flex;overflow-x:auto;overflow-y:visible;padding:8px;gap:8px;min-height:0}
+  .watch-card{flex:0 0 180px;width:180px}
+  .watch-card.alternate{display:block!important;flex:0 0 180px;width:180px;margin-left:0!important;opacity:1!important;transform:none!important;pointer-events:all}
+  .watch-card.alternate~.watch-card.alternate{display:block!important}
+  .card-fan .expand-btn{display:none}
 }
+
+/* ===== LIGHTBOX ===== */
+#lightbox{position:fixed;inset:0;background:rgba(10,10,10,.88);display:none;align-items:center;justify-content:center;z-index:9999;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;cursor:default;box-shadow:0 24px 64px rgba(0,0,0,.6)}
+#lb-close{position:fixed;top:20px;right:24px;background:none;border:none;color:#f8f6f1;font-size:28px;line-height:1;cursor:pointer;font-family:'DM Sans',sans-serif;opacity:.7}
+#lb-close:hover{opacity:1}
+.card-image img{cursor:zoom-in}
 </style>
 </head>
 <body>
@@ -1622,6 +1624,24 @@ function tlScrollTo(id){
 
 
 
+
+/* ===== LIGHTBOX ===== */
+(function(){
+  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img');
+  function open(src,alt){lbImg.src=src;lbImg.alt=alt||'';lb.classList.add('open');document.body.style.overflow='hidden'}
+  function close(){lb.classList.remove('open');lbImg.src='';document.body.style.overflow=''}
+  document.addEventListener('click',function(e){
+    if(e.target.tagName==='IMG'&&e.target.closest('.card-image'))open(e.target.src,e.target.alt);
+  });
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.getElementById('lb-close').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
 </script>
+
+<div id="lightbox">
+  <button id="lb-close" aria-label="Close">&#x2715;</button>
+  <img id="lb-img" src="" alt="">
+</div>
 </body>
 </html></html>
