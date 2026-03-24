@@ -124,7 +124,7 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 
 ## Pending Build Tasks
 
-- [ ] **S1 — Replace entirely.** New primary: Breitling Navitimer (ref. 816 or 7806). New slot label: "S1 · AGE 36 · AVIATION CHRONOGRAPH". Budget: ~$2–3K. Tags: VINTAGE · CHRONO. Clear all existing S1 alternates and replace with: Alt 1: Breitling Navitimer ref. 806 · Alt 2: [TBD from strategy doc] · Alt 3: [TBD]. Add Chrono24 and Google search links for all.
+- [ ] **S1 — Replace entirely.** New primary: Breitling Navitimer ref. 816. New slot label: "S1 · AGE 36 · AVIATION CHRONOGRAPH". Budget: ~$2–3K. Tags: VINTAGE · CHRONO. Clear all existing S1 alternates and replace with: Alt 1: Breitling Navitimer 7806 · Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown, ~1969–1973) · Alt 3: Heuer Carrera 3147S. Add Chrono24 and Google search links for all.
 
 - [ ] **S2 — Replace entirely.** Slot is now the consolidated gold dress slot (was S1 Seamaster + S2 Flagship combined). New primary: Longines Flagship 18k (ref. 2404, cream/champagne dial). New slot label: "S2 · AGE 37 · GOLD DRESS". Budget: ~$2K. Tags: VINTAGE · DRESS. Alternates: Alt 1: Longines Conquest 18k · Alt 2: Omega Constellation pie pan 18k · Alt 3: Universal Genève solid gold dress · Alt 4: Omega Seamaster 18k solid gold. Add Chrono24 and Google search links for all. Clear all existing S1 and S2 alternate cards.
 
@@ -181,16 +181,15 @@ Alternates: Omega Seamaster small seconds (2757) · Omega Genève manual (131.01
 
 ---
 
-### S1 (Age 36) — Breitling Navitimer ⚠️ UPDATED THIS SESSION
-Primary ref: 816 or 7806 · Era: 1960s–early 1970s · Valjoux 72 movement
+### S1 (Age 36) — Breitling Navitimer ✅ LOCKED
+Primary ref: 816 · Era: 1960s–early 1970s · Valjoux 72 movement
 Dial: Black, circular slide rule bezel, sector subdials · Budget: ~$2–3K
 Role: Vintage aviation chronograph — sector dial, AOPA heritage, exploration age instrument
 Tags: VINTAGE · CHRONO
 Alternates:
-- Alt 1: Breitling Navitimer ref. 806 (AOPA, earliest production, ~$4–6K)
-- Alt 2: [TBD — confirm in strategy doc]
-- Alt 3: [TBD — confirm in strategy doc]
-- Alt 4: [TBD — confirm in strategy doc]
+- Alt 1: Breitling Navitimer 7806 (same dial architecture, slightly different production window, within budget)
+- Alt 2: Breitling Chrono-Matic 1806 (Navitimer family, automatic Cal. 11, left crown at 9 o'clock, ~1969–1973)
+- Alt 3: Heuer Carrera 3147S (instrument peer, different house, stripped cockpit aesthetic)
 
 ---
 
