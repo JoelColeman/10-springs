@@ -78,6 +78,14 @@ Started as a simple question: *what are good watches under $500 that might hold 
 - Reads iced-out/bustdown watches as "spectacle vs. statement" — the Royal Oak
   and Day-Date in full diamond treatment lose their narrative. The distinction
   resonated and Joel articulated it himself.
+- Responded strongly to Glashütte Original PanoMaticLunar blue dial — asymmetric
+  layout, off-center subdials, architectural German dial design. Confirmed that
+  "instrument watch aesthetic" extends to German dress watches, not just Swiss
+  tool watches.
+- Heuer references (Carrera, Autavia) initially assumed to be German — clarified
+  as Swiss but the instinct is correct: Heuer's instrument/motorsport identity
+  reads differently than elegance-first Swiss houses. Swiss by passport,
+  instrument by soul.
 
 ### Watches Discussed — Not On Roadmap
 - **Zenith Daytona 16520 "Inverted Six"** — all-steel, El Primero-based (cal.
@@ -98,6 +106,17 @@ Started as a simple question: *what are good watches under $500 that might hold 
   philosophically resonant movie watch moment for the collection — inheritance,
   provenance, the watch as vessel for a story across generations. Worth
   referencing in any collection narrative writing.
+- Regional balance principle emerging — not a rigid rule, but a loose philosophy:
+  Swiss heritage houses as backbone, one German voice (Glashütte Original at S8),
+  Heuer as its own category (Swiss by passport, instrument by soul). Balance
+  through aesthetic merit, not geographic quota. Intentionally kept loose to
+  preserve whimsy — not a framework, just a lens.
+- Moonphase grail context established: Patek 3448 is the vintage collector grail;
+  A. Lange & Söhne Lange 1 Moon Phase is the modern German apex; F.P. Journe
+  Octa Lune for independent watchmaker prestige. All are 10 Summers territory,
+  not Springs.
+- A. Lange & Söhne Saxonia Thin (201.027) flagged as philosophical endpoint of
+  the German thread — already in 10 Summers list, worth keeping prominent there.
 
 ---
 
@@ -168,7 +187,10 @@ Started as a simple question: *what are good watches under $500 that might hold 
 - **Status:** Planned
 - **Role:** Historical chronograph — "first automatic chronograph" story, instrument-panel aesthetic
 - **Open question:** A386 vs A3817/A384 — Joel's taste clearly pulls toward the darker, more instrument-style variants
-- **Alternates:** Heuer Carrera (2447), Omega Speedmaster Reduced (3510.50), Sinn 103
+- **Alternates:**
+  - Heuer Carrera (2447) — pure instrument chronograph, named after Carrera Panamericana race, designed for legibility at speed
+  - Omega Speedmaster Reduced (3510.50)
+  - Sinn 103 — Frankfurt-made pilot chronograph, column-wheel movement, pure aviation instrument aesthetic, under $2K new. The German instrument chronograph counterpoint to the Swiss field.
 
 ---
 
@@ -189,7 +211,9 @@ Started as a simple question: *what are good watches under $500 that might hold 
 - **Budget:** $4–6K
 - **Status:** ✅ DECIDED — modern over vintage
 - **Rationale:** El Primero at S4 already covers the vintage chronograph slot. Speedmaster earns its place as the wearable iconic modern chronograph.
-- **Alternates considered and rejected:** Vintage Speedmaster 105.003/145.012, Tudor Black Bay Chrono (79360N), Heuer Autavia
+- **Alternates:**
+  - Heuer Autavia (vintage, pre-1985) — dual motorsport/aviation heritage ("AUTomobile + AVIAtion"), instrument presence, $3–5K range. Reinstated as active alternate.
+  - Tudor Black Bay Chrono (79360N)
 
 ---
 
@@ -207,14 +231,24 @@ Started as a simple question: *what are good watches under $500 that might hold 
 
 ---
 
-### S8 (Age 43) — Jaeger-LeCoultre Master Ultra Thin Moon
-- **Ref:** Q1368430 · **Era:** 2012–present
-- **Details:** Moonphase complication, ultra-thin case
-- **Preference:** Gold case preferred if budget allows
+### S8 (Age 43) — Glashütte Original PanoMaticLunar
+- **Ref:** 1-90-02-46-32-50 · **Era:** Current production
+- **Details:** Asymmetric dial layout, off-center small seconds at 8, moonphase at 1 o'clock,
+  panorama date at 6, deep sunburst blue dial, German text "MONDPHASE" / "PANORAMADATUM"
+- **Case:** ~40mm steel — confirm fits 6'5" wrist before purchase
 - **Budget:** $7–9K
 - **Status:** Planned
-- **Role:** Celestial dress watch — moonphase adds horological depth, formal role
-- **Alternates:** Glashütte Original PanoMaticLunar, JLC Memovox (E855) vintage, Cartier Santos
+- **Role:** Celestial dress watch — the one German voice in the collection. Moonphase as
+  engineering object, Bauhaus-influenced dial architecture, philosophically distinct from
+  every other piece in the box.
+- **Why primary over JLC:** Stronger aesthetic fit with instrument collection thesis. German
+  regional contrast adds collection depth. Legacy discovery value — children discovering
+  Glashütte Original and what German watchmaking means is a richer story than a second
+  Swiss dress watch.
+- **Alternates:**
+  - JLC Master Ultra Thin Moon (Q1368430) — Swiss, classical moonphase, ultra-thin,
+    strong collector floor, gold case preferred if budget allows. Previous primary.
+  - Glashütte Original PanoMaticLunar silver/white dial variant — same reference, cooler tone
 
 ---
 
@@ -310,6 +344,9 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 ### Pending — Next Session
 
 - [ ] Fix desktop card sizing — primary cards still slightly larger than alternates. CSS cascade audit needed across all breakpoints.
+- [ ] S8 — Swap primary from JLC Master Ultra Thin Moon to Glashütte Original PanoMaticLunar (ref 1-90-02-46-32-50, blue dial, ~40mm steel, $7–9K). Move JLC to ALT 1. Add GO silver dial variant as ALT 2. Update all card metadata, labels, Chrono24 and Google search links.
+- [ ] S4 — Add Sinn 103 as new alternate card. Label: "Sinn 103." Era: Current. Role: German instrument chronograph, pilot heritage, column-wheel movement. Budget: ~$2K. Add Chrono24 and Google search links.
+- [ ] S6 — Add Heuer Autavia (vintage, pre-1985) as new alternate card. Label: "Heuer Autavia." Era: Pre-1985. Role: Motorsport/aviation dual heritage chronograph. Budget: ~$3–5K. Add Chrono24 and Google search links. Note: Autavia was previously listed as "considered and rejected" — update that language to active alternate.
 - [ ] S9 alternates — strategic discussion needed, then update dashboard content
 - [ ] S10 alternates — strategic discussion needed, then update dashboard content
 - [ ] Add imgur URLs for remaining placeholder cards (defer until alternate decisions made)
@@ -333,6 +370,7 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 - S3 — Polerouter tropical dial vs crosshair silver vs blue
 - S5 — Datejust 1601 black vs blue dial
 - S7 — Hulk designated primary but final reference still open pending S4–S6 on wrist
+- S8 — PanoMaticLunar locked as primary. Confirm 40mm case size works on 6'5" wrist before purchase.
 - S9 — Vintage 18038 vs modern 228238 sizing question open
 - S9/S10 — Alternate content needs strategic review
 
@@ -340,7 +378,7 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 
 ## 10 Summers (Second Decade Concept — Not Finalized)
 
-A hypothetical second decade (ages 45–55) discussed at high level. More haute horology, advanced complications, independent watchmaker credibility. Candidates: Patek Calatrava (5119), Rolex Explorer II 1655 "Freccione", A. Lange & Söhne Saxonia Thin (201.027), AP Royal Oak (14790), Breguet Classique (5140/7147), Vacheron Constantin Overseas (4500V), Patek Annual Calendar (5146), Rolex Daytona (116500LN), F.P. Journe Chronomètre Bleu, vintage salmon-dial Patek Calatrava (565/570), Universal Genève Tri-Compax.
+A hypothetical second decade (ages 45–55) discussed at high level. More haute horology, advanced complications, independent watchmaker credibility. Candidates: Patek Calatrava (5119), Rolex Explorer II 1655 "Freccione", A. Lange & Söhne Saxonia Thin (201.027) — flagged as the philosophical endpoint of the German thread running through the collection, AP Royal Oak (14790), Breguet Classique (5140/7147), Vacheron Constantin Overseas (4500V), Patek Annual Calendar (5146), Rolex Daytona (116500LN), F.P. Journe Chronomètre Bleu, F.P. Journe Octa Lune — the independent watchmaker moonphase grail, vintage salmon-dial Patek Calatrava (565/570), Patek 3448 — the vintage moonphase collector grail, Universal Genève Tri-Compax, A. Lange & Söhne Lange 1 Moon Phase — modern German moonphase apex.
 
 ---
 
