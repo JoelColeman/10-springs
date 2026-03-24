@@ -97,6 +97,7 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 - **Placeholder oval:** Hidden via CSS `:has()` selector when real image is present.
 - **Image rendering:** `image-rendering: high-quality` on all card images.
 - **Responsive scaling:** `clamp(20px, 3.5vw, 44px)` for thumbnails. `flex: <slot-count>` proportional sizing. `overflow-x: auto` below 360px.
+- **Image URLs:** Always use direct imgur format: `https://i.imgur.com/XXXXXXX.jpg`
 
 ---
 
@@ -119,32 +120,27 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 ✅ Empty placeholder oval hidden when real image present
 ✅ Mobile layout — always-visible carousel, no toggle
 ✅ image-rendering: high-quality on card images
+✅ S1 — Breitling Navitimer 816 primary + 3 alts (7806, Chrono-Matic 1806, Heuer Carrera 3147S)
+✅ S2 — Longines Flagship 18k ref. 2404 primary + 4 alts (Conquest 18k, Constellation pie pan, UG gold dress, Seamaster 18k gold)
+✅ S4 — Sinn 103 added as Alt 4 · Zenith El Primero Shark Tooth A3817 added as Alt 1
+✅ S6 — Heuer Autavia (vintage, pre-1985) added as Alt 1 · Tudor Black Bay Chrono as Alt 2
+✅ S8 — GO PanoMaticLunar as primary · JLC as Alt 1 · GO silver dial as Alt 2
+✅ Full image URL sweep — all slots H1 through S8 have imgur images loaded (i.imgur.com direct format)
+✅ Section headers audited — no duplicates or orphans found
 
 ---
 
 ## Pending Build Tasks
 
-- [ ] **S1 — Replace entirely.** New primary: Breitling Navitimer ref. 816. New slot label: "S1 · AGE 36 · AVIATION CHRONOGRAPH". Budget: ~$2–3K. Tags: VINTAGE · CHRONO. Clear all existing S1 alternates and replace with: Alt 1: Breitling Navitimer 7806 · Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown, ~1969–1973) · Alt 3: Heuer Carrera 3147S. Add Chrono24 and Google search links for all.
-
-- [ ] **S2 — Replace entirely.** Slot is now the consolidated gold dress slot (was S1 Seamaster + S2 Flagship combined). New primary: Longines Flagship 18k (ref. 2404, cream/champagne dial). New slot label: "S2 · AGE 37 · GOLD DRESS". Budget: ~$2K. Tags: VINTAGE · DRESS. Alternates: Alt 1: Longines Conquest 18k · Alt 2: Omega Constellation pie pan 18k · Alt 3: Universal Genève solid gold dress · Alt 4: Omega Seamaster 18k solid gold. Add Chrono24 and Google search links for all. Clear all existing S1 and S2 alternate cards.
-
-- [ ] **S3 — No change to primary (UG Polerouter).** Verify alternates are current.
-
-- [ ] **S4 — Add Sinn 103 as new alternate card.** Era: Current. Role: German instrument chronograph, pilot heritage, column-wheel movement. Budget: ~$2K. Tags: MODERN · CHRONO.
-
-- [ ] **S6 — Add Heuer Autavia (vintage, pre-1985) as new alternate card.** Era: Pre-1985. Role: Motorsport/aviation dual heritage chronograph. Budget: ~$3–5K. Tags: VINTAGE · CHRONO. Note: previously listed as "considered and rejected" — update that language to active alternate.
-
-- [ ] **S8 — Swap primary** from JLC Master Ultra Thin Moon to Glashütte Original PanoMaticLunar (ref. 1-90-02-46-32-50, blue dial, ~40mm steel, $7–9K). Move JLC to Alt 1. Add GO silver dial variant as Alt 2.
-
 - [ ] **S9 alternates** — content needs strategic review. Placeholders currently in dashboard.
 
 - [ ] **S10 alternates** — content needs strategic review. Placeholders currently in dashboard.
 
-- [ ] **Fix desktop card sizing** — primary cards still slightly larger than alternates. CSS cascade audit needed across all breakpoints.
+- [ ] **Sparse card content** — some alternate cards missing role/notes line (Heuer Carrera 2447, Omega Speedmaster Reduced, a few others). Cards render shorter than neighbors as a result. Fill in during a future content pass.
 
-- [ ] **Add imgur URLs** for remaining placeholder cards — defer until after S9/S10 alternate decisions made.
+- [ ] **S10 Omega Planet Ocean / AP Royal Oak** — confirm whether these are intentional alternates or leftover placeholders. Needs strategic review alongside S10 alternates.
 
-- [ ] **Section header cleanup** — some duplicate/redundant headers remain.
+- [ ] **Add imgur URLs** for S9 and S10 alternates — defer until after strategic review and alternate decisions made.
 
 ---
 
@@ -166,10 +162,12 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 **H1 — Caravelle Manual Wind**
 Era: 1950s · Manual wind · Provenance: Great-grandfather's watch
 Tags: HEIRLOOM · NOT FOR SALE
+Image: https://i.imgur.com/eGCtW23.jpg
 
 **H2 — Bulova Accutron Spaceview**
 Ref: Cal. 214 · Era: 1960s–70s · Tuning fork 360Hz
 Tags: HEIRLOOM · NOT FOR SALE
+Image: https://i.imgur.com/zSdYCso.jpg
 
 ---
 
@@ -177,7 +175,11 @@ Tags: HEIRLOOM · NOT FOR SALE
 Ref: 7042 · Era: Late 1950s–early 1960s · Cal. 30L manual wind
 Dial: Cream/ivory · Case: ~36–38mm stainless · Price paid: ~$500
 Status: IN HAND
-Alternates: Omega Seamaster small seconds (2757) · Omega Genève manual (131.019) · Tissot Antimagnetique
+Image: https://i.imgur.com/Qniu7LS.jpg
+Alternates:
+- Omega Seamaster small seconds (2757) · https://i.imgur.com/RvJLLqJ.jpg
+- Omega Genève manual (131.019) · https://i.imgur.com/30AVqnM.jpg
+- Tissot Antimagnetique · https://i.imgur.com/1BHjSfR.jpg
 
 ---
 
@@ -186,24 +188,25 @@ Primary ref: 816 · Era: 1960s–early 1970s · Valjoux 72 movement
 Dial: Black, circular slide rule bezel, sector subdials · Budget: ~$2–3K
 Role: Vintage aviation chronograph — sector dial, AOPA heritage, exploration age instrument
 Tags: VINTAGE · CHRONO
+Image: https://i.imgur.com/ntyvdp2.jpg
 Alternates:
-- Alt 1: Breitling Navitimer 7806 (same dial architecture, slightly different production window, within budget)
-- Alt 2: Breitling Chrono-Matic 1806 (Navitimer family, automatic Cal. 11, left crown at 9 o'clock, ~1969–1973)
-- Alt 3: Heuer Carrera 3147S (instrument peer, different house, stripped cockpit aesthetic)
+- Alt 1: Breitling Navitimer 7806 · https://i.imgur.com/A7ZOpLZ.jpg
+- Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown at 9 o'clock, ~1969–1973) · https://i.imgur.com/LXPtsUr.jpg
+- Alt 3: Heuer Carrera 3147S · https://i.imgur.com/T7KDcpi.jpg
 
 ---
 
-### S2 (Age 37) — Longines Flagship 18k ⚠️ UPDATED THIS SESSION
-*Note: This slot consolidates what were previously S1 (Omega Seamaster) and S2 (Longines Flagship). Those two slots are eliminated and replaced by this single gold dress slot.*
+### S2 (Age 37) — Longines Flagship 18k ✅ LOCKED
 Primary ref: 2404 · Era: 1958–1968 · 18k solid gold · Cal. 30L family
 Dial: Cream or champagne · Budget: ~$2K
 Role: Solid gold vintage dress watch — formal/important occasion piece
 Tags: VINTAGE · DRESS
+Image: https://i.imgur.com/9fRcxvp.jpg
 Alternates:
-- Alt 1: Longines Conquest 18k solid gold (chronometer-certified, observatory credentials)
-- Alt 2: Omega Constellation pie pan 18k solid gold (Cal. 505/561, observatory caseback)
-- Alt 3: Universal Genève solid gold dress 1960s (UG thread with S3 Polerouter)
-- Alt 4: Omega Seamaster 18k solid gold 1960s
+- Alt 1: Longines Conquest 18k solid gold · https://i.imgur.com/CowmIVN.jpg
+- Alt 2: Omega Constellation pie pan 18k solid gold (Cal. 505/561, observatory caseback) · https://i.imgur.com/d041da6.jpg
+- Alt 3: Universal Genève solid gold dress 1960s · https://i.imgur.com/51bCgrN.jpg
+- Alt 4: Omega Seamaster 18k solid gold 1960s · https://i.imgur.com/tszQWDU.jpg
 
 ---
 
@@ -211,23 +214,25 @@ Alternates:
 Ref: 20217 · Era: 1956–1964 · Micro-rotor Cal. 215/218 · Designer: Gerald Genta
 Dial preference: Tropical brown (primary) · crosshair silver and blue dial (alternates within ref)
 Budget: $2–4K
-Tags: VINTAGE · DRESS
+Tags: VINTAGE · INSTRUMENT
+Image: https://i.imgur.com/adAggDf.jpg
 Alternates:
-- Girard-Perregaux Gyromatic 1965–72
-- Omega Dynamic (166.039)
-- Zenith Defy (A3642)
+- Girard-Perregaux Gyromatic 1965–72 · https://i.imgur.com/y4Jlu1i.jpg
+- Omega Dynamic (166.039) · https://i.imgur.com/GldPRzF.jpg
+- Zenith Defy (A3642) · https://i.imgur.com/WV71kEh.jpg
 
 ---
 
 ### S4 (Age 39) — Zenith El Primero
-Ref: A386 (primary) · A3817 "Shark Tooth" (strong alternate)
-Era: 1969–1972 · El Primero 3019PHC · 36,000 vph
+Ref: A386 (primary) · Era: 1969–1972 · El Primero 3019PHC · 36,000 vph
 Dial: Black, instrument style · Budget: $2–3K
 Tags: VINTAGE · CHRONO
+Image: https://i.imgur.com/lJQ6Cxf.jpg
 Alternates:
-- Heuer Carrera (2447)
-- Omega Speedmaster Reduced (3510.50)
-- Sinn 103 (current production, ~$2K) ⚠️ ADD TO DASHBOARD
+- Alt 1: Zenith El Primero "Shark Tooth" A3817 (strong alternate, darker instrument aesthetic) · https://i.imgur.com/fKC4eKx.jpg
+- Alt 2: Heuer Carrera (2447) · https://i.imgur.com/rkruIxa.jpg
+- Alt 3: Omega Speedmaster Reduced (3510.50) · https://i.imgur.com/WFqzMgH.jpg
+- Alt 4: Sinn 103 (current production, ~$2K) · https://i.imgur.com/gijyQWI.jpg
 
 ---
 
@@ -235,7 +240,11 @@ Alternates:
 Ref: 1601 · Era: 1965–1977 · Fluted bezel, pie-pan dial
 Dial preference: Black or blue sunburst · Budget: $4–6K
 Tags: VINTAGE · DRESS
-Alternates: Rolex Explorer (14270) · Rolex Air-King (5500) · Rolex Turn-O-Graph (1625)
+Image: https://i.imgur.com/hDaZahC.jpg
+Alternates:
+- Rolex Explorer (14270) · https://i.imgur.com/tfTCQxF.jpg
+- Rolex Air-King (5500) · https://i.imgur.com/QNGqXGx.jpg
+- Rolex Turn-O-Graph (1625) · https://i.imgur.com/scbvgTc.jpg
 
 ---
 
@@ -243,9 +252,10 @@ Alternates: Rolex Explorer (14270) · Rolex Air-King (5500) · Rolex Turn-O-Grap
 Ref: 3570.50 · Era: 1996–2014 · Cal. 1861 · Moonwatch, hesalite, no date
 Budget: $4–6K · Status: DECIDED
 Tags: MODERN · CHRONO
+Image: https://i.imgur.com/iIzRToh.jpg
 Alternates:
-- Heuer Autavia vintage pre-1985 ⚠️ ADD TO DASHBOARD
-- Tudor Black Bay Chrono (79360N)
+- Alt 1: Heuer Autavia vintage pre-1985 (~$3–5K) · https://i.imgur.com/ZHcDHX0.jpg
+- Alt 2: Tudor Black Bay Chrono (79360N) · https://i.imgur.com/4LsfhSl.jpg
 
 ---
 
@@ -253,21 +263,23 @@ Alternates:
 Ref: 116610LV · Era: 2010–2020 · Green ceramic bezel · Discontinued 2020
 Budget: $12–20K · Note on card: "or another colorful sport watch"
 Tags: MODERN · SPORT
+Image: https://i.imgur.com/bLQLOff.jpg
 Alternates:
-- Rolex GMT-Master II "Batman" (116710BLNR)
-- Rolex GMT-Master II "Root Beer" (126711CHNR)
-- Omega Seamaster Diver 300M
-- Tudor Black Bay 58 Blue (79030B)
+- Alt 1: Rolex GMT-Master II "Batman" (116710BLNR) · https://i.imgur.com/zUWUKzm.jpg
+- Alt 2: Rolex GMT-Master II "Root Beer" (126711CHNR) · https://i.imgur.com/dVopQSA.jpg
+- Alt 3: Omega Seamaster Diver 300M · https://i.imgur.com/P8gfdc5.jpg
+- Alt 4: Tudor Black Bay 58 Blue (79030B) · https://i.imgur.com/Xu1yIW5.jpg
 
 ---
 
-### S8 (Age 43) — Glashütte Original PanoMaticLunar ⚠️ SWAP NEEDED
+### S8 (Age 43) — Glashütte Original PanoMaticLunar ✅ UPDATED
 Ref: 1-90-02-46-32-50 · Current production · ~40mm steel
 Dial: Deep sunburst blue · Budget: $7–9K
 Tags: MODERN · DRESS
+Image: https://i.imgur.com/w443h5L.jpg
 Alternates:
-- Alt 1: JLC Master Ultra Thin Moon (Q1368430) ⚠️ MOVE FROM PRIMARY
-- Alt 2: Glashütte Original PanoMaticLunar silver/white dial ⚠️ ADD
+- Alt 1: JLC Master Ultra Thin Moon (Q1368430) · https://i.imgur.com/7PZY1nI.jpg
+- Alt 2: Glashütte Original PanoMaticLunar silver/white dial · https://i.imgur.com/V4kj0SS.jpg
 
 ---
 
@@ -285,6 +297,7 @@ Alternates: ⚠️ NEEDS STRATEGIC REVIEW — placeholders currently in dashboar
 Ref: 1675 · Era: 1965–1979 · Budget: $14–18K
 Tags: VINTAGE · SPORT
 Alternates: ⚠️ NEEDS STRATEGIC REVIEW — placeholders currently in dashboard
+Note: Omega Planet Ocean and AP Royal Oak currently showing as placeholder alts — confirm whether intentional or remove.
 
 ---
 
@@ -300,6 +313,7 @@ Alternates: ⚠️ NEEDS STRATEGIC REVIEW — placeholders currently in dashboar
 - **Prototype files:** Reference `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html` for design system and animation specs — don't rebuild from scratch.
 - **Python script writes:** Always verify the file was actually written to disk after a Python script runs.
 - **After any commit:** Verify the git diff matches expected changes before moving to the next task.
+- **Image URLs:** Always use direct imgur format `https://i.imgur.com/XXXXXXX.jpg` — never the page URL format `https://imgur.com/XXXXXXX`.
 
 ### Agent hygiene:
 - Start a fresh agent for each distinct build phase
