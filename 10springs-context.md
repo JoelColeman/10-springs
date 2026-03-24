@@ -21,7 +21,7 @@ This document is the single source of truth for the 10 Springs project. Paste it
 
 **10 Springs** — a 10-watch mechanical watch collection built over 10 years (ages 35–45), one watch purchased each spring. Hosted as a GitHub Pages dashboard at **joelcoleman.github.io/10-springs** (repo: github.com/JoelColeman/10-springs).
 
-**Stack:** Single-file index.html, vanilla HTML/CSS/JS, Claude API chat bar for natural language updates, GitHub Pages hosting. Claude Code handles all building and commits. Strategic conversations (like this one) are the advisor layer.
+**Stack:** Single-file index.html, vanilla HTML/CSS/JS, GitHub Pages hosting. Claude Code handles all building and commits. Strategic conversations (like this one) are the advisor layer. Note: Claude API chat bar has been removed from the dashboard.
 
 **Core purpose:** Leave behind watches his children can discover independently and find hold real value — recreating the experience Joel had when he discovered his grandfather's Bulova Accutron Spaceview was rare and valuable. Substance, not obligation.
 
@@ -69,6 +69,35 @@ Started as a simple question: *what are good watches under $500 that might hold 
 - Fashion-first or trend-first recommendations
 
 **The single most useful predictor of future taste:** instrument watch aesthetics — watches that look like they belong in spacecraft, observatories, laboratories, control rooms, or old aviation/scientific environments.
+
+## Taste Signals & Collector Education (Ongoing)
+
+### Confirmed Preferences
+- Strong aversion to two-tone bracelets — explicitly stated re: Daytona 16523.
+  Consistent with existing profile but now confirmed.
+- Reads iced-out/bustdown watches as "spectacle vs. statement" — the Royal Oak
+  and Day-Date in full diamond treatment lose their narrative. The distinction
+  resonated and Joel articulated it himself.
+
+### Watches Discussed — Not On Roadmap
+- **Zenith Daytona 16520 "Inverted Six"** — all-steel, El Primero-based (cal.
+  4030, same family as S4). Inverted six is a dial printing error from Singer,
+  short production window ~1991–93, now highly collectible. All-steel trades
+  $15–30K+; two-tone 16523 trades lower. Not on roadmap but Joel is aware as
+  a legitimate collector piece with direct movement connection to S4.
+- **Omega Speedmaster 105.012** — actual Apollo 13 reference. Runs cal. 321
+  (column wheel, considered finest Omega movement). S6 locked as modern 3570.50
+  (cal. 1861) — no reason to revisit — but Joel now understands why vintage
+  Speedmaster conversation gets complicated fast.
+
+### Open Threads
+- Chalamet/indie watch ecosystem as a lens: buying because you genuinely
+  understand why something is special vs. buying for recognition. Relevant
+  framework for evaluating future additions.
+- Pulp Fiction gold watch scene (Christopher Walken monologue) flagged as most
+  philosophically resonant movie watch moment for the collection — inheritance,
+  provenance, the watch as vessel for a story across generations. Worth
+  referencing in any collection narrative writing.
 
 ---
 
@@ -164,18 +193,17 @@ Started as a simple question: *what are good watches under $500 that might hold 
 
 ---
 
-### S7 (Age 42) — Colorful Modern Sport Watch
-- **Ref:** TBD — deliberately open
+### S7 (Age 42) — Rolex Submariner "Hulk"
+- **Ref:** 116610LV · **Era:** 2010–2020 · **Details:** Green ceramic bezel, discontinued 2020
 - **Budget:** $12–20K
-- **Status:** 🟡 OPEN BY DESIGN
-- **Rationale:** Color and reference deferred until S4–S6 are on the wrist and collection color balance is clear. If early springs trend dark, S7 provides color contrast.
-- **Live candidates:**
-  - Rolex Submariner "Hulk" (116610LV) — green ceramic, discontinued 2020 *(primary lean)*
+- **Status:** 🟡 DESIGNATED PRIMARY — color and exact reference may still shift after S4–S6 are on the wrist
+- **Note on card:** "or another colorful sport watch"
+- **Rationale:** Hulk designated as primary to anchor the color sport slot. Final decision deferred until collection color balance is clear after S4–S6.
+- **Alternates:**
   - Rolex GMT-Master II "Batman" (116710BLNR) — black/blue ceramic
-  - Rolex GMT-Master II "Root Beer" (126711CHNR) — Everose/steel
-  - Rolex GMT-Master II (16713) — vintage root beer
+  - Rolex GMT-Master II "Root Beer" (126711CHNR) — Everose/steel two-tone
   - Omega Seamaster Diver 300M — black, blue, or green ceramic
-  - Tudor Black Bay 58 Blue (79030B)
+  - Tudor Black Bay 58 Blue (79030B) — deep blue, 39mm
 
 ---
 
@@ -196,6 +224,9 @@ Started as a simple question: *what are good watches under $500 that might hold 
 - **Budget:** $14–18K
 - **Status:** Planned
 - **Role:** Gold luxury statement watch — power watch, success marker, warm-metal centerpiece
+- **Decided:** Full yellow gold presidential confirmed · Champagne dial as default · Black dial as strongly preferred alternate
+- **Open question:** Vintage 18038 vs modern 228238 — sizing consideration for 6'5" frame still live. Deep-dive research deferred.
+- **Alternates:** Placeholder alternates currently in dashboard — content needs strategic review before finalizing
 
 ---
 
@@ -204,7 +235,7 @@ Started as a simple question: *what are good watches under $500 that might hold 
 - **Budget:** $14–18K
 - **Status:** Planned — the grail
 - **Role:** Vintage sport grail — closes the decade with a true travel/tool icon
-- **Note:** Listed in dashboard as "GMT 1675" and "GRAIL"
+- **Alternates:** Placeholder alternates currently in dashboard — content needs strategic review before finalizing
 
 ---
 
@@ -223,129 +254,87 @@ Budget philosophy: intentional bands, not rigid numbers. Early years = vintage v
 
 ## Dashboard Build Status
 
-Dashboard Build Status
+**Live at:** joelcoleman.github.io/10-springs
+**Stack:** Single-file index.html, vanilla HTML/CSS/JS, GitHub Pages hosting
+**Repo files:**
+- `index.html` — the live dashboard
+- `10springs-context.md` — this reference document
+- `_prototypes/dashboard-mockup.html` — Daytona bezel/subdial/card design reference
+- `_prototypes/card-fan-v2.html` — fan-out alternates interaction reference
+- `_prototypes/chatbar.html` — archived Claude API chat bar (removed from main dashboard)
+- `CLAUDE.md` — project instructions for Claude Code agents
+- `embed_images.py` — image embedding utility script
 
-Live at: joelcoleman.github.io/10-springs
-Stack: Single-file index.html (~1,900+ lines), vanilla HTML/CSS/JS, Claude API chat bar (pending removal — see below), GitHub Pages hosting
-Repo files:
+---
 
-index.html — the live dashboard
-10springs-context.md — this reference document
-_prototypes/dashboard-mockup.html — Daytona bezel/subdial/card design reference
-_prototypes/card-fan-v2.html — fan-out alternates interaction reference
-CLAUDE.md — project instructions for Claude Code agents
-embed_images.py — image embedding utility script
-
-
-
-Currently Built and Live
+### Currently Built and Live
 
 ✅ Bezel frame — dark #0d0d0d outer shell, tachymeter bar with copper Bebas Neue labels, lume dots at bottom
 ✅ Dial header — "10 Springs · Ages 35–45" in clean single line, no name/location
 ✅ Three Daytona subdials — Spent (~$500) / Total Planned ($84K) / Next Spring ($1K)
-✅ Playing card fan layout — primary card solid border, upright; alternates dashed border, rotating 5°→25° clockwise from bottom-center anchor, overlapping 40px each. Hover lifts card while preserving rotation. Desktop: fan always open, toggle hidden. Mobile: primary fills width minus 25px peek, tap to expand into horizontal scroll row
-✅ Heritage cards — H1 Caravelle + H2 Accutron as two side-by-side cards matching collection card format. Factual metadata only, no anecdotes. HEIRLOOM · NOT FOR SALE tag. Listings + Research links
-✅ Listings + Research links — on all primary collection cards (H1, H2, NOW, S1–S10) linking to Chrono24 and Google Search
-✅ Collection Philosophy accordion — pills wrap horizontally on mobile, clearly visible chevron
-✅ Responsive layout — bezel reduced on mobile, header text clean at all sizes, philosophy pills wrap horizontally
-✅ 10 Summers section — correct second-decade watch list (SU1–SU10): Patek Calatrava 5119, Rolex Explorer II 1655, Lange Saxonia Thin 201.027, AP Royal Oak 14790, Breguet Classique 5140/7147, VC Overseas 4500V, Patek Annual Calendar 5146, Rolex Daytona 116500LN, FP Journe Chronomètre Bleu, Vintage Patek Calatrava 565/570
+✅ Heritage cards — H1 Caravelle + H2 Accutron. HEIRLOOM · NOT FOR SALE tag. Listings + Research links.
+✅ Listings + Research links — on ALL cards, primary and alternate (H1, H2, NOW, S1–S10 and all alternates)
+✅ Collection Philosophy accordion — pills wrap horizontally on mobile
+✅ 10 Summers section — second-decade watch list (SU1–SU10)
 ✅ Font system — Bebas Neue + Playfair Display + DM Sans + DM Mono
 ✅ Color palette — #f4f1eb linen background, #f8f6f1 card surfaces, #8a7b6a accent/gold, #1a1a1a near-black, #cc2200 status red
+✅ Claude API chat bar — removed. Archived to `_prototypes/chatbar.html`.
+✅ Tap-for-photo behavior — removed entirely. Static imgur images display permanently.
+✅ Photo search JS — removed entirely (restorePhotoBtn, injectImage, searchPhoto, loadWatchImages, WIKI_SOURCES, etc.)
+✅ Lightbox — click any watch image to open fullscreen overlay. Dismisses via click outside, X button, or Escape key.
+✅ Listings + Research on all alternate cards — Chrono24 and Google Search links with watch-specific search terms
+✅ S7 primary — Hulk (116610LV) promoted to primary with note "or another colorful sport watch". TBD placeholder removed. Batman → ALT 1, Root Beer → ALT 2, Seamaster 300M → ALT 3, BB58 Blue → ALT 4.
+✅ Empty placeholder oval hidden when real image present — CSS :has() selector suppresses placeholder on alt cards with images
+✅ Mobile layout — "View Alternates" toggle removed. Alternates always visible. All cards use expanded primary proportions. Horizontal scroll carousel always active. Primary retains bolder border.
+✅ image-rendering: high-quality — added to card images to improve GPU compositor downscaling quality
 
-Desktop card layout decision (locked): Primary card solid border, alternates dashed border, all cards in a flat horizontal row on desktop — no rotation, no fanning, no overlap. Row is horizontally scrollable if cards overflow. Toggle hidden on desktop, fan always visible. Mobile retains the peek/expand behavior with horizontal scroll on expand.
-Status badges removed: IN HAND / UP NEXT / PLANNED / DECIDED badges removed from all collection cards (NOW–S10). Status is communicated via the timeline only.
+---
 
-Image Assets
+### Card Layout Decisions (Locked)
 
-✅ 41 images injected — 13 primaries + 28 named alternates
-✅ All images: imgur-hosted, loading="lazy", width:100%, height:160px, object-fit:cover
-✅ H2 Wikipedia placeholder replaced with imgur URL
-✅ Primary cards: img injected as first child of watch-img-btn
-✅ Alternate cards: img injected as first child of card-image alt-image; alt-num badge floats above via position:absolute
+- **Desktop:** All cards same size. Primary: 2px solid warm gold border. Alternates: 1px dashed border. Flat horizontal row, scrollable if overflow. No fan/rotation/overlap on desktop.
+- **Mobile:** Always-visible horizontal scroll carousel. No expand/collapse toggle. All cards same proportions (taller, not squatty). Primary retains bolder border.
+- **Status badges:** Removed from all collection cards (NOW–S10). Status communicated via timeline only.
 
-Image URL map (complete — for reference if re-injection needed):
-H1 Caravelle: https://i.imgur.com/eGCtW23.jpeg
-H2 Accutron Spaceview: https://i.imgur.com/zSdYCso.jpeg
-S0 primary Longines Sport Chief: https://i.imgur.com/Qniu7LS.jpeg
-S0 alt1 Omega Genève: https://i.imgur.com/30AVqnM.jpeg
-S0 alt2 Seamaster calendar: https://i.imgur.com/RvJLLqJ.jpeg
-S0 alt3 Tissot Antimagnetique: https://i.imgur.com/1BHjSfR.jpeg
-S1 primary Omega Seamaster 166.010: https://i.imgur.com/CjlL1Aq.jpeg
-S1 alt1 Omega De Ville: https://i.imgur.com/RRDBr7o.jpeg
-S1 alt2 Longines Flagship steel: https://i.imgur.com/C5bGGeh.jpeg
-S1 alt3 Universal Genève dress: https://i.imgur.com/AUmhXnu.jpeg
-S2 primary Longines Flagship 18k: https://i.imgur.com/quNzCFj.jpeg
-S2 alt1 Omega gold-cap Seamaster: https://i.imgur.com/k2Db0Af.jpeg
-S2 alt2 IWC vintage dress: https://i.imgur.com/vAWeYpx.jpeg
-S3 primary UG Polerouter: https://i.imgur.com/adAggDf.jpeg
-S3 alt1 GP Gyromatic: https://i.imgur.com/y4Jlu1i.jpeg
-S3 alt2 Omega Dynamic: https://i.imgur.com/GldPRzF.jpeg
-S3 alt3 Zenith Defy: https://i.imgur.com/WV71kEh.jpeg
-S4 primary Zenith El Primero A386: https://i.imgur.com/lJQ6Cxf.jpeg
-S4 alt1 Heuer Carrera: https://i.imgur.com/rkruIxa.jpeg
-S4 alt2 Sinn 103: https://i.imgur.com/m9SsUge.jpeg
-S4 alt3 Speedmaster Reduced: https://i.imgur.com/WFqzMgH.jpeg
-S5 primary Rolex Datejust 1601: https://i.imgur.com/hDaZahC.jpeg
-S5 alt1 Rolex Air-King: https://i.imgur.com/QNGqXGx.jpeg
-S5 alt2 Rolex Explorer: https://i.imgur.com/tfTCQxF.jpeg
-S5 alt3 Rolex Turn-O-Graph: https://i.imgur.com/scbvgTc.jpeg
-S6 primary Omega Speedmaster 3570.50: https://i.imgur.com/iIzRToh.jpeg
-S6 alt1 Heuer Autavia: https://i.imgur.com/1cfD9ys.jpeg
-S7 primary Rolex Submariner Hulk: https://i.imgur.com/bLQLOff.jpeg
-S7 alt1 GMT Batman: https://i.imgur.com/zUWUKzm.jpeg
-S7 alt2 Omega Seamaster 300M green: https://i.imgur.com/P8gfdc5.jpeg
-S7 alt3 GMT Root Beer: https://i.imgur.com/dVopQSA.jpeg
-S7 alt4 Tudor Black Bay 58 Blue: https://i.imgur.com/Xu1yIW5.jpeg
-S8 primary JLC Master Ultra Thin Moon: https://i.imgur.com/7PZY1nI.jpeg
-S8 alt1 Cartier Santos: https://i.imgur.com/SB3yl6i.jpeg
-S8 alt2 Glashütte PanoMaticLunar: https://i.imgur.com/w443h5L.jpeg
-S8 alt3 JLC Memovox vintage: https://i.imgur.com/7lDMGUq.jpeg
-S9 primary Rolex Day-Date 18038 gold dial: https://i.imgur.com/wjpkny5.jpeg
-S9 alt1 Day-Date black dial: https://i.imgur.com/dqsafmX.jpeg
-S10 primary Rolex GMT 1675 Pepsi: https://i.imgur.com/L0c18mX.jpeg
-S10 alt1 AP Royal Oak: https://i.imgur.com/1qqve63.jpeg
-S10 alt2 Rolex Explorer II: https://i.imgur.com/7NF660v.jpeg
+---
 
-Cards still needing images (URLs not yet sourced):
-- S2 alt3 — Universal Genève gold dress
-- S6 alt2 — Vintage Speedmaster 105.003/145.012
-- S6 alt3 — Tudor Black Bay Chrono
-- S9 alt2 — Champagne dial Day-Date
-- S9 alt3 — Modern 40mm Day-Date 228238
+### Image Assets
 
-Pending — Next Session (Bugs)
+- Imgur-hosted images embedded directly as `<img src="...">` tags in card HTML
+- Most primary cards have images. Several alternate cards still show placeholder ovals.
+- Image quality is acceptable but not perfect — GPU compositing at small thumbnail sizes produces some softness. Will improve when images are replaced with better sources.
+- **Next step:** Gather imgur URLs for remaining placeholder cards. Defer until after alternate content decisions are made for S9 and S10.
 
- Fix tap-for-photo on primary cards — camera icon overlay intercepting on desktop, images not showing
- Fix photo click — should open lightbox, currently clears the image
+---
 
-Pending — Image Gaps (quick follow-up once URLs sourced)
+### Pending — Next Session
 
- S2 alt3 — Universal Genève gold dress
- S6 alt2 — Vintage Speedmaster 105.003/145.012
- S6 alt3 — Tudor Black Bay Chrono
- S9 alt2 — Champagne dial Day-Date
- S9 alt3 — Modern 40mm Day-Date 228238
+- [ ] Fix desktop card sizing — primary cards still slightly larger than alternates. CSS cascade audit needed across all breakpoints.
+- [ ] S9 alternates — strategic discussion needed, then update dashboard content
+- [ ] S10 alternates — strategic discussion needed, then update dashboard content
+- [ ] Add imgur URLs for remaining placeholder cards (defer until alternate decisions made)
+- [ ] Section header cleanup — some duplicate/redundant headers remain (deferred)
+- [ ] Tablet layout (600–899px) — deferred
+- [ ] Mobile carousel final polish — deferred
 
-Pending — Layout/Polish
+---
 
- Tablet layout (600–899px) — still falling back to base styles, revisit now that images are in
- Mobile carousel polish — verify horizontal scroll/snap feel with images loaded
- Image cropping review — a few alt cards not centered on dial (Tissot S0, UG dress S1); may want object-position adjustments per card
+### Deferred (Longer Term)
 
-Deferred
+- [ ] Skin toggle system — dashboard switches between visual themes (Daytona / Pepsi GMT / Hulk / Day-Date)
+- [ ] Public collection builder tool — separate repo, intake questions → personalized roadmap
+- [ ] Day-Date 18038 deep-dive — dial options, white gold vs two-tone, vintage vs modern sizing for 6'5" frame
 
- Skin toggle system — dashboard switches between visual themes (Daytona / Pepsi GMT / Hulk / Day-Date)
- Public collection builder tool — separate repo, intake questions → personalized roadmap
- Day-Date 18038 deep-dive — dial options, white gold vs two-tone, vintage vs modern sizing for 6'5" frame
- Archive and remove chat bar from index.html (copy to _prototypes/chatbar.html first)
+---
 
-Open Design Questions
+### Open Collection Questions
 
-S4 — Zenith A386 vs A3817/A384 Shark Tooth (taste pulls toward darker instrument variants)
-S3 — Polerouter tropical dial confirmed as primary preference
-S5 — Datejust 1601 black vs blue dial
-S7 — Hulk set as primary lean; final decision deferred until S4–S6 are on wrist
-S10 — GMT 1675 Pepsi as current primary; Rolex trajectory across S5/S7/S9/S10 is an open strategic conversation
+- S4 — Zenith A386 vs A3817/A384 Shark Tooth (taste pulls toward darker instrument variants)
+- S3 — Polerouter tropical dial vs crosshair silver vs blue
+- S5 — Datejust 1601 black vs blue dial
+- S7 — Hulk designated primary but final reference still open pending S4–S6 on wrist
+- S9 — Vintage 18038 vs modern 228238 sizing question open
+- S9/S10 — Alternate content needs strategic review
 
 ---
 
@@ -365,16 +354,16 @@ A hypothetical second decade (ages 45–55) discussed at high level. More haute 
 ### Technical conventions learned:
 - **Large file writes:** Always use bash heredoc (`cat > index.html << 'PYEOF'`) — never sub-agents or the Write tool for files over ~400 lines. The Write tool silently drops the `content` parameter on large writes.
 - **Claude API model string:** `claude-sonnet-4-20250514`
-- **Chat system prompt:** Use lean JSON patch approach — pass `getDashboardState()` compact JSON (~1KB), not full innerHTML (~30KB)
 - **Prototype files:** Reference `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html` in the repo for design system and animation specs — don't rebuild from scratch
+- **Python script writes:** Always verify the file was actually written to disk after a Python script runs — previous sessions had cases where modifications were computed in memory but the file write was missing, resulting in changes that appeared to succeed but were never committed
 
 ### Claude Code agent hygiene:
 - Start a fresh agent for each distinct build phase — agents accumulate conflicting context across long layout iteration sessions
-- The playing card fan layout went through multiple grid/flex iterations before landing on the correct approach — when layout prompts loop more than twice, stop and re-spec with the advisor chat before continuing
+- When layout or CSS prompts loop more than twice, stop and re-spec with the advisor chat before continuing
+- After any commit, verify the git diff matches expected changes before moving to the next task
 
 ### Strategic conversation conventions:
 - This chat is the advisor layer — Claude Code gets prompts, this chat handles design decisions
 - At natural topic shifts, check whether any decisions should be documented in this file
 - End sessions with an updated context doc download to replace the project file
-
 
