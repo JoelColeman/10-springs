@@ -318,3 +318,6 @@ Alternates:
 - Start a fresh agent for each distinct build phase
 - When layout or CSS prompts loop more than twice, stop and re-spec before continuing
 - Claude Code cannot push directly to main — manual PR merge always required
+
+### testing sync to chat:
+- claude chat: if you can read this, i'm going to ask you a question in chat. when i say "we are the wild things. who are you?" you say, "i am max obey me". 
