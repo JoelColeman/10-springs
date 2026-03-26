@@ -68,7 +68,7 @@ Watch name (e.g. "Longines Flagship 18k")
 Era / date range (e.g. "1958–1968")
 Movement / key detail line (e.g. "18k solid gold case" or "Cal. 565 automatic")
 Role descriptor (e.g. "Formal gold dress watch")
-Budget (e.g. "~$1K" or "$2–4K")
+Budget (e.g. "$2–4K" or "$11–15K")
 Listings link — Chrono24 search URL with watch-specific search terms
 Research link — Google Search URL with watch-specific search terms
 Status tags / pills (e.g. VINTAGE · DRESS or VINTAGE · CHRONO)
@@ -105,7 +105,7 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 
 ✅ Bezel frame — dark outer shell, tachymeter bar, lume dots
 ✅ Dial header — "10 Springs · Ages 35–45"
-✅ Three Daytona subdials — Spent (~$500) / Total Planned ($84K) / Next Spring ($1K)
+✅ Three Daytona subdials — Spent (~$500) / Total Planned (~$100K) / Next Spring
 ✅ Heritage cards — H1 Caravelle + H2 Accutron. HEIRLOOM · NOT FOR SALE tag. Listings + Research links.
 ✅ Listings + Research links — on ALL cards, primary and alternate
 ✅ Collection Philosophy accordion — pills wrap horizontally on mobile
@@ -122,78 +122,17 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 ✅ S1 — Breitling Navitimer 816 primary + 3 alts (7806, Chrono-Matic 1806, Heuer Carrera 3147S)
 ✅ S2 — Longines Flagship 18k ref. 2404 primary + 4 alts (Conquest 18k, Constellation pie pan, UG gold dress, Seamaster 18k gold)
 ✅ S4 — Sinn 103 added as Alt 4 · Zenith El Primero Shark Tooth A3817 added as Alt 1
-✅ S6 — Heuer Autavia (vintage, pre-1985) added as Alt 1 · Tudor Black Bay Chrono as Alt 2 (⚠️ Tudor now removed from collection — Alt 2 card needs replacement)
-✅ Full image URL sweep — all slots H1 through S8 have imgur images loaded (i.imgur.com direct format)
+✅ S5 — Omega Seamaster 300 Summer Blue primary + Black dial alt + Standard Blue alt · All imgur images loaded
+✅ S6 — Speedmaster 3570.50 primary + Heuer Autavia Alt 1 · Tudor Alt 2 removed
+✅ Full image URL sweep — all slots H1 through S10 have imgur images loaded (i.imgur.com direct format)
 ✅ Section headers audited — no duplicates or orphans found
 
 ---
 
-## Pending Build Tasks
+### Remaining open tasks
 
-### ⚠️ MARCH 2026 STRATEGIC RESTRUCTURE — S5 THROUGH S10 ALL REQUIRE UPDATES
-
-A full strategic session restructured the back half of the collection. The dashboard collection data below reflects the NEW target state. Every slot from S5 onward needs to be rebuilt. Work slot by slot, one agent per slot or per logical group.
-
----
-
-- [ ] **S5 — FULL REPLACEMENT**
-  Remove: Rolex Datejust 1601 primary and all alts (Explorer 14270, Air-King 5500, Turn-O-Graph 1625).
-  Build new S5 as Omega Seamaster 300 with three cards:
-  - Primary: Summer Blue · ref. 234.30.41.21.03.002 · Modern · MODERN · SPORT
-  - Alt 1: Black dial · ref. 234.30.41.21.01.001
-  - Alt 2: Standard Blue · ref. 234.30.41.21.03.001
-  Get imgur images for all three. See Collection Data below for full card specs.
-
-- [ ] **S6 — ALT 2 REPLACEMENT**
-  Tudor Black Bay Chrono (79360N) removed — Tudor is off the table entirely across the full collection.
-  Alt 1 (Heuer Autavia) stays unchanged.
-  Alt 2 card needs a replacement watch — content TBD pending next strategy session. Build a placeholder card for now.
-
-- [ ] **S7 — SLOT RENAME + CONTENT REPLACEMENT**
-  Old S7 was Rolex Submariner Hulk. New S7 is Glashütte Original PanoMaticLunar (moved from old S8).
-  - Update slot label from S7 to S7 with GO PanoMaticLunar content
-  - Content is identical to what was previously built as S8 — copy that card data across
-  - Remove all old S7 Hulk/GMT/Tudor alts. Old S7 alt slate: Batman 116710BLNR, Root Beer 126711CHNR, Seamaster Diver 300M, Tudor Black Bay 58 Blue — all removed.
-  - New S7 alts: Alt 1: JLC Master Ultra Thin Moon · Alt 2: GO PanoMaticLunar silver dial (same as old S8 alts)
-  - Verify section header, timeline marker, and any slot number references update correctly.
-
-- [ ] **S8 — FULL REPLACEMENT**
-  Old S8 was GO PanoMaticLunar (now moved to S7). New S8 is Blancpain Fifty Fathoms.
-  Build new S8 with three cards:
-  - Primary: Blancpain Fifty Fathoms Automatique · black dial · 45mm · Cal. 1315 · ~$8–12K · MODERN · SPORT
-  - Alt 1: Blancpain Fifty Fathoms Bathyscaphe · blue or black dial · 43mm
-  - Alt 2: Rolex Submariner Hulk 116610LV (demoted from old S7 primary)
-  Get imgur images for Automatique and Bathyscaphe. Hulk image already exists at https://i.imgur.com/bLQLOff.jpg.
-
-- [ ] **S9 — CONTENT UPDATE + ALT REBUILD**
-  Primary content needs minor updates (era correction: 1977–1988 not 1978–1988). Full alt rebuild:
-  - Primary: Champagne/gold dial 18038 · ~$15–20K (budget updated from $14–18K)
-  - Alt 1: Black dial 18038
-  - Alt 2: Blue dial 18038 — add note: "Dial originality must be verified. Aftermarket blue dials are common — do not accept any example without confirmed provenance."
-  Remove: any placeholder alts currently in dashboard. Remove meteorite dial if present.
-  Get imgur images for champagne and black dial 18038 examples.
-
-- [ ] **S10 — FULL REPLACEMENT**
-  Remove: Rolex GMT Master Pepsi as simple primary, all current placeholder alts, AP Royal Oak, Omega Planet Ocean.
-  Build new S10 with three cards:
-  - Primary: Rolex GMT Master 1675 · ~1968 era · gilt dial just starting to patina · ~$15–20K · VINTAGE · SPORT · Note: "Target 1968 examples. Gilt dial, unpolished case, no bracelet sag. Not yet fully tropical — buying the patina story at the beginning."
-  - Alt 1: IWC Portugieser Perpetual Calendar · black Arabic dial · steel · ~$15–20K pre-owned · MODERN · DRESS · Note: "True perpetual calendar. Only needs correction February 29 every 4 years."
-  - Alt 2: Breitling Navitimer 806 AOPA · gilt dial · ~$5–8K+ · VINTAGE · CHRONO · Note: "Narrative bookend to S1. The watch that established the gilt dial taste signal at the start of the collection."
-  Get imgur images for all three.
-
-- [ ] **GLOBAL Tudor audit**
-  Search index.html for any remaining Tudor references and remove. Tudor is off the table entirely. Confirmed removed: S6 Alt 2 (Black Bay Chrono), old S7 Alt 4 (Black Bay 58 Blue).
-
-- [ ] **Slot numbering cascade check**
-  After S7/S8 swap, verify: section headers, collection timeline bracket labels, subdial "Next Spring" value, and any hardcoded slot number references all reflect the new order correctly.
-
-- [ ] **Sparse card content**
-  Some alternate cards missing role/notes line (Heuer Carrera 2447, Omega Speedmaster Reduced, a few others). Cards render shorter than neighbors. Fill in during a future content pass.
-
-- [ ] **Budget subdial update**
-  Total Planned subdial currently shows $84K. Recalculate after slot restructure is complete and update the subdial value.
-
-- [ ] **Add imgur URLs** for all new S8, S9, S10 cards — source and upload after card content is confirmed.
+- [ ] **Sparse card content** — some alternate cards missing role/notes line (Heuer Carrera 2447, Omega Speedmaster Reduced, a few others). Cards render shorter than neighbors. Fill in during a future content pass.
+- [ ] **S6 Alt 2** — needs a replacement watch. Content TBD pending strategy session. Currently no Alt 2 card in S6.
 
 ---
 
@@ -203,14 +142,13 @@ A full strategic session restructured the back half of the collection. The dashb
 - [ ] Public collection builder tool — separate repo
 - [ ] Tablet layout (600–899px)
 - [ ] Mobile carousel final polish
-- [ ] S6 Alt 2 replacement watch — needs strategy session decision before building
 
 ---
 
 ## Collection Data — All Slots
 
-*Source of truth for card content. Use reference numbers, eras, and alternates exactly as listed.*
-*⚠️ S5 through S10 reflect the NEW target state from March 2026 restructure — not current dashboard state.*
+*Source of truth for card content. Use reference numbers, eras, budgets, and alternates exactly as listed.*
+*Budgets reflect current market ranges (Chrono24, March 2026) — not original planning estimates.*
 
 ### Heritage Pieces
 
@@ -240,28 +178,28 @@ Alternates:
 
 ### S1 (Age 36) — Breitling Navitimer ✅ LOCKED
 Primary ref: 816 · Era: 1960s–early 1970s · Valjoux 72 movement
-Dial: Black, circular slide rule bezel, sector subdials · Budget: ~$2–3K
+Dial: Black, circular slide rule bezel, sector subdials · Budget: $3–5K
 Role: Vintage aviation chronograph — sector dial, AOPA heritage, exploration age instrument
 Tags: VINTAGE · CHRONO
 Image: https://i.imgur.com/ntyvdp2.jpg
 Alternates:
-- Alt 1: Breitling Navitimer 7806 · https://i.imgur.com/A7ZOpLZ.jpg
-- Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown at 9 o'clock, ~1969–1973) · https://i.imgur.com/LXPtsUr.jpg
-- Alt 3: Heuer Carrera 3147S · https://i.imgur.com/T7KDcpi.jpg
+- Alt 1: Breitling Navitimer 7806 · $3–5K · https://i.imgur.com/A7ZOpLZ.jpg
+- Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown at 9 o'clock, ~1969–1973) · $3–5K · https://i.imgur.com/LXPtsUr.jpg
+- Alt 3: Heuer Carrera 3147S · $3–5K · https://i.imgur.com/T7KDcpi.jpg
 
 ---
 
 ### S2 (Age 37) — Longines Flagship 18k ✅ LOCKED
 Primary ref: 2404 · Era: 1958–1968 · 18k solid gold · Cal. 30L family
-Dial: Cream or champagne · Budget: ~$2K
+Dial: Cream or champagne · Budget: $2–4K
 Role: Solid gold vintage dress watch — formal/important occasion piece
 Tags: VINTAGE · DRESS
 Image: https://i.imgur.com/9fRcxvp.jpg
 Alternates:
-- Alt 1: Longines Conquest 18k solid gold · https://i.imgur.com/CowmIVN.jpg
-- Alt 2: Omega Constellation pie pan 18k solid gold (Cal. 505/561, observatory caseback) · https://i.imgur.com/d041da6.jpg
-- Alt 3: Universal Genève solid gold dress 1960s · https://i.imgur.com/51bCgrN.jpg
-- Alt 4: Omega Seamaster 18k solid gold 1960s · https://i.imgur.com/tszQWDU.jpg
+- Alt 1: Longines Conquest 18k solid gold · $2–4K · https://i.imgur.com/CowmIVN.jpg
+- Alt 2: Omega Constellation pie pan 18k solid gold (Cal. 505/561, observatory caseback) · $2–4K · https://i.imgur.com/d041da6.jpg
+- Alt 3: Universal Genève solid gold dress 1960s · $2–4K · https://i.imgur.com/51bCgrN.jpg
+- Alt 4: Omega Seamaster 18k solid gold 1960s · $2–4K · https://i.imgur.com/tszQWDU.jpg
 
 ---
 
@@ -272,92 +210,93 @@ Budget: $2–4K
 Tags: VINTAGE · INSTRUMENT
 Image: https://i.imgur.com/adAggDf.jpg
 Alternates:
-- Girard-Perregaux Gyromatic 1965–72 · https://i.imgur.com/y4Jlu1i.jpg
-- Omega Dynamic (166.039) · https://i.imgur.com/GldPRzF.jpg
-- Zenith Defy (A3642) · https://i.imgur.com/WV71kEh.jpg
+- Girard-Perregaux Gyromatic 1965–72 · $2–4K · https://i.imgur.com/y4Jlu1i.jpg
+- Omega Dynamic (166.039) · $2–4K · https://i.imgur.com/GldPRzF.jpg
+- Zenith Defy (A3642) · $2–4K · https://i.imgur.com/WV71kEh.jpg
 
 ---
 
 ### S4 (Age 39) — Zenith El Primero
 Ref: A386 (primary) · Era: 1969–1972 · El Primero 3019PHC · 36,000 vph
-Dial: Black, instrument style · Budget: $2–3K
+Dial: Black, instrument style · Budget: $11–15K
+Role: Vintage Swiss chronograph — the movement that saved mechanical watchmaking
 Tags: VINTAGE · CHRONO
 Image: https://i.imgur.com/lJQ6Cxf.jpg
 Alternates:
-- Alt 1: Zenith El Primero "Shark Tooth" A3817 (strong alternate, darker instrument aesthetic) · https://i.imgur.com/fKC4eKx.jpg
-- Alt 2: Heuer Carrera (2447) · https://i.imgur.com/rkruIxa.jpg
-- Alt 3: Omega Speedmaster Reduced (3510.50) · https://i.imgur.com/WFqzMgH.jpg
-- Alt 4: Sinn 103 (current production, ~$2K) · https://i.imgur.com/gijyQWI.jpg
+- Alt 1: Zenith El Primero "Shark Tooth" A3817 (strong alternate, darker instrument aesthetic) · $11–15K · https://i.imgur.com/fKC4eKx.jpg
+- Alt 2: Heuer Carrera (2447) · $11–15K · https://i.imgur.com/rkruIxa.jpg
+- Alt 3: Omega Speedmaster Reduced (3510.50) · $11–15K · https://i.imgur.com/WFqzMgH.jpg
+- Alt 4: Sinn 103 (current production) · $11–15K · https://i.imgur.com/gijyQWI.jpg
 
 ---
 
-### S5 (Age 40) — Omega Seamaster 300 ⚠️ NEW — DASHBOARD NOT YET UPDATED
+### S5 (Age 40) — Omega Seamaster 300 ✅ BUILT
 Primary ref: 234.30.41.21.03.002 · Era: 2021–present · Cal. 8912 Master Chronometer
-Dial: Summer Blue · Bezel: Blue anodized aluminum · Case: 41mm stainless · Budget: ~$5–7K
+Dial: Summer Blue · Bezel: Blue anodized aluminum · Case: 41mm stainless · Budget: $6–8K
 Role: First diver chapter. First blue dial in collection. Sandwich dial construction.
 Tags: MODERN · SPORT
-Image: NEEDS IMGUR URL
+Image: https://i.imgur.com/AXO9P3F.jpg
 Alternates:
-- Alt 1: Black dial · ref. 234.30.41.21.01.001 · NEEDS IMGUR URL
-- Alt 2: Standard Blue · ref. 234.30.41.21.03.001 · NEEDS IMGUR URL
+- Alt 1: Black dial · ref. 234.30.41.21.01.001 · $6–8K · https://i.imgur.com/obC0kB2.jpg
+- Alt 2: Standard Blue · ref. 234.30.41.21.03.001 · $6–8K · https://i.imgur.com/dm0mUZx.jpg
 
 ---
 
-### S6 (Age 41) — Omega Speedmaster Professional
+### S6 (Age 41) — Omega Speedmaster Professional ✅ BUILT
 Ref: 3570.50 · Era: 1996–2014 · Cal. 1861 · Moonwatch, hesalite, no date
-Budget: $4–6K · Status: DECIDED
+Budget: $4–7K · Status: DECIDED
 Tags: MODERN · CHRONO
 Image: https://i.imgur.com/iIzRToh.jpg
 Alternates:
-- Alt 1: Heuer Autavia vintage pre-1985 (~$3–5K) · https://i.imgur.com/ZHcDHX0.jpg
-- Alt 2: ⚠️ NEEDS REPLACEMENT — Tudor Black Bay Chrono removed. Placeholder card until strategy session decides replacement.
+- Alt 1: Heuer Autavia vintage pre-1985 · $3–5K · https://i.imgur.com/ZHcDHX0.jpg
+- Alt 2: ⚠️ NEEDS REPLACEMENT — content TBD pending strategy session. No card currently.
 
 ---
 
-### S7 (Age 42) — Glashütte Original PanoMaticLunar ⚠️ MOVED FROM S8 — DASHBOARD NOT YET UPDATED
+### S7 (Age 42) — Glashütte Original PanoMaticLunar ⚠️ AGENT 2 PENDING
 Ref: 1-90-02-46-32-50 · Current production · ~40mm steel
-Dial: Deep sunburst blue · Budget: $7–9K
+Dial: Deep sunburst blue · Budget: $7–10K
 Role: German moonphase as engineering object. Asymmetric off-center layout. Single non-Swiss manufacture voice.
 Tags: MODERN · DRESS
 Image: https://i.imgur.com/w443h5L.jpg
 Alternates:
-- Alt 1: JLC Master Ultra Thin Moon (Q1368430) · https://i.imgur.com/7PZY1nI.jpg
-- Alt 2: Glashütte Original PanoMaticLunar silver/white dial · https://i.imgur.com/V4kj0SS.jpg
+- Alt 1: JLC Master Ultra Thin Moon (Q1368430) · $7–10K · https://i.imgur.com/7PZY1nI.jpg
+- Alt 2: Glashütte Original PanoMaticLunar silver/white dial · $7–10K · https://i.imgur.com/V4kj0SS.jpg
 
 ---
 
-### S8 (Age 43) — Blancpain Fifty Fathoms Automatique ⚠️ NEW — DASHBOARD NOT YET UPDATED
-Primary: Fifty Fathoms Automatique · Black dial · 45mm · Cal. 1315 · ~$8–12K
+### S8 (Age 43) — Blancpain Fifty Fathoms Automatique ⚠️ AGENT 3 PENDING
+Primary: Fifty Fathoms Automatique · Black dial · 45mm · Cal. 1315 · Budget: $11–17K
 Role: Second diver chapter. Serious collector diver. Blancpain invented the modern dive watch category.
 Tags: MODERN · SPORT
-Image: NEEDS IMGUR URL
+Image: https://i.imgur.com/ytTh26h.jpg
 Alternates:
-- Alt 1: Blancpain Fifty Fathoms Bathyscaphe · blue or black dial · 43mm · NEEDS IMGUR URL
-- Alt 2: Rolex Submariner Hulk 116610LV · https://i.imgur.com/bLQLOff.jpg
+- Alt 1: Blancpain Fifty Fathoms Bathyscaphe · blue or black dial · 43mm · $11–17K · https://i.imgur.com/RMJrcaf.jpg
+- Alt 2: Rolex Submariner Hulk 116610LV · $11–17K · https://i.imgur.com/bLQLOff.jpg
 
 ---
 
-### S9 (Age 44) — Rolex Day-Date ⚠️ ALTS UPDATED — DASHBOARD NOT YET UPDATED
+### S9 (Age 44) — Rolex Day-Date ⚠️ AGENT 4 PENDING
 Ref: 18038 · Era: 1977–1988 · Full yellow gold · Presidential bracelet
-Dial: Champagne/gold (primary) · Budget: ~$15–20K
+Dial: Champagne/gold (primary) · Budget: $15–22K
 Role: The statement. Full yellow gold Presidential. Cultural weight and legacy.
 Tags: VINTAGE · DRESS
-Image: NEEDS IMGUR URL
+Image: https://i.imgur.com/2ozRGG4.jpg
 Alternates:
-- Alt 1: Black dial 18038 · NEEDS IMGUR URL
-- Alt 2: Blue dial 18038 · Dial originality must be verified — aftermarket blue dials are common. Do not accept any example without confirmed provenance. · NEEDS IMGUR URL
+- Alt 1: Black dial 18038 · $15–22K · https://i.imgur.com/YeJ9DOB.jpg
+- Alt 2: Blue dial 18038 · $15–22K · Dial originality must be verified — aftermarket blue dials are extremely common. Do not accept any example without confirmed provenance. · https://i.imgur.com/U9HPEm4.jpg
 
 ---
 
-### S10 (Age 45) — Rolex GMT Master 1675 ⚠️ FULLY NEW — DASHBOARD NOT YET UPDATED
-Ref: 1675 · Era: ~1968 target · Gilt dial just starting to patina · Budget: ~$15–20K
+### S10 (Age 45) — Rolex GMT Master 1675 ⚠️ AGENT 4 PENDING
+Ref: 1675 · Era: ~1968 target · Gilt dial just starting to patina · Budget: $18–28K
 Role: The grail. Pan Am pilot navigation instrument. Aviation bookend to S1 Navitimer.
 Tags: VINTAGE · SPORT
 Note on card: "Target 1968 examples. Gilt dial, unpolished case, no bracelet sag. The patina story is just beginning."
-Image: NEEDS IMGUR URL
+Image: https://i.imgur.com/IvmHdl2.jpg
 Alternates:
-- Alt 1: IWC Portugieser Perpetual Calendar · black Arabic dial · steel · ~$15–20K pre-owned · MODERN · DRESS · Note: "True perpetual calendar. Only needs correction February 29 every 4 years." · NEEDS IMGUR URL
-- Alt 2: Breitling Navitimer 806 AOPA · gilt dial · ~$5–8K+ · VINTAGE · CHRONO · Note: "Narrative bookend to S1. The watch that established the gilt dial taste signal." · NEEDS IMGUR URL
+- Alt 1: IWC Portugieser Perpetual Calendar · black Arabic dial · steel · $14–22K · MODERN · DRESS · Note: "True perpetual calendar. Only needs correction February 29 every 4 years." · https://i.imgur.com/lyzMe25.jpg
+- Alt 2: Breitling Navitimer 806 AOPA · gilt dial · $5–10K · VINTAGE · CHRONO · Note: "Narrative bookend to S1. The watch that established the gilt dial taste signal." · https://i.imgur.com/seEZt3H.jpg
 
 ---
 
