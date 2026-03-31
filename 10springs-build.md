@@ -29,6 +29,20 @@ Claude Code handles all building and commits. Strategic conversations are handle
 - `embed_images.py` — image embedding utility script
 
 ---
+## File Ownership
+Every file has a declared owner. Only the declared owner writes to that file.
+Other roles read it, never edit it.
+
+- 10springs-build.md — Owner: Code Code updates this as part of every commit. Chat reads after sync. Joel never rewrites.
+- index.html — Owner: Code Code writes all HTML/CSS/JS. Chat reads via project sync.
+- CLAUDE.md — Owner: Joel Updated manually when branch or PR URL changes.
+- _prototypes/* — Owner: Code Reference files. Code may update; Chat reads.
+- embed_images.py — Owner: Code Utility script. Code owns.
+- 10springs-strategy.md — Owner: Chat Lives in Claude project only — NOT in repo. Code never sees it. Joel commits Chat-drafted updates.
+
+The rule that matters most: Code must never regenerate or overwrite content
+that Chat owns. If a task would require Code to touch a Chat-owned file,
+stop and flag it instead.
 
 ## Design System
 
@@ -102,6 +116,53 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 ---
 
 ## What Is Currently Built and Live
+
+Spec Deviations
+Code logs here whenever it departs from the spec in the Collection Data
+or Card Layout Rules sections above. Chat reads this after sync and updates
+the spec to match reality.
+Format per entry: Date · What changed · Why · What the spec should say instead.
+(none yet)
+
+Discovered Conventions
+Code adds here whenever it encounters a new technical rule, tool behavior,
+or failure mode not already listed in the Prompt Conventions section.
+These accumulate across sessions. Chat reads them after sync and includes
+them in the next prompt.
+Format per entry: Date · Convention · Files affected.
+
+Pre-March 2026 · Large file writes
+Always use bash heredoc: cat > file << 'PYEOF'
+Never use the Write tool for files over ~400 lines — it silently drops content.
+Affects: index.html
+
+Pre-March 2026 · Image URLs
+Always use direct imgur format: https://i.imgur.com/XXXXXXX.jpg
+Never use the page URL format: https://imgur.com/XXXXXXX
+Affects: all card images
+
+Pre-March 2026 · Python script writes
+Always verify the file actually landed on disk after a Python script runs.
+Silent failure is possible — the script appears to complete but the file may be missing or empty.
+Affects: embed_images.py
+
+Pre-March 2026 · Git diff verification
+After any commit, verify git diff matches expected changes before moving to the next task.
+Affects: all commits
+
+Pre-March 2026 · CSS image-rendering
+image-rendering: high-quality required on all card images.
+GPU compositing from border-radius + overflow:hidden + transition:transform causes pixelation without it.
+Affects: card images
+
+Pre-March 2026 · Lightbox DOM order
+The lightbox HTML element must appear in the DOM before the script that references it.
+Placing the script first causes silent failure — no error thrown.
+Affects: index.html
+
+Pre-March 2026 · CSS :has(>img) selector
+:has(>img) auto-hides placeholder ovals when a real image tag is present.
+Affects: card placeholders
 
 ✅ Bezel frame — dark outer shell, tachymeter bar, lume dots
 ✅ Dial header — "10 Springs · Ages 35–45"
@@ -302,22 +363,64 @@ Alternates:
 
 ## Claude Code Prompt Conventions
 
-### Every prompt must:
-1. Start with a planning step — describe what will change and wait for confirmation before executing
-2. End with: *"After committing, provide the direct PR merge link to merge your branch into main so I can merge with one click."*
-3. Include: *"If you find yourself retrying the same approach more than twice, stop and tell me what's blocking rather than continuing to loop."*
+Claude Code Prompt Conventions
+Chat uses this section to construct every Code prompt. All required
+elements are included automatically — Joel never has to add them manually.
+Every prompt must include:
+1. Read first
+"Before starting, read 10springs-build.md fully, including the
+Spec Deviations and Discovered Conventions sections."
 
-### Technical conventions:
-- **Large file writes:** Always use bash heredoc (`cat > index.html << 'PYEOF'`) — never sub-agents or the Write tool for files over ~400 lines. The Write tool silently drops the `content` parameter on large writes.
-- **Prototype files:** Reference `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html` for design system and animation specs — don't rebuild from scratch.
-- **Python script writes:** Always verify the file was actually written to disk after a Python script runs.
-- **After any commit:** Verify the git diff matches expected changes before moving to the next task.
-- **Image URLs:** Always use direct imgur format `https://i.imgur.com/XXXXXXX.jpg` — never the page URL format `https://imgur.com/XXXXXXX`.
+2. Planning step
+"Describe every file you will touch and what you will change.
+Wait for my explicit 'go ahead' before executing."
 
-### Agent hygiene:
-- Start a fresh agent for each distinct build phase
-- When layout or CSS prompts loop more than twice, stop and re-spec before continuing
-- Claude Code cannot push directly to main — manual PR merge always required
+3. Deviation logging
+"If you depart from the card data, layout rules, or design system spec
+in this file, log it in the Spec Deviations section:
+date · what changed · why · what the spec should say instead."
 
+4. Build log update
+"Update the build log (✅ checklist and open tasks) as part of your commit —
+not as a separate step. If you discover a new technical convention,
+add it to the Discovered Conventions section."
+
+5. Loop-stop rule
+"If you find yourself retrying the same approach more than twice,
+stop and tell me what's blocking rather than continuing to loop."
+
+6. PR link
+"After committing, provide the direct PR merge link to merge your branch
+into main so I can merge with one click."
+
+Technical conventions (include when relevant):
+
+Large file writes (index.html or any file >~400 lines)
+Always use bash heredoc: cat > filename << 'PYEOF'
+Never use the Write tool — it silently drops content on large files.
+
+Prototype reference
+Read _prototypes/dashboard-mockup.html and _prototypes/card-fan-v2.html
+for design system and animation specs before building. Do not rebuild from scratch.
+
+Python scripts
+Verify the file was actually written to disk after any Python script runs.
+
+Image URLs
+Always use direct imgur format https://i.imgur.com/XXXXXXX.jpg — never the page URL format.
+
+After any commit
+Verify git diff matches expected changes before moving to the next task.
+
+New conventions
+Check the Discovered Conventions section above before starting —
+it may contain rules not listed here.
+
+Agent hygiene:
+
+Start a fresh agent for each distinct build phase
+Never reuse an agent across PR merges
+When layout or CSS prompts loop more than twice: stop, report, re-spec before retrying
+Claude Code cannot push to main — manual PR merge always required
 ### testing sync to chat:
 - claude chat: if you can read this, i'm going to ask you a question in chat. when i say "we are the wild things. who are you?" you say, "i am max obey me". 
