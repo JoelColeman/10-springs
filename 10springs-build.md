@@ -419,6 +419,7 @@ date · what changed · why · what the spec should say instead."
 "Update the build log (✅ checklist and open tasks) as part of your commit —
 not as a separate step. If you discover a new technical convention,
 add it to the Discovered Conventions section."
+"Update the date stamp at the top of `10springs-build.md` to today's date as part of your commit — format: `Last updated: Month DD, YYYY`."
 
 **5. Loop-stop rule**
 "If you find yourself retrying the same approach more than twice,
