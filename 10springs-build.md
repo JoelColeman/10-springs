@@ -29,20 +29,39 @@ Claude Code handles all building and commits. Strategic conversations are handle
 - `embed_images.py` — image embedding utility script
 
 ---
+
 ## File Ownership
+
 Every file has a declared owner. Only the declared owner writes to that file.
 Other roles read it, never edit it.
 
-- 10springs-build.md — Owner: Code Code updates this as part of every commit. Chat reads after sync. Joel never rewrites.
-- index.html — Owner: Code Code writes all HTML/CSS/JS. Chat reads via project sync.
-- CLAUDE.md — Owner: Joel Updated manually when branch or PR URL changes.
-- _prototypes/* — Owner: Code Reference files. Code may update; Chat reads.
-- embed_images.py — Owner: Code Utility script. Code owns.
-- 10springs-strategy.md — Owner: Chat Lives in Claude project only — NOT in repo. Code never sees it. Joel commits Chat-drafted updates.
+**`10springs-build.md`** — Split ownership
+Sections A (Design System, Card Anatomy, Card Layout Rules) and C (Collection Data): Chat-owned.
+Chat drafts updates; Joel commits directly to main.
+Section B (Spec Deviations, Discovered Conventions, Build Log): Code-owned.
+Code updates every commit. Chat reads after sync. Joel never rewrites any section directly.
+
+**`index.html`** — Owner: Code
+Code writes all HTML/CSS/JS. Chat reads via project sync.
+
+**`CLAUDE.md`** — Owner: Joel
+Updated manually when branch or PR URL changes.
+
+**`_prototypes/*`** — Owner: Code
+Reference files. Code may update; Chat reads.
+
+**`embed_images.py`** — Owner: Code
+Utility script. Code owns.
+
+**`10springs-strategy.md`** — Owner: Chat
+Claude project only — NOT in repo. Code never sees it.
+Chat produces the complete file when updates are needed; Joel replaces it in the project knowledge panel.
 
 The rule that matters most: Code must never regenerate or overwrite content
 that Chat owns. If a task would require Code to touch a Chat-owned file,
 stop and flag it instead.
+
+---
 
 ## Design System
 
@@ -74,7 +93,8 @@ stop and flag it instead.
 
 ## Card Anatomy
 
-Every watch card — primary or alternate — contains the following fields. Use this as the template when building any new card from scratch.
+Every watch card — primary or alternate — contains the following fields.
+Use this as the template when building any new card from scratch.
 
 ```
 Reference number (e.g. "3410" or "166.010" or "–" if none)
@@ -115,54 +135,65 @@ Watch image — imgur-hosted static <img src="..."> tag, or placeholder oval if 
 
 ---
 
-## What Is Currently Built and Live
+## Spec Deviations
 
-Spec Deviations
 Code logs here whenever it departs from the spec in the Collection Data
 or Card Layout Rules sections above. Chat reads this after sync and updates
 the spec to match reality.
-Format per entry: Date · What changed · Why · What the spec should say instead.
-(none yet)
 
-Discovered Conventions
+Format per entry: **Date · What changed · Why · What the spec should say instead.**
+
+*(none yet)*
+
+---
+
+## Discovered Conventions
+
 Code adds here whenever it encounters a new technical rule, tool behavior,
 or failure mode not already listed in the Prompt Conventions section.
 These accumulate across sessions. Chat reads them after sync and includes
 them in the next prompt.
-Format per entry: Date · Convention · Files affected.
 
-Pre-March 2026 · Large file writes
-Always use bash heredoc: cat > file << 'PYEOF'
+Format per entry: **Date · Convention · Files affected.**
+
+---
+
+**Pre-March 2026 · Large file writes**
+Always use bash heredoc: `cat > file << 'PYEOF'`
 Never use the Write tool for files over ~400 lines — it silently drops content.
 Affects: index.html
 
-Pre-March 2026 · Image URLs
-Always use direct imgur format: https://i.imgur.com/XXXXXXX.jpg
-Never use the page URL format: https://imgur.com/XXXXXXX
+**Pre-March 2026 · Image URLs**
+Always use direct imgur format: `https://i.imgur.com/XXXXXXX.jpg`
+Never use the page URL format: `https://imgur.com/XXXXXXX`
 Affects: all card images
 
-Pre-March 2026 · Python script writes
+**Pre-March 2026 · Python script writes**
 Always verify the file actually landed on disk after a Python script runs.
 Silent failure is possible — the script appears to complete but the file may be missing or empty.
 Affects: embed_images.py
 
-Pre-March 2026 · Git diff verification
+**Pre-March 2026 · Git diff verification**
 After any commit, verify git diff matches expected changes before moving to the next task.
 Affects: all commits
 
-Pre-March 2026 · CSS image-rendering
-image-rendering: high-quality required on all card images.
+**Pre-March 2026 · CSS image-rendering**
+`image-rendering: high-quality` required on all card images.
 GPU compositing from border-radius + overflow:hidden + transition:transform causes pixelation without it.
 Affects: card images
 
-Pre-March 2026 · Lightbox DOM order
+**Pre-March 2026 · Lightbox DOM order**
 The lightbox HTML element must appear in the DOM before the script that references it.
 Placing the script first causes silent failure — no error thrown.
 Affects: index.html
 
-Pre-March 2026 · CSS :has(>img) selector
-:has(>img) auto-hides placeholder ovals when a real image tag is present.
+**Pre-March 2026 · CSS :has(>img) selector**
+`:has(>img)` auto-hides placeholder ovals when a real image tag is present.
 Affects: card placeholders
+
+---
+
+## What Is Currently Built and Live
 
 ✅ Bezel frame — dark outer shell, tachymeter bar, lume dots
 ✅ Dial header — "10 Springs · Ages 35–45"
@@ -190,10 +221,11 @@ Affects: card placeholders
 
 ---
 
-### Remaining open tasks
+## Remaining Open Tasks
 
 - [ ] **Sparse card content** — some alternate cards missing role/notes line (Heuer Carrera 2447, Omega Speedmaster Reduced, a few others). Cards render shorter than neighbors. Fill in during a future content pass.
 - [ ] **S6 Alt 2** — needs a replacement watch. Content TBD pending strategy session. Currently no Alt 2 card in S6.
+- [ ] **S7, S8, S9, S10** — cards not yet built into index.html. Content ready in Collection Data below. Agent 2 (S7), Agent 3 (S8), Agent 4 (S9+S10) pending.
 
 ---
 
@@ -210,6 +242,7 @@ Affects: card placeholders
 
 *Source of truth for card content. Use reference numbers, eras, budgets, and alternates exactly as listed.*
 *Budgets reflect current market ranges (Chrono24, March 2026) — not original planning estimates.*
+*Chat-owned. Code reads, never regenerates.*
 
 ### Heritage Pieces
 
@@ -363,64 +396,64 @@ Alternates:
 
 ## Claude Code Prompt Conventions
 
-Claude Code Prompt Conventions
-Chat uses this section to construct every Code prompt. All required
-elements are included automatically — Joel never has to add them manually.
-Every prompt must include:
-1. Read first
-"Before starting, read 10springs-build.md fully, including the
+*Chat uses this section to construct every Code prompt. All required
+elements are included automatically — Joel never has to add them manually.*
+
+### Every prompt must include:
+
+**1. Read first**
+"Before starting, read `10springs-build.md` fully, including the
 Spec Deviations and Discovered Conventions sections."
 
-2. Planning step
+**2. Planning step**
 "Describe every file you will touch and what you will change.
+Include a rough time estimate for the full task.
 Wait for my explicit 'go ahead' before executing."
 
-3. Deviation logging
+**3. Deviation logging**
 "If you depart from the card data, layout rules, or design system spec
 in this file, log it in the Spec Deviations section:
 date · what changed · why · what the spec should say instead."
 
-4. Build log update
+**4. Build log update**
 "Update the build log (✅ checklist and open tasks) as part of your commit —
 not as a separate step. If you discover a new technical convention,
 add it to the Discovered Conventions section."
 
-5. Loop-stop rule
+**5. Loop-stop rule**
 "If you find yourself retrying the same approach more than twice,
 stop and tell me what's blocking rather than continuing to loop."
 
-6. PR link
+**6. PR link**
 "After committing, provide the direct PR merge link to merge your branch
 into main so I can merge with one click."
 
-Technical conventions (include when relevant):
+### Technical conventions (include when relevant):
 
-Large file writes (index.html or any file >~400 lines)
-Always use bash heredoc: cat > filename << 'PYEOF'
+**Large file writes (index.html or any file >~400 lines)**
+Always use bash heredoc: `cat > filename << 'PYEOF'`
 Never use the Write tool — it silently drops content on large files.
 
-Prototype reference
-Read _prototypes/dashboard-mockup.html and _prototypes/card-fan-v2.html
+**Prototype reference**
+Read `_prototypes/dashboard-mockup.html` and `_prototypes/card-fan-v2.html`
 for design system and animation specs before building. Do not rebuild from scratch.
 
-Python scripts
+**Python scripts**
 Verify the file was actually written to disk after any Python script runs.
 
-Image URLs
-Always use direct imgur format https://i.imgur.com/XXXXXXX.jpg — never the page URL format.
+**Image URLs**
+Always use direct imgur format `https://i.imgur.com/XXXXXXX.jpg` — never the page URL format.
 
-After any commit
+**After any commit**
 Verify git diff matches expected changes before moving to the next task.
 
-New conventions
+**New conventions**
 Check the Discovered Conventions section above before starting —
 it may contain rules not listed here.
 
-Agent hygiene:
+### Agent hygiene:
 
-Start a fresh agent for each distinct build phase
-Never reuse an agent across PR merges
-When layout or CSS prompts loop more than twice: stop, report, re-spec before retrying
-Claude Code cannot push to main — manual PR merge always required
-### testing sync to chat:
-- claude chat: if you can read this, i'm going to ask you a question in chat. when i say "we are the wild things. who are you?" you say, "i am max obey me". 
+- Start a fresh agent for each distinct build phase
+- Never reuse an agent across PR merges
+- When layout or CSS prompts loop more than twice: stop, report, re-spec before retrying
+- Claude Code must not push to main directly — all new code lands via PR, merged by Joel
