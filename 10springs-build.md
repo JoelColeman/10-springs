@@ -2,7 +2,7 @@ DASHBOARD BUILD CONTEXT (10springs-build.md)
 ════════════════════════════════════════════
 # 10 Springs — Dashboard Build Reference
 *For Claude Code agents and dashboard build sessions*
-*Last updated: March 2026*
+*Last updated: April 1, 2026*
 
 ---
 
@@ -197,7 +197,7 @@ Affects: card placeholders
 
 ✅ Bezel frame — dark outer shell, tachymeter bar, lume dots
 ✅ Dial header — "10 Springs · Ages 35–45"
-✅ Three Daytona subdials — Spent (~$500) / Total Planned (~$100K) / Next Spring
+✅ Three Daytona subdials — Spent (~$500) / Total Planned (~$91K) / Next Spring
 ✅ Heritage cards — H1 Caravelle + H2 Accutron. HEIRLOOM · NOT FOR SALE tag. Listings + Research links.
 ✅ Listings + Research links — on ALL cards, primary and alternate
 ✅ Collection Philosophy accordion — pills wrap horizontally on mobile
@@ -211,9 +211,9 @@ Affects: card placeholders
 ✅ Empty placeholder oval hidden when real image present
 ✅ Mobile layout — always-visible carousel, no toggle
 ✅ image-rendering: high-quality on card images
-✅ S1 — Breitling Navitimer 816 primary + 3 alts (7806, Chrono-Matic 1806, Heuer Carrera 3147S)
+✅ S1 — Omega Seamaster 165.003 primary + 2 alts (166.010, Seamaster Cosmic) [placeholder images — imgur pending]
 ✅ S2 — Longines Flagship 18k ref. 2404 primary + 4 alts (Conquest 18k, Constellation pie pan, UG gold dress, Seamaster 18k gold)
-✅ S4 — Sinn 103 added as Alt 4 · Zenith El Primero Shark Tooth A3817 added as Alt 1
+✅ S4 — Breitling Navitimer 816 primary + 2 alts (7806, Chrono-Matic 1806) [S4 primary placeholder — imgur pending] · Old El Primero/Sinn/Heuer/Speedmaster Reduced slate removed
 ✅ S5 — Omega Seamaster 300 Summer Blue primary + Black dial alt + Standard Blue alt · All imgur images loaded
 ✅ S6 — Speedmaster 3570.50 primary + Heuer Autavia Alt 1 · Tudor Alt 2 removed
 ✅ Full image URL sweep — all slots H1 through S10 have imgur images loaded (i.imgur.com direct format)
@@ -223,9 +223,11 @@ Affects: card placeholders
 
 ## Remaining Open Tasks
 
-- [ ] **Sparse card content** — some alternate cards missing role/notes line (Heuer Carrera 2447, Omega Speedmaster Reduced, a few others). Cards render shorter than neighbors. Fill in during a future content pass.
+- [ ] **S1 imgur images** — 165.003 primary, 166.010 alt, Seamaster Cosmic alt. Source and load when available.
+- [ ] **S4 imgur image** — Navitimer 816 primary. Source and load when available. (7806 and Chrono-Matic 1806 alts already have images.)
 - [ ] **S6 Alt 2** — needs a replacement watch. Content TBD pending strategy session. Currently no Alt 2 card in S6.
 - [ ] **S7, S8, S9, S10** — cards not yet built into index.html. Content ready in Collection Data below. Agent 2 (S7), Agent 3 (S8), Agent 4 (S9+S10) pending.
+- [ ] **Sparse card content** — some alternate cards missing role/notes line. Cards render shorter than neighbors. Fill in during a future content pass.
 
 ---
 
@@ -270,16 +272,16 @@ Alternates:
 
 ---
 
-### S1 (Age 36) — Breitling Navitimer ✅ LOCKED
-Primary ref: 816 · Era: 1960s–early 1970s · Valjoux 72 movement
-Dial: Black, circular slide rule bezel, sector subdials · Budget: $3–5K
-Role: Vintage aviation chronograph — sector dial, AOPA heritage, exploration age instrument
-Tags: VINTAGE · CHRONO
-Image: https://i.imgur.com/ntyvdp2.jpg
+### S1 (Age 36) — Omega Seamaster 165.003 ✅ RESTRUCTURED APRIL 2026
+Primary ref: 165.003 · Era: 1962–1969 · Cal. 552 automatic
+Dial: Black lacquered · No date · Budget: $1.5–2.5K
+Role: Opens collection — high-contrast vintage Omega, exploration age object, entry into the market
+Tags: VINTAGE · SPORT
+Note: Dial authenticity flag — avoid black crosshair dial variants (frequently redials). Stick to standard 165.003.
+Image: [PLACEHOLDER — imgur URL pending]
 Alternates:
-- Alt 1: Breitling Navitimer 7806 · $3–5K · https://i.imgur.com/A7ZOpLZ.jpg
-- Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown at 9 o'clock, ~1969–1973) · $3–5K · https://i.imgur.com/LXPtsUr.jpg
-- Alt 3: Heuer Carrera 3147S · $3–5K · https://i.imgur.com/T7KDcpi.jpg
+- Alt 1: Omega Seamaster 166.010 (date version, Cal. 562/565, same era, more available) · $1.2–2K · [PLACEHOLDER — imgur URL pending]
+- Alt 2: Omega Seamaster Cosmic (cushion case, black dial, late 1960s, more wrist character) · $1.5–2.5K · [PLACEHOLDER — imgur URL pending]
 
 ---
 
@@ -310,17 +312,15 @@ Alternates:
 
 ---
 
-### S4 (Age 39) — Zenith El Primero
-Ref: A386 (primary) · Era: 1969–1972 · El Primero 3019PHC · 36,000 vph
-Dial: Black, instrument style · Budget: $11–15K
-Role: Vintage Swiss chronograph — the movement that saved mechanical watchmaking
+### S4 (Age 39) — Breitling Navitimer 816 ✅ RESTRUCTURED APRIL 2026
+Primary ref: 816 · Era: 1960s–early 1970s · Valjoux 72 movement preferred
+Dial: Black, circular slide rule bezel, sector subdials · Budget: $3–5K
+Role: Vintage aviation chronograph — sector dial, AOPA heritage, exploration age instrument. Moved from S1; narrative strengthens at age 39.
 Tags: VINTAGE · CHRONO
-Image: https://i.imgur.com/lJQ6Cxf.jpg
+Image: [PLACEHOLDER — imgur URL pending]
 Alternates:
-- Alt 1: Zenith El Primero "Shark Tooth" A3817 (strong alternate, darker instrument aesthetic) · $11–15K · https://i.imgur.com/fKC4eKx.jpg
-- Alt 2: Heuer Carrera (2447) · $11–15K · https://i.imgur.com/rkruIxa.jpg
-- Alt 3: Omega Speedmaster Reduced (3510.50) · $11–15K · https://i.imgur.com/WFqzMgH.jpg
-- Alt 4: Sinn 103 (current production) · $11–15K · https://i.imgur.com/gijyQWI.jpg
+- Alt 1: Breitling Navitimer 7806 · $3–5K · https://i.imgur.com/A7ZOpLZ.jpg
+- Alt 2: Breitling Chrono-Matic 1806 (automatic Cal. 11, left crown at 9 o'clock, ~1969–1973) · $3–5K · https://i.imgur.com/LXPtsUr.jpg
 
 ---
 
@@ -384,13 +384,13 @@ Alternates:
 
 ### S10 (Age 45) — Rolex GMT Master 1675 ⚠️ AGENT 4 PENDING
 Ref: 1675 · Era: ~1968 target · Gilt dial just starting to patina · Budget: $18–28K
-Role: The grail. Pan Am pilot navigation instrument. Aviation bookend to S1 Navitimer.
+Role: The grail. Pan Am pilot navigation instrument. Aviation bookend to S4 Navitimer.
 Tags: VINTAGE · SPORT
 Note on card: "Target 1968 examples. Gilt dial, unpolished case, no bracelet sag. The patina story is just beginning."
 Image: https://i.imgur.com/IvmHdl2.jpg
 Alternates:
 - Alt 1: IWC Portugieser Perpetual Calendar · black Arabic dial · steel · $14–22K · MODERN · DRESS · Note: "True perpetual calendar. Only needs correction February 29 every 4 years." · https://i.imgur.com/lyzMe25.jpg
-- Alt 2: Breitling Navitimer 806 AOPA · gilt dial · $5–10K · VINTAGE · CHRONO · Note: "Narrative bookend to S1. The watch that established the gilt dial taste signal." · https://i.imgur.com/seEZt3H.jpg
+- Alt 2: Breitling Navitimer 806 AOPA · gilt dial · $5–10K · VINTAGE · CHRONO · Note: "Narrative bookend to S4 Navitimer. The watch that established the gilt dial taste signal." · https://i.imgur.com/seEZt3H.jpg
 
 ---
 
