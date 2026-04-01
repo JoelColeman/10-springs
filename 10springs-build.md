@@ -211,9 +211,9 @@ Affects: card placeholders
 ✅ Empty placeholder oval hidden when real image present
 ✅ Mobile layout — always-visible carousel, no toggle
 ✅ image-rendering: high-quality on card images
-✅ S1 — Omega Seamaster 165.003 primary + 2 alts (166.010, Seamaster Cosmic) [placeholder images — imgur pending]
+✅ S1 — Omega Seamaster 165.003 primary + 2 alts (166.010, Seamaster Cosmic) · All imgur images loaded · Row label updated to VINTAGE SPORT
 ✅ S2 — Longines Flagship 18k ref. 2404 primary + 4 alts (Conquest 18k, Constellation pie pan, UG gold dress, Seamaster 18k gold)
-✅ S4 — Breitling Navitimer 816 primary + 2 alts (7806, Chrono-Matic 1806) [S4 primary placeholder — imgur pending] · Old El Primero/Sinn/Heuer/Speedmaster Reduced slate removed
+✅ S4 — Breitling Navitimer 816 primary + 2 alts (7806, Chrono-Matic 1806) · All imgur images loaded · Row label updated to AVIATION CHRONOGRAPH · Old El Primero/Sinn/Heuer/Speedmaster Reduced slate removed
 ✅ S5 — Omega Seamaster 300 Summer Blue primary + Black dial alt + Standard Blue alt · All imgur images loaded
 ✅ S6 — Speedmaster 3570.50 primary + Heuer Autavia Alt 1 · Tudor Alt 2 removed
 ✅ Full image URL sweep — all slots H1 through S10 have imgur images loaded (i.imgur.com direct format)
@@ -223,8 +223,6 @@ Affects: card placeholders
 
 ## Remaining Open Tasks
 
-- [ ] **S1 imgur images** — 165.003 primary, 166.010 alt, Seamaster Cosmic alt. Source and load when available.
-- [ ] **S4 imgur image** — Navitimer 816 primary. Source and load when available. (7806 and Chrono-Matic 1806 alts already have images.)
 - [ ] **S6 Alt 2** — needs a replacement watch. Content TBD pending strategy session. Currently no Alt 2 card in S6.
 - [ ] **S7, S8, S9, S10** — cards not yet built into index.html. Content ready in Collection Data below. Agent 2 (S7), Agent 3 (S8), Agent 4 (S9+S10) pending.
 - [ ] **Sparse card content** — some alternate cards missing role/notes line. Cards render shorter than neighbors. Fill in during a future content pass.
