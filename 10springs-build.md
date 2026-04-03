@@ -2,7 +2,7 @@ DASHBOARD BUILD CONTEXT (10springs-build.md)
 ════════════════════════════════════════════
 # 10 Springs — Dashboard Build Reference
 *For Claude Code agents and dashboard build sessions*
-*Last updated: April 1, 2026*
+*Last updated: April 3, 2026*
 
 ---
 
@@ -143,7 +143,13 @@ the spec to match reality.
 
 Format per entry: **Date · What changed · Why · What the spec should say instead.**
 
-*(none yet)*
+**April 3, 2026 · S5 Chrono24 URL refs corrected** — Task spec's corrected URL table shows Summer Blue primary as 234.30.41.21.03.001 and Standard Blue alt as 234.30.41.21.03.002, which is the reverse of what was in the file (and the build doc Collection Data). Applied the corrected URL table as authoritative for listing URLs. Card content (card-ref display text) unchanged. Spec should note: Listing URL refs may differ from card-ref display refs.
+
+**April 3, 2026 · S1 Alt 2 URL trimmed** — Task spec's corrected URL table shows Omega Seamaster Cosmic without "+vintage" suffix. Removed "+vintage" from query string. No card content change.
+
+**April 3, 2026 · S3 primary URL trimmed** — Task spec shows query=Universal+Geneve+Polerouter (no +20217 ref). Removed +20217 from query string. No card content change.
+
+**April 3, 2026 · S6 primary URL trimmed** — Task spec shows query=Omega+Speedmaster+3570.50 (no "Professional"). Removed "Professional" from query string. No card content change.
 
 ---
 
@@ -218,6 +224,8 @@ Affects: card placeholders
 ✅ S6 — Speedmaster 3570.50 primary + Heuer Autavia Alt 1 · Tudor Alt 2 removed
 ✅ Full image URL sweep — all slots H1 through S10 have imgur images loaded (i.imgur.com direct format)
 ✅ Section headers audited — no duplicates or orphans found
+✅ Chrono24 URL sweep — all cards updated to clean ?query= format; &redirectToSearchIndex=true stripped globally; S2/S4/S6-alt1 custom paths converted; S3 query trimmed; S5 refs corrected; S6 "Professional" dropped from query
+✅ Watch Intel RSS section — 4 feeds (Hodinkee, A Blog to Watch, Fratello, Teddy B) fetched via rss2json.com; 16 most-recent articles sorted by date; in-collection keyword tagging; placed outside bezel above footer
 
 ---
 
