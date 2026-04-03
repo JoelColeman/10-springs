@@ -319,18 +319,23 @@ body{background:#1a1a1a;min-height:100vh;font-family:'DM Sans',sans-serif;paddin
 .card-image img{cursor:zoom-in;image-rendering:-webkit-optimize-contrast;image-rendering:high-quality}
 
 /* ===== WATCH INTEL ===== */
-.watch-intel{max-width:1160px;margin:0 auto;padding:28px 20px 8px}
-.wi-hdr{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:#8a7b6a;display:flex;align-items:center;gap:10px;text-transform:uppercase;margin-bottom:6px}
-.wi-hdr::after{content:'';flex:1;height:1px;background:#d0ccc4}
+.watch-intel{max-width:1160px;margin:32px auto;padding:32px 40px;background:#f8f6f1;border:1px solid rgba(138,123,106,.25);border-radius:8px}
+.wi-hdr{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:#1a1a1a;display:flex;align-items:center;gap:10px;text-transform:uppercase;margin-bottom:6px}
+.wi-hdr::after{content:'';flex:1;height:1px;background:rgba(138,123,106,.3)}
 .wi-sub{font-family:'DM Sans',sans-serif;font-size:11px;color:#8a7b6a;margin-bottom:14px}
 .wi-list{display:flex;flex-direction:column}
-.wi-row{display:flex;align-items:baseline;gap:8px;padding:9px 0;border-top:0.5px solid rgba(0,0,0,.07);flex-wrap:wrap}
-.wi-badge{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:2px;flex-shrink:0;background:rgba(138,123,106,.1);color:#6a5f52;border:0.5px solid #c8c0b0}
+.wi-row{display:flex;align-items:baseline;gap:8px;padding:9px 0;border-top:0.5px solid rgba(138,123,106,.15);flex-wrap:wrap;transition:background .15s}
+.wi-row:hover{background:rgba(138,123,106,.06)}
+.wi-badge{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:2px;flex-shrink:0}
+.wi-badge-hod{background:#1a2a3a;color:#f4f1eb}
+.wi-badge-abtw{background:#3d3530;color:#f4f1eb}
+.wi-badge-fra{background:#2a2a2a;color:#f4f1eb}
+.wi-badge-ted{background:#2a3525;color:#f4f1eb}
 .wi-title{font-family:'DM Sans',sans-serif;font-size:12px;color:#1a1a1a;flex:1;min-width:160px;text-decoration:none;line-height:1.35}
-.wi-title:hover{color:#8a7b6a}
-.wi-coltag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.5px;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:0.5px solid #b8a88a;color:#8a7b6a;flex-shrink:0}
-.wi-date{font-family:'DM Mono',monospace;font-size:9px;color:#aaa;flex-shrink:0;white-space:nowrap}
-.wi-status{font-family:'DM Mono',monospace;font-size:10px;color:#aaa;padding:8px 0}
+.wi-title:hover{color:#8a7b6a;text-decoration:underline}
+.wi-coltag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.5px;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:0.5px solid #b8a88a;color:#8a7b6a;flex-shrink:0;background:transparent}
+.wi-date{font-family:'DM Mono',monospace;font-size:9px;color:#8a7b6a;flex-shrink:0;white-space:nowrap}
+.wi-status{font-family:'DM Mono',monospace;font-size:10px;color:#8a7b6a;padding:8px 0}
 </style>
 </head>
 <body>
@@ -1577,10 +1582,10 @@ function tlScrollTo(id){
 (function(){
   var KW=['seamaster','navitimer','speedmaster','polerouter','longines','flagship','sport chief','glashutte','glashütte','panomatic','fifty fathoms','blancpain','day-date','daydate','gmt master','gmt-master','1675','3570','816','165.003','166.010','accutron','spaceview','omega','breitling','universal geneve','universal genève'];
   var FEEDS=[
-    {url:'https://www.hodinkee.com/articles/rss.xml',lbl:'HODINKEE'},
-    {url:'https://www.ablogtowatch.com/feed/',lbl:'ABLOGTOWATCH'},
-    {url:'https://www.fratellowatches.com/feed/',lbl:'FRATELLO'},
-    {url:'https://teddybaldassarre.com/blogs/watches.atom',lbl:'TEDDY B'}
+    {url:'https://www.hodinkee.com/articles/rss.xml',lbl:'HODINKEE',cls:'wi-badge-hod'},
+    {url:'https://www.ablogtowatch.com/feed/',lbl:'ABLOGTOWATCH',cls:'wi-badge-abtw'},
+    {url:'https://www.fratellowatches.com/feed/',lbl:'FRATELLO',cls:'wi-badge-fra'},
+    {url:'https://teddybaldassarre.com/blogs/watches.atom',lbl:'TEDDY B',cls:'wi-badge-ted'}
   ];
   var PROXY='https://api.rss2json.com/v1/api.json?rss_url=';
   function inCol(t,d){var s=((t||'')+(d||'')).toLowerCase();return KW.some(function(k){return s.indexOf(k)>=0;});}
@@ -1593,7 +1598,7 @@ function tlScrollTo(id){
       .then(function(r){return r.json();})
       .then(function(d){
         if(d.status!=='ok')return[];
-        return(d.items||[]).map(function(a){return{title:a.title||'',link:a.link||'',date:a.pubDate||'',desc:a.description||'',lbl:f.lbl};});
+        return(d.items||[]).map(function(a){return{title:a.title||'',link:a.link||'',date:a.pubDate||'',desc:a.description||'',lbl:f.lbl,cls:f.cls};});
       }).catch(function(){return[];});
   })).then(function(res){
     var all=[];
@@ -1603,7 +1608,7 @@ function tlScrollTo(id){
     all.sort(function(a,b){if(a.col&&!b.col)return -1;if(!a.col&&b.col)return 1;return new Date(b.date)-new Date(a.date);});
     var html='<div class="wi-list">';
     all.slice(0,16).forEach(function(a){
-      html+='<div class="wi-row"><span class="wi-badge">'+a.lbl+'</span>';
+      html+='<div class="wi-row"><span class="wi-badge '+a.cls+'">'+a.lbl+'</span>';
       html+='<a class="wi-title" href="'+esc(a.link)+'" target="_blank" rel="noopener">'+esc(a.title)+'</a>';
       if(a.col)html+='<span class="wi-coltag">In Your Collection</span>';
       html+='<span class="wi-date">'+fmt(a.date)+'</span></div>';
