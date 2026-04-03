@@ -226,6 +226,7 @@ Affects: card placeholders
 ✅ Section headers audited — no duplicates or orphans found
 ✅ Chrono24 URL sweep — all cards updated to clean ?query= format; &redirectToSearchIndex=true stripped globally; S2/S4/S6-alt1 custom paths converted; S3 query trimmed; S5 refs corrected; S6 "Professional" dropped from query
 ✅ Watch Intel RSS section — 4 feeds (Hodinkee, A Blog to Watch, Fratello, Teddy B) fetched via rss2json.com; 16 most-recent articles sorted by date; in-collection keyword tagging; placed outside bezel above footer
+✅ Watch Intel readability fix — light card panel (#f8f6f1 bg, warm border, 8px radius); WATCH INTEL header near-black; dark pill badges per source (distinct colors); row hover tint; date/status text warm muted; title underline on hover
 
 ---
 
