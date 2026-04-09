@@ -227,13 +227,15 @@ Affects: card placeholders
 ✅ Chrono24 URL sweep — all cards updated to clean ?query= format; &redirectToSearchIndex=true stripped globally; S2/S4/S6-alt1 custom paths converted; S3 query trimmed; S5 refs corrected; S6 "Professional" dropped from query
 ✅ Watch Intel RSS section — 4 feeds (Hodinkee, A Blog to Watch, Fratello, Teddy B) fetched via rss2json.com; 16 most-recent articles sorted by date; in-collection keyword tagging; placed outside bezel above footer
 ✅ Watch Intel readability fix — light card panel (#f8f6f1 bg, warm border, 8px radius); WATCH INTEL header near-black; dark pill badges per source (distinct colors); row hover tint; date/status text warm muted; title underline on hover
-
+✅ S7 — Glashütte Original PanoMaticLunar primary + Alt 1 JLC Master Ultra Thin Moon + Alt 2 GO PanoMaticLunar Silver/White dial · All imgur images loaded
+✅ S8 — Blancpain Fifty Fathoms Automatique primary + Alt 1 Bathyscaphe + Alt 2 Rolex Submariner Hulk 116610LV · All imgur images loaded
+✅ S9 — Rolex Day-Date 18038 champagne primary + Alt 1 black dial + Alt 2 blue dial (originality warning rendered) · All imgur images loaded
+✅ S10 — Rolex GMT-Master 1675 primary + Alt 1 IWC Portugieser Perpetual Calendar + Alt 2 Breitling Navitimer 806 AOPA · All imgur images loaded
 ---
 
 ## Remaining Open Tasks
 
 - [ ] **S6 Alt 2** — needs a replacement watch. Content TBD pending strategy session. Currently no Alt 2 card in S6.
-- [ ] **S7, S8, S9, S10** — cards not yet built into index.html. Content ready in Collection Data below. Agent 2 (S7), Agent 3 (S8), Agent 4 (S9+S10) pending.
 - [ ] **Sparse card content** — some alternate cards missing role/notes line. Cards render shorter than neighbors. Fill in during a future content pass.
 
 ---
