@@ -231,13 +231,14 @@ Affects: card placeholders
 ✅ S8 — Blancpain Fifty Fathoms Automatique primary + Alt 1 Bathyscaphe + Alt 2 Rolex Submariner Hulk 116610LV · All imgur images loaded
 ✅ S9 — Rolex Day-Date 18038 champagne primary + Alt 1 black dial + Alt 2 blue dial (originality warning rendered) · All imgur images loaded
 ✅ S10 — Rolex GMT-Master 1675 primary + Alt 1 IWC Portugieser Perpetual Calendar + Alt 2 Breitling Navitimer 806 AOPA · All imgur images loaded
+✅ 10 Summers list corrected — AP Royal Oak and Patek Calatrava removed; list rebuilt with UG Tri-Compax, Zenith A386, Freccione, Breguet, VC Overseas, Lange trio, Daytona, tropical 1675; ordered by price ascending
 ---
 
 ## Remaining Open Tasks
-
 - [ ] **S6 Alt 2** — needs a replacement watch. Content TBD pending strategy session. Currently no Alt 2 card in S6.
+- [ ] **Watch Intel — HTML entity decoding** — article titles with &amp; and other entities render as raw text. Fix esc() function to decode before display.
+- [ ] **Watch Intel — keyword tightening** — Longines and Omega match too broadly. Tighten to specific references only (Sport Chief, Flagship, Conquest; Seamaster 300, Speedmaster, Seamaster 165.003).
 - [ ] **Sparse card content** — some alternate cards missing role/notes line. Cards render shorter than neighbors. Fill in during a future content pass.
-
 ---
 
 ## Deferred (Longer Term)
