@@ -2,7 +2,7 @@ DASHBOARD BUILD CONTEXT (10springs-build.md)
 ════════════════════════════════════════════
 # 10 Springs — Dashboard Build Reference
 *For Claude Code agents and dashboard build sessions*
-*Last updated: April 3, 2026*
+*Last updated: April 9, 2026*
 
 ---
 
@@ -150,6 +150,8 @@ Format per entry: **Date · What changed · Why · What the spec should say inst
 **April 3, 2026 · S3 primary URL trimmed** — Task spec shows query=Universal+Geneve+Polerouter (no +20217 ref). Removed +20217 from query string. No card content change.
 
 **April 3, 2026 · S6 primary URL trimmed** — Task spec shows query=Omega+Speedmaster+3570.50 (no "Professional"). Removed "Professional" from query string. No card content change.
+
+**April 9, 2026 · 10 Summers list corrected** — Removed: AP Royal Oak (ref 14790), Patek Philippe Calatrava (ref 5119), Patek Philippe Annual Calendar (ref 5146), F.P. Journe Chronomètre Bleu, Vintage Patek Calatrava salmon dial. Added: Universal Genève Tri-Compax (Cal. 281), Zenith El Primero A386, A. Lange & Söhne Lange 1, A. Lange & Söhne Lange 1 Moon Phase, Rolex GMT-Master 1675 Tropical Dial. Retained with price ranges added: Rolex Explorer II Freccione, Breguet Classique, Vacheron Constantin Overseas, A. Lange & Söhne Saxonia Thin, Rolex Daytona. List reordered by price ascending ($8–20K through $44–68K). Spec should note: 10 Summers list order is price-ascending; all entries include price range in meta line.
 
 ---
 
